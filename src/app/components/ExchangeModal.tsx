@@ -45,7 +45,6 @@ const ExchangeModal = (props: Props) => {
               <InputGroup size="sm">
                 <InputLeftAddon 
                 h={12}
-                w={}
                 children="You Send"
                 />
 
