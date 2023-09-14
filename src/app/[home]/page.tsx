@@ -8,9 +8,8 @@ type Props = {}
 const page = (props: Props) => {
   return (
     <>
-    <div>This is the page that we are talking about!</div>
     <ExchangeModal />
-    <DepostiModal />
+    {/* <DepostiModal /> */}
     </>
   )
 }
