@@ -1,6 +1,6 @@
 import React from 'react'
 import ExchangeModal from '../components/ExchangeModal'
-import DepostiModal from '../components/DepostiModal'
+import DepostiModal from '../components/DepositModal'
 
 
 type Props = {}
