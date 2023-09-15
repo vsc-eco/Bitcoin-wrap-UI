@@ -35,7 +35,7 @@ const DepositModal = (props: Props) => {
         <ModalOverlay />
         <ModalContent maxW="700px" maxH="900px">
           <ModalCloseButton />
-          <ModalBody pb={6} my={4} mx={8}>
+          <ModalBody pb={6} my={4} mx={4}>
             <Container
               style={{ display: "flex", justifyContent: "space-between" }}
             >
@@ -53,11 +53,11 @@ const DepositModal = (props: Props) => {
 
             <Container style={{display:"flex"}} py={4}>
               <Container w="30%">
-                <Text fontSize="l">Send deposit</Text>
+                <Text fontSize="sk">Send deposit</Text>
               </Container>
               <Container w="70%" style={{display:"flex"}}>
                 <FaBitcoin size="1.5em" color="F7931A" />
-                <Text fontSize="l" style={{padding:"2px 7px"}}>0.1 BTC</Text>
+                <Text fontSize="l" style={{padding:"0px 7px"}}>0.1 BTC</Text>
               </Container>
             </Container>
            {/* This is for QR  */}
@@ -83,8 +83,24 @@ const DepositModal = (props: Props) => {
 
             <Container>
               <Text py={8}>Operation details</Text>
-              
             </Container>
+
+            <Container style={{display:"flex"}} py={4}>
+              <Container w="30%">
+                <Text fontSize="l">You get:</Text>
+              </Container>
+              <Container w="70%" style={{display:"flex"}}>
+                <FaEthereum size="1.5em" color="#3c3c3d" />
+                <Text fontSize="sm" style={{padding:"0px 7px"}}>0.1 BTC</Text>
+              </Container>
+            </Container>
+
+            <Container display="flex" justifyContent="space-between" px={4}>
+              <Text>Recipient Address</Text>
+              <Text>0x3434543434343cb3k243b4343knkml082j28902b</Text>
+              <CiShare1 />
+            </Container>
+
           </ModalBody>
         </ModalContent>
       </Modal>
