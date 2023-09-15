@@ -11,11 +11,16 @@ import {
   FormLabel,
   Input,
   Center,
+  Container,
   InputGroup,
   InputLeftAddon,
   InputRightAddon,
+  Text,
 } from "@chakra-ui/react";
 import { FaBitcoin, FaEthereum } from "react-icons/fa";
+import { MdCancelPresentation } from "react-icons/md";
+import { TbExchange } from "react-icons/tb";
+import {BiSolidLockOpenAlt} from "react-icons/bi"
 import { useState } from "react";
 
 type Props = {};
@@ -40,7 +45,7 @@ const ExchangeModal = (props: Props) => {
             <Center>Add exchange details</Center>
           </ModalHeader>
           <ModalCloseButton />
-          <ModalBody pb={6} my={4} mx={4}>
+          <ModalBody pb={6} my={4} mx={8}>
             <FormControl my={4}>
               <InputGroup size="sm">
                 <InputLeftAddon h={12} w={28}>
@@ -52,6 +57,8 @@ const ExchangeModal = (props: Props) => {
                   placeholder="0.0"
                   value={token1Amount}
                   onChange={(e) => setToken1Amount(e.target.value)}
+                  focusBorderColor="transparent"
+                  textAlign="right"
                 />
                 <div
                   style={{
@@ -60,11 +67,18 @@ const ExchangeModal = (props: Props) => {
                     paddingLeft: "8px",
                   }}
                 >
-                  <FaBitcoin size="1.5em" />
-                  <span style={{ paddingLeft: "12px" }}> BTC</span>
+                  <FaBitcoin size="1.5em" color="#F7931A" />
+                  <span style={{ paddingLeft: "12px", fontWeight:"bold"}}> BTC</span>
                 </div>
               </InputGroup>
             </FormControl>
+            <Container style={{display:"flex", justifyContent:"space-between"}}>
+              <div>
+              <BiSolidLockOpenAlt />
+              <Text fontSize='sm'>Floating rate</Text>
+              </div>
+              <TbExchange/>
+            </Container>
             <FormControl my={4}>
               <InputGroup size="sm">
                 <InputLeftAddon h={12} w={28}>
@@ -76,44 +90,66 @@ const ExchangeModal = (props: Props) => {
                   placeholder="0.0"
                   value={token2Amount}
                   onChange={(e) => setToken2Amount(e.target.value)}
+                  focusBorderColor="transparent"
+                  textAlign="right"
                 />
                 <div
                   style={{
                     display: "flex",
                     alignItems: "center",
                     paddingLeft: "8px",
-                  }}
+                  }} 
                 >
-                  <FaEthereum size="1.5em" />
-                  <span style={{ paddingLeft: "12px" }}> ETH</span>
+                  <FaEthereum size="1.5em" color="#3c3c3d" />
+                  <span style={{ paddingLeft: "12px", fontWeight:"bold" }}> ETH</span>
                 </div>
               </InputGroup>
             </FormControl>
             <FormControl my={8}>
               <FormLabel>
-                <h1>Enter the wallet address</h1>
-                <Input
-                  mt={2}
-                  w="90%"
-                  h="56px"
-                  placeholder="The recipient's ethereum address"
-                  sx={{
-                    "::placeholder": {
-                      position: "relative",
-                      top: "-14px",
-                      fontSize: "12px",
-                      fontWeight: "bold", // Adjust this value as needed
-                    },
-                  }}
-                  value={walletAddress}
-                  onChange={(e) => setWalletAddress(e.target.value)}
-                />
+                <Text fontWeight="bold">Enter the wallet address</Text>
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <Input
+                    mt={2}
+                    w="90%"
+                    h="56px"
+                    placeholder="The recipient's ethereum address"
+                    sx={{
+                      "::placeholder": {
+                        position: "relative",
+                        top: "-14px",
+                        fontSize: "12px",
+                        fontWeight: "bold", // Adjust this value as needed
+                      },
+                    }}
+                    value={walletAddress}
+                    onChange={(e) => setWalletAddress(e.target.value)}
+                    focusBorderColor="transparent"
+                  />
+                  <MdCancelPresentation />
+                </div>
               </FormLabel>
             </FormControl>
+            <Button
+              colorScheme="blue"
+              my={4}
+              mb={4}
+              w="100%"
+              onClick={handleClose}
+            >
+              Swap
+            </Button>
+            <p
+              style={{
+                fontSize: "9px",
+                textAlign: "center",
+                paddingBottom: "12px",
+              }}
+            >
+              By Clicking Create an exchange, I agree to the Privacy Policy and
+              Terms of Service
+            </p>
           </ModalBody>
-          <Button colorScheme="blue" mr={3} ml={3} mb={3} onClick={handleClose}>
-            Swap
-          </Button>
         </ModalContent>
       </Modal>
     </>
