@@ -4,8 +4,8 @@ import { useState } from "react";
 import { FaBitcoin, FaEthereum } from "react-icons/fa";
 import { FaClipboardQuestion } from "react-icons/fa6";
 import { CiShare1 } from "react-icons/ci";
-import {BiCopy} from "react-icons/bi"
-import {MdPending} from "react-icons/md"
+import { BiCopy } from "react-icons/bi";
+import { MdPending } from "react-icons/md";
 
 import {
   Button,
@@ -51,56 +51,78 @@ const DepositModal = (props: Props) => {
               </Center>
             </ModalHeader>
 
-            <Container style={{display:"flex"}} py={4}>
+            <Container style={{ display: "flex" }} py={4}>
               <Container w="30%">
                 <Text fontSize="sk">Send deposit</Text>
               </Container>
-              <Container w="70%" style={{display:"flex"}}>
+              <Container w="70%" style={{ display: "flex" }}>
                 <FaBitcoin size="1.5em" color="F7931A" />
-                <Text fontSize="l" style={{padding:"0px 7px"}}>0.1 BTC</Text>
+                <Text fontSize="l" style={{ padding: "0px 7px" }}>
+                  0.1 BTC
+                </Text>
               </Container>
             </Container>
-           {/* This is for QR  */}
-            <Container style={{display:"flex"}} py={4}>
-              <Container w="30%" style={{display:"flex"}}>
+            {/* This is for QR  */}
+            <Container style={{ display: "flex" }} py={4}>
+              <Container w="30%" style={{ display: "flex" }}>
                 <Text fontSize="l">Deposit address</Text>
               </Container>
-              <Container w="70%" style={{display:"flex", justifyContent:"space-between"}}>
+              <Container
+                w="70%"
+                style={{ display: "flex", justifyContent: "space-between" }}
+              >
                 {/* Here qr code will be placed  */}
-                <Text fontSize="l" style={{padding:"2px 7px"}}>fsdklsklsdsk</Text>
-                <div style={{display:"flex"}}>
-                <CiShare1 />
-                <BiCopy />
+                <Text fontSize="l" style={{ padding: "2px 7px" }}>
+                  fsdklsklsdsk
+                </Text>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-around",
+                    width: "56px",
+                  }}
+                >
+                  <CiShare1 />
+                  <BiCopy />
                 </div>
               </Container>
             </Container>
             <Container>
-            <Container>
-              <MdPending/>
-            </Container>
+              <Container>
+                <MdPending />
+              </Container>
               <Text>Pending deposit</Text>
             </Container>
 
-            <Container>
-              <Text py={8}>Operation details</Text>
+            <Container pt={8} pb={4}>
+              <Text py={8} fontWeight="bold" fontSize="xl">
+                Operation details
+              </Text>
             </Container>
 
-            <Container style={{display:"flex"}} py={4}>
+            <Container style={{ display: "flex" }} py={4}>
               <Container w="30%">
                 <Text fontSize="l">You get:</Text>
               </Container>
-              <Container w="70%" style={{display:"flex"}}>
+              <Container w="70%" style={{ display: "flex" }}>
                 <FaEthereum size="1.5em" color="#3c3c3d" />
-                <Text fontSize="sm" style={{padding:"0px 7px"}}>0.1 BTC</Text>
+                <Text fontSize="sm" style={{ padding: "0px 7px" }}>
+                  0.1 BTC
+                </Text>
               </Container>
             </Container>
 
             <Container display="flex" justifyContent="space-between" px={4}>
-              <Text>Recipient Address</Text>
-              <Text>0x3434543434343cb3k243b4343knkml082j28902b</Text>
-              <CiShare1 />
+              <Text fontSize="l" py={1}>
+                Recipient Address
+              </Text>
+              <Text fontSize="sm" py={1}>
+                0x3434543434343cb3k243b4343knkml082j28902b
+              </Text>
+              <div style={{paddingTop:"4px"}}>
+              <CiShare1/>
+              </div>
             </Container>
-
           </ModalBody>
         </ModalContent>
       </Modal>
