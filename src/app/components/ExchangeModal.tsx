@@ -55,12 +55,13 @@ const ExchangeModal = (props: Props) => {
 
                 <Input
                   h={12}
-                  w={400}
+                  w={300}
                   placeholder="0.0"
                   value={token1Amount}
                   onChange={(e) => setToken1Amount(e.target.value)}
                   focusBorderColor="transparent"
                   textAlign="right"
+                  border="none"
                 />
                 <Flex alignItems="center" paddingLeft="8px">
                   <FaBitcoin size="1.5em" color="#F7931A" />
@@ -83,12 +84,13 @@ const ExchangeModal = (props: Props) => {
 
                 <Input
                   h={12}
-                  w={400}
+                  w={300}
                   placeholder="0.0"
                   value={token2Amount}
                   onChange={(e) => setToken2Amount(e.target.value)}
                   focusBorderColor="transparent"
                   textAlign="right"
+                  border="none"
                 />
                 <Flex alignItems="center" paddingLeft="8px">
                   <FaEthereum size="1.5em" color="#3c3c3d" />
@@ -116,6 +118,7 @@ const ExchangeModal = (props: Props) => {
                     value={walletAddress}
                     onChange={(e) => setWalletAddress(e.target.value)}
                     focusBorderColor="transparent"
+                    border="none"
                   />
                   <MdCancelPresentation color="grey"/>
                 </Flex>

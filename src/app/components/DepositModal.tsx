@@ -17,6 +17,7 @@ import {
   ModalBody,
   Center,
   Container,
+  Flex,
   Text,
 } from "@chakra-ui/react";
 
@@ -53,7 +54,7 @@ const DepositModal = (props: Props) => {
 
             <Container style={{ display: "flex" }} py={4}>
               <Container w="30%">
-                <Text fontSize="sk">Send deposit</Text>
+                <Text fontSize="sm" fontWeight="bold">Send deposit</Text>
               </Container>
               <Container w="70%" style={{ display: "flex" }}>
                 <FaBitcoin size="1.5em" color="F7931A" />
@@ -65,32 +66,32 @@ const DepositModal = (props: Props) => {
             {/* This is for QR  */}
             <Container style={{ display: "flex" }} py={4}>
               <Container w="30%" style={{ display: "flex" }}>
-                <Text fontSize="l">Deposit address</Text>
+                <Text fontSize="sm" fontWeight="bold">Deposit address</Text>
               </Container>
               <Container
                 w="70%"
                 style={{ display: "flex", justifyContent: "space-between" }}
               >
                 {/* Here qr code will be placed  */}
-                <Text fontSize="l" style={{ padding: "2px 7px" }}>
-                  fsdklsklsdsk
+                <Text fontSize="sm" style={{ padding: "2px 7px" }}>
+                0x742d35Cc6634C0532925a3b844Bc454e4438f44e
                 </Text>
-                <div
+                <Flex
                   style={{
                     display: "flex",
                     justifyContent: "space-around",
-                    width: "56px",
+                    width: "60px",
                   }}
                 >
-                  <CiShare1 />
-                  <BiCopy />
-                </div>
+                  <CiShare1  color="grey" />
+                  <BiCopy color="grey"/>
+                </Flex>
               </Container>
             </Container>
-            <Container>
-              <Container>
-                <MdPending />
-              </Container>
+            <Container p={8}>
+              <Flex mx={10}>
+                <MdPending style={{fontSize: "30px"}} color="#202A44"/>
+              </Flex>
               <Text>Pending deposit</Text>
             </Container>
 
@@ -100,28 +101,28 @@ const DepositModal = (props: Props) => {
               </Text>
             </Container>
 
-            <Container style={{ display: "flex" }} py={4}>
+            <Flex px={10} py={4}>
               <Container w="30%">
-                <Text fontSize="l">You get:</Text>
+                <Text fontSize="sm">You get:</Text>
               </Container>
-              <Container w="70%" style={{ display: "flex" }}>
+              <Flex w="70%" justifyContent="start" >
                 <FaEthereum size="1.5em" color="#3c3c3d" />
                 <Text fontSize="sm" style={{ padding: "0px 7px" }}>
                   0.1 BTC
                 </Text>
-              </Container>
-            </Container>
+              </Flex>
+            </Flex>
 
             <Container display="flex" justifyContent="space-between" px={4}>
-              <Text fontSize="l" py={1}>
+              <Text fontSize="sm" py={1}>
                 Recipient Address
               </Text>
               <Text fontSize="sm" py={1}>
                 0x3434543434343cb3k243b4343knkml082j28902b
               </Text>
-              <div style={{paddingTop:"4px"}}>
+              <Flex style={{paddingTop:"4px"}}>
               <CiShare1/>
-              </div>
+              </Flex>
             </Container>
           </ModalBody>
         </ModalContent>
