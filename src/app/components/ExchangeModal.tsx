@@ -16,6 +16,7 @@ import {
   InputLeftAddon,
   InputRightAddon,
   Text,
+  Flex
 } from "@chakra-ui/react";
 import { FaBitcoin, FaEthereum } from "react-icons/fa";
 import { MdCancelPresentation } from "react-icons/md";
@@ -54,31 +55,26 @@ const ExchangeModal = (props: Props) => {
 
                 <Input
                   h={12}
+                  w={400}
                   placeholder="0.0"
                   value={token1Amount}
                   onChange={(e) => setToken1Amount(e.target.value)}
                   focusBorderColor="transparent"
                   textAlign="right"
                 />
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    paddingLeft: "8px",
-                  }}
-                >
+                <Flex alignItems="center" paddingLeft="8px">
                   <FaBitcoin size="1.5em" color="#F7931A" />
                   <span style={{ paddingLeft: "12px", fontWeight:"bold"}}> BTC</span>
-                </div>
+                </Flex>
               </InputGroup>
             </FormControl>
-            <Container style={{display:"flex", justifyContent:"space-between"}}>
-              <div>
-              <BiSolidLockOpenAlt />
-              <Text fontSize='sm'>Floating rate</Text>
-              </div>
+            <Flex style={{justifyContent:"space-between"}}>
+              <Flex>
+              <BiSolidLockOpenAlt/>
+              <Text fontSize='sm' px={1}>Floating rate</Text>
+              </Flex>
               <TbExchange/>
-            </Container>
+            </Flex>
             <FormControl my={4}>
               <InputGroup size="sm">
                 <InputLeftAddon h={12} w={28}>
@@ -87,28 +83,23 @@ const ExchangeModal = (props: Props) => {
 
                 <Input
                   h={12}
+                  w={400}
                   placeholder="0.0"
                   value={token2Amount}
                   onChange={(e) => setToken2Amount(e.target.value)}
                   focusBorderColor="transparent"
                   textAlign="right"
                 />
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    paddingLeft: "8px",
-                  }} 
-                >
+                <Flex alignItems="center" paddingLeft="8px">
                   <FaEthereum size="1.5em" color="#3c3c3d" />
                   <span style={{ paddingLeft: "12px", fontWeight:"bold" }}> ETH</span>
-                </div>
+                </Flex>
               </InputGroup>
             </FormControl>
             <FormControl my={8}>
               <FormLabel>
                 <Text fontWeight="bold">Enter the wallet address</Text>
-                <div style={{ display: "flex", alignItems: "center" }}>
+                <Flex alignItems="center">
                   <Input
                     mt={2}
                     w="90%"
@@ -126,8 +117,8 @@ const ExchangeModal = (props: Props) => {
                     onChange={(e) => setWalletAddress(e.target.value)}
                     focusBorderColor="transparent"
                   />
-                  <MdCancelPresentation />
-                </div>
+                  <MdCancelPresentation color="grey"/>
+                </Flex>
               </FormLabel>
             </FormControl>
             <Button
@@ -139,7 +130,7 @@ const ExchangeModal = (props: Props) => {
             >
               Swap
             </Button>
-            <p
+            <Text
               style={{
                 fontSize: "9px",
                 textAlign: "center",
@@ -148,7 +139,7 @@ const ExchangeModal = (props: Props) => {
             >
               By Clicking Create an exchange, I agree to the Privacy Policy and
               Terms of Service
-            </p>
+            </Text>
           </ModalBody>
         </ModalContent>
       </Modal>
