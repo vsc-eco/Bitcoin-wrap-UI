@@ -1,11 +1,14 @@
 "use client";
 import React, { use } from "react";
 import { useState } from "react";
-import { FaBitcoin, FaEthereum } from "react-icons/fa";
+import { FaBitcoin } from "react-icons/fa";
 import { FaClipboardQuestion } from "react-icons/fa6";
 import { CiShare1 } from "react-icons/ci";
 import { BiCopy } from "react-icons/bi";
+import { IoReloadCircleSharp } from "react-icons/io5";
 import { MdPending } from "react-icons/md";
+import { TbExchange } from "react-icons/tb";
+import { RiSendPlaneLine } from "react-icons/ri";
 
 import {
   Button,
@@ -19,6 +22,7 @@ import {
   Container,
   Flex,
   Text,
+  FormLabel,
 } from "@chakra-ui/react";
 
 type Props = {};
@@ -54,19 +58,23 @@ const DepositModal = (props: Props) => {
 
             <Container style={{ display: "flex" }} py={4}>
               <Container w="30%">
-                <Text fontSize="sm" fontWeight="bold">Send deposit</Text>
+                <Text fontSize="sm" fontWeight="bold">
+                  Send deposit
+                </Text>
               </Container>
               <Container w="70%" style={{ display: "flex" }}>
-                <FaBitcoin size="1.5em" color="F7931A" />
+                <FaBitcoin size="1.5em" color="#F7931A" />
                 <Text fontSize="l" style={{ padding: "0px 7px" }}>
-                  0.1 BTC
+                  0.1 WBTC
                 </Text>
               </Container>
             </Container>
             {/* This is for QR  */}
             <Container style={{ display: "flex" }} py={4}>
               <Container w="30%" style={{ display: "flex" }}>
-                <Text fontSize="sm" fontWeight="bold">Deposit address</Text>
+                <Text fontSize="sm" fontWeight="bold">
+                  Deposit address
+                </Text>
               </Container>
               <Container
                 w="70%"
@@ -74,7 +82,7 @@ const DepositModal = (props: Props) => {
               >
                 {/* Here qr code will be placed  */}
                 <Text fontSize="sm" style={{ padding: "2px 7px" }}>
-                0x742d35Cc6634C0532925a3b844Bc454e4438f44e
+                  0x742d35Cc6634C0532925a3b844Bc454e4438f44e
                 </Text>
                 <Flex
                   style={{
@@ -83,17 +91,66 @@ const DepositModal = (props: Props) => {
                     width: "60px",
                   }}
                 >
-                  <CiShare1  color="grey" />
-                  <BiCopy color="grey"/>
+                  <CiShare1 color="grey" />
+                  <BiCopy color="grey" />
                 </Flex>
               </Container>
             </Container>
-            <Container p={8}>
-              <Flex mx={10}>
-                <MdPending style={{fontSize: "30px"}} color="#202A44"/>
-              </Flex>
-              <Text>Pending deposit</Text>
-            </Container>
+            <Flex justifyContent="space-around" py={8} alignItems="center" maxW="700px">
+              <Container >
+                <Flex>
+                  <MdPending style={{ fontSize: "30px" }} color="#202A44" />
+                </Flex>
+                <Text align="center">Pending deposit</Text>
+              </Container>
+              <Container>
+              <hr style={{ width: "40px", height:"1px", backgroundColor:"#202A44", marginBottom:"30px"}}  />
+              </Container>
+              <Container>
+                <Flex>
+                  <IoReloadCircleSharp
+                    style={{ fontSize: "30px" }}
+                    color="#202A44"
+                  />
+                </Flex>
+                <Text align="center">Confirming</Text>
+              </Container>
+              <Container>
+              <hr style={{ width: "40px", height:"1px", backgroundColor:"#202A44", marginBottom:"30px"}}  />
+              </Container>
+              <Container>
+                <Flex>
+                  <TbExchange
+                    style={{
+                      fontSize: "25px",
+                      transform: "rotate(90deg)",
+                      backgroundColor: "#202A44",
+                      padding: "2px",
+                      borderRadius: "12px",
+                    }}
+                    color="white"
+                  />
+                </Flex>
+                <Text align="center">Exchanging</Text>
+              </Container>
+              <Container>
+              <hr style={{ width: "40px", height:"1px", backgroundColor:"#202A44", marginBottom:"30px"}}  />
+              </Container>
+              <Container>
+                <Flex>
+                  <RiSendPlaneLine
+                    style={{
+                      fontSize: "25px",
+                      backgroundColor: "#202A44",
+                      padding: "2px",
+                      borderRadius: "12px",
+                    }}
+                    color="white"
+                  />
+                </Flex>
+                <Text align="center">Sending</Text>
+              </Container>
+            </Flex>
 
             <Container pt={8} pb={4}>
               <Text py={8} fontWeight="bold" fontSize="xl">
@@ -105,10 +162,11 @@ const DepositModal = (props: Props) => {
               <Container w="30%">
                 <Text fontSize="sm">You get:</Text>
               </Container>
-              <Flex w="70%" justifyContent="start" >
-                <FaEthereum size="1.5em" color="#3c3c3d" />
+              <Flex w="70%" justifyContent="start">
+                <FaBitcoin size="1.5em" color="#F7931A" />
+                <FormLabel style={{ padding: "0px 7px" }}>0.1</FormLabel>
                 <Text fontSize="sm" style={{ padding: "0px 7px" }}>
-                  0.1 BTC
+                   WBTC
                 </Text>
               </Flex>
             </Flex>
@@ -120,8 +178,8 @@ const DepositModal = (props: Props) => {
               <Text fontSize="sm" py={1}>
                 0x3434543434343cb3k243b4343knkml082j28902b
               </Text>
-              <Flex style={{paddingTop:"4px"}}>
-              <CiShare1/>
+              <Flex style={{ paddingTop: "4px" }}>
+                <CiShare1 />
               </Flex>
             </Container>
           </ModalBody>

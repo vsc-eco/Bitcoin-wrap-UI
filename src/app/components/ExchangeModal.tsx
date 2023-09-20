@@ -16,12 +16,18 @@ import {
   InputLeftAddon,
   InputRightAddon,
   Text,
-  Flex
+  Flex,
+  Box,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
 } from "@chakra-ui/react";
 import { FaBitcoin, FaEthereum } from "react-icons/fa";
 import { MdCancelPresentation } from "react-icons/md";
 import { TbExchange } from "react-icons/tb";
-import {BiSolidLockOpenAlt} from "react-icons/bi"
+import { BiSolidLockOpenAlt } from "react-icons/bi";
 import { useState } from "react";
 
 type Props = {};
@@ -65,16 +71,21 @@ const ExchangeModal = (props: Props) => {
                 />
                 <Flex alignItems="center" paddingLeft="8px">
                   <FaBitcoin size="1.5em" color="#F7931A" />
-                  <span style={{ paddingLeft: "12px", fontWeight:"bold"}}> BTC</span>
+                  <span style={{ paddingLeft: "12px", fontWeight: "bold" }}>
+                    {" "}
+                    BTC
+                  </span>
                 </Flex>
               </InputGroup>
             </FormControl>
-            <Flex style={{justifyContent:"space-between"}}>
+            <Flex style={{ justifyContent: "space-between" }}>
               <Flex>
-              <BiSolidLockOpenAlt/>
-              <Text fontSize='sm' px={1}>Floating rate</Text>
+                <BiSolidLockOpenAlt />
+                <Text fontSize="sm" px={1}>
+                  Floating rate
+                </Text>
               </Flex>
-              <TbExchange/>
+              <TbExchange />
             </Flex>
             <FormControl my={4}>
               <InputGroup size="sm">
@@ -93,20 +104,22 @@ const ExchangeModal = (props: Props) => {
                   border="none"
                 />
                 <Flex alignItems="center" paddingLeft="8px">
-                  <FaEthereum size="1.5em" color="#3c3c3d" />
-                  <span style={{ paddingLeft: "12px", fontWeight:"bold" }}> ETH</span>
+                  <FaBitcoin size="1.5em" color="#F7931A" />
+                  <span style={{ paddingLeft: "12px", fontWeight: "bold" }}>
+                    (W)BTC
+                  </span>
                 </Flex>
               </InputGroup>
             </FormControl>
             <FormControl my={8}>
               <FormLabel>
-                <Text fontWeight="bold">Enter the wallet address</Text>
+                <Text fontWeight="bold">Enter your HIVE username</Text>
                 <Flex alignItems="center">
                   <Input
                     mt={2}
                     w="90%"
                     h="56px"
-                    placeholder="The recipient's ethereum address"
+                    placeholder="The recipient's HIVE username"
                     sx={{
                       "::placeholder": {
                         position: "relative",
@@ -120,7 +133,28 @@ const ExchangeModal = (props: Props) => {
                     focusBorderColor="transparent"
                     border="none"
                   />
-                  <MdCancelPresentation color="grey"/>
+                  <MdCancelPresentation color="grey" />
+                </Flex>
+                <Text fontSize="xs" color="red" px={4}>
+                  HIVE account doesnt exists!
+                </Text>
+
+                <Flex>
+                  <Accordion defaultIndex={[0]} allowMultiple>
+                    <AccordionItem>
+                      <h2>
+                        <AccordionButton>
+                          <Box as="span" flex="1" textAlign="left">
+                          Bridge fee
+                          </Box>
+                          <AccordionIcon />
+                        </AccordionButton>
+                      </h2>
+                      <AccordionPanel pb={4}>
+                        fee breakdown
+                      </AccordionPanel>
+                    </AccordionItem>
+                  </Accordion>
                 </Flex>
               </FormLabel>
             </FormControl>
