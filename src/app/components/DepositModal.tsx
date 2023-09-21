@@ -96,18 +96,17 @@ const DepositModal = (props: Props) => {
                 </Flex>
               </Container>
             </Container>
-            <Flex justifyContent="space-around" py={8} alignItems="center" maxW="700px">
+            <hr />
+            <Flex justifyContent="space-around" py={8} alignItems="center" maxW="800px" fontSize="xs" ml={4}>
               <Container >
-                <Flex>
+                <Flex mx={12}>
                   <MdPending style={{ fontSize: "30px" }} color="#202A44" />
                 </Flex>
                 <Text align="center">Pending deposit</Text>
               </Container>
+      
               <Container>
-              <hr style={{ width: "40px", height:"1px", backgroundColor:"#202A44", marginBottom:"30px"}}  />
-              </Container>
-              <Container>
-                <Flex>
+                <Flex mx={12}>
                   <IoReloadCircleSharp
                     style={{ fontSize: "30px" }}
                     color="#202A44"
@@ -115,11 +114,9 @@ const DepositModal = (props: Props) => {
                 </Flex>
                 <Text align="center">Confirming</Text>
               </Container>
+          
               <Container>
-              <hr style={{ width: "40px", height:"1px", backgroundColor:"#202A44", marginBottom:"30px"}}  />
-              </Container>
-              <Container>
-                <Flex>
+                <Flex mx={12}>
                   <TbExchange
                     style={{
                       fontSize: "25px",
@@ -133,11 +130,9 @@ const DepositModal = (props: Props) => {
                 </Flex>
                 <Text align="center">Exchanging</Text>
               </Container>
+              
               <Container>
-              <hr style={{ width: "40px", height:"1px", backgroundColor:"#202A44", marginBottom:"30px"}}  />
-              </Container>
-              <Container>
-                <Flex>
+                <Flex mx={12}>
                   <RiSendPlaneLine
                     style={{
                       fontSize: "25px",
