@@ -23,6 +23,7 @@ import {
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { FaBitcoin, FaEthereum } from "react-icons/fa";
 import { MdCancelPresentation } from "react-icons/md";
@@ -33,19 +34,19 @@ import { useState } from "react";
 type Props = {};
 
 const ExchangeModal = (props: Props) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const {isOpen, onOpen, onClose} = useDisclosure()
   const [token1Amount, setToken1Amount] = useState("");
   const [token2Amount, setToken2Amount] = useState("");
   const [walletAddress, setWalletAddress] = useState("");
 
-  const handleOpen = () => setIsOpen(true);
-  const handleClose = () => setIsOpen(false);
+  // const handleOpen = () => setIsOpen(true);
+  // const handleClose = () => setIsOpen(false);
 
   return (
     <>
-      <Button onClick={handleOpen}>Swap tokens</Button>
+      {/* <Button onClick={handleOpen}>Swap tokens</Button> */}
 
-      <Modal isOpen={isOpen} onClose={handleClose}>
+      <Modal isOpen={isOpen} isCentered closeOnOverlayClick={false} onClose={onClose}>
         <ModalOverlay />
         <ModalContent maxW="700px" maxH="900px">
           <ModalHeader>
@@ -158,7 +159,7 @@ const ExchangeModal = (props: Props) => {
                 </Flex>
               </FormLabel>
             </FormControl>
-            <Button
+            {/* <Button
               colorScheme="blue"
               my={4}
               mb={4}
@@ -166,7 +167,7 @@ const ExchangeModal = (props: Props) => {
               onClick={handleClose}
             >
               Swap
-            </Button>
+            </Button> */}
             <Text
               style={{
                 fontSize: "9px",
