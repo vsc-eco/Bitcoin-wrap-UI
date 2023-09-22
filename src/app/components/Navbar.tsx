@@ -4,7 +4,7 @@ import { Box, Flex, Link } from '@chakra-ui/react';
 
 const Navbar = () => {
   return (
-    <Flex bg="teal.500" px={5} py={4} justifyContent="space-between" alignItems="center">
+    <Flex bg="teal.500" px={5} py={4} justifyContent="space-between" alignItems="center" bgColor="#03568e" marginBottom="1px">
       <Flex flexDirection="row" justifyContent="center" alignItems="center">
         <Box>
           <Link color='white'>WBTC Swap</Link>

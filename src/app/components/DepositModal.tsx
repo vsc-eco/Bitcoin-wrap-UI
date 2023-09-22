@@ -1,6 +1,6 @@
 "use client";
 import React, { use } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaBitcoin } from "react-icons/fa";
 import { FaClipboardQuestion } from "react-icons/fa6";
 import { CiShare1 } from "react-icons/ci";
@@ -12,49 +12,54 @@ import { RiSendPlaneLine } from "react-icons/ri";
 
 import {
   Button,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
+  Card,
+  CardHeader,
+  CardBody,
   Center,
   Container,
   Flex,
   Text,
   FormLabel,
+  useDisclosure,
 } from "@chakra-ui/react";
 
 type Props = {};
 
-const DepositModal = (props: Props) => {
-  const [isOpen, setIsOpen] = useState(false);
+const DepositCard = (props: Props) => {
+  // const [isOpen, setIsOpen] = useState(false);
+  const {isOpen, onOpen, onClose} = useDisclosure()
 
-  const handleOpen = () => setIsOpen(true);
-  const handleClose = () => setIsOpen(false);
+  // const handleOpen = () => setIsOpen(true);
+  // const handleClose = () => setIsOpen(false);
+
+   useEffect(()=>{
+    onOpen()
+   }, [onOpen])
+
 
   return (
     <>
-      <Button onClick={handleOpen}>Deposit</Button>
-      <Modal isOpen={isOpen} onClose={handleClose}>
-        <ModalOverlay />
-        <ModalContent maxW="700px" maxH="900px">
-          <ModalCloseButton />
-          <ModalBody pb={6} my={4} mx={4}>
+      {/* <Button onClick={handleOpen}>Deposit</Button> */}
+
+      <Flex justifyContent="center">
+      <Card  maxW="700px" maxH="900px">
+          <CardBody pb={6} my={4} mx={4}>
             <Container
               style={{ display: "flex", justifyContent: "space-between" }}
             >
-              <Text fontSize="sm">Exchange ID: dkajklsnfhalkandlksd2324</Text>
+             <Text fontSize="sm">Exchange ID: dkajklsnfhalkandlksd2324</Text>
+             <a style={{cursor:"pointer"}}>
               <div style={{ display: "flex" }}>
                 <FaClipboardQuestion />
-                <Text fontSize="smaller">Need help?</Text>
+                <Text fontSize="sm">Need help?</Text>
               </div>
+             </a>
             </Container>
-            <ModalHeader py={12}>
+            <CardHeader py={12}>
               <Center>
                 <Text fontSize="2xl">Awaiting your deposit</Text>
               </Center>
-            </ModalHeader>
+            </CardHeader>
 
             <Container style={{ display: "flex" }} py={4}>
               <Container w="30%">
@@ -91,8 +96,12 @@ const DepositModal = (props: Props) => {
                     width: "60px",
                   }}
                 >
-                  <CiShare1 color="grey" />
-                  <BiCopy color="grey" />
+                  <Button size="l" px={2}>
+                  <CiShare1 color="black" fontWeight="bold" />
+                  </Button>
+                  <Button size="l" px={2}>
+                  <BiCopy color="black" fontWeight="bold" />
+                  </Button>
                 </Flex>
               </Container>
             </Container>
@@ -153,7 +162,7 @@ const DepositModal = (props: Props) => {
               </Text>
             </Container>
 
-            <Flex px={10} py={4}>
+            <Flex px={12} py={4}>
               <Container w="30%">
                 <Text fontSize="sm">You get:</Text>
               </Container>
@@ -173,15 +182,17 @@ const DepositModal = (props: Props) => {
               <Text fontSize="sm" py={1}>
                 0x3434543434343cb3k243b4343knkml082j28902b
               </Text>
-              <Flex style={{ paddingTop: "4px" }}>
-                <CiShare1 />
+              <Flex style={{ alignItems:"center"}}>
+                 <a style={{cursor:"pointer", paddingBottom:"2px"}}>
+                <CiShare1/>
+                 </a>
               </Flex>
             </Container>
-          </ModalBody>
-        </ModalContent>
-      </Modal>
+          </CardBody>
+      </Card>
+    </Flex>
     </>
   );
 };
 
-export default DepositModal;
+export default DepositCard;

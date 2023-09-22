@@ -1,12 +1,6 @@
 "use client";
 import {
   Button,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
   FormControl,
   FormLabel,
   Input,
@@ -14,7 +8,6 @@ import {
   Container,
   InputGroup,
   InputLeftAddon,
-  InputRightAddon,
   Text,
   Flex,
   Box,
@@ -29,7 +22,8 @@ import { FaBitcoin, FaEthereum } from "react-icons/fa";
 import { MdCancelPresentation } from "react-icons/md";
 import { TbExchange } from "react-icons/tb";
 import { BiSolidLockOpenAlt } from "react-icons/bi";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Card, CardHeader, CardBody, CardFooter } from '@chakra-ui/react'
 
 type Props = {};
 
@@ -42,18 +36,21 @@ const ExchangeModal = (props: Props) => {
   // const handleOpen = () => setIsOpen(true);
   // const handleClose = () => setIsOpen(false);
 
+  //  useEffect(()=> {
+  //   onOpen()
+  //  }, [onOpen])
   return (
     <>
       {/* <Button onClick={handleOpen}>Swap tokens</Button> */}
-
-      <Modal isOpen={isOpen} isCentered closeOnOverlayClick={false} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent maxW="700px" maxH="900px">
-          <ModalHeader>
-            <Center>Add exchange details</Center>
-          </ModalHeader>
-          <ModalCloseButton />
-          <ModalBody pb={6} my={4} mx={8}>
+      <Flex justifyContent="center" py={8}>
+      <Card bg="white" maxW="800px" maxH="900px">
+        {/* <ModalOverlay /> */}
+        {/* <Card maxW="700px" maxH="900px"> */}
+          <CardHeader>
+            <Center fontWeight="bold">Add exchange details</Center>
+          </CardHeader>
+          {/* <ModalCloseButton /> */}
+          <CardBody  pb={6} my={4} mx={16}>
             <FormControl my={4}>
               <InputGroup size="sm">
                 <InputLeftAddon h={12} w={28}>
@@ -86,7 +83,10 @@ const ExchangeModal = (props: Props) => {
                   Floating rate
                 </Text>
               </Flex>
+              <Button _hover={{ bg: "brand.500", color:"white" }}>
               <TbExchange />
+              </Button>
+              
             </Flex>
             <FormControl my={4}>
               <InputGroup size="sm">
@@ -140,34 +140,37 @@ const ExchangeModal = (props: Props) => {
                   HIVE account doesnt exists!
                 </Text>
 
-                <Flex>
+                <Flex py={4}>
                   <Accordion defaultIndex={[0]} allowMultiple>
                     <AccordionItem>
                       <h2>
                         <AccordionButton>
-                          <Box as="span" flex="1" textAlign="left">
+                          <Box as="span" flex="1" textAlign="left" fontSize="xs">
                           Bridge fee
                           </Box>
                           <AccordionIcon />
                         </AccordionButton>
                       </h2>
-                      <AccordionPanel pb={4}>
-                        fee breakdown
+                      <AccordionPanel pb={2}>
+                        <Flex justifyContent="space-between">
+                          <Text fontSize="xs">Bridge fee</Text>
+                          <Text fontSize="xs" px={12}>0 BTC ($0.01)</Text>
+                        </Flex>
                       </AccordionPanel>
                     </AccordionItem>
                   </Accordion>
                 </Flex>
               </FormLabel>
             </FormControl>
-            {/* <Button
+            <Button
               colorScheme="blue"
               my={4}
               mb={4}
               w="100%"
-              onClick={handleClose}
+              onClick={()=> alert("button has been clicked :)")}
             >
               Swap
-            </Button> */}
+            </Button>
             <Text
               style={{
                 fontSize: "9px",
@@ -178,9 +181,9 @@ const ExchangeModal = (props: Props) => {
               By Clicking Create an exchange, I agree to the Privacy Policy and
               Terms of Service
             </Text>
-          </ModalBody>
-        </ModalContent>
-      </Modal>
+          </CardBody>
+      </Card>
+      </Flex>
     </>
   );
 };
