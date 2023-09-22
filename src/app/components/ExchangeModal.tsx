@@ -146,7 +146,7 @@ const ExchangeModal = (props: Props) => {
                       <h2>
                         <AccordionButton>
                           <Box as="span" flex="1" textAlign="left" fontSize="xs">
-                          Bridge fee
+                          Fee Breakdown
                           </Box>
                           <AccordionIcon />
                         </AccordionButton>
