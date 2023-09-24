@@ -69,7 +69,8 @@ const DepositCard = (props: Props) => {
               </Container>
               <Container
                 w="70%"
-                style={{ display: "flex", justifyContent: "space-between" }}
+                display='flex'
+                justifyContent="left"
               >
                 {/* Here qr code will be placed  */}
                 <Text fontSize="sm" style={{ padding: "2px 0px" }}>
