@@ -16,41 +16,30 @@ import {
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
-  useDisclosure,
 } from "@chakra-ui/react";
-import { FaBitcoin, FaEthereum } from "react-icons/fa";
+import { FaBitcoin } from "react-icons/fa";
 import { MdCancelPresentation } from "react-icons/md";
 import { TbExchange } from "react-icons/tb";
 import { BiSolidLockOpenAlt } from "react-icons/bi";
-import { useState, useEffect } from "react";
-import { Card, CardHeader, CardBody, CardFooter } from '@chakra-ui/react'
+import { useState } from "react";
+import { Card, CardHeader, CardBody } from "@chakra-ui/react";
+import { useBreakpointValue } from "@chakra-ui/media-query";
 
 type Props = {};
 
 const ExchangeModal = (props: Props) => {
-  const {isOpen, onOpen, onClose} = useDisclosure()
   const [token1Amount, setToken1Amount] = useState("");
   const [token2Amount, setToken2Amount] = useState("");
   const [walletAddress, setWalletAddress] = useState("");
 
-  // const handleOpen = () => setIsOpen(true);
-  // const handleClose = () => setIsOpen(false);
-
-  //  useEffect(()=> {
-  //   onOpen()
-  //  }, [onOpen])
   return (
     <>
-      {/* <Button onClick={handleOpen}>Swap tokens</Button> */}
-      <Flex justifyContent="center" py={8}>
-      <Card bg="white" maxW="800px" maxH="900px">
-        {/* <ModalOverlay /> */}
-        {/* <Card maxW="700px" maxH="900px"> */}
+      <Flex justifyContent="center" py={8} alignItems="center">
+        <Card bg="white" maxW="800px" maxH="900px" w="680px" m={4}>
           <CardHeader>
             <Center fontWeight="bold">Add exchange details</Center>
           </CardHeader>
-          {/* <ModalCloseButton /> */}
-          <CardBody  pb={6} my={4} mx={16}>
+          <CardBody pb={6} my={4} mx={16}>
             <FormControl my={4}>
               <InputGroup size="sm">
                 <InputLeftAddon h={12} w={28}>
@@ -83,10 +72,9 @@ const ExchangeModal = (props: Props) => {
                   Floating rate
                 </Text>
               </Flex>
-              <Button _hover={{ bg: "brand.500", color:"white" }}>
-              <TbExchange />
+              <Button _hover={{ bg: "brand.500", color: "white" }}>
+                <TbExchange />
               </Button>
-              
             </Flex>
             <FormControl my={4}>
               <InputGroup size="sm">
@@ -112,29 +100,30 @@ const ExchangeModal = (props: Props) => {
                 </Flex>
               </InputGroup>
             </FormControl>
-            <FormControl my={8}>
+            <FormControl mt={8}>
               <FormLabel>
-                <Text fontWeight="bold">Enter your HIVE username</Text>
+                <Text fontWeight="bold" mx={2}>
+                  Enter HIVE username
+                </Text>
                 <Flex alignItems="center">
+                  <Text
+                    style={{ position: "absolute", top: "30px", left:"10px" }}
+                    fontSize="xs"
+                  >
+                    The recipients hive username
+                  </Text>
                   <Input
-                    mt={2}
+                    mt={1}
                     w="90%"
                     h="56px"
-                    placeholder="The recipient's HIVE username"
-                    sx={{
-                      "::placeholder": {
-                        position: "relative",
-                        top: "-14px",
-                        fontSize: "12px",
-                        fontWeight: "bold", // Adjust this value as needed
-                      },
-                    }}
                     value={walletAddress}
                     onChange={(e) => setWalletAddress(e.target.value)}
                     focusBorderColor="transparent"
                     border="none"
                   />
-                  <MdCancelPresentation color="grey" />
+                  <Button _hover={{ bg: "brand.500", color: "white" }}>
+                    <MdCancelPresentation color="black" />
+                  </Button>
                 </Flex>
                 <Text fontSize="xs" color="red" px={4}>
                   HIVE account doesnt exists!
@@ -145,8 +134,13 @@ const ExchangeModal = (props: Props) => {
                     <AccordionItem>
                       <h2>
                         <AccordionButton>
-                          <Box as="span" flex="1" textAlign="left" fontSize="xs">
-                          Fee Breakdown
+                          <Box
+                            as="span"
+                            flex="1"
+                            textAlign="left"
+                            fontSize="xs"
+                          >
+                            Fee Breakdown
                           </Box>
                           <AccordionIcon />
                         </AccordionButton>
@@ -154,7 +148,9 @@ const ExchangeModal = (props: Props) => {
                       <AccordionPanel pb={2}>
                         <Flex justifyContent="space-between">
                           <Text fontSize="xs">Bridge fee</Text>
-                          <Text fontSize="xs" px={12}>0 BTC ($0.01)</Text>
+                          <Text fontSize="xs" px={12}>
+                            0 BTC ($0.01)
+                          </Text>
                         </Flex>
                       </AccordionPanel>
                     </AccordionItem>
@@ -167,7 +163,7 @@ const ExchangeModal = (props: Props) => {
               my={4}
               mb={4}
               w="100%"
-              onClick={()=> alert("button has been clicked :)")}
+              onClick={() => alert("button has been clicked :)")}
             >
               Swap
             </Button>
@@ -182,7 +178,7 @@ const ExchangeModal = (props: Props) => {
               Terms of Service
             </Text>
           </CardBody>
-      </Card>
+        </Card>
       </Flex>
     </>
   );

@@ -1,17 +1,15 @@
 "use client";
-import React, { use } from "react";
-import { useState, useEffect } from "react";
+import React from "react";
 import { FaBitcoin } from "react-icons/fa";
 import { FaClipboardQuestion } from "react-icons/fa6";
 import { CiShare1 } from "react-icons/ci";
 import { BiCopy } from "react-icons/bi";
-import { IoReloadCircleSharp } from "react-icons/io5";
-import { MdPending } from "react-icons/md";
-import { TbExchange } from "react-icons/tb";
-import { RiSendPlaneLine } from "react-icons/ri";
+import ProgressBar from "./ProgressBar";
+import { useBreakpointValue } from "@chakra-ui/media-query";
 
 import {
   Button,
+  Box,
   Card,
   CardHeader,
   CardBody,
@@ -20,40 +18,28 @@ import {
   Flex,
   Text,
   FormLabel,
-  useDisclosure,
 } from "@chakra-ui/react";
 
 type Props = {};
 
+
+
 const DepositCard = (props: Props) => {
-  // const [isOpen, setIsOpen] = useState(false);
-  const {isOpen, onOpen, onClose} = useDisclosure()
-
-  // const handleOpen = () => setIsOpen(true);
-  // const handleClose = () => setIsOpen(false);
-
-   useEffect(()=>{
-    onOpen()
-   }, [onOpen])
-
-
   return (
     <>
-      {/* <Button onClick={handleOpen}>Deposit</Button> */}
-
-      <Flex justifyContent="center">
-      <Card  maxW="700px" maxH="900px">
+      <Flex justifyContent="center" alignItems="center">
+        <Card maxW="800px" maxH="900px" w="680px" m={4}>
           <CardBody pb={6} my={4} mx={4}>
             <Container
               style={{ display: "flex", justifyContent: "space-between" }}
             >
-             <Text fontSize="sm">Exchange ID: dkajklsnfhalkandlksd2324</Text>
-             <a style={{cursor:"pointer"}}>
-              <div style={{ display: "flex" }}>
-                <FaClipboardQuestion />
-                <Text fontSize="sm">Need help?</Text>
-              </div>
-             </a>
+              <Text fontSize="sm">Exchange ID: dkajklsnfhalkandlksd2324</Text>
+              <a style={{ cursor: "pointer" }}>
+                <div style={{ display: "flex" }}>
+                  <FaClipboardQuestion />
+                  <Text fontSize="sm">Need help?</Text>
+                </div>
+              </a>
             </Container>
             <CardHeader py={12}>
               <Center>
@@ -86,28 +72,35 @@ const DepositCard = (props: Props) => {
                 style={{ display: "flex", justifyContent: "space-between" }}
               >
                 {/* Here qr code will be placed  */}
-                <Text fontSize="sm" style={{ padding: "2px 7px" }}>
+                <Text fontSize="sm" style={{ padding: "2px 0px" }}>
                   0x742d35Cc6634C0532925a3b844Bc454e4438f44e
                 </Text>
                 <Flex
                   style={{
                     display: "flex",
                     justifyContent: "space-around",
-                    width: "60px",
+                    width: "50px",
                   }}
                 >
-                  <Button size="l" px={2}>
-                  <CiShare1 color="black" fontWeight="bold" />
+                  <Button size="l" px={1}>
+                    <CiShare1 color="black" fontWeight="bold" />
                   </Button>
-                  <Button size="l" px={2}>
-                  <BiCopy color="black" fontWeight="bold" />
+                  <Button size="l">
+                    <BiCopy color="black" fontWeight="bold" />
                   </Button>
                 </Flex>
               </Container>
             </Container>
-            <hr />
-            <Flex justifyContent="space-around" py={8} alignItems="center" maxW="800px" fontSize="xs" ml={4}>
-              <Container >
+
+            <Box
+              justifyContent="space-evenly"
+              py={8}
+              alignItems="center"
+              maxW="800px"
+              fontSize="xs"
+              w="100%"
+            >
+              {/* <Container>
                 <Flex mx={12}>
                   <MdPending style={{ fontSize: "30px" }} color="#202A44" />
                 </Flex>
@@ -153,8 +146,9 @@ const DepositCard = (props: Props) => {
                   />
                 </Flex>
                 <Text align="center">Sending</Text>
-              </Container>
-            </Flex>
+              </Container> */}
+              <ProgressBar  />
+            </Box>
 
             <Container pt={8} pb={4}>
               <Text py={8} fontWeight="bold" fontSize="xl">
@@ -162,15 +156,17 @@ const DepositCard = (props: Props) => {
               </Text>
             </Container>
 
-            <Flex px={12} py={4}>
+            <Flex px={4}>
               <Container w="30%">
-                <Text fontSize="sm">You get:</Text>
+                <Text fontSize="sm" mx={6}>
+                  You get:
+                </Text>
               </Container>
               <Flex w="70%" justifyContent="start">
                 <FaBitcoin size="1.5em" color="#F7931A" />
                 <FormLabel style={{ padding: "0px 7px" }}>0.1</FormLabel>
                 <Text fontSize="sm" style={{ padding: "0px 7px" }}>
-                   WBTC
+                  WBTC
                 </Text>
               </Flex>
             </Flex>
@@ -182,15 +178,15 @@ const DepositCard = (props: Props) => {
               <Text fontSize="sm" py={1}>
                 0x3434543434343cb3k243b4343knkml082j28902b
               </Text>
-              <Flex style={{ alignItems:"center"}}>
-                 <a style={{cursor:"pointer", paddingBottom:"2px"}}>
-                <CiShare1/>
-                 </a>
+              <Flex style={{ alignItems: "center" }}>
+                <a style={{ cursor: "pointer", paddingBottom: "2px" }}>
+                  <CiShare1 />
+                </a>
               </Flex>
             </Container>
           </CardBody>
-      </Card>
-    </Flex>
+        </Card>
+      </Flex>
     </>
   );
 };
