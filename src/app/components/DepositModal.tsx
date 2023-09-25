@@ -101,53 +101,7 @@ const DepositCard = (props: Props) => {
               fontSize="xs"
               w="100%"
             >
-              {/* <Container>
-                <Flex mx={12}>
-                  <MdPending style={{ fontSize: "30px" }} color="#202A44" />
-                </Flex>
-                <Text align="center">Pending deposit</Text>
-              </Container>
-      
-              <Container>
-                <Flex mx={12}>
-                  <IoReloadCircleSharp
-                    style={{ fontSize: "30px" }}
-                    color="#202A44"
-                  />
-                </Flex>
-                <Text align="center">Confirming</Text>
-              </Container>
-          
-              <Container>
-                <Flex mx={12}>
-                  <TbExchange
-                    style={{
-                      fontSize: "25px",
-                      transform: "rotate(90deg)",
-                      backgroundColor: "#202A44",
-                      padding: "2px",
-                      borderRadius: "12px",
-                    }}
-                    color="white"
-                  />
-                </Flex>
-                <Text align="center">Exchanging</Text>
-              </Container>
-              
-              <Container>
-                <Flex mx={12}>
-                  <RiSendPlaneLine
-                    style={{
-                      fontSize: "25px",
-                      backgroundColor: "#202A44",
-                      padding: "2px",
-                      borderRadius: "12px",
-                    }}
-                    color="white"
-                  />
-                </Flex>
-                <Text align="center">Sending</Text>
-              </Container> */}
+
               <ProgressBar  />
             </Box>
 

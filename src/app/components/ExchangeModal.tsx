@@ -39,16 +39,26 @@ const ExchangeModal = (props: Props) => {
           <CardHeader>
             <Center fontWeight="bold">Add exchange details</Center>
           </CardHeader>
-          <CardBody pb={6} my={4} mx={16}>
-            <FormControl my={4}>
+          <CardBody
+            pb={["1", "2", "4", "6"]}
+            my={["1", "2", "4", "4"]}
+            mx={["1", "2", "4", "16"]}
+          >
+            <FormControl my={["1", "2", "3", "4"]}>
               <InputGroup size="sm">
-                <InputLeftAddon h={12} w={28}>
-                  <span>You Send</span>
+                <InputLeftAddon
+                  h={["8", "12", "16", "12"]}
+                  w="25%"
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                >
+                  <Text>You Send</Text>
                 </InputLeftAddon>
 
                 <Input
-                  h={12}
-                  w={300}
+                  h={["8", "12", "12", "12"]}
+                  w="75%"
                   placeholder="0.0"
                   value={token1Amount}
                   onChange={(e) => setToken1Amount(e.target.value)}
@@ -66,9 +76,9 @@ const ExchangeModal = (props: Props) => {
               </InputGroup>
             </FormControl>
             <Flex style={{ justifyContent: "space-between" }}>
-              <Flex>
+              <Flex alignItems="center">
                 <BiSolidLockOpenAlt />
-                <Text fontSize="sm" px={1}>
+                <Text fontSize={["8px", "10px", "12px", "14px"]} px={1}>
                   Floating rate
                 </Text>
               </Flex>
@@ -78,13 +88,19 @@ const ExchangeModal = (props: Props) => {
             </Flex>
             <FormControl my={4}>
               <InputGroup size="sm">
-                <InputLeftAddon h={12} w={28}>
-                  <span>You Got</span>
+              <InputLeftAddon
+                  h={["8", "12", "16", "12"]}
+                  w="25%"
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                >
+                  <Text>You Got</Text>
                 </InputLeftAddon>
 
                 <Input
                   h={12}
-                  w={300}
+                  w="75%"
                   placeholder="0.0"
                   value={token2Amount}
                   onChange={(e) => setToken2Amount(e.target.value)}
@@ -102,12 +118,16 @@ const ExchangeModal = (props: Props) => {
             </FormControl>
             <FormControl mt={8}>
               <FormLabel>
-                <Text fontWeight="bold" mx={2}>
+                <Text
+                  fontWeight="bold"
+                  mx={2}
+                  fontSize={["12px", "16px", "18px", "20px"]}
+                >
                   Enter HIVE username
                 </Text>
                 <Flex alignItems="center">
                   <Text
-                    style={{ position: "absolute", top: "30px", left:"10px" }}
+                    style={{ position: "absolute", top: "30px", left: "10px" }}
                     fontSize="xs"
                   >
                     The recipients hive username
@@ -125,7 +145,7 @@ const ExchangeModal = (props: Props) => {
                     <MdCancelPresentation color="black" />
                   </Button>
                 </Flex>
-                <Text fontSize="xs" color="red" px={4}>
+                <Text fontSize={["8px", "10px", "12px", "14px"]} color="red" px={["1","2","3", "4"]}>
                   HIVE account doesnt exists!
                 </Text>
 
