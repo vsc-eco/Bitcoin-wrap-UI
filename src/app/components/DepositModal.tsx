@@ -5,7 +5,6 @@ import { FaClipboardQuestion } from "react-icons/fa6";
 import { CiShare1 } from "react-icons/ci";
 import { BiCopy } from "react-icons/bi";
 import ProgressBar from "./ProgressBar";
-import { useBreakpointValue } from "@chakra-ui/media-query";
 
 import {
   Button,
@@ -17,76 +16,97 @@ import {
   Container,
   Flex,
   Text,
+  Wrap,
+  Icon,
   FormLabel,
 } from "@chakra-ui/react";
 
 type Props = {};
-
-
 
 const DepositCard = (props: Props) => {
   return (
     <>
       <Flex justifyContent="center" alignItems="center">
         <Card maxW="800px" maxH="900px" w="680px" m={4}>
-          <CardBody pb={6} my={4} mx={4}>
-            <Container
-              style={{ display: "flex", justifyContent: "space-between" }}
-            >
-              <Text fontSize="sm">Exchange ID: dkajklsnfhalkandlksd2324</Text>
+          <CardBody
+            pb={["1", "2", "4", "6"]}
+            my={["1", "2", "4", "4"]}
+            mx={["1", "2", "4", "6"]}
+          >
+            <Container display="flex" justifyContent="space-between" maxW={600}>
+              <Text fontSize={["8px", "10px", "12px", "16px"]}>
+                Exchange ID: dkajklsnfhalkandlksd2324
+              </Text>
               <a style={{ cursor: "pointer" }}>
-                <div style={{ display: "flex" }}>
-                  <FaClipboardQuestion />
-                  <Text fontSize="sm">Need help?</Text>
-                </div>
+                <Flex alignItems="center">
+                  <Icon
+                    as={FaClipboardQuestion}
+                    boxSize={["12px", "12px", "16px", "18px"]}
+                  />
+                  <Text fontSize={["8px", "10px", "12px", "16px"]}>
+                    Need help?
+                  </Text>
+                </Flex>
               </a>
             </Container>
-            <CardHeader py={12}>
+            <CardHeader py={["4", "6", "8", "12"]}>
               <Center>
-                <Text fontSize="2xl">Awaiting your deposit</Text>
+                <Text
+                  fontSize={["12px", "16px", "20px", "24px"]}
+                  fontWeight="bold"
+                >
+                  Awaiting your deposit
+                </Text>
               </Center>
             </CardHeader>
 
-            <Container style={{ display: "flex" }} py={4}>
-              <Container w="30%">
-                <Text fontSize="sm" fontWeight="bold">
+            <Container display="flex" py={["1", "2", "3", "4"]} maxW={600}>
+              <Container w="30%" display="flex" justifyContent="left">
+                <Text
+                  fontSize={["8px", "12px", "14px", "16px"]}
+                  fontWeight="bold"
+                >
                   Send deposit
                 </Text>
               </Container>
-              <Container w="70%" style={{ display: "flex" }}>
-                <FaBitcoin size="1.5em" color="#F7931A" />
-                <Text fontSize="l" style={{ padding: "0px 7px" }}>
+              <Container w="70%" display="flex">
+                <Icon
+                  as={FaBitcoin}
+                  boxSize={["16px", "18px", "20px", "24px"]}
+                  color="#F7931A"
+                />
+                <Text fontSize={["9px", "11px", "13px", "16px"]} px={["2"]}>
                   0.1 WBTC
                 </Text>
               </Container>
             </Container>
             {/* This is for QR  */}
-            <Container style={{ display: "flex" }} py={4}>
-              <Container w="30%" style={{ display: "flex" }}>
-                <Text fontSize="sm" fontWeight="bold">
+            <Container display="flex" py={4} maxW={600}>
+              <Container w="30%" display="flex">
+                <Text
+                  fontSize={["8px", "12px", "14px", "16px"]}
+                  fontWeight="bold"
+                >
                   Deposit address
                 </Text>
               </Container>
               <Container
-                w="70%"
-                display='flex'
-                justifyContent="left"
+                w="75%"
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
               >
-                {/* Here qr code will be placed  */}
-                <Text fontSize="sm" style={{ padding: "2px 0px" }}>
+                {/* Here qr code will  placed  */}
+
+                <Text fontSize={["8px", "10px", "12px", "14px"]} isTruncated>
                   0x742d35Cc6634C0532925a3b844Bc454e4438f44e
                 </Text>
-                <Flex
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-around",
-                    width: "50px",
-                  }}
-                >
-                  <Button size="l" px={1}>
+
+                <Flex alignItems="center">
+                  <Button size={['xs','sm','l']} px={["2"]}>
                     <CiShare1 color="black" fontWeight="bold" />
                   </Button>
-                  <Button size="l">
+                  <Button size={['xs','sm','l']} px={["2"]}>
                     <BiCopy color="black" fontWeight="bold" />
                   </Button>
                 </Flex>
@@ -97,43 +117,64 @@ const DepositCard = (props: Props) => {
               justifyContent="space-evenly"
               py={8}
               alignItems="center"
-              maxW="800px"
               fontSize="xs"
               w="100%"
+              maxW={600}
             >
-
-              <ProgressBar  />
+              <ProgressBar />
             </Box>
 
-            <Container pt={8} pb={4}>
-              <Text py={8} fontWeight="bold" fontSize="xl">
+            <Container
+              py={["1", "2", "3", "4"]}
+              px={["1", "2", "3", "4"]}
+              maxW={600}
+            >
+              <Text fontWeight="bold"  mx={4} fontSize={["12px", "14px", "16px", "18px"]}>
                 Operation details
               </Text>
             </Container>
 
-            <Flex px={4}>
-              <Container w="30%">
-                <Text fontSize="sm" mx={6}>
+            <Container display="flex" py={["1", "2", "3", "4"]} maxW={600}>
+              <Container w="30%" display="flex" justifyContent="left">
+                <Text
+                  fontSize={["8px", "10px", "12px", "16px"]}
+                  fontWeight="bold"
+                >
                   You get:
                 </Text>
               </Container>
-              <Flex w="70%" justifyContent="start">
-                <FaBitcoin size="1.5em" color="#F7931A" />
-                <FormLabel style={{ padding: "0px 7px" }}>0.1</FormLabel>
-                <Text fontSize="sm" style={{ padding: "0px 7px" }}>
-                  WBTC
+              <Container w="70%" display="flex">
+                <Icon
+                  as={FaBitcoin}
+                  boxSize={["16px", "18px", "20px", "24px"]}
+                  color="#F7931A"
+                />
+                <Text fontSize={["9px", "11px", "13px", "16px"]} px={["2"]}>
+                  0.1 WBTC
                 </Text>
-              </Flex>
-            </Flex>
+              </Container>
+            </Container>
 
-            <Container display="flex" justifyContent="space-between" px={4}>
-              <Text fontSize="sm" py={1}>
-                Recipient Address
-              </Text>
-              <Text fontSize="sm" py={1}>
-                0x3434543434343cb3k243b4343knkml082j28902b
-              </Text>
-              <Flex style={{ alignItems: "center" }}>
+            <Container display="flex" py={["1", "2", "3", "4"]} maxW={600}>
+              <Container w="30%" display="flex" justifyContent="left">
+                <Text
+                  fontSize={["8px", "10px", "12px", "16px"]}
+                  py={1}
+                  fontWeight="bold"
+                >
+                  Recipient Address:
+                </Text>
+              </Container>
+              <Container w="70%" display="flex" alignItems="center">
+                <Text
+                  fontSize={["8px", "10px", "12px", "14px"]}
+                  py={1}
+                  isTruncated
+                >
+                  0x3434543434343cb3k243b4343knkml082j28902b
+                </Text>
+              </Container>
+              <Flex alignItems="center">
                 <a style={{ cursor: "pointer", paddingBottom: "2px" }}>
                   <CiShare1 />
                 </a>
