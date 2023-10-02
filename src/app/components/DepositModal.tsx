@@ -5,6 +5,8 @@ import { FaClipboardQuestion } from "react-icons/fa6";
 import { CiShare1 } from "react-icons/ci";
 import { BiCopy } from "react-icons/bi";
 import ProgressBar from "./ProgressBar";
+import { IoQrCode } from "react-icons/io5";
+
 
 import {
   Button,
@@ -19,6 +21,7 @@ import {
   Wrap,
   Icon,
   FormLabel,
+  Img,
 } from "@chakra-ui/react";
 
 type Props = {};
@@ -97,6 +100,7 @@ const DepositCard = (props: Props) => {
                 alignItems="center"
               >
                 {/* Here qr code will  placed  */}
+              <IoQrCode />
 
                 <Text fontSize={["8px", "10px", "12px", "14px"]} isTruncated>
                   0x742d35Cc6634C0532925a3b844Bc454e4438f44e
