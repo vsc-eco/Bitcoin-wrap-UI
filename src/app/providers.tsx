@@ -7,7 +7,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 const colors = {
   brand: {
     100: "#cce4f6", // Lighter Blue
-    500: "#03568e ", // Normal Blue
+    500: "#4099ed ", // Normal Blue
     900: "#001a33" // Darker Blue
   },
 }

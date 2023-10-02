@@ -23,7 +23,7 @@ import { TbExchange } from "react-icons/tb";
 import { BiSolidLockOpenAlt } from "react-icons/bi";
 import { useState } from "react";
 import { Card, CardHeader, CardBody } from "@chakra-ui/react";
-import { useBreakpointValue } from "@chakra-ui/media-query";
+
 
 type Props = {};
 
@@ -35,17 +35,23 @@ const ExchangeModal = (props: Props) => {
   return (
     <>
       <Flex justifyContent="center" py={8} alignItems="center">
-        <Card bg="white" maxW="800px" maxH="900px" w="680px" m={['0','0','1','4']}>
+        <Card bg="white" maxW="800px" maxH="900px" w={670} m={['0','0','1','3']}>
           <CardHeader>
             <Center fontWeight="bold">Add exchange details</Center>
           </CardHeader>
           <CardBody
             pb={["1", "2", "4", "6"]}
             my={["1", "2", "4", "4"]}
-            mx={["1", "2", "4", "16"]}
+            mx={["1", "2", "4", "8"]}
           >
+            <Box
+            background="#ebf4f5"
+            px={8}
+            py={4}
+            borderRadius={6}
+            >
             <FormControl my={["1", "2", "3", "4"]}>
-              <InputGroup size="sm" background="#B4E0F0">
+              <InputGroup size="sm">
                 <InputLeftAddon
                   h={["8", "12", "12", "12"]}
                   w="25%"
@@ -66,12 +72,12 @@ const ExchangeModal = (props: Props) => {
                   value={token1Amount}
                   onChange={(e) => setToken1Amount(e.target.value)}
                   textAlign="right"
-                  border="2px solid #ADD8E6"
+                  border="2px solid #dff0f5"
                   borderRadius={6}
-                  background="#ADD8E6"
+                  background="#dff0f5"
                   focusBorderColor="transparent"
-
-                />
+                  
+                  />
                 <Flex alignItems="center" paddingLeft="8px">
                   <FaBitcoin size="1.5em" color="#F7931A" />
                   <span style={{ paddingLeft: "12px", fontWeight: "bold" }}>
@@ -103,7 +109,7 @@ const ExchangeModal = (props: Props) => {
                   border="1px solid #E0E0E0"
                   borderTopLeftRadius={6}
                   borderBottomLeftRadius={6}
-                >
+                  >
                   <Text>You Get</Text>
                 </InputLeftAddon>
 
@@ -114,11 +120,11 @@ const ExchangeModal = (props: Props) => {
                   value={token2Amount}
                   onChange={(e) => setToken2Amount(e.target.value)}
                   textAlign="right"
-                  border="2px solid #ADD8E6"
                   borderRadius={6}
-                  background="#ADD8E6"
+                  border="2px solid #dff0f5"
+                  background="#dff0f5"
                   focusBorderColor="transparent"
-                />
+                  />
                 <Flex alignItems="center" paddingLeft="4px">
                   <FaBitcoin size="1.5em" color="#F7931A" />
                   <span style={{ paddingLeft: "4px", fontWeight: "bold" }}>
@@ -127,41 +133,45 @@ const ExchangeModal = (props: Props) => {
                 </Flex>
               </InputGroup>
             </FormControl>
-            <FormControl mt={8}>
+            </Box>
+            
+            <Box background="#ebf4f5" py={2} px={8} my={4}
+            borderRadius={6}
+            >
+            <FormControl>
               <FormLabel>
                 <Text
                   fontWeight="bold"
-
                   fontSize={["12px", "16px", "18px", "20px"]}
-                >
+                  >
                   Enter HIVE username
                 </Text>
                 <Flex alignItems="center" position="relative">
                   <Text
-                    style={{ position: "absolute", top: "10px", left: "6px" }}
+                    style={{ position: "absolute", top: "10px", left: "8px" }}
                     fontSize={["8px", "10px", "12px", "12px"]}
                     color="gray.600"
                     zIndex={5}
-                  >
-                    The recipients hive username
+                    >
+                    recipient's hive username
                   </Text>
                   <Input
                     mt={1.5}
-                    w="87%"
-                    h="56px"
+                    
+                    h="60px"
                     fontWeight="bold"
                     value={walletAddress}
                     onChange={(e) => setWalletAddress(e.target.value)}
-                    border="2px solid #E0E0E0"
-                    background="#ADD8E6"
+                    border="2px solid #dff0f5"
+                    background="#dff0f5"
                     borderRadius={8}
                     focusBorderColor="transparent"
-
-                  />
+                    
+                    />
                   <Button
                     _hover={{ bg: "brand.500", color: "white" }}
                     mx={["1", "2", "3", "4"]}
-                  >
+                    >
                     <MdCancelPresentation color="black" />
                   </Button>
                 </Flex>
@@ -179,7 +189,7 @@ const ExchangeModal = (props: Props) => {
                             flex="1"
                             textAlign="left"
                             fontSize="xs"
-                          >
+                            >
                             Fee Breakdown
                           </Box>
                           <AccordionIcon />
@@ -198,13 +208,14 @@ const ExchangeModal = (props: Props) => {
                 </Flex>
               </FormLabel>
             </FormControl>
+            </Box>
             <Button
               colorScheme="blue"
               my={4}
               mb={4}
               w="100%"
               onClick={() => alert("button has been clicked :)")}
-            >
+              >
               Swap
             </Button>
             <Text
