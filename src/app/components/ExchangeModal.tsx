@@ -89,7 +89,7 @@ const ExchangeModal = (props: Props) => {
             </FormControl>
             <Flex style={{ justifyContent: "space-between" }}>
               <Flex alignItems="center">
-                <Box background="#c1f5e6" borderRadius={12}>
+                <Box background="#c1f5e6" borderRadius={16} p={1}>
                 <BiSolidLockOpenAlt />
                 </Box>
                 <Text fontSize={["10px", "10px", "12px", "14px"]} px={1}>

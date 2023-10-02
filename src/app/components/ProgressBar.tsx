@@ -14,22 +14,36 @@ const steps = [
 
 const ProgressBar = ({ currentStep = 0 }) => {
   return (
-    <Box display="flex" justifyContent="space-evenly" alignItems="end">
+    <>
+    <Box display="flex" justifyContent="space-evenly" alignItems="end" position="relative" >
       {steps.map((step, i) => (
-        <Box key={i}>
+        <Box key={i} zIndex={2}>
           <Box
             display="flex"
             justifyContent="center"
             fontSize="xl"
             color={i <= currentStep ? "blue.900" : "gray.700"}
+            background="#ebf4f5"
           >
             {/* {i <= currentStep ? step.icon : null} */}
             {step.icon}
           </Box>
+          
           <Box fontWeight={i <= currentStep ? "bold" : "none"}>{step.name}</Box>
         </Box>
       ))}
+      <Box
+     as="hr"
+     w="70%"
+     h={1}
+     position="absolute"
+     right="60px"
+     top="9px"
+     zIndex={1}
+    />
     </Box>
+   
+    </>
   );
 };
 
