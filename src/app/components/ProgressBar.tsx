@@ -8,7 +8,7 @@ import { RiSendPlaneLine } from "react-icons/ri";
 const steps = [
   { name: "Pending deposit", icon: <MdPending /> },
   { name: "Confirming", icon: <IoReloadCircleSharp /> },
-  { name: "Exchanging", icon: <TbExchange /> },
+  { name: "Minting", icon: <TbExchange /> },
   { name: "Sending", icon: <RiSendPlaneLine /> },
 ];
 

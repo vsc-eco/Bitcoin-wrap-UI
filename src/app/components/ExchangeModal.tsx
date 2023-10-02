@@ -89,7 +89,9 @@ const ExchangeModal = (props: Props) => {
             </FormControl>
             <Flex style={{ justifyContent: "space-between" }}>
               <Flex alignItems="center">
+                <Box background="#c1f5e6" borderRadius={12}>
                 <BiSolidLockOpenAlt />
+                </Box>
                 <Text fontSize={["10px", "10px", "12px", "14px"]} px={1}>
                   Floating rate
                 </Text>
@@ -153,7 +155,7 @@ const ExchangeModal = (props: Props) => {
                     color="gray.600"
                     zIndex={5}
                     >
-                    recipient's hive username
+                    recipients hive username
                   </Text>
                   <Input
                     mt={1.5}
@@ -163,13 +165,13 @@ const ExchangeModal = (props: Props) => {
                     value={walletAddress}
                     onChange={(e) => setWalletAddress(e.target.value)}
                     border="2px solid #dff0f5"
-                    background="#dff0f5"
+                    background="# "
                     borderRadius={8}
                     focusBorderColor="transparent"
                     
                     />
                   <Button
-                    _hover={{ bg: "brand.500", color: "white" }}
+                    _hover={{ bg:"brand.500", color: "white" }}
                     mx={["1", "2", "3", "4"]}
                     >
                     <MdCancelPresentation color="black" />

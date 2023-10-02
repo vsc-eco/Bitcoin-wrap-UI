@@ -11,25 +11,25 @@ const Navbar = () => {
       py={4}
       justifyContent="space-between"
       alignItems="center"
-      bgColor="#03568e"
+      bgColor="#f5f7f7"
       marginBottom="1px"
     >
       <Flex flexDirection="row" justifyContent="center" alignItems="center">
         <Box>
-          <Link color="white" size={size}>WBTC Swap</Link>
+          <Link color="#535454" size={size}>WBTC Swap</Link>
         </Box>
       </Flex>
       <Flex>
-        <Link color="white" mx={2} fontWeight="bold" >
+        <Link color="#535454" mx={2} fontWeight="bold" >
           <Text size={size}>How it works</Text>
         </Link>
-        <Link color="white" mx={2} fontWeight="bold" >
+        <Link color="#535454" mx={2} fontWeight="bold" >
           <Text size={size}>Loyalty Program</Text>
         </Link>
-        <Link color="white" mx={2} fontWeight="bold" >
+        <Link color="#535454" mx={2} fontWeight="bold" >
           <Text size={size}>Contacts</Text>
         </Link>
-        <Link color="white" mx={2} fontWeight="bold" >
+        <Link color="#535454" mx={2} fontWeight="bold" >
           <Text size={size}>Blog</Text>
         </Link>
       </Flex>

@@ -8,8 +8,8 @@ type Props = {}
 const page = (props: Props) => {
   return (
     <>
-    <Navbar />
-    <Box bg="brand.500" h="500vh">
+    <Navbar  />
+    <Box bg="brand.50" h="500vh">
     <ExchangeModal />
     <DepostiModal />
     </Box>
