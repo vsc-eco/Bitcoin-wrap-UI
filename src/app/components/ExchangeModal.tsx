@@ -35,7 +35,7 @@ const ExchangeModal = (props: Props) => {
   return (
     <>
       <Flex justifyContent="center" py={8} alignItems="center">
-        <Card bg="white" maxW="800px" maxH="900px" w="680px" m={4}>
+        <Card bg="white" maxW="800px" maxH="900px" w="680px" m={['0','0','1','4']}>
           <CardHeader>
             <Center fontWeight="bold">Add exchange details</Center>
           </CardHeader>
@@ -45,7 +45,7 @@ const ExchangeModal = (props: Props) => {
             mx={["1", "2", "4", "16"]}
           >
             <FormControl my={["1", "2", "3", "4"]}>
-              <InputGroup size="sm">
+              <InputGroup size="sm" background="#B4E0F0">
                 <InputLeftAddon
                   h={["8", "12", "12", "12"]}
                   w="25%"
@@ -54,6 +54,7 @@ const ExchangeModal = (props: Props) => {
                   alignItems="center"
                   borderTopLeftRadius={6}
                   borderBottomLeftRadius={6}
+                  
                 >
                   <Text>You Send</Text>
                 </InputLeftAddon>
@@ -65,9 +66,9 @@ const ExchangeModal = (props: Props) => {
                   value={token1Amount}
                   onChange={(e) => setToken1Amount(e.target.value)}
                   textAlign="right"
-                  border="2px solid #E0E0E0"
+                  border="2px solid #ADD8E6"
                   borderRadius={6}
-                  background="#E0E0E0"
+                  background="#ADD8E6"
                   focusBorderColor="transparent"
 
                 />
@@ -83,7 +84,7 @@ const ExchangeModal = (props: Props) => {
             <Flex style={{ justifyContent: "space-between" }}>
               <Flex alignItems="center">
                 <BiSolidLockOpenAlt />
-                <Text fontSize={["8px", "10px", "12px", "14px"]} px={1}>
+                <Text fontSize={["10px", "10px", "12px", "14px"]} px={1}>
                   Floating rate
                 </Text>
               </Flex>
@@ -107,15 +108,15 @@ const ExchangeModal = (props: Props) => {
                 </InputLeftAddon>
 
                 <Input
-                  h={12}
+                  h={["8", "12", "12", "12"]}
                   w="75%"
                   placeholder="0.0"
                   value={token2Amount}
                   onChange={(e) => setToken2Amount(e.target.value)}
                   textAlign="right"
-                  border="2px solid #E0E0E0"
+                  border="2px solid #ADD8E6"
                   borderRadius={6}
-                  background="#E0E0E0"
+                  background="#ADD8E6"
                   focusBorderColor="transparent"
                 />
                 <Flex alignItems="center" paddingLeft="4px">
@@ -130,17 +131,17 @@ const ExchangeModal = (props: Props) => {
               <FormLabel>
                 <Text
                   fontWeight="bold"
-                  mx={2}
+
                   fontSize={["12px", "16px", "18px", "20px"]}
                 >
                   Enter HIVE username
                 </Text>
                 <Flex alignItems="center" position="relative">
                   <Text
-                    style={{ position: "absolute", top: "35px", left: "6px" }}
-                    fontSize="xs"
+                    style={{ position: "absolute", top: "10px", left: "6px" }}
+                    fontSize={["8px", "10px", "12px", "12px"]}
                     color="gray.600"
-                    z-zIndex={5}
+                    zIndex={5}
                   >
                     The recipients hive username
                   </Text>
@@ -152,8 +153,8 @@ const ExchangeModal = (props: Props) => {
                     value={walletAddress}
                     onChange={(e) => setWalletAddress(e.target.value)}
                     border="2px solid #E0E0E0"
-                    background="#E0E0E0"
-                    borderRadius={6}
+                    background="#ADD8E6"
+                    borderRadius={8}
                     focusBorderColor="transparent"
 
                   />
