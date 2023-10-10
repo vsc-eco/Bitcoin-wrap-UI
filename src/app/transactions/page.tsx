@@ -15,13 +15,14 @@ import {
   TableContainer,
   Flex,
 } from "@chakra-ui/react";
+import {HiDownload} from "react-icons/hi"
 
 type Props = {};
 
 const page = (props: Props) => {
   return (
     <Flex justifyContent="center">
-    <Box maxW={800}>
+    <Box w="50%">
       <Text textAlign="center">Transactions page</Text>
       {/* There will be two buttons here  */}
       <Box display="flex" justifyContent="space-between">
