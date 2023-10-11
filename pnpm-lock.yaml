@@ -26,6 +26,18 @@ dependencies:
   '@emotion/styled':
     specifier: ^11.11.0
     version: 11.11.0(@emotion/react@11.11.1)(@types/react@18.2.21)(react@18.2.0)
+  '@fontsource/ia-writer-quattro':
+    specifier: ^5.0.7
+    version: 5.0.7
+  '@fontsource/open-sans':
+    specifier: ^5.0.15
+    version: 5.0.15
+  '@fontsource/raleway':
+    specifier: ^5.0.13
+    version: 5.0.13
+  '@next/font':
+    specifier: ^13.5.4
+    version: 13.5.4
   '@types/node':
     specifier: 20.6.0
     version: 20.6.0
@@ -1444,6 +1456,18 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: false
 
+  /@fontsource/ia-writer-quattro@5.0.7:
+    resolution: {integrity: sha512-o8O9dUKcAKpwlKF2mk0sfuneu0NRN6AYGIXdSPNv6iIIJ6E2ne8MchwIIY0uR6ER4m/mseLtq+IosXH86/J3zw==}
+    dev: false
+
+  /@fontsource/open-sans@5.0.15:
+    resolution: {integrity: sha512-gnvxTADG72CWWN57//x5leVJqQthgkhHao3/dK6wkn5wO7uTLYpiViLfUJYeV274juC73EvGQnc/3Y+9IEST2A==}
+    dev: false
+
+  /@fontsource/raleway@5.0.13:
+    resolution: {integrity: sha512-LWw7+Ahz7CGSQuj6T68N3m8/6Pa9+b+jlDP6TOeyr7HUA+32HDAXFpBv7WSqxeTzRWmPcAJS5IRUkGrYG/hl1w==}
+    dev: false
+
   /@graphql-typed-document-node/core@3.2.0(graphql@16.8.0):
     resolution: {integrity: sha512-mB9oAsNCm9aM3/SOv4YtBMqZbYj10R7dkq8byBqxGY/ncFwhf2oQzMV+LCRlWoDSEBJ3COiR1yeDvMtsoOsuFQ==}
     peerDependencies:
@@ -1480,6 +1504,10 @@ packages:
     resolution: {integrity: sha512-N/O+zGb6wZQdwu6atMZHbR7T9Np5SUFUjZqCbj0sXm+MwQO35M8TazVB4otm87GkXYs2l6OPwARd3/PUWhZBVQ==}
     dependencies:
       glob: 7.1.7
+    dev: false
+
+  /@next/font@13.5.4:
+    resolution: {integrity: sha512-rOMki1/9BP9N93RZABiiF0EidMGgyCvNVSKvLLAnMkVh/IYk4Z827+NRuxCyRQCeT3vv/AeCiP5SFPAP10SPrQ==}
     dev: false
 
   /@next/swc-darwin-arm64@13.4.19:
