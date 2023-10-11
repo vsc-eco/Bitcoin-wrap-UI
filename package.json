@@ -18,7 +18,6 @@
     "@emotion/styled": "^11.11.0",
     "@fontsource/ia-writer-quattro": "^5.0.7",
     "@fontsource/open-sans": "^5.0.15",
-    "@fontsource/raleway": "^5.0.13",
     "@next/font": "^13.5.4",
     "@types/node": "20.6.0",
     "@types/react": "18.2.21",

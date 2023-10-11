@@ -13,10 +13,15 @@ import {
   Td,
   TableCaption,
   TableContainer,
+  WrapItem,
+  Avatar,
   Flex,
 } from "@chakra-ui/react";
 import { HiDownload } from "react-icons/hi";
 import { CiFilter } from "react-icons/ci";
+import { BsCoin } from "react-icons/bs";
+import { BsArrowLeft } from "react-icons/bs";
+import { BsArrowRight } from "react-icons/bs";
 
 type Props = {};
 
@@ -25,7 +30,7 @@ const Page = (props: Props) => {
     <>
       <Flex justifyContent="center">
         <Box w="50%" py={4}>
-          <Text textAlign="center">Transactions page</Text>
+          <Text>Transactions page</Text>
           <Box display="flex" justifyContent="space-between">
             <Button alignItems="center">
               <CiFilter />
@@ -41,36 +46,77 @@ const Page = (props: Props) => {
               <TableCaption>Imperial to metric conversion factors</TableCaption>
               <Thead>
                 <Tr>
-                  <Th w={23} textTransform="capitalize">Date</Th>
-                  <Th textTransform="capitalize">To/From</Th> {/* Fixed typo in "To / From" */}
-                  <Th isNumeric textTransform="capitalize">Amount</Th>
-                  <Th textTransform="capitalize">Payment Method</Th>
+                  <Th w={23} textTransform="capitalize">
+                    Date
+                  </Th>
+                  <Th textTransform="capitalize">To/From</Th>{" "}
+                  {/* Fixed typo in "To / From" */}
+                  <Th isNumeric textTransform="capitalize">
+                    Amount
+                  </Th>
+                  <Th
+                    textTransform="capitalize"
+                    display="flex"
+                    alignItems="center"
+                  >
+                    <BsCoin />
+                    <Text px={1}>Payment Method</Text>
+                  </Th>
                 </Tr>
               </Thead>
               <Tbody>
                 <Tr>
-                  <Td>10 OCT</Td>
-                  <Td>Transfer to ops/payroll</Td>{" "}
-                  {/* Fixed typo in "millimeters" */}
+                  <Td>10 Oct</Td>
+                  <Td display="flex" alignItems="center">
+                    <WrapItem>
+                      <Avatar
+                        name="Kola Tioluwani"
+                        src="https://bit.ly/tioluwani-kolawole"
+                      />
+                    </WrapItem>
+                    <Text px={2}>Transfer to ops/payroll</Text>
+                  </Td>
                   <Td isNumeric>25.4</Td>
-                  <Td></Td>
+                  <Td display="flex" alignItems="center">
+                    <BsArrowLeft />
+                    <Text>Transfer</Text>
+                  </Td>
                 </Tr>
                 <Tr>
                   <Td></Td>
-                  <Td>centimeters (cm)</Td>
+                  <Td display="flex" alignItems="center">
+                    <WrapItem>
+                      <Avatar
+                        name="Kola Tioluwani"
+                        src="https://bit.ly/tioluwani-kolawole"
+                      />
+                    </WrapItem>
+                    <Text px={2}>Transfer to ops/payroll</Text>
+                  </Td>
                   <Td isNumeric>30.48</Td>
-                  <Td></Td>
+                  <Td display="flex" alignItems="center">
+                    <Text>Transfer</Text>
+                    <BsArrowRight />
+                  </Td>
                 </Tr>
                 <Tr>
                   <Td></Td>
-                  <Td>meters (m)</Td> {/* Fixed typo in "meters" */}
+                  <Td display="flex" alignItems="center">
+                    <WrapItem>
+                      <Avatar
+                        name="Kola Tioluwani"
+                        src="https://bit.ly/tioluwani-kolawole"
+                      />
+                    </WrapItem>
+                    <Text px={2}>Transfer to ops/payroll</Text>
+                  </Td>
                   <Td isNumeric>0.91444</Td>
                   <Td></Td>
                 </Tr>
               </Tbody>
             </Table>
           </TableContainer>
-        </Box>
+        </Box> 
       </Flex>
     </>
   );
