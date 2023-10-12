@@ -33,7 +33,7 @@ const Page = (props: Props) => {
           <Box display="flex" justifyContent="space-between">
             <Button alignItems="center">
               <CiFilter />
-              Add Filter
+              <Text size="xs">Add Filter</Text>
             </Button>
             <Button alignItems="center">
               <HiDownload />

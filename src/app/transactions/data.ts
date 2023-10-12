@@ -32,7 +32,7 @@ export const transactions = [
       toFrom: "Salary Deposit",
       amount: 3000.0,
       paymentMethod: "Bank Transfer",
-      pending: false
+      pending: true
     },
     // Add more transactions here
   ];
