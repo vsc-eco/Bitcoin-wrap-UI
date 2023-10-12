@@ -13,15 +13,14 @@ import {
   Td,
   TableCaption,
   TableContainer,
-  WrapItem,
-  Avatar,
   Flex,
 } from "@chakra-ui/react";
 import { HiDownload } from "react-icons/hi";
 import { CiFilter } from "react-icons/ci";
-import { BsCoin } from "react-icons/bs";
-import { BsArrowLeft } from "react-icons/bs";
-import { BsArrowRight } from "react-icons/bs";
+
+//import the data
+import { transactions } from "./data";
+import TransactionItem from "./TransactionItem";
 
 type Props = {};
 
@@ -49,8 +48,7 @@ const Page = (props: Props) => {
                   <Th w={23} textTransform="capitalize">
                     Date
                   </Th>
-                  <Th textTransform="capitalize">To/From</Th>{" "}
-                  {/* Fixed typo in "To / From" */}
+                  <Th textTransform="capitalize">To/From</Th>
                   <Th isNumeric textTransform="capitalize">
                     Amount
                   </Th>
@@ -59,64 +57,18 @@ const Page = (props: Props) => {
                     display="flex"
                     alignItems="center"
                   >
-                    <BsCoin />
-                    <Text px={1}>Payment Method</Text>
+                    Payment Method
                   </Th>
                 </Tr>
               </Thead>
               <Tbody>
-                <Tr>
-                  <Td>10 Oct</Td>
-                  <Td display="flex" alignItems="center">
-                    <WrapItem>
-                      <Avatar
-                        name="Kola Tioluwani"
-                        src="https://bit.ly/tioluwani-kolawole"
-                      />
-                    </WrapItem>
-                    <Text px={2}>Transfer to ops/payroll</Text>
-                  </Td>
-                  <Td isNumeric>25.4</Td>
-                  <Td display="flex" alignItems="center">
-                    <BsArrowLeft />
-                    <Text>Transfer</Text>
-                  </Td>
-                </Tr>
-                <Tr>
-                  <Td></Td>
-                  <Td display="flex" alignItems="center">
-                    <WrapItem>
-                      <Avatar
-                        name="Kola Tioluwani"
-                        src="https://bit.ly/tioluwani-kolawole"
-                      />
-                    </WrapItem>
-                    <Text px={2}>Transfer to ops/payroll</Text>
-                  </Td>
-                  <Td isNumeric>30.48</Td>
-                  <Td display="flex" alignItems="center">
-                    <Text>Transfer</Text>
-                    <BsArrowRight />
-                  </Td>
-                </Tr>
-                <Tr>
-                  <Td></Td>
-                  <Td display="flex" alignItems="center">
-                    <WrapItem>
-                      <Avatar
-                        name="Kola Tioluwani"
-                        src="https://bit.ly/tioluwani-kolawole"
-                      />
-                    </WrapItem>
-                    <Text px={2}>Transfer to ops/payroll</Text>
-                  </Td>
-                  <Td isNumeric>0.91444</Td>
-                  <Td></Td>
-                </Tr>
+                {transactions.map((transaction, index) => (
+                  <TransactionItem key={index} {...transaction} />
+                ))}
               </Tbody>
             </Table>
           </TableContainer>
-        </Box> 
+        </Box>
       </Flex>
     </>
   );
