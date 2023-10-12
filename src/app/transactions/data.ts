@@ -3,6 +3,7 @@ export const transactions = [
       date: "10 Oct",
       toFrom: "Transfer to ops/payroll",
       amount: 25.4,
+      dollar: 123,
       paymentMethod: "Transfer",
       pending: true
     },
@@ -10,6 +11,7 @@ export const transactions = [
       date: "10 Oct",
       toFrom: "Transfer to ops/payroll",
       amount: 25.4,
+      dollar: 123,
       paymentMethod: "Transfer",
       pending: false
     },
@@ -17,6 +19,7 @@ export const transactions = [
       date: "10 Oct",
       toFrom: "Transfer to ops/payroll",
       amount: 25.4,
+      dollar: 123,
       paymentMethod: "Transfer",
       pending: false
     },
@@ -24,6 +27,7 @@ export const transactions = [
       date: "11 Oct",
       toFrom: "Purchase from vendor",
       amount: 50.0,
+      dollar: 123,
       paymentMethod: "Credit Card",
       pending: true
     },
@@ -31,6 +35,7 @@ export const transactions = [
       date: "12 Oct",
       toFrom: "Salary Deposit",
       amount: 3000.0,
+      dollar: 123,
       paymentMethod: "Bank Transfer",
       pending: true
     },
