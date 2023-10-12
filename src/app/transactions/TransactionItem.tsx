@@ -1,9 +1,9 @@
 import React from "react";
-import { Tr, Td, WrapItem, Avatar, Text } from "@chakra-ui/react";
+import { Tr, Td, WrapItem, Avatar, Text, Flex } from "@chakra-ui/react";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 
 const TransactionItem = ({ date, toFrom, amount, paymentMethod }) => (
-  <Tr>
+  <Tr _hover={{ bg: "blue.100" }} cursor="pointer">
     <Td>{date}</Td>
     <Td display="flex" alignItems="center">
       <WrapItem>
@@ -16,9 +16,11 @@ const TransactionItem = ({ date, toFrom, amount, paymentMethod }) => (
       <Text px={2}>{toFrom}</Text>
     </Td>
     <Td isNumeric>{amount}</Td>
-    <Td display="flex" alignItems="center">
-      {paymentMethod === "Transfer" ? <BsArrowLeft /> : <BsArrowRight />}
-      <Text>{paymentMethod}</Text>
+    <Td>
+      <Flex>
+        {paymentMethod === "Transfer" ? <BsArrowLeft /> : <BsArrowRight />}
+        <Text>{paymentMethod}</Text>
+      </Flex>
     </Td>
   </Tr>
 );
