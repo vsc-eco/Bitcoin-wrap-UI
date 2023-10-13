@@ -50,8 +50,9 @@ const Page = (props: Props) => {
               <TableCaption>Imperial to metric conversion factors</TableCaption>
               <Thead>
                 <Tr>
-                  <Th w={23} textTransform="capitalize">
-                    Date
+                  <Th w={23} display="flex" textTransform="capitalize">
+                    <Text px="1">Date</Text> 
+                    <Text fontSize="10px">(GMT +5:30)</Text>
                   </Th>
                   <Th textTransform="capitalize">To/From</Th>
                   <Th isNumeric textTransform="capitalize">
@@ -68,17 +69,17 @@ const Page = (props: Props) => {
               </Thead>
               <Tbody>
                 {transactions.map((transaction, index) => {
-                  let showDate: boolean;
+                  let showDateProp: boolean;
                   if (lastDate.current === transaction.date) {
-                    showDate = false;
+                    showDateProp = false;
                   } else {
-                    showDate = true;
+                    showDateProp = true;
                     lastDate.current = transaction.date;
                   }
 
                   return (
                     <TransactionItem
-                      showDate={showDate}
+                      showDateProp={showDateProp}
                       key={index}
                       {...transaction}
                     />

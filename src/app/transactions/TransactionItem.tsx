@@ -12,14 +12,43 @@ import {
 } from "@chakra-ui/react";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 
-const TransactionItem = ({ date, toFrom, amount, paymentMethod, pending, showDate}) => {
+
+const TransactionItem = ({
+  date,
+  toFrom,
+  amount,
+  paymentMethod,
+  pending,
+  showDateProp
+}) => {
+
+  const [showDate, setShowDate] = useState(showDateProp)
+
+
+  function handleMouseEnter() {
+      //if showDate is false then make it true
+      if(!showDateProp){
+        setShowDate(true) //updating the state not the prop
+      }
+  }
+
+  function handleMouseLeave() {
+    if(!showDateProp){
+      setShowDate(false)
+    }
+  }
+
+
+
 
   return (
     <Tr
       _hover={{ bg: "blue.100" }}
       cursor="pointer"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
-      <Td w={28}>{showDate && date}</Td>
+      <Td w={28}>{showDate ? date : null}</Td>
 
       <Td display="flex" alignItems="center">
         <WrapItem>
