@@ -1,6 +1,6 @@
 export const transactions = [
     {
-      date: "10 Oct",
+      date: "10 Oct", //date is string type
       toFrom: "Transfer to ops/payroll",
       amount: 25.4,
       paymentMethod: "Transfer",
