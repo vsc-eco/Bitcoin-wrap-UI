@@ -18,8 +18,6 @@ const TransactionItem = ({ date, toFrom, amount, paymentMethod, pending }) => {
 
   useEffect(()=> {
     setPreviousDate(date); //we will store the previous date here
-    console.log(previousDate)
-    console.log(date)
   }, [date])
 
 
@@ -39,6 +37,7 @@ const TransactionItem = ({ date, toFrom, amount, paymentMethod, pending }) => {
       onMouseLeave={() => setIsHovered(true)}
     >
       <Td w={28}>{isHovered && date}</Td>
+
       <Td display="flex" alignItems="center">
         <WrapItem>
           <Avatar
@@ -62,6 +61,7 @@ const TransactionItem = ({ date, toFrom, amount, paymentMethod, pending }) => {
         )}
       </Td>
       <Td isNumeric>{amount} BTC</Td>
+
       <Td>
         <Flex>
           {paymentMethod === "Transfer" ? <BsArrowLeft /> : <BsArrowRight />}
