@@ -12,31 +12,14 @@ import {
 } from "@chakra-ui/react";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 
-const TransactionItem = ({ date, toFrom, amount, paymentMethod, pending }) => {
-  const [isHovered, setIsHovered] = useState(true);  //when the dates are not duplicate then its true 
-  const [previousDate, setPreviousDate] = useState(null);
-
-  useEffect(()=> {
-    setPreviousDate(date); //we will store the previous date here
-  }, [date])
-
-
-  //make a function to check the date is duplicate or not
-  const checkDuplicate = () => {
-   if(previousDate === date){
-     setIsHovered(false)
-   }
-  }
-
+const TransactionItem = ({ date, toFrom, amount, paymentMethod, pending, showDate}) => {
 
   return (
     <Tr
       _hover={{ bg: "blue.100" }}
       cursor="pointer"
-      onMouseEnter={checkDuplicate}
-      onMouseLeave={() => setIsHovered(true)}
     >
-      <Td w={28}>{isHovered && date}</Td>
+      <Td w={28}>{showDate && date}</Td>
 
       <Td display="flex" alignItems="center">
         <WrapItem>

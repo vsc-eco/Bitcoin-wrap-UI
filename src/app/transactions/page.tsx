@@ -1,4 +1,5 @@
-import React from "react";
+"use client"
+import React, { useRef } from "react";
 import Head from "next/head"; // Import Head component
 import {
   Button,
@@ -25,6 +26,8 @@ import TransactionItem from "./TransactionItem";
 type Props = {};
 
 const Page = (props: Props) => {
+  let lastDate = useRef(null);
+
   return (
     <>
       <Flex justifyContent="center">
@@ -33,9 +36,11 @@ const Page = (props: Props) => {
           <Box display="flex" justifyContent="space-between">
             <Button alignItems="center">
               <CiFilter />
-              <Text size="xs" fontSize="xs">Add Filter</Text>
+              <Text size="xs" fontSize="xs">
+                Add Filter
+              </Text>
             </Button>
-            <Button alignItems="center" >
+            <Button alignItems="center">
               <HiDownload />
               <Text fontSize="xs">Export</Text>
             </Button>
@@ -62,9 +67,23 @@ const Page = (props: Props) => {
                 </Tr>
               </Thead>
               <Tbody>
-                {transactions.map((transaction, index) => (
-                  <TransactionItem key={index} {...transaction} />
-                ))}
+                {transactions.map((transaction, index) => {
+                  let showDate: boolean;
+                  if (lastDate.current === transaction.date) {
+                    showDate = false;
+                  } else {
+                    showDate = true;
+                    lastDate.current = transaction.date;
+                  }
+
+                  return (
+                    <TransactionItem
+                      showDate={showDate}
+                      key={index}
+                      {...transaction}
+                    />
+                  );
+                })}
               </Tbody>
             </Table>
           </TableContainer>
