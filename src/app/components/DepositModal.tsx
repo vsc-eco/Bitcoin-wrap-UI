@@ -100,9 +100,12 @@ const DepositCard = (props: Props) => {
                 alignItems="center"
               >
                 {/* Here qr code will  placed  */}
-              <IoQrCode />
+              <Icon
+              as={IoQrCode}
+              boxSize={["20px", "22px", "24px", "42px"]}
+              />
 
-                <Text fontSize={["8px", "10px", "12px", "14px"]} isTruncated>
+                <Text fontSize={["8px", "10px", "12px", "14px"]} maxW={48} isTruncated>
                   0x742d35Cc6634C0532925a3b844Bc454e4438f44e
                 </Text>
 
