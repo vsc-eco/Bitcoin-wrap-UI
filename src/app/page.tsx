@@ -1,7 +1,20 @@
- function Home() {
+import React from 'react'
+import ExchangeModal from './components/ExchangeModal'
+import DepostiModal from './components/DepositModal'
+import Navbar from './components/Navbar'
+import {Box} from "@chakra-ui/react"
+type Props = {}
+
+const page = (props: Props) => {
   return (
-     <h1>This is the index</h1>
+    <>
+    <Navbar  />
+    <Box bg="brand.50" h="500vh">
+    <ExchangeModal />
+    <DepostiModal />
+    </Box>
+    </>
   )
 }
 
-export default Home;
+export default page
