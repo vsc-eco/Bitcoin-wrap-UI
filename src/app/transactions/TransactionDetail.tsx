@@ -8,46 +8,89 @@ import {
   CardHeader,
   CardBody,
   CardFooter,
+  Divider,
+  VStack,
 } from "@chakra-ui/react";
 import { Textarea } from "@chakra-ui/react";
 import { RxCross2 } from "react-icons/rx";
-import { BsDot } from "react-icons/bs";
+import { BsFillCircleFill } from "react-icons/bs";
 import { GrFormAdd } from "react-icons/gr";
 import { BsLink45Deg } from "react-icons/bs";
 import { BsThreeDots } from "react-icons/bs";
+import { FaLocationPin } from "react-icons/fa6";
 
 type Props = {};
 
 const TransactionDetail = (props: Props) => {
   return (
-    <Card w={356} display="float" top={20} color="brand.50">
+    <Card w={356} display="float" top={20}>
       <CardHeader>
         <Flex justify="space-between">
-          <Text fontSize={["12px"]}>Transfer</Text>
+          <Text fontSize={["12px"]} color="brand.50">
+            Transfer
+          </Text>
 
           <Icon as={RxCross2} cursor="pointer" _hover={{ bg: "blue.100" }} />
         </Flex>
-      </CardHeader>
-      <CardBody>
         <Flex>
-          <Text fontSize="32px">$24,009.16</Text>
+          <Text fontSize="32px" color="brand.50">
+            $24,009.16
+          </Text>
         </Flex>
-        <Flex>
+        <Flex direction="column" fontSize={['12px']}>
           <Flex>
-            <Icon as={BsDot} boxSize={["4px", "6px", "8px", "22px"]} />
+            <VStack spacing={1}>
+              <Icon
+                as={BsFillCircleFill}
+                boxSize={["4px", "6px", "8px", "10px"]}
+              />
+              <Divider
+                orientation="vertical"
+                borderColor="gray.900"
+                borderWidth="1.5px"
+                height="50px"
+              />
+            </VStack>
+            <Box mx={4}>
+              <Text>From AR</Text>
+              <Box>
+                <Text>Mercury Checking ••1038</Text>
+                <Flex>
+                  <Text pr={1}>Oct 16 at</Text>
+                  <Text>10:36 am</Text>
+                </Flex>
+              </Box>
+            </Box>
           </Flex>
-          <Flex></Flex>
+          <Flex mt={1}>
+            <Icon as={FaLocationPin} boxSize={["4px", "6px", "8px", "12px"]} />
+            <Box mx={4}>
+              <Text>To Ops/Payroll</Text>
+              <Box>
+                <Text>Mercury Checking ••1038</Text>
+                <Flex>
+                  <Text pr={1}>Oct 16 at </Text>
+                  <Text>10:36 am</Text>
+                </Flex>
+              </Box>
+            </Box>
+          </Flex>
         </Flex>
-        {/* This is the border line  */}
-        <hr />
-
+      </CardHeader>
+      {/* This is the border line  */}
+      <hr />
+      <CardBody>
         <Box py={4}>
-          <Text fontSize={["12px"]}>Notes</Text>
-          <Textarea placeholder="Here is a sample placeholder" />
+          <Text fontSize={["12px"]} color="brand.50">
+            Notes
+          </Text>
+          <Textarea placeholder="Add a note" />
         </Box>
-    
+
         <Box>
-          <Text fontSize={["12px"]}>Attachments</Text>
+          <Text fontSize={["12px"]} color="brand.50">
+            Attachments
+          </Text>
           <Flex py={4}>
             <Icon as={GrFormAdd} boxSize={["10px", "12px", "16px", "18px"]} />
             <Text fontSize={["12px"]} px={2} fontWeight="bold">
@@ -57,12 +100,17 @@ const TransactionDetail = (props: Props) => {
         </Box>
 
         <Flex my={4} direction="column">
-          <Text fontSize={["12px"]}> Bank Description </Text>
+          <Text fontSize={["12px"]} color="brand.50">
+            {" "}
+            Bank Description{" "}
+          </Text>
           <Box>
             <Text>#HERE WILL BE THE REFERENCE NUMBER</Text>
           </Box>
         </Flex>
       </CardBody>
+      {/* This is the border line  */}
+      <hr />
       <CardFooter>
         <Flex justify="space-between" w="full">
           <Icon as={BsLink45Deg} boxSize={[]} />

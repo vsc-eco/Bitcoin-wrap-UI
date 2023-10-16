@@ -10,7 +10,7 @@ import '@fontsource/open-sans/700.css'
 
 const colors = {
   brand: {
-    50: '#dfe6e4',
+    50: '#2e2c2c',
     100: "#cce4f6", // Lighter Blue
     500: "#4099ed ", // Normal Blue
     900: "#001a33" // Darker Blue
