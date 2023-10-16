@@ -22,6 +22,7 @@ import { CiFilter } from "react-icons/ci";
 //import the data
 import { transactions } from "./data";
 import TransactionItem from "./TransactionItem";
+import TransactionDetail from "./TransactionDetail";
 
 type Props = {};
 
@@ -89,6 +90,7 @@ const Page = (props: Props) => {
             </Table>
           </TableContainer>
         </Box>
+        <TransactionDetail />
       </Flex>
     </>
   );
