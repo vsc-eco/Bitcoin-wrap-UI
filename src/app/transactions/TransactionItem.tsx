@@ -15,6 +15,7 @@ import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 
 const TransactionItem = ({
   date,
+  avatarUrl,
   toFrom,
   amount,
   paymentMethod,
@@ -54,7 +55,7 @@ const TransactionItem = ({
         <WrapItem>
           <Avatar
             name="Kola Tioluwani"
-            src="https://bit.ly/tioluwani-kolawole"
+            src= {avatarUrl}
             size="sm"
           />
         </WrapItem>
