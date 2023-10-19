@@ -21,7 +21,8 @@ const TransactionItem = ({
   dollar,
   paymentMethod,
   pending,
-  showDateProp
+  showDateProp,
+  TransferIn
 }) => {
 
   const [showDate, setShowDate] = useState(showDateProp)
@@ -39,8 +40,6 @@ const TransactionItem = ({
       setShowDate(false)
     }
   }
-
-
 
 
   return (
@@ -81,7 +80,7 @@ const TransactionItem = ({
 
       <Td>
         <Flex>
-          {paymentMethod === "Transfer In" ? <BsArrowLeft /> : paymentMethod === "Transfer Out" ? <BsArrowRight /> : null}
+          {paymentMethod === "Transfer" && TransferIn ? <BsArrowLeft /> : paymentMethod === "Transfer" && !TransferIn ? <BsArrowRight /> : null}
           <Text>{paymentMethod}</Text>
         </Flex>
       </Td>

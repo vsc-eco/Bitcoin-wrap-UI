@@ -1,5 +1,5 @@
-"use client"
-import React, { useRef } from "react";
+"use client";
+import React, { useRef, useState } from "react";
 import Head from "next/head"; // Import Head component
 import {
   Button,
@@ -29,6 +29,14 @@ type Props = {};
 const Page = (props: Props) => {
   let lastDate = useRef(null);
 
+  //useState
+  const [isTransactionDetailOpen, setTransactionDetailOpen] = useState(false);
+
+  //function for handling the state
+  const handleTransactionToggle = () => {
+    setTransactionDetailOpen(!isTransactionDetailOpen);
+  };
+
   return (
     <>
       <Flex justifyContent="center">
@@ -48,11 +56,10 @@ const Page = (props: Props) => {
           </Box>
           <TableContainer alignSelf="center">
             <Table variant="simple" size="sm">
-              <TableCaption>Imperial to metric conversion factors</TableCaption>
               <Thead>
                 <Tr>
                   <Th w={23} display="flex" textTransform="capitalize">
-                    <Text px="1">Date</Text> 
+                    <Text px="1">Date</Text>
                     <Text fontSize="10px">(GMT +5:30)</Text>
                   </Th>
                   <Th textTransform="capitalize">To/From</Th>
@@ -90,7 +97,7 @@ const Page = (props: Props) => {
             </Table>
           </TableContainer>
         </Box>
-        <TransactionDetail />
+        { <TransactionDetail  toggleClose={handleTransactionToggle} />}
       </Flex>
     </>
   );

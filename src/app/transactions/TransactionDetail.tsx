@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import {
   Text,
   Icon,
@@ -19,18 +20,20 @@ import { BsLink45Deg } from "react-icons/bs";
 import { BsThreeDots } from "react-icons/bs";
 import { FaLocationPin } from "react-icons/fa6";
 
-type Props = {};
+type Props = {
+  toggleClose: () => void;
+};
 
-const TransactionDetail = (props: Props) => {
+const TransactionDetail = ({toggleClose}: Props) => {
   return (
-    <Card w={356} display="float" top={20}>
+    <Card w={356} display="float" top={20} h={600}>
       <CardHeader>
         <Flex justify="space-between">
           <Text fontSize={["12px"]} color="brand.50">
             Transfer
           </Text>
 
-          <Icon as={RxCross2} cursor="pointer" _hover={{ bg: "blue.100" }} />
+          <Icon as={RxCross2} cursor="pointer" _hover={{ bg: "blue.100" }} onClick={toggleClose} />
         </Flex>
         <Flex>
           <Text fontSize="32px" color="brand.50">
@@ -54,7 +57,7 @@ const TransactionDetail = (props: Props) => {
             <Box mx={4}>
               <Text>From AR</Text>
               <Box>
-                <Text>Mercury Checking ••1038</Text>
+                {/* <Text>Mercury Checking ••1038</Text> */}
                 <Flex>
                   <Text pr={1}>Oct 16 at</Text>
                   <Text>10:36 am</Text>
@@ -67,7 +70,7 @@ const TransactionDetail = (props: Props) => {
             <Box mx={4}>
               <Text>To Ops/Payroll</Text>
               <Box>
-                <Text>Mercury Checking ••1038</Text>
+                {/* <Text>Mercury Checking ••1038</Text> */}
                 <Flex>
                   <Text pr={1}>Oct 16 at </Text>
                   <Text>10:36 am</Text>
@@ -102,18 +105,20 @@ const TransactionDetail = (props: Props) => {
         <Flex my={4} direction="column">
           <Text fontSize={["12px"]} color="brand.50">
             {" "}
-            Bank Description{" "}
+            Memo {" "}
           </Text>
           <Box>
-            <Text>#HERE WILL BE THE REFERENCE NUMBER</Text>
+            <Text>#kcs-126249</Text>
           </Box>
         </Flex>
       </CardBody>
       {/* This is the border line  */}
       <hr />
       <CardFooter>
-        <Flex justify="space-between" w="full">
-          <Icon as={BsLink45Deg} boxSize={[]} />
+        <Flex justify="space-between" w="full" alignItems="center">
+          <Link href="https://hiveblocks.com/tx/d92bca994c7038a6f59b7743a09af8ff0810080c">
+          <Icon as={BsLink45Deg} boxSize={[]}  />
+          </Link>
 
           <Icon as={BsThreeDots} boxSize={[]} />
         </Flex>
