@@ -73,11 +73,11 @@ const TransactionItem = ({
           </Button>
         )}
       </Td>
-      <Td isNumeric>{amount} BTC</Td>
+      <Td isNumeric>{amount}</Td>
 
       <Td>
         <Flex>
-          {paymentMethod === "Transfer" ? <BsArrowLeft /> : <BsArrowRight />}
+          {paymentMethod === "Transfer In" ? <BsArrowLeft /> : paymentMethod === "Transfer Out" ? <BsArrowRight /> : null}
           <Text>{paymentMethod}</Text>
         </Flex>
       </Td>
