@@ -18,6 +18,7 @@ const TransactionItem = ({
   avatarUrl,
   toFrom,
   amount,
+  dollar,
   paymentMethod,
   pending,
   showDateProp
@@ -73,7 +74,10 @@ const TransactionItem = ({
           </Button>
         )}
       </Td>
-      <Td isNumeric>{amount}</Td>
+      <Td isNumeric>
+      {amount}
+      &nbsp; (${dollar})
+      </Td>
 
       <Td>
         <Flex>
