@@ -22,9 +22,10 @@ import { FaLocationPin } from "react-icons/fa6";
 
 type Props = {
   toggleClose: () => void;
+  transaction: any
 };
 
-const TransactionDetail = ({toggleClose}: Props) => {
+const TransactionDetail = ({toggleClose, transaction}: Props) => {
   return (
     <Card w={356} display="float" top={20} h={600}>
       <CardHeader>
@@ -37,7 +38,7 @@ const TransactionDetail = ({toggleClose}: Props) => {
         </Flex>
         <Flex>
           <Text fontSize="32px" color="brand.50">
-            $24,009.16
+            ${transaction.dollar}.00
           </Text>
         </Flex>
         <Flex direction="column" fontSize={['12px']}>
@@ -55,11 +56,11 @@ const TransactionDetail = ({toggleClose}: Props) => {
               />
             </VStack>
             <Box mx={4}>
-              <Text>From AR</Text>
+              <Text>{transaction.toFrom}</Text>
               <Box>
                 {/* <Text>Mercury Checking ••1038</Text> */}
                 <Flex>
-                  <Text pr={1}>Oct 16 at</Text>
+                  <Text pr={1}>{transaction.date} at</Text>
                   <Text>10:36 am</Text>
                 </Flex>
               </Box>
@@ -68,11 +69,11 @@ const TransactionDetail = ({toggleClose}: Props) => {
           <Flex mt={1}>
             <Icon as={FaLocationPin} boxSize={["4px", "6px", "8px", "12px"]} />
             <Box mx={4}>
-              <Text>To Ops/Payroll</Text>
+              <Text>{transaction.toFrom}</Text>
               <Box>
                 {/* <Text>Mercury Checking ••1038</Text> */}
                 <Flex>
-                  <Text pr={1}>Oct 16 at </Text>
+                  <Text pr={1}>{transaction.date} at </Text>
                   <Text>10:36 am</Text>
                 </Flex>
               </Box>

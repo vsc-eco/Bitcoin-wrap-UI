@@ -11,22 +11,26 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
+import { transactions } from "./data";
 
 
 const TransactionItem = ({
-  date,
-  avatarUrl,
-  toFrom,
-  amount,
-  dollar,
-  paymentMethod,
-  pending,
+  // date,
+  // avatarUrl,
+  // toFrom,
+  // amount,
+  // dollar,
+  // paymentMethod,
+  // pending,
+  // showDateProp,
+  // TransferIn,
   showDateProp,
-  TransferIn,
-  handleTransactionOpen
+  handleTransactionOpen,
+  ...transaction
 }) => {
 
   const [showDate, setShowDate] = useState(showDateProp)
+  const [selectedTransaction, setSelectedTransaction] = useState(null);
 
 
   function handleMouseEnter() {
@@ -44,6 +48,7 @@ const TransactionItem = ({
 
   //function for toggling the transaction detail modal
   const handleTransactionClick =()=> {
+    setSelectedTransaction(transaction)
     handleTransactionOpen();
   }
 
@@ -55,20 +60,20 @@ const TransactionItem = ({
       onMouseLeave={handleMouseLeave}
       onClick={handleTransactionClick}
     >
-      <Td w={28}>{showDate ? date : null}</Td>
+      <Td w={28}>{showDate ? transaction.date : null}</Td>
 
       <Td display="flex" alignItems="center">
         <WrapItem>
           <Avatar
             name="Coffe Fondo"
-            src= {avatarUrl}
+            src= {transaction.avatarUrl}
             size="sm"
           />
         </WrapItem>
         <Text px={2} fontSize={["12px"]}>
-          {toFrom}
+          {transaction.toFrom}
         </Text>
-        {pending && (
+        {transaction.pending && (
           <Button
             variant="outline"
             size="xs"
@@ -80,14 +85,14 @@ const TransactionItem = ({
         )}
       </Td>
       <Td isNumeric>
-      {amount}
-      &nbsp; (${dollar})
+      {transaction.amount}
+      &nbsp; (${transaction.dollar})
       </Td>
 
       <Td>
         <Flex>
-          {paymentMethod === "Transfer" && TransferIn ? <BsArrowLeft /> : paymentMethod === "Transfer" && !TransferIn ? <BsArrowRight /> : null}
-          <Text>{paymentMethod}</Text>
+          {transaction.paymentMethod === "Transfer" && transaction.TransferIn ? <BsArrowLeft /> : transaction.paymentMethod === "Transfer" && !transaction.TransferIn ? <BsArrowRight /> : null}
+          <Text>{transaction.paymentMethod}</Text>
         </Flex>
       </Td>
     </Tr>
