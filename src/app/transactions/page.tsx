@@ -33,9 +33,14 @@ const Page = (props: Props) => {
   const [isTransactionDetailOpen, setTransactionDetailOpen] = useState(false);
 
   //function for handling the state
-  const handleTransactionToggle = () => {
-    setTransactionDetailOpen(!isTransactionDetailOpen);
+  const handleTransactionOpen = () => {
+    setTransactionDetailOpen(true);
   };
+
+  //function for closing the modal again 
+  const handleTransactionClose =  ()=> {
+    setTransactionDetailOpen(false)
+  }
 
   return (
     <>
@@ -90,6 +95,7 @@ const Page = (props: Props) => {
                       showDateProp={showDateProp}
                       key={index}
                       {...transaction}
+                      handleTransactionOpen={handleTransactionOpen}
                     />
                   );
                 })}
@@ -97,7 +103,9 @@ const Page = (props: Props) => {
             </Table>
           </TableContainer>
         </Box>
-        { <TransactionDetail  toggleClose={handleTransactionToggle} />}
+        <Box className={`side-popup ${isTransactionDetailOpen} ? 'show-popup' : ''`}>
+        { isTransactionDetailOpen && <TransactionDetail  toggleClose={handleTransactionClose} />}
+        </Box>
       </Flex>
     </>
   );

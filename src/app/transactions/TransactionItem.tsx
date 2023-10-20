@@ -22,7 +22,8 @@ const TransactionItem = ({
   paymentMethod,
   pending,
   showDateProp,
-  TransferIn
+  TransferIn,
+  handleTransactionOpen
 }) => {
 
   const [showDate, setShowDate] = useState(showDateProp)
@@ -41,6 +42,10 @@ const TransactionItem = ({
     }
   }
 
+  //function for toggling the transaction detail modal
+  const handleTransactionClick =()=> {
+    handleTransactionOpen();
+  }
 
   return (
     <Tr
@@ -48,13 +53,14 @@ const TransactionItem = ({
       cursor="pointer"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onClick={handleTransactionClick}
     >
       <Td w={28}>{showDate ? date : null}</Td>
 
       <Td display="flex" alignItems="center">
         <WrapItem>
           <Avatar
-            name="Kola Tioluwani"
+            name="Coffe Fondo"
             src= {avatarUrl}
             size="sm"
           />

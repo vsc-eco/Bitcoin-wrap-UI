@@ -108,7 +108,7 @@ const TransactionDetail = ({toggleClose}: Props) => {
             Memo {" "}
           </Text>
           <Box>
-            <Text>#kcs-126249</Text>
+            <Text>kcs-126249</Text>
           </Box>
         </Flex>
       </CardBody>
