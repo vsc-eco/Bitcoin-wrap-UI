@@ -117,7 +117,7 @@ const TransactionDetail = ({toggleClose, transaction}: Props) => {
       <hr />
       <CardFooter>
         <Flex justify="space-between" w="full" alignItems="center">
-          <Link href="https://hiveblocks.com/tx/d92bca994c7038a6f59b7743a09af8ff0810080c">
+          <Link href="https://hiveblocks.com/tx/d92bca994c7038a6f59b7743a09af8ff0810080c" target="_blank">
           <Icon as={BsLink45Deg} boxSize={[]}  />
           </Link>
 
