@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, VStack, Text, Flex } from "@chakra-ui/react";
-import NextLink from "next/link"; // Import Next.js Link
+import NextLink from "next/link";
 import { AiOutlineHome } from "react-icons/ai";
 import { TfiMenuAlt } from "react-icons/tfi";
 
@@ -11,34 +11,27 @@ const Sidebar = () => {
       w="200px"
       minH="100vh"
       p={4}
-      position="fixed"
-      top={0}
-      left={0}
       boxShadow="lg"
     >
       <VStack spacing={4} align="start">
-        <Flex alignItems="center">
+        <Flex alignItems="center" justifyContent="space-between">
           <NextLink href="/" passHref>
-            {" "}
-            {/* Use NextLink for client-side navigation */}
-            <AiOutlineHome />
-            <a>
-              <Text fontSize="lg" fontWeight="bold">
+            <Flex alignItems="center">
+              <AiOutlineHome />
+              <Text ml={2} fontSize="lg" fontWeight="bold"> {/* Add margin to the left */}
                 Home
               </Text>
-            </a>
+            </Flex>
           </NextLink>
         </Flex>
-        <Flex alignItems="center">
+        <Flex alignItems="center" justifyContent="space-between">
           <NextLink href="/transactions" passHref>
-            {" "}
-            {/* Use NextLink for client-side navigation */}
-            <TfiMenuAlt />
-            <a>
-              <Text fontSize="lg" fontWeight="bold">
+            <Flex alignItems="center">
+              <TfiMenuAlt />
+              <Text ml={2} fontSize="lg" fontWeight="bold"> {/* Add margin to the left */}
                 Transactions
               </Text>
-            </a>
+            </Flex>
           </NextLink>
         </Flex>
       </VStack>
