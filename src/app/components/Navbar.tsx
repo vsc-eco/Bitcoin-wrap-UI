@@ -16,22 +16,22 @@ const Navbar = () => {
     >
       <Flex flexDirection="row" justifyContent="center" alignItems="center">
         <Box>
-          <Link color="#535454" size={size}>WBTC Swap</Link>
+          <Link color="#535454" size={size}>HiveFi</Link>
         </Box>
       </Flex>
       <Flex>
-        <Link color="#535454" mx={2} fontWeight="bold" >
-          <Text size={size}>How it works</Text>
+        <Link color="#535454" mx={2} fontWeight="bold" href="https://vsc.eco" target="_blank">
+          <Text size={size}>Main site</Text>
         </Link>
         <Link color="#535454" mx={2} fontWeight="bold" >
-          <Text size={size}>Loyalty Program</Text>
+          <Text size={size}>FAQ</Text>
         </Link>
-        <Link color="#535454" mx={2} fontWeight="bold" >
+        {/* <Link color="#535454" mx={2} fontWeight="bold" >
           <Text size={size}>Contacts</Text>
         </Link>
         <Link color="#535454" mx={2} fontWeight="bold" >
           <Text size={size}>Blog</Text>
-        </Link>
+        </Link> */}
       </Flex>
     </Flex>
   );
