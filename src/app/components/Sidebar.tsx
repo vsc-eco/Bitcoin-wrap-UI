@@ -7,7 +7,6 @@ import { TfiMenuAlt } from "react-icons/tfi";
 const Sidebar = () => {
   return (
     <Box
-      bg="gray.200"
       w="200px"
       minH="100vh"
       p={4}
@@ -16,9 +15,9 @@ const Sidebar = () => {
       <VStack spacing={4} align="start">
         <Flex alignItems="center" justifyContent="space-between">
           <NextLink href="/" passHref>
-            <Flex alignItems="center">
+            <Flex alignItems="center" _hover={{color: "blue.500"}}>
               <AiOutlineHome />
-              <Text ml={2} fontSize="lg" fontWeight="bold"> {/* Add margin to the left */}
+              <Text ml={2} fontSize="lg" fontWeight="bold" > {/* Add margin to the left */}
                 Home
               </Text>
             </Flex>
@@ -26,7 +25,7 @@ const Sidebar = () => {
         </Flex>
         <Flex alignItems="center" justifyContent="space-between">
           <NextLink href="/transactions" passHref>
-            <Flex alignItems="center">
+            <Flex alignItems="center" _hover={{color: "blue.500"}}>
               <TfiMenuAlt />
               <Text ml={2} fontSize="lg" fontWeight="bold"> {/* Add margin to the left */}
                 Transactions
