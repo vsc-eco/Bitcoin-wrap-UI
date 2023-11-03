@@ -1,30 +1,41 @@
-"use client"
+"use client";
 import { Box, Flex, Link, Text } from "@chakra-ui/react";
 import { useBreakpointValue } from "@chakra-ui/media-query";
-
+import Image from "next/image";
+import {RiArrowDropDownLine} from "react-icons/ri"
 const Navbar = () => {
-  const size= useBreakpointValue({base:"xs", md:"md"})
+  const size = useBreakpointValue({ base: "xs", md: "md" });
   return (
     <Flex
       bg="teal.500"
-      px={5}
-      py={4}
+      px={6}
+      py={5}
       justifyContent="space-between"
       alignItems="center"
-      bgColor="#f5f7f7"
+      bgGradient="linear(to-l, #919ca9, #fefeff)"
       marginBottom="1px"
     >
       <Flex flexDirection="row" justifyContent="center" alignItems="center">
-        <Box>
-          <Link color="#535454" size={size}>HiveFi</Link>
-        </Box>
+        <Flex alignItems="center">
+          <Box>
+            {/* <Link color="#535454" size={size}></Link> */}
+            <Image src="/logo.svg" alt="Icon" width={112} height={112} />
+          </Box>
+          <Text letterSpacing="0.1rem" fontWeight="bolder">VSC NETWORK</Text>
+        </Flex>
       </Flex>
-      <Flex>
-        <Link color="#535454" mx={2} fontWeight="bold" href="https://vsc.eco" target="_blank">
+      <Flex mx={4}>
+        <Link mx={4} fontWeight="bold" href="https://vsc.eco" target="_blank">
+          <Flex alignItems="center">
           <Text size={size}>Main site</Text>
+          <RiArrowDropDownLine />
+          </Flex>
         </Link>
-        <Link color="#535454" mx={2} fontWeight="bold" >
+        <Link mx={4} fontWeight="bold">
+          <Flex alignItems="center">
           <Text size={size}>FAQ</Text>
+          <RiArrowDropDownLine />
+          </Flex>
         </Link>
         {/* <Link color="#535454" mx={2} fontWeight="bold" >
           <Text size={size}>Contacts</Text>
