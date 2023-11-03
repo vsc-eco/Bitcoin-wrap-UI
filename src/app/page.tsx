@@ -15,12 +15,12 @@ const Page = (props: Props) => {
         <Flex>
           <Sidebar /> 
           <Box flex="1"> 
-             <Flex h="screen" w="full">
+             <Flex h="100vh" w="full" justifyContent="space-evenly" alignItems="center">
               <Box>
-                <Text>Here will be the content</Text>
+                <Text fontSize="5rem" p={24}>HIVE Finance: smooth DeFi experience</Text>
               </Box>
               <Box>
-                <Image src="/Landing.svg" alt='Langing' width={112} height={112}/>
+                <Image src="/Landing.svg" alt='Langing' width={800} height={800}/>
               </Box>
              </Flex>
             <ExchangeModal />

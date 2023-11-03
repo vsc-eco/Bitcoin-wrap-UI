@@ -13,7 +13,6 @@ const Navbar = () => {
       justifyContent="space-between"
       alignItems="center"
       bgGradient="linear(to-l, #919ca9, #fefeff)"
-      marginBottom="1px"
     >
       <Flex flexDirection="row" justifyContent="center" alignItems="center">
         <Flex alignItems="center">
