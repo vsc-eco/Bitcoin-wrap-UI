@@ -14,25 +14,25 @@ const Navbar = () => {
       alignItems="center"
       bgGradient="linear(to-l, #919ca9, #fefeff)"
     >
-      <Flex flexDirection="row" justifyContent="center" alignItems="center">
+      <Flex flexDirection="row"  alignItems="center">
         <Flex alignItems="center">
-          <Box>
+          <Box w={["12","16","20","24"]}>
             {/* <Link color="#535454" size={size}></Link> */}
-            <Image src="/logo.svg" alt="Icon" width={112} height={112} />
+            <Image src="/logo.svg" alt="Icon" width={150} height={150} />
           </Box>
-          <Text letterSpacing="0.1rem" fontWeight="bolder" fontSize={["8px", "12px"]}>VSC NETWORK</Text>
+          <Text letterSpacing="0.1rem" fontWeight="bolder" fontSize={["12px", "16px", "20px", "24px"]}>VSC NETWORK</Text>
         </Flex>
       </Flex>
-      <Flex mx={4}>
+      <Flex mx={["1","2","3","4"]}>
         <Link mx={4} fontWeight="bold" href="https://vsc.eco" target="_blank">
           <Flex alignItems="center">
-          <Text size={size}>Main site</Text>
+          <Text fontSize={["12px", "16px", "20px", "24px"]}>Main site</Text>
           <RiArrowDropDownLine />
           </Flex>
         </Link>
         <Link mx={4} fontWeight="bold">
           <Flex alignItems="center">
-          <Text size={size}>FAQ</Text>
+          <Text fontSize={["12px", "16px", "20px", "24px"]}>FAQ</Text>
           <RiArrowDropDownLine />
           </Flex>
         </Link>
