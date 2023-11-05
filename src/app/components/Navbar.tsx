@@ -8,7 +8,7 @@ const Navbar = () => {
   return (
     <Flex
       bg="teal.500"
-      px={6}
+      px={["2","3","4","6"]}
       py={5}
       justifyContent="space-between"
       alignItems="center"
@@ -20,7 +20,7 @@ const Navbar = () => {
             {/* <Link color="#535454" size={size}></Link> */}
             <Image src="/logo.svg" alt="Icon" width={112} height={112} />
           </Box>
-          <Text letterSpacing="0.1rem" fontWeight="bolder">VSC NETWORK</Text>
+          <Text letterSpacing="0.1rem" fontWeight="bolder" fontSize={["8px", "12px"]}>VSC NETWORK</Text>
         </Flex>
       </Flex>
       <Flex mx={4}>
