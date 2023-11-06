@@ -8,7 +8,6 @@ const Navbar = () => {
   return (
     <Flex
       bg="teal.500"
-      px={["2","3","4","6"]}
       py={5}
       justifyContent="space-between"
       alignItems="center"
@@ -26,13 +25,13 @@ const Navbar = () => {
       <Flex mx={["1","2","3","4"]}>
         <Link mx={4} fontWeight="bold" href="https://vsc.eco" target="_blank">
           <Flex alignItems="center">
-          <Text fontSize={["12px", "16px", "20px", "24px"]}>Main site</Text>
+          <Text fontSize={["10px", "10px", "12px", "16px"]}>Main site</Text>
           <RiArrowDropDownLine />
           </Flex>
         </Link>
         <Link mx={4} fontWeight="bold">
           <Flex alignItems="center">
-          <Text fontSize={["12px", "16px", "20px", "24px"]}>FAQ</Text>
+          <Text fontSize={["10px", "10px", "12px", "16px"]}>FAQ</Text>
           <RiArrowDropDownLine />
           </Flex>
         </Link>

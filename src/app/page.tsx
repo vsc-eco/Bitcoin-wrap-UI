@@ -1,26 +1,25 @@
+"use client"
 import React from "react";
-import ExchangeModal from "../components/ExchangeModal";
-import DepositModal from "../components/DepositModal";
 import Navbar from "../components/Navbar";
-import { Box, Flex, Text } from "@chakra-ui/react";
-import LandingPage from "../components/LandingPage";
-import Hamburger from "../components/Hamburger";
-import Sidebar from "../components/Sidebar";
+import { Box} from "@chakra-ui/react";
+import LandingPage from "../sections/LandingPage";
+import { useDisclosure } from '@chakra-ui/react';
+import SecondSection from "../sections/SecondSection";
+import ThirdSection from "../sections/ThirdSection";
 
 type Props = {};
 
 const Page = (props: Props) => {
+
+  const { isOpen, onClose, onOpen } = useDisclosure();
+
   return (
     <>
-      <Box as="section">
+      <Box w="100%">
         <Navbar />
-        <Box>
-          <Hamburger />
-          {/* <Sidebar /> */}
           <LandingPage />
-          <ExchangeModal />
-          <DepositModal />
-        </Box>
+          <SecondSection />
+          <ThirdSection />
       </Box>
     </>
   );

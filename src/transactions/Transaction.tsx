@@ -26,7 +26,7 @@
 
   type Props = {};
 
-  const Page = (props: Props) => {
+  const Transaction = (props: Props) => {
     let lastDate = useRef(null);
 
     //useState
@@ -113,4 +113,4 @@
     );
   };
 
-  export default Page; // Changed "page" to "Page" for naming consistency
+  export default Transaction; // Changed "page" to "Page" for naming consistency

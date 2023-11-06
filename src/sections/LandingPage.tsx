@@ -1,15 +1,19 @@
 import React from "react";
 import { Box, Text, Flex } from "@chakra-ui/react";
 import Image from "next/image";
+import Sidebar from "../components/Sidebar";
 
 
 type Props = {};
 
 const LandingPage = (props: Props) => {
   return (
+    <>
+    
     <Flex
       direction={["column", "column", "column", "row"]} // Responsive flex direction
       bgColor="linear(to-l, #919ca9, #fefeff)"
+      alignItems="center"
     >
       <Flex
         h="100vh"
@@ -24,14 +28,13 @@ const LandingPage = (props: Props) => {
           </Text>
         </Box>
       </Flex>
-      <Box
+      <Flex
         display={["block", "block", "block", "block"]} // Hide on mobile views
-        flex={1} // Flex to occupy available space
-
       >
         <Image src="/Landing.svg" alt="Landing" width={800} height={800} />
-      </Box>
+      </Flex>
     </Flex>
+    </>
   );
 }
 

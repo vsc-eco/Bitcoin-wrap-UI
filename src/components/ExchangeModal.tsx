@@ -35,7 +35,8 @@ const ExchangeModal = (props: Props) => {
   return (
     <>
       <Flex justifyContent="center" py={8} alignItems="center">
-        <Card bg="white" maxW="800px" maxH="900px" w={670} m={['0','0','1','3']}>
+      {/* <Hamburger/> */}
+        <Card bg="white" maxW="800px" maxH="900px" w={["400px","500px","680px","1080px"]}  m={['0','0','1','3']}>
           <CardHeader>
             <Center fontWeight="bold">Add exchange details</Center>
           </CardHeader>
@@ -54,7 +55,7 @@ const ExchangeModal = (props: Props) => {
               <InputGroup size="sm">
                 <InputLeftAddon
                   h={["8", "12", "12", "12"]}
-                  w="25%"
+                  w="25%" 
                   display="flex"
                   justifyContent="center"
                   alignItems="center"
@@ -232,7 +233,7 @@ const ExchangeModal = (props: Props) => {
             </Text>
           </CardBody>
         </Card>
-      </Flex>
+      </Flex> 
     </>
   );
 };
