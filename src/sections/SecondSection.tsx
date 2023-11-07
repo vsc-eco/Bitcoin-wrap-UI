@@ -12,14 +12,14 @@ const SecondSection = (props: Props) => {
   const [showTransaction, setShowTransaction] = useState(false);
   const {isOpen, onOpen, onClose} = useDisclosure()
   return (
-    <Flex w="full" h="70vh" alignItems="center" justifyContent="space-between">
+    <Flex w="full" h="90vh" alignItems="center" justifyContent="space-between">
       <Flex display={["none","none", "none", "block"]} px={4}>
         <Sidebar />
       </Flex>
       <Flex display={["block","block", "block", "none"]} px={4}>
         <Hamburger />
       </Flex>
-      <Flex>
+      <Flex py={8}>
         {showTransaction ? <Transaction /> : <ExchangeModal />}
       </Flex>
     </Flex>

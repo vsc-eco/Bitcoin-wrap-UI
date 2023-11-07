@@ -35,14 +35,13 @@ const ExchangeModal = (props: Props) => {
   return (
     <>
       <Flex justifyContent="center" py={8} alignItems="center">
-      {/* <Hamburger/> */}
-        <Card bg="white" maxW="800px" maxH="900px" w={["400px","500px","680px","1080px"]}  m={['0','0','1','3']}>
+        <Card bg="white" maxW="800px" maxH="900px" w={["400px","500px","680px","800px"]}  m={['0','0','1','3']}>
           <CardHeader>
             <Center fontWeight="bold">Add exchange details</Center>
           </CardHeader>
           <CardBody
             pb={["1", "2", "4", "6"]}
-            my={["1", "2", "4", "4"]}
+            my={["1", "1", "2", "2"]}
             mx={["1", "2", "4", "8"]}
           >
             <Box
