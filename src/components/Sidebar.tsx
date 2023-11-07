@@ -39,7 +39,7 @@ const Sidebar = ({ handleExchangeOnClick, handleTransactionOnClick}) => {
         </Flex>
         <Box>
           <Text fontSize='smaller'>Sign in with:</Text>
-        <Flex bgColor="#1c1b1b" _hover={{bg:"black"}} p={2}>
+        <Flex bgColor="#1c1b1b" _hover={{bgColor:"black"}} p={2} borderRadius={3}>
         <Image src="/keychain.png" height={112} width={112} alt="keychain logo" onClick={handleClick} style={{cursor:"pointer"}} />
         </Flex>
         </Box>

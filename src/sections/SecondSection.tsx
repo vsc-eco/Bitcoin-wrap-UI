@@ -25,17 +25,19 @@ const SecondSection = (props: Props) => {
   }
 
   return (
-    <Flex w="100%" h="90vh" alignItems="center" justifyContent="center" bgColor="purple">
-      <Flex  display={["none","none", "none", "block"]} px={4} bgColor="cyan">
+    <Flex w="100%" h="90vh"  justifyContent="center" >
+    <Flex w="70%" justifyContent="space-between" alignItems="center">
+      <Flex  display={["none","none", "none", "block"]} px={4}>
         <Sidebar handleExchangeOnClick={handleExchangeOnClick} handleTransactionOnClick={handleTransactionOnClick}/>
       </Flex>
-      <Flex display={["block","block", "block", "none"]} px={4} bgColor="yellow">
+      <Flex display={["block","block", "block", "none"]} px={4}>
         <Hamburger />
       </Flex>
       {/* TODO Making this section wider! like 80% */}
-      <Flex px={10} bgColor="blue">
+      <Flex px={5}>
         {showTransaction ? <Transaction /> : <ExchangeModal />}
       </Flex>
+    </Flex>
     </Flex>
   );
 };
