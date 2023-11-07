@@ -62,7 +62,7 @@ const TransactionItem = ({
     >
       <Td w={28}>{showDate ? transaction.date : null}</Td>
 
-      <Td display="flex" alignItems="center">
+      <Td display="flex" alignItems="center" w={412} h={12}>
         <WrapItem>
           <Avatar
             name="Coffe Fondo"

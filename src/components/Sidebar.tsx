@@ -6,7 +6,7 @@ import { TfiMenuAlt } from "react-icons/tfi";
 import Image from "next/image"
 
 
-const Sidebar = () => {
+const Sidebar = ({ handleExchangeOnClick, handleTransactionOnClick}) => {
 
 
   function handleClick(){
@@ -18,29 +18,29 @@ const Sidebar = () => {
       w={["180px"]}
       h="70vh"
       boxShadow="0 0 10px rgba(0, 0, 0, 0.2)"
+      borderRadius={8}
     >
-      <VStack spacing={4} align="start" marginLeft={[".5rem",".5rem",".5rem",".5rem"]}>
+      <VStack spacing={4} align="start" marginLeft={[".5rem",".5rem",".5rem",".5rem"]} py={5}>
         <Flex alignItems="center" justifyContent="space-between">
             <Flex alignItems="center" _hover={{color: "blue.500"}} >
               <AiOutlineHome />
-              <Text ml={2} fontSize="lg" fontWeight="bold" > {/* Add margin to the left */}
+              <Text ml={2} fontSize="lg" fontWeight="bold" onClick={handleExchangeOnClick} style={{ cursor:"pointer"}}> 
                 Home
               </Text>
             </Flex>
         </Flex>
         <Flex alignItems="center" justifyContent="space-between">
-            <Flex alignItems="center" _hover={{color: "blue.500"}}>
+            <Flex alignItems="center" _hover={{color: "blue.500"}} onClick={handleTransactionOnClick}>
               <TfiMenuAlt />
-              <Text ml={2} fontSize="lg" fontWeight="bold"> {/* Add margin to the left */}
+              <Text ml={2} fontSize="lg" fontWeight="bold" style={{ cursor:"pointer"}}>
                 Transactions
               </Text>
             </Flex>
         </Flex>
-        {/* TODO Add the hivekeychain logo here! */}
         <Box>
           <Text fontSize='smaller'>Sign in with:</Text>
         <Flex bgColor="#1c1b1b" _hover={{bg:"black"}} p={2}>
-        <Image src="/keychain.png" height={112} width={112} alt="keychain logo" onClick={handleClick} style={{cursor:"pointer"}}/>
+        <Image src="/keychain.png" height={112} width={112} alt="keychain logo" onClick={handleClick} style={{cursor:"pointer"}} />
         </Flex>
         </Box>
       </VStack>

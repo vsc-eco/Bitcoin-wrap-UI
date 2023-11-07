@@ -9,17 +9,31 @@ import Hamburger from "../components/Hamburger";
 type Props = {};
 
 const SecondSection = (props: Props) => {
-  const [showTransaction, setShowTransaction] = useState(false);
-  const {isOpen, onOpen, onClose} = useDisclosure()
+  const [showTransaction, setShowTransaction] = useState(true);
+  const [showExchangeModal, setShowExchangeModal] = useState(false);
+
+  //function for handling the TransactionModal
+  const handleTransactionOnClick = () => {
+    setShowTransaction(true);
+    setShowExchangeModal(false);
+  }
+
+  //function for handling the TransactionModal
+  const handleExchangeOnClick = () => {
+    setShowTransaction(false);
+    setShowExchangeModal(true);
+  }
+
   return (
-    <Flex w="full" h="90vh" alignItems="center" justifyContent="space-between">
-      <Flex display={["none","none", "none", "block"]} px={4}>
-        <Sidebar />
+    <Flex w="100%" h="90vh" alignItems="center" justifyContent="center" bgColor="purple">
+      <Flex  display={["none","none", "none", "block"]} px={4} bgColor="cyan">
+        <Sidebar handleExchangeOnClick={handleExchangeOnClick} handleTransactionOnClick={handleTransactionOnClick}/>
       </Flex>
-      <Flex display={["block","block", "block", "none"]} px={4}>
+      <Flex display={["block","block", "block", "none"]} px={4} bgColor="yellow">
         <Hamburger />
       </Flex>
-      <Flex py={8}>
+      {/* TODO Making this section wider! like 80% */}
+      <Flex px={10} bgColor="blue">
         {showTransaction ? <Transaction /> : <ExchangeModal />}
       </Flex>
     </Flex>

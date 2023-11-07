@@ -12,7 +12,6 @@ const LandingPage = (props: Props) => {
     {/* TODO Add the background color here! */}
     <Flex
       direction={["column", "column", "column", "row"]} // Responsive flex direction
-      bgColor="linear(to-l, #919ca9, #fefeff)"
       alignItems="center"
     >
       <Flex
@@ -23,7 +22,7 @@ const LandingPage = (props: Props) => {
         flex={1} // Flex to occupy available space
       >
         <Box py={"4"} textAlign="center">
-          <Text fontSize={["2rem", "3rem", "4rem", "5rem"]} fontWeight="bolder">
+          <Text fontSize={["2rem", "3rem", "4rem", "6rem"]} fontWeight="bolder">
             HIVE Finance: smooth DeFi experience
           </Text>
         </Box>

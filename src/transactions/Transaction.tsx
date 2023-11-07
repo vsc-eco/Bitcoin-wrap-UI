@@ -8,17 +8,16 @@
     Box,
     Thead,
     Tbody,
-    Tfoot,
     Tr,
     Th,
-    Td,
-    TableCaption,
     TableContainer,
     Flex,
   } from "@chakra-ui/react";
   import { HiDownload } from "react-icons/hi";
   import { CiFilter } from "react-icons/ci";
-
+  
+  //import the css
+  // import "./Transaction.css"
   //import the data
   import { transactions } from "./data";
   import TransactionItem from "./TransactionItem";
@@ -46,9 +45,9 @@
 
     return (
       <>
-        <Flex justifyContent="center">
-          <Box w="50%" py={4}>
-            <Text>Transactions page</Text>
+        <Flex justifyContent="center" h="90vh" alignItems="center">
+          <Box py={4} textAlign={"center"}>
+            <Text fontSize="l">Transactions page</Text>
             <Box display="flex" justifyContent="space-between">
               <Button alignItems="center">
                 <CiFilter />
@@ -98,6 +97,7 @@
                         key={index}
                         {...transaction}
                         handleTransactionOpen={() => handleTransactionOpen(transaction)}
+                        my={1}
                       />
                     );
                   })}
@@ -106,7 +106,7 @@
             </TableContainer>
           </Box>
           <Box className={`side-popup ${isTransactionDetailOpen} ? 'show-popup' : ''`}>
-          { isTransactionDetailOpen && <TransactionDetail  toggleClose={handleTransactionClose} transaction={selectedTransaction} />}
+          { isTransactionDetailOpen && <TransactionDetail  toggleClose={handleTransactionClose} transaction={selectedTransaction} /> }
           </Box>
         </Flex>
       </>
