@@ -9,10 +9,10 @@ type Props = {};
 const LandingPage = (props: Props) => {
   return (
     <>
-    {/* TODO Add the background color here! */}
     <Flex
       direction={["column", "column", "column", "row"]} // Responsive flex direction
       alignItems="center"
+      bgGradient="linear(to-l, #919ca9, #fefeff)"
     >
       <Flex
         h="100vh"

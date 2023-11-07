@@ -29,14 +29,14 @@ type Props = {};
 const DepositModal = (props: Props) => {
   return (
     <>
-      <Flex justifyContent="center" alignItems="center">
-        <Card maxW="800px" maxH="900px" w={["380px","480px","580px","680px"]} m={['0','0','1','4']}>
+      <Flex justifyContent="center" alignItems="center" >
+        <Card maxW="800px" maxH="900px" w={["380px","480px","580px","680px"]} m={['0','0','1','4']} bgColor={"#dff0f5"} >
           <CardBody
             pb={["1", "2", "4", "6"]}
             my={["1", "2", "4", "4"]}
             mx={["1", "2", "4", "6"]}
           >
-            <Container display="flex" justifyContent="space-between" maxW={600}>
+            <Container display="flex" justifyContent="space-between" maxW={600} >
               <Text fontSize={["8px", "10px", "12px", "16px"]}>
                 Exchange ID: dkajklsnfhalkandlksd2324
               </Text>
@@ -63,7 +63,7 @@ const DepositModal = (props: Props) => {
               </Center>
             </CardHeader>
 
-            <Container display="flex" py={["1", "2", "3", "4"]} maxW={600}>
+            <Container display="flex" py={["1", "2", "3", "4"]} maxW={600} >
               <Container w="30%" display="flex" justifyContent="left">
                 <Text
                   fontSize={["8px", "12px", "14px", "16px"]}

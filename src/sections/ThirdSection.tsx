@@ -6,7 +6,7 @@ type Props = {};
 
 const ThirdSection = (props: Props) => {
   return (
-    <Flex justifyContent="center">
+    <Flex justifyContent="center" >
       <DepositModal />
     </Flex>
   );

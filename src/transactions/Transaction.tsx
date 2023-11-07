@@ -46,7 +46,7 @@
     return (
       <>
         <Flex justifyContent="center" h="90vh" alignItems="center">
-          <Box py={4} textAlign={"center"}>
+          <Box py={4} textAlign={"center"} bgColor={"white"} p={8} borderRadius={8} w={"100%"}>
             <Text fontSize="l">Transactions page</Text>
             <Box display="flex" justifyContent="space-between">
               <Button alignItems="center">

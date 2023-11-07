@@ -16,7 +16,6 @@ const Page = (props: Props) => {
   return (
     <>
       <Box w="100%">
-        <Navbar />
           <LandingPage />
           <SecondSection />
           <ThirdSection />

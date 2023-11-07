@@ -1,7 +1,7 @@
-'use client';
+"use client";
 // app/layout.tsx
 import { Providers } from "./providers";
-
+import Navbar from "../components/Navbar";
 
 export default function RootLayout({
   children,
@@ -12,9 +12,10 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Providers>
+          <Navbar />
           {children}
         </Providers>
       </body>
     </html>
   );
-} 
+}
