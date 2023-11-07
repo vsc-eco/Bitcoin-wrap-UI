@@ -16,9 +16,10 @@ const Sidebar = ({ handleExchangeOnClick, handleTransactionOnClick}) => {
   return (
     <Box
       w={["180px"]}
-      h="70vh"
+      h="75vh"
       boxShadow="0 0 10px rgba(0, 0, 0, 0.2)"
       borderRadius={8}
+      bgColor="white"
     >
       <VStack spacing={4} align="start" marginLeft={[".5rem",".5rem",".5rem",".5rem"]} py={5}>
         <Flex alignItems="center" justifyContent="space-between">

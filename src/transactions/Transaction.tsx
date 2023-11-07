@@ -64,7 +64,7 @@
               <Table variant="simple" size="sm">
                 <Thead>
                   <Tr>
-                    <Th w={23} display="flex" textTransform="capitalize">
+                    <Th w={32} display="flex" textTransform="capitalize">
                       <Text px="1">Date</Text>
                       <Text fontSize="10px">(GMT +5:30)</Text>
                     </Th>
