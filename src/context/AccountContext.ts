@@ -6,16 +6,12 @@ import KeyResolver from 'key-did-resolver';
 import { DID } from 'dids';
 import { DHive } from '../const';
 import { createGlobalState } from 'react-hooks-global-state';
-// import { CeramicClient } from '@ceramicnetwork/http-client';
-// import { useCeramic } from '../hooks/Ceramic';
+
+
 
 interface AuthInfo {
   authId: string;
   authSecret: Uint8Array;
-}
-
-interface window{
-    hive_keychain?: any
 }
 
 function normalizeAuthSecret(authSecret64: Uint8Array): Uint8Array {
@@ -67,7 +63,7 @@ class AccountContextClass {
     const loginResult = await new Promise((resolve, reject) => {
       window.hive_keychain.requestSignBuffer(
         hiveName,
-        'Allow this account to control your identity',
+        'Allow this account to control your identity',  
         'Posting',
         (e: any) => {
           if (e.success) {
