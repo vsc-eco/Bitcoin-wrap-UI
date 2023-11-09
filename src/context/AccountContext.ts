@@ -1,4 +1,4 @@
-// TODO To debug this code in typescript 
+
 import React, { useCallback, useEffect, useState, useContext } from 'react';
 import { hash } from '@stablelib/sha256';
 import { Ed25519Provider } from 'key-did-provider-ed25519';

@@ -3,6 +3,8 @@ import { extendTheme } from '@chakra-ui/react'
 import { CacheProvider } from '@chakra-ui/next-js'
 import { ChakraProvider } from '@chakra-ui/react'
 
+import { AccountContext } from '../context/AccountContext'
+
 
 //import relevant font weights
 import '@fontsource/ia-writer-quattro/400.css'
