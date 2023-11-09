@@ -17,8 +17,13 @@ declare global {
         callback: (e: any) => void,
         url: string,
         label: string
+      ): void,
+      requestBroadcast(
+        username: string,
+        data: any[],
+        type: string,
+        callback: (e: any) => void
       ): void;
-      // Add other methods/properties as needed
     };
   }
 }
@@ -37,18 +42,23 @@ function normalizeAuthSecret(authSecret64: Uint8Array): Uint8Array {
   return authSecret;
 }
 
+//login authentication 
 class AccountContextClass {
+  // Setting DID and hiveName to the null initially
   private did: DID | null = null;
   private hiveName: string | null = null;
 
+  //function for storing the authInfo 
   storeAuth(authInfo: AuthInfo) {
     localStorage.setItem('login.auth', JSON.stringify(authInfo));
   }
 
+  //function for retrieving the authInfo
   getAuth(): AuthInfo | null {
     const authInfo = localStorage.getItem('login.auth');
     return authInfo ? JSON.parse(authInfo) : null;
   }
+
 
   async checkLogin() {
     const auth = this.getAuth();
