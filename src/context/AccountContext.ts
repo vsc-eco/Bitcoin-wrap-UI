@@ -7,6 +7,21 @@ import { DID } from 'dids';
 import { DHive } from '../const';
 import { createGlobalState } from 'react-hooks-global-state';
 
+declare global {
+  interface Window {
+    hive_keychain: {
+      requestSignBuffer(
+        hiveName: string,
+        message: string,
+        type: string,
+        callback: (e: any) => void,
+        url: string,
+        label: string
+      ): void;
+      // Add other methods/properties as needed
+    };
+  }
+}
 
 
 interface AuthInfo {
@@ -60,7 +75,7 @@ class AccountContextClass {
   }
 
   async loginWithHive(hiveName: string) {
-    const loginResult = await new Promise((resolve, reject) => {
+    const loginResult: any = await new Promise((resolve, reject) => {
       window.hive_keychain.requestSignBuffer(
         hiveName,
         'Allow this account to control your identity',  
