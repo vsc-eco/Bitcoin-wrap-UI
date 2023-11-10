@@ -11,7 +11,6 @@ type Props = {};
 
 const Page = (props: Props) => {
 
-  const { isOpen, onClose, onOpen } = useDisclosure();
 
   return (
     <>

@@ -3,6 +3,7 @@
 import { Providers } from "./providers";
 import Navbar from "../components/Navbar";
 
+import { AccountContext } from "../context/AccountContext";
 
 export default function RootLayout({
   children,

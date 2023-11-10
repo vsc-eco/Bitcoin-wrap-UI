@@ -98,7 +98,7 @@ class AccountContextClass {
           }
         },
         'https://hive-api.3speak.tv',
-        'Login to SPK network'
+        'Login to Hive Finance'
       );
     });
 
@@ -139,24 +139,24 @@ export const AccountContext = React.createContext(new AccountContextClass());
 const initialState = { count: 0, did: null, ceramic: null };
 const { useGlobalState } = createGlobalState(initialState);
 
-// export const useAccountContext = function () {
-//   const ac = useContext(AccountContext);
-//   const [myDid, setMyDid] = useGlobalState('did');
-//   const { Ceramic } = useCeramic();
+export const useAccountContext = function () {
+  const ac = useContext(AccountContext);  //this is to make the instance of the account context 
+  const [myDid, setMyDid] = useGlobalState('did');
+  // const { Ceramic } = useCeramic();
 
-//   const triggerLoginWithHive = useCallback(async () => {
-//     await ac.loginWithHive(ac.hiveName || ''); // Pass the hiveName here
-//     if (ac.did) {
-//       await Ceramic.setDID(ac.did);
-//     }
-//     setMyDid(ac.did);
-//   }, [ac, setMyDid, Ceramic]);
+  const triggerLoginWithHive = useCallback(async () => {
+    await ac.loginWithHive(ac.hiveName || ''); // Pass the hiveName here
+    if (ac.did) {
+      await Ceramic.setDID(ac.did);
+    }
+    setMyDid(ac.did);
+  }, [ac, setMyDid, Ceramic]);
 
-//   return {
-//     loggedIn: !!myDid,
-//     myDid,
-//     triggerLoginWithHive,
-//   };
-// };
+  return {
+    loggedIn: !!myDid,
+    myDid,
+    triggerLoginWithHive,
+  };
+};
 
-// window.AccountContext = AccountContext; // Not recommended, consider alternatives in a React application
+window.AccountContext = AccountContext; // Not recommended, consider alternatives in a React application
