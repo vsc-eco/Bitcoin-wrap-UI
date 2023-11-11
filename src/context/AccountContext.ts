@@ -102,7 +102,7 @@ class AccountContextClass {
           }
         },
         'https://hive-api.3speak.tv',
-        'Login to SPK network'
+        'Login to Hive Finance'
       );
     });
 
