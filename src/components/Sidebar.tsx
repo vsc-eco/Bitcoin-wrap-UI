@@ -5,13 +5,21 @@ import { AiOutlineHome } from "react-icons/ai";
 import { TfiMenuAlt } from "react-icons/tfi";
 import Image from "next/image"
 
+import { AccountContext, useAccountContext } from "../context/AccountContext";
+import { useContext } from "react";
+import { ResolveUsername } from "../hooks/Hive";
+
 
 const Sidebar = ({ handleExchangeOnClick, handleTransactionOnClick}) => {
 
+  const {
+    triggerLoginWithHive
+  } = useAccountContext()
+  const ac = useContext(AccountContext)
 
-  function handleClick(){
-    console.log("Clicked!")
-  }
+  const did = ResolveUsername("vaultec")
+  console.log(did)
+
   //function for clicking the transactions 
   return (
     <Box
@@ -41,7 +49,7 @@ const Sidebar = ({ handleExchangeOnClick, handleTransactionOnClick}) => {
         <Box>
           <Text fontSize='smaller'>Sign in with:</Text>
         <Flex bgColor="#1c1b1b" _hover={{bgColor:"black"}} p={2} borderRadius={3}>
-        <Image src="/keychain.png" height={112} width={112} alt="keychain logo" onClick={handleClick} style={{cursor:"pointer"}} />
+        <Image src="/keychain.png" height={112} width={112} alt="keychain logo" onClick={triggerLoginWithHive} style={{cursor:"pointer"}} />
         </Flex>
         </Box>
       </VStack>

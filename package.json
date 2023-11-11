@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@apollo/client": "^3.8.3",
+    "@ceramicnetwork/core": "^2.46.0",
+    "@ceramicnetwork/http-client": "^2.36.0",
     "@chakra-ui/icons": "^2.1.1",
     "@chakra-ui/media-query": "^3.3.0",
     "@chakra-ui/next-js": "^2.1.5",

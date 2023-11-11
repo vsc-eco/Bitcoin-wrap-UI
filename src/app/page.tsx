@@ -7,11 +7,13 @@ import { useDisclosure } from '@chakra-ui/react';
 import SecondSection from "../sections/SecondSection";
 import ThirdSection from "../sections/ThirdSection";
 
+import { AccountContext } from "../context/AccountContext";
+
+
 type Props = {};
 
 const Page = (props: Props) => {
 
-  const { isOpen, onClose, onOpen } = useDisclosure();
 
   return (
     <>

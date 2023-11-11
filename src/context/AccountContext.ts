@@ -6,6 +6,9 @@ import KeyResolver from 'key-did-resolver';
 import { DID } from 'dids';
 import { DHive } from '../const';
 import { createGlobalState } from 'react-hooks-global-state';
+import { CeramicClient } from '@ceramicnetwork/http-client'
+
+import {useCeramic} from '../hooks/Ceramic'
 
 declare global {
   interface Window {
@@ -23,7 +26,8 @@ declare global {
         data: any[],
         type: string,
         callback: (e: any) => void
-      ): void;
+      ): void,
+      AccountContext: React.ContextType<typeof AccountContext>
     };
   }
 }
@@ -132,31 +136,54 @@ class AccountContextClass {
   async runLoginComplete() {
     // Implement your logic here
   }
+
+  //public method to get hiveName
+  getHiveName(){
+    return this.hiveName
+  }
+
+  //public function to get did
+  getDid(){
+    return this.did
+  }
 }
 
-export const AccountContext = React.createContext(new AccountContextClass());
+export const AccountContext = React.createContext(new AccountContextClass());  //this is the export variables
 
 const initialState = { count: 0, did: null, ceramic: null };
 const { useGlobalState } = createGlobalState(initialState);
 
-// export const useAccountContext = function () {
-//   const ac = useContext(AccountContext);
-//   const [myDid, setMyDid] = useGlobalState('did');
-//   const { Ceramic } = useCeramic();
+export const useAccountContext = function () {
+  const ac = useContext(AccountContext);
+  const [myDid, setMyDid] = useGlobalState('did');
+  const { Ceramic } = useCeramic();
 
-//   const triggerLoginWithHive = useCallback(async () => {
-//     await ac.loginWithHive(ac.hiveName || ''); // Pass the hiveName here
-//     if (ac.did) {
-//       await Ceramic.setDID(ac.did);
-//     }
-//     setMyDid(ac.did);
-//   }, [ac, setMyDid, Ceramic]);
-
-//   return {
-//     loggedIn: !!myDid,
-//     myDid,
-//     triggerLoginWithHive,
-//   };
-// };
-
-// window.AccountContext = AccountContext; // Not recommended, consider alternatives in a React application
+  const triggerLoginWithHive = useCallback(async () => {
+    console.log('Triggering login with Hive...');
+    console.log('Hive name:', ac.getHiveName());
+  
+    try {
+      await ac.loginWithHive(ac.getHiveName() || ''); // Pass the hiveName here
+      console.log('Login with Hive successful');
+  
+      if (ac.getDid()) {
+        console.log('Setting DID:', ac.getDid());
+        await Ceramic.setDID(ac.getDid());
+        console.log('DID set successfully');
+      }
+  
+      setMyDid(ac.getDid());
+      console.log('Setting myDid:', ac.getDid());
+    } catch (error) {
+      console.error('Error during login:', error);
+    }
+  }, [ac, setMyDid, Ceramic]);
+  
+  return {
+    loggedIn: !!myDid,
+    myDid,
+    triggerLoginWithHive,
+  };
+  
+// window.AccountContext = AccountContext; Not recommended, consider alternatives in a React application
+}
