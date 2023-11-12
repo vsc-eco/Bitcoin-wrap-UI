@@ -25,8 +25,8 @@ const SecondSection = (props: Props) => {
   }
 
   return (
-    <Flex w="100%" h="90vh"  justifyContent="center"  >
-    <Flex w="82%" bgColor={"#dff0f5"}>
+    <Flex w="100%" h="90vh"  justifyContent="center" >
+    <Flex w="82%" bgColor={"#dff0f5"} position={"sticky"}>
     <Flex w="70%" justifyContent="space-between" alignItems="center">
       <Flex  display={["none","none", "none", "block"]} px={10}>
         <Sidebar handleExchangeOnClick={handleExchangeOnClick} handleTransactionOnClick={handleTransactionOnClick}/>

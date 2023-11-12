@@ -39,14 +39,14 @@
     };
 
     //function for closing the modal again 
-    const handleTransactionClose =  ()=> {
+    const handleTransactionClose =  () => {
       setTransactionDetailOpen(false)
     }
 
     return (
       <>
         <Flex justifyContent="center" h="90vh" alignItems="center">
-          <Box py={4} textAlign={"center"} bgColor={"white"} p={8} borderRadius={8} w={"100%"}>
+          <Flex direction="column" py={4} textAlign={"center"} bgColor={"white"} p={8} borderRadius={8}  margin="auto" maxW={["250px","350px","550px","950px"]}>
             <Text fontSize="l">Transactions page</Text>
             <Box display="flex" justifyContent="space-between">
               <Button alignItems="center">
@@ -104,7 +104,7 @@
                 </Tbody>
               </Table>
             </TableContainer>
-          </Box>
+          </Flex>
           <Box className={`side-popup ${isTransactionDetailOpen} ? 'show-popup' : ''`}>
           { isTransactionDetailOpen && <TransactionDetail  toggleClose={handleTransactionClose} transaction={selectedTransaction} /> }
           </Box>
