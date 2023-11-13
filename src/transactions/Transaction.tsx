@@ -105,9 +105,11 @@
               </Table>
             </TableContainer>
           </Flex>
+          <Flex className="overlay">
           <Box className={`side-popup ${isTransactionDetailOpen} ? 'show-popup' : ''`}>
           { isTransactionDetailOpen && <TransactionDetail  toggleClose={handleTransactionClose} transaction={selectedTransaction} /> }
           </Box>
+          </Flex>
         </Flex>
       </>
     );

@@ -60,7 +60,7 @@ const TransactionItem = ({
       onMouseLeave={handleMouseLeave}
       onClick={handleTransactionClick}
     >
-      <Td w={28}>{showDate ? transaction.date : null}</Td>
+      <Td w={22}>{showDate ? transaction.date : null}</Td>
 
       <Td display="flex" alignItems="center" w={412} h={12}>
         <WrapItem>

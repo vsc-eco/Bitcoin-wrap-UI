@@ -16,29 +16,30 @@ const SecondSection = (props: Props) => {
   const handleTransactionOnClick = () => {
     setShowTransaction(true);
     setShowExchangeModal(false);
-  }
+  };
 
   //function for handling the TransactionModal
   const handleExchangeOnClick = () => {
     setShowTransaction(false);
     setShowExchangeModal(true);
-  }
+  };
 
   return (
-    <Flex w="100%" h="90vh"  justifyContent="center" >
-    <Flex w="90%" position={"sticky"} justifyContent={"center"}>
-    <Flex w="70%" justifyContent="space-between" alignItems="center">
-      <Flex  display={["none","none", "none", "block"]} px={10}>
-        <Sidebar handleExchangeOnClick={handleExchangeOnClick} handleTransactionOnClick={handleTransactionOnClick}/>
+    <Flex w="100%" h="90vh" justifyContent="center">
+      <Flex w="90%">
+        <Flex w="100%" justifyContent="center" alignItems="center">
+          <Flex display={["none", "none", "none", "block"]} px={12}>
+            <Sidebar
+              handleExchangeOnClick={handleExchangeOnClick}
+              handleTransactionOnClick={handleTransactionOnClick}
+            />
+          </Flex>
+          <Flex display={["block", "block", "block", "none"]} px={4}>
+            <Hamburger />
+          </Flex>
+          <Flex>{showTransaction ? <Transaction /> : <ExchangeModal />}</Flex>
+        </Flex>
       </Flex>
-      <Flex display={["block","block", "block", "none"]} px={4}>
-        <Hamburger />
-      </Flex>
-      <Flex>
-        {showTransaction ? <Transaction /> : <ExchangeModal />}
-      </Flex>
-    </Flex>
-    </Flex>
     </Flex>
   );
 };
