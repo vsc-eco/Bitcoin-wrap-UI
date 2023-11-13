@@ -58,7 +58,11 @@ const Sidebar = ({ handleExchangeOnClick, handleTransactionOnClick }) => {
           </Flex>
         </Flex>
         <Flex alignItems="center" justifyContent="space-between" marginX="10px">
-          <Flex alignItems="center" _hover={{ color: "blue.500" }}>
+          <Flex
+            alignItems="center"
+            _hover={{ color: "blue.500" }}
+            onClick={triggerLoginWithHive}
+          >
             <Text
               ml={2}
               fontSize="lg"
@@ -76,13 +80,13 @@ const Sidebar = ({ handleExchangeOnClick, handleTransactionOnClick }) => {
             _hover={{ bgColor: "black" }}
             p={2}
             borderRadius={3}
+            onClick={triggerLoginWithHive}
           >
             <Image
               src="/keychain.png"
               height={112}
               width={115}
               alt="keychain logo"
-              onClick={triggerLoginWithHive}
               style={{ cursor: "pointer" }}
             />
           </Flex>
