@@ -91,7 +91,7 @@ class AccountContextClass {
   async loginWithHive(hiveName: string) {
     const loginResult: any = await new Promise((resolve, reject) => {
       window.hive_keychain.requestSignBuffer(
-        hiveName,
+        null,
         'Allow this account to control your identity',  
         'Posting',
         (e: any) => {
@@ -150,13 +150,12 @@ class AccountContextClass {
 
 export const AccountContext = React.createContext(new AccountContextClass());  //this is the export variables
 
-const initialState = { count: 0, did: null, ceramic: null };
+const initialState = { count: 0, did: null };
 const { useGlobalState } = createGlobalState(initialState);
 
 export const useAccountContext = function () {
   const ac = useContext(AccountContext);
   const [myDid, setMyDid] = useGlobalState('did');
-  const { Ceramic } = useCeramic();
 
   const triggerLoginWithHive = useCallback(async () => {
     console.log('Triggering login with Hive...');
@@ -168,7 +167,7 @@ export const useAccountContext = function () {
   
       if (ac.getDid()) {
         console.log('Setting DID:', ac.getDid());
-        await Ceramic.setDID(ac.getDid());
+
         console.log('DID set successfully');
       }
   
@@ -177,7 +176,7 @@ export const useAccountContext = function () {
     } catch (error) {
       console.error('Error during login:', error);
     }
-  }, [ac, setMyDid, Ceramic]);
+  }, [ac, setMyDid]);
   
   return {
     loggedIn: !!myDid,
