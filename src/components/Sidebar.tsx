@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, VStack, Text, Flex } from "@chakra-ui/react";
-import { AiOutlineHome } from "react-icons/ai";
+import { TbExchange } from "react-icons/tb";
 import { TfiMenuAlt } from "react-icons/tfi";
 import Image from "next/image";
 
@@ -19,38 +19,80 @@ const Sidebar = ({ handleExchangeOnClick, handleTransactionOnClick }) => {
   return (
     <Box
       w={["150px"]}
-      h={["65vh","65vh","65vh","71vh"]}
+      h={["65vh", "65vh", "65vh", "71vh"]}
       boxShadow="0 0 10px rgba(0, 0, 0, 0.2)"
       borderRadius={8}
       bgColor="white"
       paddingY="10px" // Add margin to the entire sidebar
     >
-      <VStack align="start" >
+      <VStack align="start">
         <Flex alignItems="center" justifyContent="space-between" marginX="10px">
-          {/* Add margin to this Flex container */}
           <Flex alignItems="center" _hover={{ color: "blue.500" }}>
-            <AiOutlineHome />
-            <Text ml={2} fontSize="lg" fontWeight="bold" onClick={handleExchangeOnClick} style={{ cursor: "pointer" }}>
-              Home
+            <TbExchange />
+            <Text
+              ml={2}
+              fontSize="lg"
+              fontWeight="bold"
+              onClick={handleExchangeOnClick}
+              style={{ cursor: "pointer" }}
+            >
+              Swap
             </Text>
           </Flex>
         </Flex>
         <Flex alignItems="center" justifyContent="space-between" marginX="10px">
-          {/* Add margin to this Flex container */}
-          <Flex alignItems="center" _hover={{ color: "blue.500" }} onClick={handleTransactionOnClick}>
+          <Flex
+            alignItems="center"
+            _hover={{ color: "blue.500" }}
+            onClick={handleTransactionOnClick}
+          >
             <TfiMenuAlt />
-            <Text ml={1} fontSize="lg" fontWeight="bold" style={{ cursor: "pointer" }}>
+            <Text
+              ml={1}
+              fontSize="lg"
+              fontWeight="bold"
+              style={{ cursor: "pointer" }}
+            >
               Transactions
             </Text>
           </Flex>
         </Flex>
-        <Box marginX="10px">
-          {/* Add margin to this Box */}
+        <Flex alignItems="center" justifyContent="space-between" marginX="10px">
+          <Flex alignItems="center" _hover={{ color: "blue.500" }}>
+            <Text
+              ml={2}
+              fontSize="lg"
+              fontWeight="bold"
+              onClick={handleExchangeOnClick}
+              style={{ cursor: "pointer" }}
+            >
+              Sign in with:
+            </Text>
+          </Flex>
+        </Flex>
+        <Flex alignItems="center" justifyContent="space-between" marginX="10px">
+          <Flex
+            bgColor="#1c1b1b"
+            _hover={{ bgColor: "black" }}
+            p={2}
+            borderRadius={3}
+          >
+            <Image
+              src="/keychain.png"
+              height={112}
+              width={115}
+              alt="keychain logo"
+              onClick={triggerLoginWithHive}
+              style={{ cursor: "pointer" }}
+            />
+          </Flex>
+        </Flex>
+        {/* <Box marginX="10px">
           <Text fontSize="large" textAlign="center" fontWeight="bolder">Sign in with:</Text>
           <Flex bgColor="#1c1b1b" _hover={{ bgColor: "black" }} p={2} borderRadius={3}>
             <Image src="/keychain.png" height={112} width={115} alt="keychain logo" onClick={triggerLoginWithHive} style={{ cursor: "pointer" }} />
           </Flex>
-        </Box>
+        </Box> */}
       </VStack>
     </Box>
   );
