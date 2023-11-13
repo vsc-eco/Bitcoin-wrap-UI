@@ -19,7 +19,7 @@ const Sidebar = ({ handleExchangeOnClick, handleTransactionOnClick }) => {
   return (
     <Box
       w={["150px"]}
-      h={["65vh", "65vh", "65vh", "71vh"]}
+      h={["65vh", "65vh", "65vh", "65vh"]}
       boxShadow="0 0 10px rgba(0, 0, 0, 0.2)"
       borderRadius={8}
       bgColor="white"

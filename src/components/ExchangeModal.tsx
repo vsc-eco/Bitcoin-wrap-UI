@@ -35,7 +35,7 @@ const ExchangeModal = (props: Props) => {
   return (
     <>
       <Flex justifyContent="center" py={8} alignItems="center">
-        <Card bg="white" maxW="800px" maxH="900px" w={["400px","500px","680px","800px"]}  m={['0','0','1','3']}>
+        <Card bg="white" maxW="800px" maxH="700px" w={["400px","500px","680px","800px"]}  m={['0','0','1','3']}>
           <CardHeader>
             <Center fontWeight="bold">Add exchange details</Center>
           </CardHeader>

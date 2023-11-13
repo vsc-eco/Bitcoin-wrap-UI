@@ -30,7 +30,7 @@ const DepositModal = (props: Props) => {
   return (
     <>
       <Flex justifyContent="center" alignItems="center" >
-        <Card maxW="800px" maxH="900px" w={["380px","480px","580px","680px"]} m={['0','0','1','4']} bgColor={"#dff0f5"} >
+        <Card maxW="800px" maxH="900px" w={["380px","480px","580px","680px"]} m={['0','0','1','4']} >
           <CardBody
             pb={["1", "2", "4", "6"]}
             my={["1", "2", "4", "4"]}
