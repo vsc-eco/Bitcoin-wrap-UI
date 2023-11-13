@@ -6,9 +6,7 @@ import KeyResolver from 'key-did-resolver';
 import { DID } from 'dids';
 import { DHive } from '../const';
 import { createGlobalState } from 'react-hooks-global-state';
-import { CeramicClient } from '@ceramicnetwork/http-client'
 
-import {useCeramic} from '../hooks/Ceramic'
 
 declare global {
   interface Window {
