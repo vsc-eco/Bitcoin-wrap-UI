@@ -26,7 +26,7 @@ const SecondSection = (props: Props) => {
 
   return (
     <Flex w="100%" h="90vh" justifyContent="center">
-      <Flex w="90%">
+      <Flex w="80%">
         <Flex w="100%" justifyContent="center" alignItems="center">
           <Flex display={["none", "none", "none", "block"]} px={12}>
             <Sidebar

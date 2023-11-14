@@ -13,35 +13,6 @@ import {
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { transactions } from "./data";
 
-//graphql code for the integration of api
-import { gql } from "@apollo/client";
-import client from "../apollo/client";
-
-//fetching the details
-client.query({
-  query: gql`
-    query MyQuery {
-      findTransaction(
-        filterOptions: {
-          byAccount: "did:key:z6MkrKziBAfgGEywLj1v3PfJmkxdtsBPwq2FC1HghCpZZ7Yg"
-          byAction: "applyTx"
-        }
-      ) {
-        txs {
-          first_seen
-          executed_in
-          id
-          status
-          type
-          included_in
-          local
-          op
-          decoded_tx
-        }
-      }
-    }
-  `,
-}).then((result) => console.log(result))
 
 const TransactionItem = ({
   showDateProp,

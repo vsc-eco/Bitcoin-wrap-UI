@@ -23,6 +23,36 @@
   import TransactionItem from "./TransactionItem";
   import TransactionDetail from "./TransactionDetail";
 
+  //graphql code for the integration of api
+import { gql } from "@apollo/client";
+import client from "../apollo/client";
+
+//fetching the details
+client.query({
+  query: gql`
+    query MyQuery {
+      findTransaction(
+        filterOptions: {
+          byAccount: "did:key:z6MkrKziBAfgGEywLj1v3PfJmkxdtsBPwq2FC1HghCpZZ7Yg"
+          byAction: "applyTx"
+        }
+      ) {
+        txs {
+          first_seen
+          executed_in
+          id
+          status
+          type
+          included_in
+          local
+          op
+          decoded_tx
+        }
+      }
+    }
+  `,
+}).then((result) => console.log(result))
+
   type Props = {};
 
   const Transaction = (props: Props) => {
@@ -60,6 +90,7 @@
                 <Text fontSize="xs">Export</Text>
               </Button>
             </Box>
+            <Box overflowY="auto">
             <TableContainer alignSelf="center">
               <Table variant="simple" size="sm">
                 <Thead>
@@ -104,6 +135,7 @@
                 </Tbody>
               </Table>
             </TableContainer>
+            </Box>
           </Flex>
           <Flex className="overlay">
           <Box className={`side-popup ${isTransactionDetailOpen} ? 'show-popup' : ''`}>
