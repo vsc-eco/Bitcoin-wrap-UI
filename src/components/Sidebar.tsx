@@ -8,6 +8,7 @@ import { AccountContext, useAccountContext } from "../context/AccountContext";
 import { useContext } from "react";
 import { ResolveUsername } from "../hooks/Hive";
 
+
 const Sidebar = ({ handleExchangeOnClick, handleTransactionOnClick }) => {
   const { triggerLoginWithHive } = useAccountContext();
   const ac = useContext(AccountContext);
@@ -15,7 +16,9 @@ const Sidebar = ({ handleExchangeOnClick, handleTransactionOnClick }) => {
   const did = ResolveUsername("vaultec");
   console.log(did);
 
-  //function for clicking the transactions
+
+ 
+
   return (
     <Box
       w={["150px"]}

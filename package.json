@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@apollo/client": "^3.8.3",
+    "@apollo/client": "^3.8.7",
     "@ceramicnetwork/core": "^2.46.0",
     "@ceramicnetwork/http-client": "^2.36.0",
     "@chakra-ui/icons": "^2.1.1",
@@ -30,7 +30,7 @@
     "eslint": "8.49.0",
     "eslint-config-next": "13.4.19",
     "framer-motion": "^10.16.4",
-    "graphql": "^16.8.0",
+    "graphql": "^16.8.1",
     "install": "^0.13.0",
     "key-did-provider-ed25519": "^3.0.2",
     "key-did-resolver": "^3.0.0",

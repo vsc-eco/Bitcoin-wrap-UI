@@ -23,6 +23,7 @@ import { TbExchange } from "react-icons/tb";
 import { BiSolidLockOpenAlt } from "react-icons/bi";
 import { useState } from "react";
 import { Card, CardHeader, CardBody } from "@chakra-ui/react";
+import { useShowComponent } from "../context/ShowComponent";
 
 
 type Props = {};
@@ -31,6 +32,8 @@ const ExchangeModal = (props: Props) => {
   const [token1Amount, setToken1Amount] = useState("");
   const [token2Amount, setToken2Amount] = useState("");
   const [walletAddress, setWalletAddress] = useState("");
+
+  const {toggleShowComponent} = useShowComponent();
 
   return (
     <>
@@ -216,7 +219,7 @@ const ExchangeModal = (props: Props) => {
               my={4}
               mb={4}
               w="100%"
-              onClick={() => alert("button has been clicked :)")}
+              onClick={toggleShowComponent}
               >
               Swap
             </Button>
