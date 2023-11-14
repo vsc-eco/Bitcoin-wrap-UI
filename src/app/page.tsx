@@ -19,7 +19,6 @@ const Page = (props: Props) => {
         <Box w="100%">
           <LandingPage />
           <SecondSection />
-          {/* TODO: This component will show up only if the swap is successfull  */}
           <ThirdSection />
         </Box>
       </ShowComponentProvider>

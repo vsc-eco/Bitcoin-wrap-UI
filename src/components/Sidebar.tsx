@@ -8,16 +8,12 @@ import { AccountContext, useAccountContext } from "../context/AccountContext";
 import { useContext } from "react";
 import { ResolveUsername } from "../hooks/Hive";
 
-
 const Sidebar = ({ handleExchangeOnClick, handleTransactionOnClick }) => {
   const { triggerLoginWithHive } = useAccountContext();
   const ac = useContext(AccountContext);
 
   const did = ResolveUsername("vaultec");
   console.log(did);
-
-
- 
 
   return (
     <Box
@@ -61,18 +57,8 @@ const Sidebar = ({ handleExchangeOnClick, handleTransactionOnClick }) => {
           </Flex>
         </Flex>
         <Flex alignItems="center" justifyContent="space-between" marginX="10px">
-          <Flex
-            alignItems="center"
-            _hover={{ color: "blue.500" }}
-            onClick={triggerLoginWithHive}
-          >
-            <Text
-              ml={2}
-              fontSize="lg"
-              fontWeight="bold"
-              onClick={handleExchangeOnClick}
-              style={{ cursor: "pointer" }}
-            >
+          <Flex alignItems="center">
+            <Text ml={2} fontSize="lg" fontWeight="bold">
               Sign in with:
             </Text>
           </Flex>

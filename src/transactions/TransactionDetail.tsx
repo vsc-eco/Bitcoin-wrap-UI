@@ -30,14 +30,14 @@ const TransactionDetail = ({toggleClose, transaction}: Props) => {
     <Card w={356} display="float" top={20} h={600}>
       <CardHeader>
         <Flex justify="space-between">
-          <Text fontSize={["12px"]} color="brand.50">
+          <Text fontSize={["12px"]}>
             Transfer
           </Text>
 
           <Icon as={RxCross2} cursor="pointer" _hover={{ bg: "blue.100" }} onClick={toggleClose} />
         </Flex>
         <Flex>
-          <Text fontSize="32px" color="brand.50">
+          <Text fontSize="32px">
             ${transaction.dollar}.00
           </Text>
         </Flex>
