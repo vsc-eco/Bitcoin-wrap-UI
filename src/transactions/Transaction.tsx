@@ -1,5 +1,5 @@
   "use client";
-  import React, { useRef, useState } from "react";
+  import React, { useRef, useState, useEffect } from "react";
   import Head from "next/head"; // Import Head component
   import {
     Button,
@@ -15,6 +15,8 @@
   } from "@chakra-ui/react";
   import { HiDownload } from "react-icons/hi";
   import { CiFilter } from "react-icons/ci";
+import { gql } from "@apollo/client";
+import Axios from 'axios'
   
   //import the css
   // import "./Transaction.css"
@@ -24,12 +26,12 @@
   import TransactionDetail from "./TransactionDetail";
 
   //graphql code for the integration of api
-import { gql } from "@apollo/client";
-import client from "../apollo/client";
+import {client} from "../apollo/client";
+import { useQuery } from "@apollo/client";
 
 //fetching the details
-client.query({
-  query: gql`
+
+const query = gql`
     query MyQuery {
       findTransaction(
         filterOptions: {
@@ -50,8 +52,47 @@ client.query({
         }
       }
     }
-  `,
-}).then((result) => console.log(result))
+  `
+// client.query({
+//   query: gql`
+//     query MyQuery {
+//       findTransaction(
+//         filterOptions: {
+//           byAccount: "did:key:z6MkrKziBAfgGEywLj1v3PfJmkxdtsBPwq2FC1HghCpZZ7Yg"
+//           byAction: "applyTx"
+//         }
+//       ) {
+//         txs {
+//           first_seen
+//           executed_in
+//           id
+//           status
+//           type
+//           included_in
+//           local
+//           op
+//           decoded_tx
+//         }
+//       }
+//     }
+//   `,
+// }).then((result) => console.log(result))
+
+
+function useBitcoinPrice() {
+  const [price, setPrice] = useState()
+
+  useEffect(() => {
+    void (async () => {
+      const {data} = await Axios.get(`/api/bitcoin_price`)
+      console.log(data)
+      setPrice(data.price)
+    })()
+  }, [])
+
+
+  return price;
+}
 
   type Props = {};
 
@@ -61,6 +102,13 @@ client.query({
     //useState
     const [isTransactionDetailOpen, setTransactionDetailOpen] = useState(false);
     const [selectedTransaction, setSelectedTransaction] = useState(null);
+
+    const {data} = useQuery(query, {
+      variables: {}
+    })
+    const bitcoinPrice = useBitcoinPrice();
+    const items = data?.findTransaction?.txs || []
+    // console.log('transactions', items)
 
     //function for handling the state
     const handleTransactionOpen = (transaction) => {
@@ -113,7 +161,7 @@ client.query({
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {transactions.map((transaction, index) => {
+                  {/* {transactions.map((transaction, index) => {
                     let showDateProp: boolean;
                     if (lastDate.current === transaction.date) {
                       showDateProp = false;
@@ -127,6 +175,33 @@ client.query({
                         showDateProp={showDateProp}
                         key={index}
                         {...transaction}
+                        handleTransactionOpen={() => handleTransactionOpen(transaction)}
+                        my={1}
+                      />
+                    );
+                  })} */}
+                  {items.map((transaction, index) => {
+                    console.log(transaction)
+                    let showDateProp: boolean;
+                    if (lastDate.current === transaction.date) {
+                      showDateProp = false;
+                    } else {
+                      showDateProp = true;
+                      lastDate.current = transaction.date;
+                    }
+                    transaction.date = new Date(transaction.first_seen).toLocaleDateString()
+                    transaction.amount = transaction.decoded_tx.amount
+                    if(bitcoinPrice) {
+                      transaction.dollar = Number((transaction.decoded_tx.amount * bitcoinPrice).toFixed(2))
+                    }
+
+                    return (
+                      <TransactionItem
+                        showDateProp={showDateProp}
+                        key={index}
+                        {...transaction}
+                        // amount='40 BTC'
+                        // dollar={price}
                         handleTransactionOpen={() => handleTransactionOpen(transaction)}
                         my={1}
                       />

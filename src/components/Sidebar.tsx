@@ -9,11 +9,12 @@ import { useContext } from "react";
 import { ResolveUsername } from "../hooks/Hive";
 
 const Sidebar = ({ handleExchangeOnClick, handleTransactionOnClick }) => {
-  const { triggerLoginWithHive } = useAccountContext();
+  const { triggerLoginWithHive, myDid } = useAccountContext();
   const ac = useContext(AccountContext);
 
   const did = ResolveUsername("vaultec");
   console.log(did);
+
 
   return (
     <Box

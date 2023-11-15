@@ -3,12 +3,14 @@
 import { extendTheme } from "@chakra-ui/react";
 import { CacheProvider } from "@chakra-ui/next-js";
 import { ChakraProvider } from "@chakra-ui/react";
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
 import { AccountContext } from "../context/AccountContext";
 
 //import relevant font weights
 import "@fontsource/ia-writer-quattro/400.css";
 import "@fontsource/open-sans/700.css";
+import { client } from "../apollo/client";
 
 const colors = {
   brand: {
@@ -29,8 +31,10 @@ export const theme = extendTheme({
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
-    <CacheProvider>
-      <ChakraProvider theme={theme}>{children}</ChakraProvider>
-    </CacheProvider>
+    <ApolloProvider client={client}>
+      <CacheProvider>
+        <ChakraProvider theme={theme}>{children}</ChakraProvider>
+      </CacheProvider>
+    </ApolloProvider>
   );
 }

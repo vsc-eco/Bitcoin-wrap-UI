@@ -38,7 +38,7 @@ const TransactionDetail = ({toggleClose, transaction}: Props) => {
         </Flex>
         <Flex>
           <Text fontSize="32px">
-            ${transaction.dollar}.00
+            ${transaction.dollar}
           </Text>
         </Flex>
         <Flex direction="column" fontSize={['12px']}>
