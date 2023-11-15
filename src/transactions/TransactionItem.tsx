@@ -13,11 +13,10 @@ import {
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { transactions } from "./data";
 
-
 const TransactionItem = ({
   showDateProp,
   handleTransactionOpen,
-  ...transaction
+  transaction
 }) => {
   const [showDate, setShowDate] = useState(showDateProp);
   const [selectedTransaction, setSelectedTransaction] = useState(null);
@@ -91,4 +90,3 @@ const TransactionItem = ({
 };
 
 export default TransactionItem;
-  
