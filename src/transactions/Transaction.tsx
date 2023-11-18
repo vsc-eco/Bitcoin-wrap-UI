@@ -54,30 +54,6 @@ const query = gql`
     }
   }
 `;
-// client.query({
-//   query: gql`
-//     query MyQuery {
-//       findTransaction(
-//         filterOptions: {
-//           byAccount: "did:key:z6MkrKziBAfgGEywLj1v3PfJmkxdtsBPwq2FC1HghCpZZ7Yg"
-//           byAction: "applyTx"
-//         }
-//       ) {
-//         txs {
-//           first_seen
-//           executed_in
-//           id
-//           status
-//           type
-//           included_in
-//           local
-//           op
-//           decoded_tx
-//         }
-//       }
-//     }
-//   `,
-// }).then((result) => console.log(result))
 
 function useBitcoinPrice() {
   const [price, setPrice] = useState();
@@ -132,7 +108,8 @@ const Transaction = (props: Props) => {
           borderRadius={8}
           margin="auto"
           maxW={["250px", "350px", "550px", "950px"]}
-          boxShadow="0 0 10px rgba(0, 0, 0, 0.1)" // Adjust the values as needed
+          boxShadow="0 0 10px rgba(0, 0, 0, 0.1)"
+          minH="60vh"
         >
           <Text fontSize="l" fontWeight={"bolder"}>
             Transactions

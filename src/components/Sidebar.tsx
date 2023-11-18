@@ -20,7 +20,7 @@ const Sidebar = ({ handleExchangeOnClick, handleTransactionOnClick }) => {
     <Box
       id="sidebar"
       w={["150px"]}
-      h={["40vh", "60vh"]}
+      h={["60vh"]}
       boxShadow="0 0 10px rgba(0, 0, 0, 0.2)"
       borderRadius={8}
       bgColor="white"
