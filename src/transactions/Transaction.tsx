@@ -122,7 +122,7 @@ const Transaction = (props: Props) => {
 
   return (
     <>
-      <Flex justifyContent="center" h="90vh" alignItems="center">
+      <Flex justifyContent="center" h="90vh">
         <Flex
           direction="column"
           py={4}
@@ -132,6 +132,7 @@ const Transaction = (props: Props) => {
           borderRadius={8}
           margin="auto"
           maxW={["250px", "350px", "550px", "950px"]}
+          boxShadow="0 0 10px rgba(0, 0, 0, 0.1)" // Adjust the values as needed
         >
           <Text fontSize="l" fontWeight={"bolder"}>
             Transactions
@@ -171,31 +172,8 @@ const Transaction = (props: Props) => {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {/* {transactions.map((transaction, index) => {
-                    let showDateProp: boolean;
-                    if (lastDate.current === transaction.date) {
-                      showDateProp = false;
-                    } else {
-                      showDateProp = true;
-                      lastDate.current = transaction.date;
-                    }
-
-                    return (
-                      <TransactionItem
-                        showDateProp={showDateProp}
-                        key={index}
-                        {...transaction}
-                        handleTransactionOpen={() => handleTransactionOpen(transaction)}
-                        my={1}
-                      />
-                    );
-                  })} */}
                   {items.map((transaction, index) => {
                     console.log("Transaction ->", transaction);
-
-                    // transaction.date = new Date(
-                    //   transaction.first_seen
-                    // ).toLocaleDateString();
 
                     //making a separate object for the adding the date property to the transactions
                     const newTransaction: any = {
@@ -226,19 +204,10 @@ const Transaction = (props: Props) => {
                       lastDate.current = newTransaction.date;
                     }
 
-                    // const amount = {
-                    //   amount: transactions.decoded_tx.amount;
-                    // }
-
-                    // transaction.amount = transaction.decoded_tx.amount;
-
                     return (
                       <TransactionItem
                         showDateProp={showDateProp}
                         key={index}
-                        // {...transaction}
-                        // amount='40 BTC'
-                        // dollar={price}
                         transaction={newTransaction}
                         handleTransactionOpen={() =>
                           handleTransactionOpen(newTransaction)
