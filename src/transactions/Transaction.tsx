@@ -133,8 +133,10 @@ const Transaction = (props: Props) => {
           margin="auto"
           maxW={["250px", "350px", "550px", "950px"]}
         >
-          <Text fontSize="l">Transactions page</Text>
-          <Box display="flex" justifyContent="space-between">
+          <Text fontSize="l" fontWeight={"bolder"}>
+            Transactions
+          </Text>
+          <Box display="flex" justifyContent="space-between" my={2}>
             <Button alignItems="center">
               <CiFilter />
               <Text size="xs" fontSize="xs">
@@ -190,16 +192,18 @@ const Transaction = (props: Props) => {
                   })} */}
                   {items.map((transaction, index) => {
                     console.log("Transaction ->", transaction);
-                  
+
                     // transaction.date = new Date(
                     //   transaction.first_seen
                     // ).toLocaleDateString();
 
-                    //making a separate object for the adding the date property to the transactions 
+                    //making a separate object for the adding the date property to the transactions
                     const newTransaction: any = {
-                      date: new Date(transaction.first_seen).toLocaleDateString(),
+                      date: new Date(
+                        transaction.first_seen
+                      ).toLocaleDateString(),
                       amount: transaction.decoded_tx.amount,
-                    }
+                    };
 
                     if (bitcoinPrice) {
                       newTransaction.dollar = Number(
@@ -209,26 +213,24 @@ const Transaction = (props: Props) => {
                       );
                     }
                     //loop for assigning all the values to new object
-                   for(var k in transaction){
-                    newTransaction[k] = transaction[k] 
-                   }
+                    for (var k in transaction) {
+                      newTransaction[k] = transaction[k];
+                    }
 
-                   //logic for the same dates
-                   let showDateProp: boolean;
-                   if (lastDate.current === newTransaction.date) {
-                     showDateProp = false;
-                   } else {
-                     showDateProp = true;
-                     lastDate.current = newTransaction.date;
-                   }
-
+                    //logic for the same dates
+                    let showDateProp: boolean;
+                    if (lastDate.current === newTransaction.date) {
+                      showDateProp = false;
+                    } else {
+                      showDateProp = true;
+                      lastDate.current = newTransaction.date;
+                    }
 
                     // const amount = {
                     //   amount: transactions.decoded_tx.amount;
                     // }
 
                     // transaction.amount = transaction.decoded_tx.amount;
-                    
 
                     return (
                       <TransactionItem
@@ -237,9 +239,9 @@ const Transaction = (props: Props) => {
                         // {...transaction}
                         // amount='40 BTC'
                         // dollar={price}
-                        transaction={newTransaction} 
+                        transaction={newTransaction}
                         handleTransactionOpen={() =>
-                         handleTransactionOpen(newTransaction)
+                          handleTransactionOpen(newTransaction)
                         }
                       />
                     );

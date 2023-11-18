@@ -16,7 +16,7 @@ import { transactions } from "./data";
 const TransactionItem = ({
   showDateProp,
   handleTransactionOpen,
-  transaction
+  transaction,
 }) => {
   const [showDate, setShowDate] = useState(showDateProp);
   const [selectedTransaction, setSelectedTransaction] = useState(null);
@@ -48,9 +48,11 @@ const TransactionItem = ({
       onMouseLeave={handleMouseLeave}
       onClick={handleTransactionClick}
     >
-      <Td w={22}>{showDate ? transaction.date : null}</Td>
+      <Td w={22} h={12}>
+        {showDate ? transaction.date : null}
+      </Td>
 
-      <Td display="flex" alignItems="center" w={412} h={12}>
+      <Td display="flex" alignItems="center" w={412} h={14}>
         <WrapItem>
           <Avatar name="Coffe Fondo" src={transaction.avatarUrl} size="sm" />
         </WrapItem>
