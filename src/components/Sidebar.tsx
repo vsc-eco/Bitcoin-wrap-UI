@@ -82,12 +82,6 @@ const Sidebar = ({ handleExchangeOnClick, handleTransactionOnClick }) => {
             />
           </Flex>
         </Flex>
-        {/* <Box marginX="10px">
-          <Text fontSize="large" textAlign="center" fontWeight="bolder">Sign in with:</Text>
-          <Flex bgColor="#1c1b1b" _hover={{ bgColor: "black" }} p={2} borderRadius={3}>
-            <Image src="/keychain.png" height={112} width={115} alt="keychain logo" onClick={triggerLoginWithHive} style={{ cursor: "pointer" }} />
-          </Flex>
-        </Box> */}
       </VStack>
     </Box>
   );
