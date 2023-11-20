@@ -9,11 +9,13 @@ interface ShowComponentContextProps {
 const ShowComponentContext = createContext<ShowComponentContextProps | undefined>(undefined); //initialiized undefined
 
 export const ShowComponentProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  //use state
   const [showComponent, setShowComponent] = useState(false);
 
   const toggleShowComponent = () => {
     setShowComponent((prevShowComponent) => !prevShowComponent);
-  };
+    console.log(showComponent)
+  };  
 
   return (
     <ShowComponentContext.Provider value={{ showComponent, toggleShowComponent }}>
