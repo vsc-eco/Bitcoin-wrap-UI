@@ -244,6 +244,7 @@ const ExchangeModal = (props: Props) => {
               mb={4}
               w="100%"
               onClick={toggleShowComponent}
+
             >
               Swap
             </Button>
