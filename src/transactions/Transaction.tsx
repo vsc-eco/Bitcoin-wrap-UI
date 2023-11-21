@@ -150,7 +150,6 @@ const Transaction = (props: Props) => {
                 </Thead>
                 <Tbody>
                   {items.map((transaction, index) => {
-                    console.log("Transaction ->", transaction);
 
                     //making a separate object for the adding the date property to the transactions
                     const newTransaction: any = {
