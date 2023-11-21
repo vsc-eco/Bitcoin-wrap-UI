@@ -135,7 +135,7 @@ const ExchangeModal = (props: Props) => {
                   >
                     <Text>You Get</Text>
                   </InputLeftAddon>
-
+                  {/* TODO : we need to remove input for the button and auto render the same amount */}
                   <Input
                     h={["8", "12", "12", "12"]}
                     w="75%"

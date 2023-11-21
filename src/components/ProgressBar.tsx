@@ -9,9 +9,10 @@ const steps = [
   { name: "Pending deposit", icon: <MdPending /> },
   { name: "Confirming", icon: <IoReloadCircleSharp /> },
   { name: "Minting", icon: <TbExchange /> },
-  { name: "Sending", icon: <RiSendPlaneLine /> },
+  { name: "Complete", icon: <RiSendPlaneLine /> },
 ];
 
+//TODO : have to make a line between them and bold letter should come to the processing  
 const ProgressBar = ({ currentStep = 0 }) => {
   return (
     <Box display="flex" justifyContent="space-evenly" alignItems="end">
@@ -21,7 +22,7 @@ const ProgressBar = ({ currentStep = 0 }) => {
             display="flex"
             justifyContent="center"
             fontSize="xl"
-            color={i <= currentStep ? "blue.900" : "gray.700"}
+            color={i <= currentStep ? "green.600" : "gray.700"}
           >
             {/* {i <= currentStep ? step.icon : null} */}
             {step.icon}

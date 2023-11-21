@@ -98,8 +98,8 @@ const DepositModal = (props: Props) => {
                 display="flex"
                 justifyContent="space-between"
                 alignItems="center"
-              >
-                {/* Here qr code will  placed  */}
+                >
+                {/* TODO auto generate the qr code according the address */}
               <Icon
               as={IoQrCode}
               boxSize={["20px", "22px", "24px", "42px"]}
@@ -169,7 +169,7 @@ const DepositModal = (props: Props) => {
                   py={1}
                   fontWeight="bold"
                 >
-                  Recipient Address:
+                  Recipient:
                 </Text>
               </Container>
               <Container w="70%" display="flex" alignItems="center">
@@ -178,6 +178,7 @@ const DepositModal = (props: Props) => {
                   py={1}
                   isTruncated
                 >
+                  {/* TODO Here will be the username by hive  */}
                   0x3434543434343cb3k243b4343knkml082j28902b
                 </Text>
               </Container>

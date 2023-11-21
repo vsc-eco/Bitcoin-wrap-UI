@@ -33,6 +33,7 @@ const ThirdSection = (props: Props) => {
        cursor={"pointer"}
        boxSize={"2rem"}
        />
+       {/* TODO making this button at top left   */}
       </Button>
        </Flex>
       </>

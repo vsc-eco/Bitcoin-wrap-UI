@@ -12,7 +12,7 @@ declare global {
   interface Window {
     hive_keychain: {
       requestSignBuffer(
-        hiveName: string,
+        hiveName: any,
         message: string,
         type: string,
         callback: (e: any) => void,
