@@ -5,7 +5,6 @@ import { Box } from "@chakra-ui/react";
 import LandingPage from "../sections/LandingPage";
 import { useDisclosure } from "@chakra-ui/react";
 import SecondSection from "../sections/SecondSection";
-import ThirdSection from "../sections/ThirdSection";
 
 //importing context
 import { ShowComponentProvider } from "../context/ShowComponent";
@@ -19,7 +18,6 @@ const Page = (props: Props) => {
         <Box w="100%">
           <LandingPage />
           <SecondSection />
-          <ThirdSection />
         </Box>
       </ShowComponentProvider>
     </>

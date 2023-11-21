@@ -164,7 +164,7 @@ const ExchangeModal = (props: Props) => {
                         WBTC
                       </span>
                     </Flex>
-                  )}
+                  )}w
                 </InputGroup>
               </FormControl>
             </Box>
@@ -239,6 +239,7 @@ const ExchangeModal = (props: Props) => {
                 </FormLabel>
               </FormControl>
             </Box>
+            {/* TODO: check for the user login if not then show the prompt  */}
             <Button
               colorScheme="blue"
               mb={4}
