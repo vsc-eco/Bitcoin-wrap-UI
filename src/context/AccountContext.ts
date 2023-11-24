@@ -1,12 +1,11 @@
-
-import React, { useCallback, useEffect, useState, useContext } from 'react';
-import { hash } from '@stablelib/sha256';
-import { Ed25519Provider } from 'key-did-provider-ed25519';
-import KeyResolver from 'key-did-resolver';
-import { DID } from 'dids';
-import { DHive } from '../const';
-import { createGlobalState } from 'react-hooks-global-state';
-
+import React, { useCallback, useEffect, useState, useContext } from "react";
+import { hash } from "@stablelib/sha256";
+import { Ed25519Provider } from "key-did-provider-ed25519";
+import KeyResolver from "key-did-resolver";
+import { DID } from "dids";
+import { DHive } from "../const";
+import { createGlobalState } from "react-hooks-global-state";
+import { providers } from "ethers";
 
 declare global {
   interface Window {
@@ -18,18 +17,17 @@ declare global {
         callback: (e: any) => void,
         url: string,
         label: string
-      ): void,
+      ): void;
       requestBroadcast(
         username: string,
         data: any[],
         type: string,
         callback: (e: any) => void
-      ): void,
-      AccountContext: React.ContextType<typeof AccountContext>
+      ): void;
+      AccountContext: React.ContextType<typeof AccountContext>;
     };
   }
 }
-
 
 interface AuthInfo {
   authId: string;
@@ -39,34 +37,33 @@ interface AuthInfo {
 function normalizeAuthSecret(authSecret64: Uint8Array): Uint8Array {
   const authSecret = new Uint8Array(32);
   for (let i = 0; i < authSecret.length; i++) {
-    authSecret[i] = authSecret64[i]; 
+    authSecret[i] = authSecret64[i];
   }
   return authSecret;
 }
 
-//login authentication 
-class AccountContextClass {
+//login authentication
+export class AccountContextClass {
   // Setting DID and hiveName to the null initially
   private did: DID | null = null;
   private hiveName: string | null = null;
 
-  //function for storing the authInfo 
+  //function for storing the authInfo
   storeAuth(authInfo: AuthInfo) {
-    localStorage.setItem('login.auth', JSON.stringify(authInfo));
+    localStorage.setItem("login.auth", JSON.stringify(authInfo));
   }
 
   //function for retrieving the authInfo
   getAuth(): AuthInfo | null {
-    const authInfo = localStorage.getItem('login.auth');
+    const authInfo = localStorage.getItem("login.auth");
     return authInfo ? JSON.parse(authInfo) : null;
   }
-
 
   async checkLogin() {
     const auth = this.getAuth();
 
     if (!auth) {
-      console.log('LOGIN FAILED!');
+      console.log("LOGIN FAILED!");
       return;
     }
     auth.authSecret = new Uint8Array(Object.values(auth.authSecret));
@@ -86,12 +83,13 @@ class AccountContextClass {
     return did;
   }
 
+  //
   async loginWithHive(hiveName: string) {
     const loginResult: any = await new Promise((resolve, reject) => {
       window.hive_keychain.requestSignBuffer(
         null,
-        'Allow this account to control your identity',  
-        'Posting',
+        "Allow this account to control your identity",
+        "Posting",
         (e: any) => {
           if (e.success) {
             resolve(e);
@@ -99,12 +97,15 @@ class AccountContextClass {
             return reject(e);
           }
         },
-        'https://hive-api.3speak.tv',
-        'Login to Hive Finance'
+        "https://hive-api.3speak.tv",
+        "Login to Hive Finance"
       );
     });
 
+
     const { username } = loginResult.data;
+
+    localStorage.setItem
 
     const authId = `hive:${username}`;
     const authSecret = normalizeAuthSecret(
@@ -120,12 +121,17 @@ class AccountContextClass {
       json_metadata.did = did.id;
       window.hive_keychain.requestBroadcast(
         username,
-        [['account_update2', {
-          account: username,
-          json_metadata: '',
-          posting_json_metadata: JSON.stringify(json_metadata),
-        }]],
-        'Posting',
+        [
+          [
+            "account_update2",
+            {
+              account: username,
+              json_metadata: "",
+              posting_json_metadata: JSON.stringify(json_metadata),
+            },
+          ],
+        ],
+        "Posting",
         (e: any) => console.log(e)
       );
     }
@@ -136,51 +142,54 @@ class AccountContextClass {
   }
 
   //public method to get hiveName
-  getHiveName(){
-    return this.hiveName
+  getHiveName() {
+    return ;
   }
 
   //public function to get did
-  getDid(){
-    return this.did
+  getDid() {
+    return this.did;
   }
 }
 
-export const AccountContext = React.createContext(new AccountContextClass());  //this is the export variables
+ 
+export const AccountContext = React.createContext(new AccountContextClass()); //this is the export variables
 
 const initialState = { count: 0, did: null };
 const { useGlobalState } = createGlobalState(initialState);
 
 export const useAccountContext = function () {
   const ac = useContext(AccountContext);
-  const [myDid, setMyDid] = useGlobalState('did');
+
+  const [myDid, setMyDid] = useGlobalState("did");
 
   const triggerLoginWithHive = useCallback(async () => {
-    console.log('Triggering login with Hive...');
-    console.log('Hive name:', ac.getHiveName());
-  
-    try {
-      await ac.loginWithHive(ac.getHiveName() || ''); // Pass the hiveName here
-      console.log('Login with Hive successful');
-  
-      if (ac.getDid()) {
-        console.log('Setting DID:', ac.getDid());
+    console.log("Triggering login with Hive...");
+    console.log("Hive name:", ac.getHiveName());
 
-        console.log('DID set successfully');
+    try {
+      await ac.loginWithHive(ac.getHiveName() || ""); // Pass the hiveName here
+      console.log("Login with Hive successful");
+
+      if (ac.getDid()) {
+        console.log("Setting DID:", ac.getDid());
+
+        console.log("DID set successfully");
       }
-  
+
       setMyDid(ac.getDid());
-      console.log('Setting myDid:', ac.getDid());
+
+      console.log("Setting myDid:", ac.getDid());
     } catch (error) {
-      console.error('Error during login:', error);
+      console.error("Error during login:", error);
     }
   }, [ac, setMyDid]);
-  
+
   return {
     loggedIn: !!myDid,
     myDid,
-    triggerLoginWithHive,
+    triggerLoginWithHive
   };
-  
-// window.AccountContext = AccountContext; Not recommended, consider alternatives in a React application
-}
+
+  // window.AccountContext = AccountContext; Not recommended, consider alternatives in a React application
+};

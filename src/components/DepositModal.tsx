@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useContext } from "react";
 import { FaBitcoin } from "react-icons/fa";
 import { FaClipboardQuestion } from "react-icons/fa6";
 import { CiShare1 } from "react-icons/ci";
@@ -24,9 +24,18 @@ import {
   Img,
 } from "@chakra-ui/react";
 
+//importing the context file 
+import { AccountContext } from "../context/AccountContext";
+
+
+
 type Props = {};
 
 const DepositModal = (props: Props) => {
+
+  const response = JSON.parse(localStorage.getItem("login.auth")!)['authId'].split(':')[1]
+  console.log(response)
+  
   return (
     <>
       <Flex justifyContent="center" alignItems="center" >
@@ -178,8 +187,7 @@ const DepositModal = (props: Props) => {
                   py={1}
                   isTruncated
                 >
-                  {/* TODO Here will be the username by hive  */}
-                  0x3434543434343cb3k243b4343knkml082j28902b
+                  {response}
                 </Text>
               </Container>
               <Flex alignItems="center">

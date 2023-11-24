@@ -1,3 +1,4 @@
+
 import React from "react";
 import Link from "next/link";
 import {
@@ -27,7 +28,7 @@ type Props = {
 
 const TransactionDetail = ({toggleClose, transaction}: Props) => {
   return (
-    <Card w={356} display="float" top={20} h={600}>
+    <Card w={356} display="float" top={"140px"} h={580}>
       <CardHeader>
         <Flex justify="space-between">
           <Text fontSize={["12px"]}>
@@ -83,7 +84,7 @@ const TransactionDetail = ({toggleClose, transaction}: Props) => {
       </CardHeader>
       {/* This is the border line  */}
       <hr />
-      <CardBody>
+      <CardBody py={8}>
         <Box py={4}>
           <Text fontSize={["12px"]} color="brand.50">
             Notes
@@ -103,7 +104,7 @@ const TransactionDetail = ({toggleClose, transaction}: Props) => {
           </Flex>
         </Box>
 
-        <Flex my={4} direction="column">
+        <Flex direction="column">
           <Text fontSize={["12px"]} color="brand.50">
             {" "}
             Memo {" "}
@@ -120,7 +121,6 @@ const TransactionDetail = ({toggleClose, transaction}: Props) => {
           <Link href="https://hiveblocks.com/tx/d92bca994c7038a6f59b7743a09af8ff0810080c" target="_blank">
           <Icon as={BsLink45Deg} boxSize={[]}  />
           </Link>
-
           <Icon as={BsThreeDots} boxSize={[]} />
         </Flex>
       </CardFooter>

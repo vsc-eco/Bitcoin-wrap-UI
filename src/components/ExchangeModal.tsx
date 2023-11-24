@@ -29,13 +29,11 @@ type Props = {};
 
 const ExchangeModal = (props: Props) => {
   const [token1Amount, setToken1Amount] = useState("");
-  const [token2Amount, setToken2Amount] = useState("");
   const [walletAddress, setWalletAddress] = useState("");
   const [swapButtons, setSwapButtons] = useState(true);
   const { toggleShowComponent } = useShowComponent();
 
   function swapButtonsOnExchange() {
-    console.log("swap done!");
     setSwapButtons(!swapButtons);
   }
 
@@ -135,19 +133,18 @@ const ExchangeModal = (props: Props) => {
                   >
                     <Text>You Get</Text>
                   </InputLeftAddon>
-                  {/* TODO : we need to remove input for the button and auto render the same amount */}
                   <Input
                     h={["8", "12", "12", "12"]}
                     w="75%"
-                    placeholder="0.0"
-                    value={token2Amount}
-                    onChange={(e) => setToken2Amount(e.target.value)}
                     textAlign="right"
                     borderRadius={6}
-                    border="2px solid #dff0f5"
+                    border="transparent"
                     background="#dff0f5"
-                    focusBorderColor="transparent"
-                  />
+                    readOnly
+                    value={token1Amount}
+                  >
+                  
+                  </Input>
                   {!swapButtons && (
                     <Flex alignItems="center" paddingLeft="8px">
                       <FaBitcoin size="1.5em" color="#F7931A" />

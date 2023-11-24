@@ -12,8 +12,7 @@ const steps = [
   { name: "Complete", icon: <RiSendPlaneLine /> },
 ];
 
-//TODO : have to make a line between them and bold letter should come to the processing  
-const ProgressBar = ({ currentStep = 0 }) => {
+const ProgressBar = ({ currentStep = 2 }) => {
   return (
     <Box display="flex" justifyContent="space-evenly" alignItems="end">
       {steps.map((step, i) => (
@@ -27,7 +26,7 @@ const ProgressBar = ({ currentStep = 0 }) => {
             {/* {i <= currentStep ? step.icon : null} */}
             {step.icon}
           </Box>
-          <Box fontWeight={i <= currentStep ? "bold" : "none"}>{step.name}</Box>
+          <Box fontWeight={i == currentStep ? "bold" : "none"}>{step.name}</Box>
         </Box>
       ))}
     </Box>
