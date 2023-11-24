@@ -21,7 +21,6 @@ const Page = (props: Props) => {
         <Box w="100%">
           <LandingPage />
           <SecondSection />
-          <ThirdSection />
         </Box>
       </ShowComponentProvider>
     </>

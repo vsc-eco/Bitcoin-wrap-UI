@@ -12,7 +12,7 @@ const steps = [
   { name: "Complete", icon: <RiSendPlaneLine /> },
 ];
 
-const ProgressBar = ({ currentStep = 2 }) => {
+const ProgressBar = ({ currentStep = 0 }) => {
   return (
     <Box display="flex" justifyContent="space-evenly" alignItems="end">
       {steps.map((step, i) => (

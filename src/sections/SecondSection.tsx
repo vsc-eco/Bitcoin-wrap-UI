@@ -8,6 +8,7 @@ import Hamburger from "../components/Hamburger";
 
 //export the context file 
 import { useShowComponent } from "../context/ShowComponent"
+import ThirdSection from "./ThirdSection";
 
 type Props = {};
 
@@ -26,12 +27,6 @@ const SecondSection = (props: Props) => {
         setShowTransaction(false);
         setShowExchangeModal(true);
     };
-
-    const { showComponent } = useShowComponent();
-
-    if (showComponent) {
-        return null
-    }
 
     return (
         // <Flex w="100%" h="90vh" justifyContent="center">
@@ -60,7 +55,7 @@ const SecondSection = (props: Props) => {
         />
       </Flex>
       <Flex w="70%" id="transaction-swap" m={0} p={0}>
-      {showTransaction ? <Transaction /> : <ExchangeModal />}
+      {showTransaction ? <Transaction /> : <ThirdSection />}
       {/* TODO add the Deposit modal here as third component  */}
        
       </Flex>
