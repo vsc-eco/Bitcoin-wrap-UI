@@ -55,9 +55,7 @@ const SecondSection = (props: Props) => {
         />
       </Flex>
       <Flex w="70%" id="transaction-swap" m={0} p={0}>
-      {showTransaction ? <Transaction /> : <ThirdSection />}
-      {/* TODO add the Deposit modal here as third component  */}
-       
+      {showTransaction ? <Transaction /> : <ThirdSection />}  
       </Flex>
     </Flex>
     );

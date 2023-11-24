@@ -5,6 +5,11 @@ import { MdPending } from "react-icons/md";
 import { TbExchange } from "react-icons/tb";
 import { RiSendPlaneLine } from "react-icons/ri";
 
+interface Step {
+  name: string;
+  icon: React.ReactNode;
+}
+
 const steps = [
   { name: "Pending deposit", icon: <MdPending /> },
   { name: "Confirming", icon: <IoReloadCircleSharp /> },
@@ -16,6 +21,7 @@ const ProgressBar = ({ currentStep = 0 }) => {
   return (
     <Box display="flex" justifyContent="space-evenly" alignItems="end">
       {steps.map((step, i) => (
+        <> 
         <Box key={i}>
           <Box
             display="flex"
@@ -28,6 +34,8 @@ const ProgressBar = ({ currentStep = 0 }) => {
           </Box>
           <Box fontWeight={i == currentStep ? "bold" : "none"}>{step.name}</Box>
         </Box>
+        {i <step.length - 1 && <Divider orientation="vertical" borderColor="gray.300" />}
+        </>
       ))}
     </Box>
   );

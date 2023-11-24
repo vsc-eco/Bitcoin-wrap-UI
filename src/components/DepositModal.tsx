@@ -109,6 +109,7 @@ const DepositModal = (props: Props) => {
                 alignItems="center"
                 >
                 {/* TODO auto generate the qr code according the address */}
+                
               <Icon
               as={IoQrCode}
               boxSize={["20px", "22px", "24px", "42px"]}
