@@ -115,7 +115,7 @@ const DepositModal = (props: Props) => {
               >
 
                 <Image
-                  text={"https://github.com/bunlong/next-qrcode"}
+                  text={"bitcoin:39QibdfU7sTciRVwCV98rjFT7GU9P3JZA7"}
                   options={{
                     type: "image/jpeg",
                     quality: 0.3,
@@ -140,7 +140,7 @@ const DepositModal = (props: Props) => {
                   maxW={48}
                   isTruncated
                 >
-                  0x742d35Cc6634C0532925a3b844Bc454e4438f44e
+                  39QibdfU7sTciRVwCV98rjFT7GU9P3JZA7
                 </Text>
 
                 <Flex alignItems="center">
