@@ -34,7 +34,7 @@ const ProgressBar = ({ currentStep = 0 }) => {
           </Box>
           <Box fontWeight={i == currentStep ? "bold" : "none"}>{step.name}</Box>
         </Box>
-        {i <step.length - 1 && <Divider orientation="vertical" borderColor="gray.300" />}
+        {i <steps.length - 1 && <Divider orientation="vertical" borderColor="gray.300" />}
         </>
       ))}
     </Box>

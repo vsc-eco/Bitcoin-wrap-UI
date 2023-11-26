@@ -5,8 +5,8 @@ import { FaClipboardQuestion } from "react-icons/fa6";
 import { CiShare1 } from "react-icons/ci";
 import { BiCopy } from "react-icons/bi";
 import ProgressBar from "./ProgressBar";
-import { IoQrCode } from "react-icons/io5";
 
+import { useQRCode } from "next-qrcode";
 
 import {
   Button,
@@ -21,31 +21,36 @@ import {
   Wrap,
   Icon,
   FormLabel,
-  Img,
 } from "@chakra-ui/react";
 
-//importing the context file 
+//importing the context file
 import { AccountContext } from "../context/AccountContext";
-
-
 
 type Props = {};
 
 const DepositModal = (props: Props) => {
+  const response = JSON.parse(localStorage.getItem("login.auth")!)[
+    "authId"
+  ].split(":")[1];
 
-  const response = JSON.parse(localStorage.getItem("login.auth")!)['authId'].split(':')[1]
-  console.log(response)
-  
+  //for qr code
+  const { Image } = useQRCode();
+
   return (
     <>
-      <Flex justifyContent="center" alignItems="center" >
-        <Card maxW="800px" maxH="900px" w={["380px","480px","580px","680px"]} m={['0','0','1','4']} >
+      <Flex justifyContent="center" alignItems="center">
+        <Card
+          maxW="800px"
+          maxH="900px"
+          w={["380px", "480px", "580px", "680px"]}
+          m={["0", "0", "1", "4"]}
+        >
           <CardBody
             pb={["1", "2", "4", "6"]}
             my={["1", "2", "4", "4"]}
             mx={["1", "2", "4", "6"]}
           >
-            <Container display="flex" justifyContent="space-between" maxW={600} >
+            <Container display="flex" justifyContent="space-between" maxW={600}>
               <Text fontSize={["8px", "10px", "12px", "16px"]}>
                 Exchange ID: dkajklsnfhalkandlksd2324
               </Text>
@@ -72,7 +77,7 @@ const DepositModal = (props: Props) => {
               </Center>
             </CardHeader>
 
-            <Container display="flex" py={["1", "2", "3", "4"]} maxW={600} >
+            <Container display="flex" py={["1", "2", "3", "4"]} maxW={600}>
               <Container w="30%" display="flex" justifyContent="left">
                 <Text
                   fontSize={["8px", "12px", "14px", "16px"]}
@@ -107,23 +112,42 @@ const DepositModal = (props: Props) => {
                 display="flex"
                 justifyContent="space-between"
                 alignItems="center"
-                >
-                {/* TODO auto generate the qr code according the address */}
-                
-              <Icon
+              >
+
+                <Image
+                  text={"https://github.com/bunlong/next-qrcode"}
+                  options={{
+                    type: "image/jpeg",
+                    quality: 0.3,
+                    errorCorrectionLevel: "M",
+                    margin: 3,
+                    scale: 2,
+                    width: 100,
+                    color: {
+                      dark: " #000000",
+                      light: "#FFFFFF",
+                    },
+                  }}
+                />
+
+                {/* <Icon
               as={IoQrCode}
               boxSize={["20px", "22px", "24px", "42px"]}
-              />
+              /> */}
 
-                <Text fontSize={["8px", "10px", "12px", "14px"]} maxW={48} isTruncated>
+                <Text
+                  fontSize={["8px", "10px", "12px", "14px"]}
+                  maxW={48}
+                  isTruncated
+                >
                   0x742d35Cc6634C0532925a3b844Bc454e4438f44e
                 </Text>
 
                 <Flex alignItems="center">
-                  <Button size={['xs','sm','l']} px={["2"]}>
+                  <Button size={["xs", "sm", "l"]} px={["2"]}>
                     <CiShare1 color="black" fontWeight="bold" />
                   </Button>
-                  <Button size={['xs','sm','l']} px={["2"]}>
+                  <Button size={["xs", "sm", "l"]} px={["2"]}>
                     <BiCopy color="black" fontWeight="bold" />
                   </Button>
                 </Flex>
@@ -146,7 +170,11 @@ const DepositModal = (props: Props) => {
               px={["1", "2", "3", "4"]}
               maxW={600}
             >
-              <Text fontWeight="bold"  mx={4} fontSize={["12px", "14px", "16px", "18px"]}>
+              <Text
+                fontWeight="bold"
+                mx={4}
+                fontSize={["12px", "14px", "16px", "18px"]}
+              >
                 Operation details
               </Text>
             </Container>
