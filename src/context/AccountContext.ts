@@ -1,11 +1,11 @@
-import React, { useCallback, useEffect, useState, useContext } from "react";
+import React, { useCallback, useContext } from "react";
 import { hash } from "@stablelib/sha256";
 import { Ed25519Provider } from "key-did-provider-ed25519";
 import KeyResolver from "key-did-resolver";
 import { DID } from "dids";
 import { DHive } from "../const";
 import { createGlobalState } from "react-hooks-global-state";
-import { providers } from "ethers";
+
 
 declare global {
   interface Window {

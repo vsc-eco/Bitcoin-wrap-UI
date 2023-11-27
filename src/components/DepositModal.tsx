@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext } from "react";
+import React from "react";
 import { FaBitcoin } from "react-icons/fa";
 import { FaClipboardQuestion } from "react-icons/fa6";
 import { CiShare1 } from "react-icons/ci";
@@ -18,13 +18,8 @@ import {
   Container,
   Flex,
   Text,
-  Wrap,
   Icon,
-  FormLabel,
 } from "@chakra-ui/react";
-
-//importing the context file
-import { AccountContext } from "../context/AccountContext";
 
 type Props = {};
 
@@ -128,11 +123,6 @@ const DepositModal = (props: Props) => {
                     },
                   }}
                 />
-
-                {/* <Icon
-              as={IoQrCode}
-              boxSize={["20px", "22px", "24px", "42px"]}
-              /> */}
 
                 <Text
                   fontSize={["8px", "10px", "12px", "14px"]}
