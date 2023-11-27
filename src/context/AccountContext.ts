@@ -142,12 +142,12 @@ export class AccountContextClass {
   }
 
   //public method to get hiveName
-  getHiveName() {
-    return ;
+  getHiveName(): any {
+    return this.hiveName;
   }
 
   //public function to get did
-  getDid() {
+  getDid(): any {
     return this.did;
   }
 }

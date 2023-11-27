@@ -61,7 +61,6 @@ function useBitcoinPrice() {
   useEffect(() => {
     void (async () => {
       const { data } = await Axios.get(`/api/bitcoin_price`);
-      console.log(data);
       setPrice(data.price);
     })();
   }, []);
@@ -83,7 +82,6 @@ const Transaction = (props: Props) => {
   });
   const bitcoinPrice = useBitcoinPrice();
   const items = data?.findTransaction?.txs || [];
-  // console.log('transactions', items)
 
   //function for handling the state
   const handleTransactionOpen = (transaction) => {

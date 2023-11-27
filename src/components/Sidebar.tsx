@@ -13,7 +13,6 @@ const Sidebar = ({ handleExchangeOnClick, handleTransactionOnClick }) => {
   const ac = useContext(AccountContext);
 
   const did = ResolveUsername("vaultec");
-  console.log(did);
 
 
   return (

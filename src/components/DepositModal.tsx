@@ -113,8 +113,8 @@ const DepositModal = (props: Props) => {
                 justifyContent="space-between"
                 alignItems="center"
               >
-
                 <Image
+                  alt="qr-code"
                   text={"bitcoin:39QibdfU7sTciRVwCV98rjFT7GU9P3JZA7"}
                   options={{
                     type: "image/jpeg",
