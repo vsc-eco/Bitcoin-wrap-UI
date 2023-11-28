@@ -28,7 +28,7 @@ import { useShowComponent } from "../context/ShowComponent";
 type Props = {};
 
 const ExchangeModal = (props: Props) => {
-  const [token1Amount, setToken1Amount] = useState("");
+  const [token1Amount, setToken1Amount] = useState<number>(0);
   const [walletAddress, setWalletAddress] = useState("");
   const [swapButtons, setSwapButtons] = useState(true);
   const { toggleShowComponent } = useShowComponent();
@@ -79,8 +79,8 @@ const ExchangeModal = (props: Props) => {
                     h={["8", "12", "12", "12"]}
                     w="75%"
                     placeholder="0.0"
-                    value={token1Amount}
-                    onChange={(e) => setToken1Amount(e.target.value)}
+                    value={token1Amount.toString()}
+                    onChange={(e) => setToken1Amount(parseFloat(e.target.value))}
                     textAlign="right"
                     borderRadius={6}
                     background="#dff0f5"
@@ -141,7 +141,7 @@ const ExchangeModal = (props: Props) => {
                     border="transparent"
                     background="#dff0f5"
                     readOnly
-                    value={token1Amount}
+                    value={token1Amount - 0.00016}
                   >
                   
                   </Input>
@@ -224,9 +224,9 @@ const ExchangeModal = (props: Props) => {
                         </h2>
                         <AccordionPanel pb={2}>
                           <Flex justifyContent="space-between">
-                            <Text fontSize="xs">Bridge fee</Text>
+                            <Text fontSize="xs">Bitcoin Mainnet Fee</Text>
                             <Text fontSize="xs" px={12}>
-                              0 BTC ($0.01)
+                              0.00016 BTC ($6)
                             </Text>
                           </Flex>
                         </AccordionPanel>

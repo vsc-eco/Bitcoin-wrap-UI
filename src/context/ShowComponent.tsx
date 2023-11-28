@@ -12,14 +12,9 @@ export const ShowComponentProvider: React.FC<{ children: ReactNode }> = ({ child
   const [showComponent, setShowComponent] = useState(false);
 
   const toggleShowComponent = () => {
-    const user =  localStorage.getItem("login.auth");
-
-    if(user){
       setShowComponent((prevShowComponent) => !prevShowComponent);
-    }else{
-      window.alert("Please login to Hive!")
-    }
   };
+
 
   return (
     <ShowComponentContext.Provider value={{ showComponent, toggleShowComponent }}>
