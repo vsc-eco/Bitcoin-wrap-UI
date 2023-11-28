@@ -12,6 +12,10 @@ import {
   Th,
   TableContainer,
   Flex,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
 } from "@chakra-ui/react";
 import { HiDownload } from "react-icons/hi";
 import { CiFilter } from "react-icons/ci";
@@ -29,6 +33,9 @@ import TransactionDetail from "./TransactionDetail";
 import { client } from "../apollo/client";
 import { useQuery } from "@apollo/client";
 import { transactions } from "./data";
+import { ChevronDownIcon } from "@chakra-ui/icons";
+import TransferModal from "../components/TransferModal";
+import RedeemModal from "../components/RedeemModal";
 
 //fetching the details
 
@@ -119,10 +126,23 @@ const Transaction = (props: Props) => {
                 Add Filter
               </Text>
             </Button>
-            <Button alignItems="center">
+            {/* <Button alignItems="center">
               <HiDownload />
               <Text fontSize="xs">Export</Text>
-            </Button>
+            </Button> */}
+            <Menu>
+              <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+                Actions
+              </MenuButton>
+              <MenuList style={{ minWidth: "100%" }}>
+                <MenuItem>
+                  <TransferModal />
+                </MenuItem>
+                <MenuItem>
+                  <RedeemModal />
+                </MenuItem>
+              </MenuList>
+            </Menu>
           </Box>
           <Box overflowY="auto">
             <TableContainer alignSelf="center">
@@ -148,7 +168,6 @@ const Transaction = (props: Props) => {
                 </Thead>
                 <Tbody>
                   {items.map((transaction, index) => {
-
                     //making a separate object for the adding the date property to the transactions
                     const newTransaction: any = {
                       date: new Date(
@@ -211,4 +230,4 @@ const Transaction = (props: Props) => {
   );
 };
 
-export default Transaction; // Changed "page" to "Page" for naming consistency
+export default Transaction;
