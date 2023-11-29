@@ -5,6 +5,7 @@ import Sidebar from "../components/Sidebar";
 import Transaction from "../transactions/Transaction";
 import LoginComponent from "../components/LoginComponent";
 import ThirdSection from "./ThirdSection";
+import { useAccountContext } from "../context/AccountContext";
 
 type Props = {};
 
@@ -12,6 +13,7 @@ const SecondSection = (props: Props) => {
   const [showTransaction, setShowTransaction] = useState(true);
   const [showExchangeModal, setShowExchangeModal] = useState(false);
   const [showLogin, setShowLogin] = useState(true);
+  const {myDid} = useAccountContext()
 
   //function for handling the TransactionModal
   const handleTransactionOnClick = () => {
@@ -26,16 +28,16 @@ const SecondSection = (props: Props) => {
   };
 
   //check for the login
-  const handleCheckLogin = () => {
-    const user = localStorage.getItem("login.auth");
-    if (user) {
-      setShowLogin(!showLogin);
-    }
-  };
-  // for intervals of seconds
-  useEffect(() => {
-    handleCheckLogin();
-  }, []);
+  // const handleCheckLogin = () => {
+  //   const user = localStorage.getItem("login.auth");
+  //   if (user) {
+  //     setShowLogin(!showLogin);
+  //   }
+  // };
+  // // for intervals of seconds
+  // useEffect(() => {
+  //   handleCheckLogin();
+  // }, []);
 
   return (
     //updates only for desktop view no mobile view from now
@@ -53,8 +55,8 @@ const SecondSection = (props: Props) => {
         />
       </Flex>
       <Flex w="70%" id="transaction-swap" m={0} p={0}>
-        {showLogin && <LoginComponent />}
-        {!showLogin && (showTransaction ? <Transaction /> : <ThirdSection />)}
+        {!myDid && <LoginComponent />}
+        {myDid && (showTransaction ? <Transaction /> : <ThirdSection />)}
       </Flex>
     </Flex>
   );
