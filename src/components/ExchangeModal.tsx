@@ -38,7 +38,7 @@ type Props = {
 };
 
 const ExchangeModal = (props: Props) => {
-  const [token1Amount, setToken1Amount] = useState<number>(0);
+  const [token1Amount, setToken1Amount] = useState<number>(null);
   const [walletAddress, setWalletAddress] = useState("");
   const [swapButtons, setSwapButtons] = useState(true);
   const [validAccount, setValidAccount] = useState(false)
@@ -117,9 +117,9 @@ const ExchangeModal = (props: Props) => {
                   <Input
                     h={["8", "12", "12", "12"]}
                     w="75%"
-                    placeholder="0.0"
+                    placeholder="0"
                     value={token1Amount}
-                    onChange={(e) => setToken1Amount(e.target.value)}
+                    onChange={(e) => setToken1Amount(Number(e.target.value))}
                     textAlign="right"
                     borderRadius={6}
                     background="#dff0f5"
