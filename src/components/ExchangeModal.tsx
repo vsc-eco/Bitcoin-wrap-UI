@@ -23,20 +23,59 @@ import { TbExchange } from "react-icons/tb";
 import { BiSolidLockOpenAlt } from "react-icons/bi";
 import { useState } from "react";
 import { Card, CardHeader, CardBody } from "@chakra-ui/react";
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
 import { useShowComponent } from "../context/ShowComponent";
+import { DHive } from "../const";
 
-type Props = {};
+type Props = {
+  setDest: Function
+};
 
 const ExchangeModal = (props: Props) => {
   const [token1Amount, setToken1Amount] = useState<number>(0);
   const [walletAddress, setWalletAddress] = useState("");
   const [swapButtons, setSwapButtons] = useState(true);
+  const [validAccount, setValidAccount] = useState(false)
   const { toggleShowComponent } = useShowComponent();
 
   function swapButtonsOnExchange() {
     setSwapButtons(!swapButtons);
   }
 
+  // const queryClient = useQueryClient()
+
+  // Queries
+  const query = useQuery({ queryKey: ['account_status', walletAddress], queryFn: async () => {
+    try {
+      const [account] = await DHive.database.getAccounts([walletAddress])
+      console.log(account)
+      if(account) {
+        const json = JSON.parse(account.posting_json_metadata)
+        if(json.did) {
+          if(props.setDest) {
+            props.setDest(json.did)
+          }
+          setValidAccount(true)
+        } else {
+          setValidAccount(false)
+        }
+      } else {
+        setValidAccount(false)
+      }
+    } catch {
+      setValidAccount(false)
+    }
+    return true;
+  }})
+  console.log(query)
+
+ 
   return (
     <>
       <Flex justifyContent="center" py={8} alignItems="center">
@@ -202,9 +241,16 @@ const ExchangeModal = (props: Props) => {
                       <MdCancelPresentation color="black" />
                     </Button>
                   </Flex>
-                  <Text fontSize={["8px", "10px", "12px", "14px"]} color="red">
-                    HIVE account doesnt exists!
-                  </Text>
+
+                  {
+                    validAccount ? 
+                    <Text fontSize={["8px", "10px", "12px", "14px"]} color="green">
+                      Account exists!
+                    </Text> :
+                    <Text fontSize={["8px", "10px", "12px", "14px"]} color="red">
+                      HIVE account must be registered on this web portal.
+                    </Text>
+                  }
 
                   <Flex py={2} w="100%">
                     <Accordion defaultIndex={[0]} allowMultiple w="100%">
@@ -241,7 +287,7 @@ const ExchangeModal = (props: Props) => {
               mb={4}
               w="100%"
               onClick={toggleShowComponent}
-
+              disabled={!validAccount}
             >
               Swap
             </Button>

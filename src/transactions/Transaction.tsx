@@ -34,32 +34,34 @@ import { client } from "../apollo/client";
 import { useQuery } from "@apollo/client";
 import { transactions } from "./data";
 import { ChevronDownIcon } from "@chakra-ui/icons";
+import { AccountContext, useAccountContext } from "../context/AccountContext";
 import TransferModal from "../components/TransferModal";
 import RedeemModal from "../components/RedeemModal";
 
 //fetching the details
 
+const BTC_TOKEN_CONTRACT = '59dfb8383291734049bfab403ced85a57cbcde6a'
+
 const query = gql`
-  query MyQuery {
-    findTransaction(
-      filterOptions: {
-        byAccount: "did:key:z6MkrKziBAfgGEywLj1v3PfJmkxdtsBPwq2FC1HghCpZZ7Yg"
-        byAction: "applyTx"
-      }
-    ) {
-      txs {
-        first_seen
-        executed_in
-        id
-        status
-        type
-        included_in
-        local
-        op
-        decoded_tx
-      }
+  query MyQuery($did: String) {
+  findLedgerTXs(
+    byToFrom: $did
+    byContractId: "${BTC_TOKEN_CONTRACT}"
+  ) {
+    txs {
+      first_seen
+      executed_in
+      id
+      status
+      type
+      included_in
+      local
+      op
+      decoded_tx
+      redeem
     }
   }
+}
 `;
 
 function useBitcoinPrice() {
@@ -78,6 +80,7 @@ function useBitcoinPrice() {
 type Props = {};
 
 const Transaction = (props: Props) => {
+  const { triggerLoginWithHive, myDid } = useAccountContext();
   let lastDate = useRef(null);
 
   //useState
@@ -85,7 +88,9 @@ const Transaction = (props: Props) => {
   const [selectedTransaction, setSelectedTransaction] = useState(null);
 
   const { data } = useQuery(query, {
-    variables: {},
+    variables: {
+      did: myDid
+    },
   });
   const bitcoinPrice = useBitcoinPrice();
   const items = data?.findTransaction?.txs || [];

@@ -4,6 +4,13 @@ import { extendTheme } from "@chakra-ui/react";
 import { CacheProvider } from "@chakra-ui/next-js";
 import { ChakraProvider } from "@chakra-ui/react";
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
 
 import { AccountContext } from "../context/AccountContext";
 
@@ -29,12 +36,16 @@ export const theme = extendTheme({
   },
 });
 
+const queryClient = new QueryClient()
+
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
-    <ApolloProvider client={client}>
-      <CacheProvider>
-        <ChakraProvider theme={theme}>{children}</ChakraProvider>
-      </CacheProvider>
-    </ApolloProvider>
+    <QueryClientProvider client={queryClient}>
+      <ApolloProvider client={client}>
+        <CacheProvider>
+          <ChakraProvider theme={theme}>{children}</ChakraProvider>
+        </CacheProvider>
+      </ApolloProvider>
+    </QueryClientProvider>
   );
 }

@@ -1,5 +1,5 @@
 import { Box, Flex, Icon, Button } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import DepositModal from "../components/DepositModal";
 import ExchangeModal from "../components/ExchangeModal";
 //importing the context file
@@ -15,8 +15,10 @@ const ThirdSection = (props: Props) => {
 
   const { toggleShowComponent } = useShowComponent();
 
+  const [dest, setDest] = useState(null)
+
   if (!showComponent) {
-    return <ExchangeModal />;
+    return <ExchangeModal setDest={setDest}/>;
   } else {
     return (
       <>
@@ -29,7 +31,10 @@ const ThirdSection = (props: Props) => {
               boxSize={"2rem"}
             />
           </Button>
-          <DepositModal />
+          <DepositModal dest={{
+            username: 'test',
+            did: dest!
+          }}/>
         </Flex>
       </>
     );

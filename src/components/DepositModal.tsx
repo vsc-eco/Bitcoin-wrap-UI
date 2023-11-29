@@ -4,6 +4,7 @@ import { FaBitcoin } from "react-icons/fa";
 import { FaClipboardQuestion } from "react-icons/fa6";
 import { CiShare1 } from "react-icons/ci";
 import { BiCopy } from "react-icons/bi";
+import {hash160, sha256} from 'bitcoinjs-lib/src/crypto'
 import ProgressBar from "./ProgressBar";
 
 import { useQRCode } from "next-qrcode";
@@ -20,13 +21,35 @@ import {
   Text,
   Icon,
 } from "@chakra-ui/react";
+import bs58check from "bs58check";
 
-type Props = {};
+const WP_PUB = "034240ccd025374e0531945a65661aedaac5fff1b2ae46197623e594e0129e8b13"
+
+
+function compileScript(pubKey, addrKey) {
+  return Buffer.from(`21${pubKey}ad20${addrKey}`, "hex");
+}
+
+type Props = {
+  dest: {
+    username: string
+    did: string
+  }
+};
 
 const DepositModal = (props: Props) => {
   const response = JSON.parse(localStorage.getItem("login.auth")!)[
     "authId"
   ].split(":")[1];
+
+  const scriptHash = hash160(compileScript(WP_PUB, sha256(Buffer.from(props?.dest?.did)).toString('hex')))
+
+  let addr = new Uint8Array(21)
+  addr.set([0x05])
+  addr.set(scriptHash, 1)
+  const encodedAddr = bs58check.encode(addr)
+  
+
 
   //for qr code
   const { Image } = useQRCode();
@@ -47,7 +70,7 @@ const DepositModal = (props: Props) => {
           >
             <Container display="flex" justifyContent="space-between" maxW={600}>
               <Text fontSize={["8px", "10px", "12px", "16px"]}>
-                Exchange ID: dkajklsnfhalkandlksd2324
+                Exchange ID: {encodedAddr}
               </Text>
               <a style={{ cursor: "pointer" }}>
                 <Flex alignItems="center">
@@ -109,7 +132,7 @@ const DepositModal = (props: Props) => {
                 alignItems="center"
               >
                 <Image
-                  text={"bitcoin:39QibdfU7sTciRVwCV98rjFT7GU9P3JZA7"}
+                  text={`bitcoin:${encodedAddr}`}
                   options={{
                     type: "image/jpeg",
                     quality: 0.3,
@@ -129,7 +152,7 @@ const DepositModal = (props: Props) => {
                   maxW={48}
                   isTruncated
                 >
-                  39QibdfU7sTciRVwCV98rjFT7GU9P3JZA7
+                  {encodedAddr}
                 </Text>
 
                 <Flex alignItems="center">
