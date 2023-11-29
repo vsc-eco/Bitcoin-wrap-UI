@@ -38,11 +38,13 @@ type Props = {
 };
 
 const ExchangeModal = (props: Props) => {
-  const [token1Amount, setToken1Amount] = useState<number>(0);
+  
   const [walletAddress, setWalletAddress] = useState("");
   const [swapButtons, setSwapButtons] = useState(true);
   const [validAccount, setValidAccount] = useState(false);
   const { toggleShowComponent } = useShowComponent();
+  const [tokenAmount, setTokenAmount] = useShowComponent();
+  
 
   function swapButtonsOnExchange() {
     setSwapButtons(!swapButtons);
@@ -117,12 +119,12 @@ const ExchangeModal = (props: Props) => {
                   </InputLeftAddon>
 
                   <Input
-                    isInvalid={!token1Amount}
+                    isInvalid={!tokenAmount}
                     h={["8", "12", "12", "12"]}
                     w="75%"
                     placeholder="0"
-                    value={token1Amount}
-                    onChange={(e) => setToken1Amount(Number(e.target.value))}
+                    value={tokenAmount}
+                    onChange={(e) => setTokenAmount(Number(e.target.value))}
                     textAlign="right"
                     borderRadius={6}
                     background="#dff0f5"
@@ -184,7 +186,7 @@ const ExchangeModal = (props: Props) => {
                     border="transparent"
                     background="#dff0f5"
                     readOnly
-                    value={token1Amount - 0.00016}
+                    value={tokenAmount! - 0.00016}
                   ></Input>
                   {!swapButtons && (
                     <Flex alignItems="center" paddingLeft="8px">
@@ -297,7 +299,7 @@ const ExchangeModal = (props: Props) => {
               mb={4}
               w="100%"
               onClick={toggleShowComponent}
-              isDisabled={!validAccount}
+              isDisabled={tokenAmount === 0 && !validAccount }
             >
               Swap
             </Button>

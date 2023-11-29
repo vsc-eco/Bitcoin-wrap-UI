@@ -18,7 +18,7 @@ const ThirdSection = (props: Props) => {
   const [dest, setDest] = useState(null)
 
   if (!showComponent) {
-    return <ExchangeModal setDest={setDest}/>;
+    return <ExchangeModal setDest={setDest} />;
   } else {
     return (
       <>
