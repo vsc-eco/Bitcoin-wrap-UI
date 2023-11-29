@@ -79,8 +79,8 @@ const ExchangeModal = (props: Props) => {
                     h={["8", "12", "12", "12"]}
                     w="75%"
                     placeholder="0.0"
-                    value={token1Amount.toString()}
-                    onChange={(e) => setToken1Amount(parseFloat(e.target.value))}
+                    value={token1Amount}
+                    onChange={(e) => setToken1Amount(e.target.value)}
                     textAlign="right"
                     borderRadius={6}
                     background="#dff0f5"
