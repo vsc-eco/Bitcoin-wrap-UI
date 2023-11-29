@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Text,
   Button,
@@ -19,6 +19,15 @@ type Props = {};
 
 const RedeemModal = (props: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [amount, setAmount] = useState("");
+  const isAmountValid = amount.trim() !== ""; // Check if amount is not empty or only whitespace
+
+  const handleSend = () => {
+    // Add your logic to handle the "Send" button click
+    console.log("Sending:", { amount });
+    onClose();
+  };
+
   return (
     <>
       <Button onClick={onOpen} bgColor={"transparent"}>
@@ -36,13 +45,21 @@ const RedeemModal = (props: Props) => {
             </InputGroup>
             <InputGroup>
               <InputLeftAddon w={32}>Amount</InputLeftAddon>
-              <Input />
+              <Input
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+                isInvalid={!isAmountValid}
+              />
             </InputGroup>
-            <Text color='tomato' fontSize={"smaller"} px={2}>Not enough balance</Text>
+            {!isAmountValid && (
+              <Text color='tomato' fontSize={"smaller"} px={2}>
+                Please enter a valid amount
+              </Text>
+            )}
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3}>
+            <Button colorScheme="blue" mr={3} onClick={handleSend} isDisabled={!isAmountValid}>
               Send
             </Button>
             <Button colorScheme="blue" mr={3} onClick={onClose}>

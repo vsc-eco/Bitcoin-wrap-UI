@@ -62,4 +62,6 @@ const SecondSection = (props: Props) => {
   );
 };
 
+
+
 export default SecondSection;

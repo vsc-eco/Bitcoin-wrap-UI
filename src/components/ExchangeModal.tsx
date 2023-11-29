@@ -29,19 +29,19 @@ import {
   useQueryClient,
   QueryClient,
   QueryClientProvider,
-} from '@tanstack/react-query'
+} from "@tanstack/react-query";
 import { useShowComponent } from "../context/ShowComponent";
 import { DHive } from "../const";
 
 type Props = {
-  setDest: Function
+  setDest: Function;
 };
 
 const ExchangeModal = (props: Props) => {
   const [token1Amount, setToken1Amount] = useState<number>(0);
   const [walletAddress, setWalletAddress] = useState("");
   const [swapButtons, setSwapButtons] = useState(true);
-  const [validAccount, setValidAccount] = useState(false)
+  const [validAccount, setValidAccount] = useState(false);
   const { toggleShowComponent } = useShowComponent();
 
   function swapButtonsOnExchange() {
@@ -51,31 +51,33 @@ const ExchangeModal = (props: Props) => {
   // const queryClient = useQueryClient()
 
   // Queries
-  const query = useQuery({ queryKey: ['account_status', walletAddress], queryFn: async () => {
-    try {
-      const [account] = await DHive.database.getAccounts([walletAddress])
-      console.log(account)
-      if(account) {
-        const json = JSON.parse(account.posting_json_metadata)
-        if(json.did) {
-          if(props.setDest) {
-            props.setDest(json.did)
+  const query = useQuery({
+    queryKey: ["account_status", walletAddress],
+    queryFn: async () => {
+      try {
+        const [account] = await DHive.database.getAccounts([walletAddress]);
+        console.log(account);
+        if (account) {
+          const json = JSON.parse(account.posting_json_metadata);
+          if (json.did) {
+            if (props.setDest) {
+              props.setDest(json.did);
+            }
+            setValidAccount(true);
+          } else {
+            setValidAccount(false);
           }
-          setValidAccount(true)
         } else {
-          setValidAccount(false)
+          setValidAccount(false);
         }
-      } else {
-        setValidAccount(false)
+      } catch {
+        setValidAccount(false);
       }
-    } catch {
-      setValidAccount(false)
-    }
-    return true;
-  }})
-  console.log(query)
+      return true;
+    },
+  });
+  console.log(query);
 
- 
   return (
     <>
       <Flex justifyContent="center" py={8} alignItems="center">
@@ -115,6 +117,7 @@ const ExchangeModal = (props: Props) => {
                   </InputLeftAddon>
 
                   <Input
+                    isInvalid={!token1Amount}
                     h={["8", "12", "12", "12"]}
                     w="75%"
                     placeholder="0"
@@ -173,6 +176,7 @@ const ExchangeModal = (props: Props) => {
                     <Text>You Get</Text>
                   </InputLeftAddon>
                   <Input
+                    isRequired
                     h={["8", "12", "12", "12"]}
                     w="75%"
                     textAlign="right"
@@ -181,9 +185,7 @@ const ExchangeModal = (props: Props) => {
                     background="#dff0f5"
                     readOnly
                     value={token1Amount - 0.00016}
-                  >
-                  
-                  </Input>
+                  ></Input>
                   {!swapButtons && (
                     <Flex alignItems="center" paddingLeft="8px">
                       <FaBitcoin size="1.5em" color="#F7931A" />
@@ -224,6 +226,7 @@ const ExchangeModal = (props: Props) => {
                       recipients hive username
                     </Text>
                     <Input
+                      isRequired
                       mt={1.5}
                       h="60px"
                       fontWeight="bold"
@@ -242,15 +245,21 @@ const ExchangeModal = (props: Props) => {
                     </Button>
                   </Flex>
 
-                  {
-                    validAccount ? 
-                    <Text fontSize={["8px", "10px", "12px", "14px"]} color="green">
+                  {validAccount ? (
+                    <Text
+                      fontSize={["8px", "10px", "12px", "14px"]}
+                      color="green"
+                    >
                       Account exists!
-                    </Text> :
-                    <Text fontSize={["8px", "10px", "12px", "14px"]} color="red">
+                    </Text>
+                  ) : (
+                    <Text
+                      fontSize={["8px", "10px", "12px", "14px"]}
+                      color="red"
+                    >
                       HIVE account must be registered on this web portal.
                     </Text>
-                  }
+                  )}
 
                   <Flex py={2} w="100%">
                     <Accordion defaultIndex={[0]} allowMultiple w="100%">
@@ -283,11 +292,12 @@ const ExchangeModal = (props: Props) => {
               </FormControl>
             </Box>
             <Button
+              
               colorScheme="blue"
               mb={4}
               w="100%"
               onClick={toggleShowComponent}
-              disabled={!validAccount}
+              isDisabled={!validAccount}
             >
               Swap
             </Button>
