@@ -42,12 +42,15 @@ const DepositModal = (props: Props) => {
     "authId"
   ].split(":")[1];
 
-  const scriptHash = hash160(compileScript(WP_PUB, sha256(Buffer.from(props?.dest?.did)).toString('hex')))
-
-  let addr = new Uint8Array(21)
-  addr.set([0x05])
-  addr.set(scriptHash, 1)
-  const encodedAddr = bs58check.encode(addr)
+  let encodedAddr
+  if(props?.dest?.did) {
+    const scriptHash = hash160(compileScript(WP_PUB, sha256(Buffer.from(props?.dest?.did)).toString('hex')))
+  
+    let addr = new Uint8Array(21)
+    addr.set([0x05])
+    addr.set(scriptHash, 1)
+    encodedAddr = bs58check.encode(addr)
+  }
   
 
 
