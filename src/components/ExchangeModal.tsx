@@ -38,7 +38,7 @@ type Props = {
 };
 
 const ExchangeModal = (props: Props) => {
-  const [token1Amount, setToken1Amount] = useState<number>(null);
+  const [token1Amount, setToken1Amount] = useState<number>(0);
   const [walletAddress, setWalletAddress] = useState("");
   const [swapButtons, setSwapButtons] = useState(true);
   const [validAccount, setValidAccount] = useState(false)
