@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from "react";
+import React, { useCallback, useContext, useEffect } from "react";
 import { hash } from "@stablelib/sha256";
 import { Ed25519Provider } from "key-did-provider-ed25519";
 import KeyResolver from "key-did-resolver";
@@ -117,7 +117,7 @@ export class AccountContextClass {
 
     const accountInfo = (await DHive.database.getAccounts([username]))[0];
     let json_metadata = JSON.parse(accountInfo.posting_json_metadata);
-    if (!json_metadata?.did) {
+    if (json_metadata?.did !== did.id) {
       json_metadata.did = did.id;
       window.hive_keychain.requestBroadcast(
         username,
@@ -177,13 +177,22 @@ export const useAccountContext = function () {
         console.log("DID set successfully");
       }
 
-      setMyDid(ac.getDid());
+      setMyDid(ac.getDid().id);
 
       console.log("Setting myDid:", ac.getDid());
     } catch (error) {
       console.error("Error during login:", error);
     }
   }, [ac, setMyDid]);
+
+  useEffect(() => {
+    ac.checkLogin().then(e => {
+      if(e) {
+        console.log('did check login', e)
+        setMyDid((e as any).id)
+      }
+    })
+  }, [setMyDid])
 
   return {
     loggedIn: !!myDid,
