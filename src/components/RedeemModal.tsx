@@ -30,7 +30,7 @@ const RedeemModal = (props: Props) => {
 
   return (
     <>
-      <Button onClick={onOpen} bgColor={"transparent"}>
+      <Button onClick={onOpen} bgColor={"transparent"} fontSize='xs'>
         Redeem
       </Button>
 

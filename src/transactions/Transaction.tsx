@@ -127,7 +127,7 @@ const Transaction = (props: Props) => {
           <Box display="flex" justifyContent="space-between" my={2}>
             <Button alignItems="center">
               <CiFilter />
-              <Text size="xs" fontSize="xs">
+              <Text size="s" fontSize="xs">
                 Add Filter
               </Text>
             </Button>
@@ -136,7 +136,7 @@ const Transaction = (props: Props) => {
               <Text fontSize="xs">Export</Text>
             </Button> */}
             <Menu>
-              <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+              <MenuButton as={Button} rightIcon={<ChevronDownIcon />} fontSize='xs'>
                 Actions
               </MenuButton>
               <MenuList style={{ minWidth: "100%" }}>

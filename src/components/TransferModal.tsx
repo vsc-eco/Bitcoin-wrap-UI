@@ -30,7 +30,7 @@ const TransferModal = (props: Props) => {
 
   return (
     <>
-      <Button onClick={onOpen} bgColor={"transparent"}>
+      <Button onClick={onOpen} bgColor={"transparent"} fontSize='xs'>
         Transfer
       </Button>
 
