@@ -9,18 +9,19 @@ import ThirdSection from "../sections/ThirdSection";
 
 //importing context
 import { ShowComponentProvider } from "../context/ShowComponent";
+import { TokenAmountProvider } from "../context/TokenTransferContext";
 
 type Props = {};
 
 const Page = (props: Props) => {
-
   return (
     <>
-
       <ShowComponentProvider>
         <Box w="100%">
           <LandingPage />
-          <SecondSection />
+          <TokenAmountProvider>
+            <SecondSection />
+          </TokenAmountProvider>
         </Box>
       </ShowComponentProvider>
     </>

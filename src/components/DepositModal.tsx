@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useContext } from "react";
 import { FaBitcoin } from "react-icons/fa";
 import { FaClipboardQuestion } from "react-icons/fa6";
 import { CiShare1 } from "react-icons/ci";
@@ -8,6 +8,7 @@ import {hash160, sha256} from 'bitcoinjs-lib/src/crypto'
 import ProgressBar from "./ProgressBar";
 
 import { useQRCode } from "next-qrcode";
+
 
 import {
   Button,
@@ -22,6 +23,7 @@ import {
   Icon,
 } from "@chakra-ui/react";
 import bs58check from "bs58check";
+import { MyContext } from "../context/TokenTransferContext";
 
 const WP_PUB = "034240ccd025374e0531945a65661aedaac5fff1b2ae46197623e594e0129e8b13"
 
@@ -56,6 +58,8 @@ const DepositModal = (props: Props) => {
 
   //for qr code
   const { Image } = useQRCode();
+
+  const { myValue, updateValue } = useContext(MyContext)!;
 
   return (
     <>
@@ -114,7 +118,7 @@ const DepositModal = (props: Props) => {
                   color="#F7931A"
                 />
                 <Text fontSize={["9px", "11px", "13px", "16px"]} px={["2"]}>
-                  0.1 WBTC
+                  {myValue! - 0.00016}
                 </Text>
               </Container>
             </Container>
@@ -210,7 +214,7 @@ const DepositModal = (props: Props) => {
                   color="#F7931A"
                 />
                 <Text fontSize={["9px", "11px", "13px", "16px"]} px={["2"]}>
-                  0.1 WBTC
+                  {myValue! - 0.0016}
                 </Text>
               </Container>
             </Container>

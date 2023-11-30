@@ -21,7 +21,7 @@ import { FaBitcoin } from "react-icons/fa";
 import { MdCancelPresentation } from "react-icons/md";
 import { TbExchange } from "react-icons/tb";
 import { BiSolidLockOpenAlt } from "react-icons/bi";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Card, CardHeader, CardBody } from "@chakra-ui/react";
 import {
   useQuery,
@@ -32,6 +32,8 @@ import {
 } from "@tanstack/react-query";
 import { useShowComponent } from "../context/ShowComponent";
 import { DHive } from "../const";
+import { MyContext } from "../context/TokenTransferContext";
+
 
 type Props = {
   setDest: Function;
@@ -43,14 +45,18 @@ const ExchangeModal = (props: Props) => {
   const [swapButtons, setSwapButtons] = useState(true);
   const [validAccount, setValidAccount] = useState(false);
   const { toggleShowComponent } = useShowComponent();
-  const [tokenAmount, setTokenAmount] = useShowComponent();
-  
+
+
+  const { myValue, updateValue } = useContext(MyContext)!;
+  // const { tokenValue, setTokenValue } = useState(0);
+
+
 
   function swapButtonsOnExchange() {
     setSwapButtons(!swapButtons);
   }
 
-  // const queryClient = useQueryClient()
+  let passAmount = 0;
 
   // Queries
   const query = useQuery({
@@ -119,12 +125,12 @@ const ExchangeModal = (props: Props) => {
                   </InputLeftAddon>
 
                   <Input
-                    isInvalid={!tokenAmount}
+                    // isInvalid={}
                     h={["8", "12", "12", "12"]}
                     w="75%"
                     placeholder="0"
-                    value={tokenAmount}
-                    onChange={(e) => setTokenAmount(Number(e.target.value))}
+                    value={myValue!} 
+                    onChange={(e) =>  updateValue(Number(e.target.value))}
                     textAlign="right"
                     borderRadius={6}
                     background="#dff0f5"
@@ -186,7 +192,7 @@ const ExchangeModal = (props: Props) => {
                     border="transparent"
                     background="#dff0f5"
                     readOnly
-                    value={tokenAmount! - 0.00016}
+                    value={myValue! - 0.00016}
                   ></Input>
                   {!swapButtons && (
                     <Flex alignItems="center" paddingLeft="8px">
@@ -299,7 +305,7 @@ const ExchangeModal = (props: Props) => {
               mb={4}
               w="100%"
               onClick={toggleShowComponent}
-              isDisabled={tokenAmount === 0 && !validAccount }
+              isDisabled={!validAccount }
             >
               Swap
             </Button>
