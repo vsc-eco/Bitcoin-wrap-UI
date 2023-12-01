@@ -250,7 +250,7 @@ const Transaction = (props: Props) => {
                       showDateProp = false;
                     } else {
                       showDateProp = true;
-                      lastDate.current = Moment(newTransaction.date).format('D MMM');
+                      lastDate.current = Moment(newTransaction.date).format('D MMM') as any;
                     }
                     
                     
