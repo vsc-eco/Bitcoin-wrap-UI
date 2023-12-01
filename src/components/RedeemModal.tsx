@@ -20,7 +20,7 @@ type Props = {};
 const RedeemModal = (props: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [amount, setAmount] = useState("");
-  const isAmountValid = amount.trim() !== ""; // Check if amount is not empty or only whitespace
+  const isAmountValid = (amount.trim() !== "") && ( /^\d*\.?\d*$/.test(amount)); // Check if amount is not empty or only whitespace
 
   const handleSend = () => {
     // Add your logic to handle the "Send" button click
@@ -41,9 +41,13 @@ const RedeemModal = (props: Props) => {
           <ModalCloseButton />
           <ModalBody>
             <InputGroup my={2}>
-              <Input readOnly value={"1Gx9FCknxSsLfFDzFdn75Xgqx95sDp38ir"} />
+            <InputLeftAddon w={32}>Address</InputLeftAddon>
+              <Input />
             </InputGroup>
-            <InputGroup>
+            <Text color="tomato" fontSize="xs" px={2}>
+              Account not found!
+            </Text>
+            <InputGroup py={2}>
               <InputLeftAddon w={32}>Amount</InputLeftAddon>
               <Input
                 value={amount}
