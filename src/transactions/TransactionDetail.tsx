@@ -20,6 +20,7 @@ import { GrFormAdd } from "react-icons/gr";
 import { BsLink45Deg } from "react-icons/bs";
 import { BsThreeDots } from "react-icons/bs";
 import { FaLocationPin } from "react-icons/fa6";
+import Moment from 'moment'
 
 type Props = {
   toggleClose: () => void;
@@ -27,6 +28,7 @@ type Props = {
 };
 
 const TransactionDetail = ({toggleClose, transaction}: Props) => {
+  console.log('transaction.date', transaction.date)
   return (
     <Card w={356} display="float" top={"140px"} h={580}>
       <CardHeader>
@@ -59,10 +61,9 @@ const TransactionDetail = ({toggleClose, transaction}: Props) => {
             <Box mx={4}>
               <Text>{transaction.toFrom}</Text>
               <Box>
-                {/* <Text>Mercury Checking ••1038</Text> */}
                 <Flex>
-                  <Text pr={1}>{transaction.date} at</Text>
-                  <Text>10:36 am</Text>
+                  <Text pr={1}>{Moment(transaction.date).format('D MMM')} at</Text>
+                  <Text>{Moment(transaction.date).format('h:mm:ss a')}</Text>
                 </Flex>
               </Box>
             </Box>
@@ -72,10 +73,9 @@ const TransactionDetail = ({toggleClose, transaction}: Props) => {
             <Box mx={4}>
               <Text>{transaction.toFrom}</Text>
               <Box>
-                {/* <Text>Mercury Checking ••1038</Text> */}
                 <Flex>
-                  <Text pr={1}>{transaction.date} at </Text>
-                  <Text>10:36 am</Text>
+                  <Text pr={1}>{Moment(transaction.date).format('D MMM')} at </Text>
+                  <Text>{Moment(transaction.date).format('h:mm:ss a')}</Text>
                 </Flex>
               </Box>
             </Box>
@@ -92,7 +92,7 @@ const TransactionDetail = ({toggleClose, transaction}: Props) => {
           <Textarea placeholder="Add a note" />
         </Box>
 
-        <Box>
+        {/* <Box>
           <Text fontSize={["12px"]} color="brand.50">
             Attachments
           </Text>
@@ -102,17 +102,28 @@ const TransactionDetail = ({toggleClose, transaction}: Props) => {
               Add an Attachment
             </Text>
           </Flex>
-        </Box>
+        </Box> */}
+        
+        {transaction.decoded_tx.action === "mint" ? <Box>
+          <Text fontSize={["12px"]}  color="brand.50">
+            Wrapping proof:
+          </Text>
+          <Flex py={4}>
+            <Text fontSize={["12px"]}  fontWeight="bold">
+              <a target='_blank' href={`https://mempool.space/tx/${transaction.decoded_tx.tx_id}`}>View on block explorer</a>
+            </Text>
+          </Flex>
+        </Box> : null}
 
-        <Flex direction="column">
+        {transaction.memo ? <Flex direction="column">
           <Text fontSize={["12px"]} color="brand.50">
             {" "}
             Memo {" "}
           </Text>
           <Box>
-            <Text>kcs-126249</Text>
+            <Text>{transaction.memo}</Text>
           </Box>
-        </Flex>
+        </Flex> : null}
       </CardBody>
       {/* This is the border line  */}
       <hr />

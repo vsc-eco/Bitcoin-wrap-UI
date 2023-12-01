@@ -41,7 +41,7 @@ const RedeemModal = (props: Props) => {
           <ModalCloseButton />
           <ModalBody>
             <InputGroup my={2}>
-            <InputLeftAddon w={32}>Address</InputLeftAddon>
+            <InputLeftAddon w={32}>BTC Address</InputLeftAddon>
               <Input />
             </InputGroup>
             <Text color="tomato" fontSize="xs" px={2}>

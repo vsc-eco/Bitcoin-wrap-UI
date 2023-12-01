@@ -155,13 +155,14 @@ export class AccountContextClass {
  
 export const AccountContext = React.createContext(new AccountContextClass()); //this is the export variables
 
-const initialState = { count: 0, did: null };
+const initialState = { count: 0, did: null, didRaw: null };
 const { useGlobalState } = createGlobalState(initialState);
 
 export const useAccountContext = function () {
   const ac = useContext(AccountContext);
 
   const [myDid, setMyDid] = useGlobalState("did");
+  const [myAuth, setMyAuth] = useGlobalState('didRaw')
 
   const triggerLoginWithHive = useCallback(async () => {
     console.log("Triggering login with Hive...");
@@ -178,18 +179,20 @@ export const useAccountContext = function () {
       }
 
       setMyDid(ac.getDid().id);
-
+      setMyAuth(ac.getDid())
+      
       console.log("Setting myDid:", ac.getDid());
     } catch (error) {
       console.error("Error during login:", error);
     }
   }, [ac, setMyDid]);
-
+  
   useEffect(() => {
     ac.checkLogin().then(e => {
       if(e) {
         console.log('did check login', e)
         setMyDid((e as any).id)
+        setMyAuth(e as any)
       }
     })
   }, [setMyDid])
@@ -197,6 +200,7 @@ export const useAccountContext = function () {
   return {
     loggedIn: !!myDid,
     myDid,
+    myAuth,
     triggerLoginWithHive
   };
 

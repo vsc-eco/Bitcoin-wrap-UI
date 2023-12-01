@@ -13,7 +13,7 @@ const LoginComponent = (props: Props) => {
     <Flex w={720} h={720} justifyContent="center" alignItems="center">
       <Flex mx={2}>
         <Text fontSize="larger" fontWeight="bolder">
-          Login to your Hive account! :)
+          Login to your Hive account! 
         </Text>
       </Flex>
       <Flex 

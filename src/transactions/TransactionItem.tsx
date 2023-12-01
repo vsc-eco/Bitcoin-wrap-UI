@@ -11,6 +11,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
+import Moment from 'moment'
 import { transactions } from "./data";
 
 const TransactionItem = ({
@@ -49,7 +50,7 @@ const TransactionItem = ({
       onClick={handleTransactionClick}
     >
       <Td w={22} h={12}>
-        {showDate ? transaction.date : null}
+        {showDate ? Moment(transaction.date).format('D MMM') : null}
       </Td>
 
       <Td display="flex" alignItems="center" w={412} h={14}>
@@ -71,19 +72,26 @@ const TransactionItem = ({
         )}
       </Td>
       <Td isNumeric>
+        {transaction.amountPrefix}
+        &nbsp;
         {transaction.amount}
         &nbsp; (${transaction.dollar})
       </Td>
 
       <Td>
         <Flex>
-          {transaction.paymentMethod === "Transfer" &&
+          {/* {transaction.paymentMethod === "Transfer" &&
           transaction.TransferIn ? (
             <BsArrowLeft />
           ) : transaction.paymentMethod === "Transfer" &&
             !transaction.TransferIn ? (
             <BsArrowRight />
-          ) : null}
+          ) : null} */}
+          {transaction.TransferIn ? (
+            <BsArrowLeft />
+          ) : <BsArrowRight/>}
+          {'  '}
+          &nbsp;
           <Text>{transaction.paymentMethod}</Text>
         </Flex>
       </Td>

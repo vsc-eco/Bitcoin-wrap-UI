@@ -1,10 +1,11 @@
 "use client";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { FaBitcoin } from "react-icons/fa";
 import { FaClipboardQuestion } from "react-icons/fa6";
 import { CiShare1 } from "react-icons/ci";
 import { BiCopy } from "react-icons/bi";
 import {hash160, sha256} from 'bitcoinjs-lib/src/crypto'
+import { useCreateTx } from "../hooks/VSC";
 import ProgressBar from "./ProgressBar";
 
 import { useQRCode } from "next-qrcode";
@@ -24,6 +25,7 @@ import {
 } from "@chakra-ui/react";
 import bs58check from "bs58check";
 import { MyContext } from "../context/TokenTransferContext";
+import { useAccountContext } from "../context/AccountContext";
 
 const WP_PUB = "034240ccd025374e0531945a65661aedaac5fff1b2ae46197623e594e0129e8b13"
 
@@ -40,6 +42,7 @@ type Props = {
 };
 
 const DepositModal = (props: Props) => {
+  const {myAuth} = useAccountContext()
   const response = JSON.parse(localStorage.getItem("login.auth")!)[
     "authId"
   ].split(":")[1];
@@ -53,6 +56,19 @@ const DepositModal = (props: Props) => {
     addr.set(scriptHash, 1)
     encodedAddr = bs58check.encode(addr)
   }
+
+
+  console.log('myDid:61', myAuth)
+  const {registerAddr} = useCreateTx()
+  useEffect(() => {
+    if(props.dest.did) {
+      registerAddr({
+        addr:props.dest.did,
+        encodedAddr,
+        did: myAuth
+      })
+    }
+  }, [myAuth])
   
 
 

@@ -19,8 +19,9 @@ import {
 } from "@chakra-ui/react";
 import { HiDownload } from "react-icons/hi";
 import { CiFilter } from "react-icons/ci";
-import { gql } from "@apollo/client";
+import { ErrorPolicy, gql } from "@apollo/client";
 import Axios from "axios";
+import Moment from 'moment'
 
 //import the css
 // import "./Transaction.css"
@@ -37,6 +38,7 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 import { AccountContext, useAccountContext } from "../context/AccountContext";
 import TransferModal from "../components/TransferModal";
 import RedeemModal from "../components/RedeemModal";
+import { useCreateTx } from "../hooks/VSC";
 
 //fetching the details
 
@@ -80,20 +82,45 @@ function useBitcoinPrice() {
 type Props = {};
 
 const Transaction = (props: Props) => {
-  const { triggerLoginWithHive, myDid } = useAccountContext();
+  const { transfer } = useCreateTx()
+  const { triggerLoginWithHive, myDid, myAuth } = useAccountContext();
   let lastDate = useRef(null);
 
   //useState
   const [isTransactionDetailOpen, setTransactionDetailOpen] = useState(false);
   const [selectedTransaction, setSelectedTransaction] = useState(null);
 
-  const { data } = useQuery(query, {
+
+  useEffect(() => {
+    if(myDid) {
+    //   transfer({
+    //     dest: "did:key:z6MkryiH1U2zQ344Rtuq1iwk8xY5Fhf9Kwb4Xiwf7gbcZE2L",
+    //     did: myDid,
+    //     didAuth:myAuth,
+    //     amount: 0.0001
+    // })
+    }
+  }, [myDid])
+
+  const { data, refetch } = useQuery(query, {
     variables: {
       did: myDid
     },
+    errorPolicy: 'ignore'
   });
+
+  useEffect(() => {
+    const pid = setInterval(() => {
+      refetch()
+    }, 15_000)
+    return () => {
+      clearInterval(pid)
+    }
+  })
+  
   const bitcoinPrice = useBitcoinPrice();
-  const items = data?.findTransaction?.txs || [];
+  const items = data?.findLedgerTXs?.txs || [];
+  console.log('items', items, data)
 
   //function for handling the state
   const handleTransactionOpen = (transaction) => {
@@ -156,7 +183,7 @@ const Transaction = (props: Props) => {
                   <Tr>
                     <Th w={32} display="flex" textTransform="capitalize">
                       <Text px="1">Date</Text>
-                      <Text fontSize="10px">(GMT +5:30)</Text>
+                      <Text fontSize="10px">(Local Time)</Text>
                     </Th>
                     <Th textTransform="capitalize">To/From</Th>
                     <Th isNumeric textTransform="capitalize">
@@ -174,11 +201,21 @@ const Transaction = (props: Props) => {
                 <Tbody>
                   {items.map((transaction, index) => {
                     //making a separate object for the adding the date property to the transactions
-                    const newTransaction: any = {
-                      date: new Date(
+                    let date
+                    console.log('transaction.first_seen', transaction.first_seen)
+                    if(typeof transaction.first_seen === 'string') {
+                      date = new Date(
+                       transaction.first_seen
+                      )
+                    } else {
+                      date = new Date(
                         transaction.first_seen
-                      ).toLocaleDateString(),
+                      )
+                    }
+                    const newTransaction: any = {
+                      date: date,
                       amount: transaction.decoded_tx.amount,
+                      amountPrefix: "BTC"
                     };
 
                     if (bitcoinPrice) {
@@ -192,15 +229,33 @@ const Transaction = (props: Props) => {
                     for (var k in transaction) {
                       newTransaction[k] = transaction[k];
                     }
+                    console.log('newTransaction', newTransaction)
+                    if(newTransaction.decoded_tx.action === 'mint') {
+                      newTransaction['toFrom'] = `Incoming wrap (#${transaction.decoded_tx.tx_id.slice(0, 8)}...${transaction.decoded_tx.tx_id.slice(transaction.decoded_tx.tx_id.length -8)})`
+                      newTransaction['paymentMethod'] = 'Incoming wrap'
+                      newTransaction.TransferIn = true
+                      newTransaction.avatarUrl = `https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/1200px-Bitcoin.svg.png`
+                    } else if(newTransaction.decoded_tx?.action === 'applyTx') {
+                      const memo = JSON.parse(transaction.decoded_tx.memo) 
+                      console.log(memo)
+                      newTransaction['toFrom'] = `${memo.from} (${memo.msg})`
+                      newTransaction.avatarUrl = `https://images.hive.blog/u/${memo.from}/avatar`
+                      newTransaction['paymentMethod'] = 'Outgoing transfer'
+                      newTransaction['memo'] = memo.msg
+                    }
 
                     //logic for the same dates
                     let showDateProp: boolean;
-                    if (lastDate.current === newTransaction.date) {
+                    if (lastDate.current === Moment(newTransaction.date).format('D MMM')) {
                       showDateProp = false;
                     } else {
                       showDateProp = true;
-                      lastDate.current = newTransaction.date;
+                      lastDate.current = Moment(newTransaction.date).format('D MMM');
                     }
+                    
+                    
+
+                    console.log("ITEM IN TX LIST")
 
                     return (
                       <TransactionItem
