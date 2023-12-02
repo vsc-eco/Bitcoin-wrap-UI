@@ -238,9 +238,22 @@ const Transaction = (props: Props) => {
                     } else if(newTransaction.decoded_tx?.action === 'applyTx') {
                       const memo = JSON.parse(transaction.decoded_tx.memo) 
                       console.log(memo)
-                      newTransaction['toFrom'] = `${memo.from} (${memo.msg})`
-                      newTransaction.avatarUrl = `https://images.hive.blog/u/${memo.from}/avatar`
-                      newTransaction['paymentMethod'] = 'Outgoing transfer'
+                      newTransaction.avatarUrl = `https://images.hive.blog/u/${memo.to || memo.from}/avatar`
+                      console.log(newTransaction.decoded_tx)
+                      if(newTransaction.decoded_tx.dest === myDid && newTransaction.decoded_tx.from === myDid) {
+                        newTransaction['paymentMethod'] = 'Self transfer'
+                        newTransaction['toFrom'] = `${memo.from} (${memo.msg})`
+                        newTransaction.TransferIn = true
+                      } else if(newTransaction.decoded_tx.dest === myDid)  {
+                        newTransaction['paymentMethod'] = 'Incoming transfer'
+                        newTransaction['toFrom'] = `${memo.from} (${memo.msg})`
+                        newTransaction.TransferIn = true
+                      } else {
+                        newTransaction['paymentMethod'] = 'Outgoing transfer'
+                        newTransaction['toFrom'] = `${memo.to} (${memo.msg})`
+                        newTransaction.TransferIn = false
+
+                      }
                       newTransaction['memo'] = memo.msg
                     }
 
