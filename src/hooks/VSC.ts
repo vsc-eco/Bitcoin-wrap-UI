@@ -12,7 +12,7 @@ export const globalConfig = {
 
 
 async function submitTX(tx) {
-    const {data} = await Axios.post(`${LOCAL_API}/api/v1/graphql`, {
+    const {data} = await Axios.post(`${API_URL}/api/v1/graphql`, {
         query: `
             query SubmitTx($tx: String) {
                 submitTransaction(payload: $tx) {
@@ -28,7 +28,7 @@ async function submitTX(tx) {
 }
 
 async function checkDepositAddr(address) {
-    const {data} = await Axios.post(`${LOCAL_API}/api/v1/graphql`, {
+    const {data} = await Axios.post(`${API_URL}/api/v1/graphql`, {
         query: `
             query MyQuery($contractId: String, $key: String) {
                 contractState(id: $contractId) {
@@ -38,12 +38,12 @@ async function checkDepositAddr(address) {
         `,
         variables: {
             contractId: globalConfig.btcTokenContract,
-            address: `btc_addrs/${address}`
+            key: `btc_addrs/${address}`
         }
     })
     console.log(data)
 
-    if(data.data.contractState) {
+    if(data.data.contractState.state !== null) {
         return {
             needRegistration: false
         }
@@ -55,7 +55,7 @@ async function checkDepositAddr(address) {
 }
 
 export async function getOutputs(address) {
-    const {data} = await Axios.post(`${LOCAL_API}/api/v1/graphql`, {
+    const {data} = await Axios.post(`${API_URL}/api/v1/graphql`, {
         query: `
             query MyOutputs($contractId: String, $key: String, $query: JSON) {
                 contractState(id: $contractId) {
@@ -236,6 +236,7 @@ export function useCreateTx() {
 
   return {
     transfer,
+    redeem,
     registerAddr,
   };
 }
