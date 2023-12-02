@@ -31,7 +31,7 @@ const TransferModal = (props: Props) => {
   const [amount, setAmount] = useState("");
   
   const isAmountValid = amount.trim() !== "" && /^\d*\.?\d*$/.test(amount); // Check if amount is not empty or only whitespace
-  const { triggerLoginWithHive, myDid, myAuth } = useAccountContext();
+  const { triggerLoginWithHive, myDid, myAuth, myHiveName } = useAccountContext();
   const { transfer } = useCreateTx()
 
   
