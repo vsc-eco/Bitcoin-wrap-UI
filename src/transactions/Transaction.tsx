@@ -168,7 +168,7 @@ const Transaction = (props: Props) => {
               </MenuButton>
               <MenuList style={{ minWidth: "100%" }}>
                 <MenuItem>
-                  <TransferModal />
+                  <TransferModal refetch={refetch}/>
                 </MenuItem>
                 <MenuItem>
                   <RedeemModal />
@@ -238,19 +238,21 @@ const Transaction = (props: Props) => {
                     } else if(newTransaction.decoded_tx?.action === 'applyTx') {
                       const memo = JSON.parse(transaction.decoded_tx.memo) 
                       console.log(memo)
-                      newTransaction.avatarUrl = `https://images.hive.blog/u/${memo.to || memo.from}/avatar`
                       console.log(newTransaction.decoded_tx)
                       if(newTransaction.decoded_tx.dest === myDid && newTransaction.decoded_tx.from === myDid) {
                         newTransaction['paymentMethod'] = 'Self transfer'
                         newTransaction['toFrom'] = `${memo.from} (${memo.msg})`
+                        newTransaction.avatarUrl = `https://images.hive.blog/u/${memo.to || memo.from}/avatar`
                         newTransaction.TransferIn = true
                       } else if(newTransaction.decoded_tx.dest === myDid)  {
                         newTransaction['paymentMethod'] = 'Incoming transfer'
+                        newTransaction.avatarUrl = `https://images.hive.blog/u/${memo.from}/avatar`
                         newTransaction['toFrom'] = `${memo.from} (${memo.msg})`
                         newTransaction.TransferIn = true
                       } else {
                         newTransaction['paymentMethod'] = 'Outgoing transfer'
                         newTransaction['toFrom'] = `${memo.to} (${memo.msg})`
+                        newTransaction.avatarUrl = `https://images.hive.blog/u/${memo.to}/avatar`
                         newTransaction.TransferIn = false
 
                       }

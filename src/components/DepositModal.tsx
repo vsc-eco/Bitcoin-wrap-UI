@@ -68,7 +68,7 @@ const DepositModal = (props: Props) => {
         did: myAuth
       })
     }
-  }, [myAuth])
+  }, [props.dest.did, myAuth])
   
 
 

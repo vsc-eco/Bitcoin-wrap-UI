@@ -21,7 +21,9 @@ import { getOutputs, useCreateTx } from "../hooks/VSC";
 import { useQuery } from "@tanstack/react-query";
 import { DHive } from "../const";
 
-type Props = {};
+type Props = {
+  refetch: Function
+};
 
 const TransferModal = (props: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -84,9 +86,13 @@ const TransferModal = (props: Props) => {
       amount: Number(amount),
       didAuth: myAuth,
       did: myDid,
+      myHiveName,
       dest: queryAccount.data,
       destHive: destination
     })
+    if(props.refetch) {
+      props.refetch()
+    }
     onClose();
   };
 

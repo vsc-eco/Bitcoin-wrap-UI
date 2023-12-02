@@ -60,7 +60,7 @@ const TransactionItem = ({
         <Text px={2} fontSize={["12px"]}>
           {transaction.toFrom}
         </Text>
-        {transaction.pending && (
+        {transaction.status !== "CONFIRMED" && (
           <Button
             variant="outline"
             size="xs"

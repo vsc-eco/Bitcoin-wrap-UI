@@ -168,7 +168,7 @@ export function useCreateTx() {
             dest: args.dest,
             inputs: inputs,
             asset_type: 'TOKEN:WBTC',
-            memo: JSON.stringify({to: args.destHive, from: 'vaultec', msg: 'via vsc.eco'})
+            memo: JSON.stringify({to: args.destHive, from: args.myHiveName, msg: 'via vsc.eco'})
         },
         action: 'applyTx'
     }, args.didAuth)
