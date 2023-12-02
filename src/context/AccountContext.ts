@@ -181,7 +181,7 @@ export const useAccountContext = function () {
 
       setMyDid(ac.getDid().id);
       setMyAuth(ac.getDid())
-      setMyHiveName(ac.getHiveName())
+      setMyHiveName(ac.getHiveName().split(':')[1])
       
       console.log("Setting myDid:", ac.getDid());
     } catch (error) {
@@ -195,7 +195,8 @@ export const useAccountContext = function () {
         console.log('did check login', e)
         setMyDid((e as any).id)
         setMyAuth(e as any)
-        setMyHiveName((e as any).getHiveName())
+        console.log('(e as any).getHiveName()', (ac).getHiveName())
+        setMyHiveName(ac.getHiveName().split(':')[1])
       }
     })
   }, [setMyDid])

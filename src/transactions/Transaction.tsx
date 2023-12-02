@@ -229,7 +229,7 @@ const Transaction = (props: Props) => {
                     for (var k in transaction) {
                       newTransaction[k] = transaction[k];
                     }
-                    console.log('newTransaction', newTransaction)
+                    // console.log('newTransaction', newTransaction)
                     if(newTransaction.decoded_tx.action === 'mint') {
                       newTransaction['toFrom'] = `Incoming wrap (#${transaction.decoded_tx.tx_id.slice(0, 8)}...${transaction.decoded_tx.tx_id.slice(transaction.decoded_tx.tx_id.length -8)})`
                       newTransaction['paymentMethod'] = 'Incoming wrap'
@@ -237,8 +237,8 @@ const Transaction = (props: Props) => {
                       newTransaction.avatarUrl = `https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/1200px-Bitcoin.svg.png`
                     } else if(newTransaction.decoded_tx?.action === 'applyTx') {
                       const memo = JSON.parse(transaction.decoded_tx.memo) 
-                      console.log(memo)
-                      console.log(newTransaction.decoded_tx)
+                      // console.log(memo)
+                      // console.log(newTransaction.decoded_tx)
                       if(newTransaction.decoded_tx.dest === myDid && newTransaction.decoded_tx.from === myDid) {
                         newTransaction['paymentMethod'] = 'Self transfer'
                         newTransaction['toFrom'] = `${memo.from} (${memo.msg})`
