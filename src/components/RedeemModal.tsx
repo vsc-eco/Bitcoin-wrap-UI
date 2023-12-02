@@ -26,6 +26,7 @@ type Props = {};
 const RedeemModal = (props: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [amount, setAmount] = useState("");
+  const [destination, setDestination] = useState("");
   const isAmountValid = (amount.trim() !== "") && ( /^\d*\.?\d*$/.test(amount)); // Check if amount is not empty or only whitespace
 
   const { triggerLoginWithHive, myDid, myAuth } = useAccountContext();
@@ -34,18 +35,12 @@ const RedeemModal = (props: Props) => {
   const handleSend = async () => {
     // Add your logic to handle the "Send" button click
 
-    console.log({
-      amount,
-      didAuth: myAuth,
-      did: myDid,
-      dest: queryAccount.data,
-    })
+    
     await redeem({
       amount: Number(amount),
       didAuth: myAuth,
       did: myDid,
-      dest: queryAccount.data,
-      destHive: destination
+      dest: destination,
     })
     onClose();
   };
@@ -76,7 +71,7 @@ const RedeemModal = (props: Props) => {
           <ModalBody>
             <InputGroup my={2}>
             <InputLeftAddon w={32}>BTC Address</InputLeftAddon>
-              <Input />
+              <Input value={destination} onChange={(e) => setDestination(e.target.value)}/>
             </InputGroup>
             {/* <Text color="tomato" fontSize="xs" px={2}>
               Account not found!
