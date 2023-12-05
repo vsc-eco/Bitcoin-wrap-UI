@@ -34,23 +34,20 @@ import { useShowComponent } from "../context/ShowComponent";
 import { DHive } from "../const";
 import { MyContext } from "../context/TokenTransferContext";
 
-
 type Props = {
   setDest: Function;
 };
 
 const ExchangeModal = (props: Props) => {
-  
   const [walletAddress, setWalletAddress] = useState("");
   const [swapButtons, setSwapButtons] = useState(true);
   const [validAccount, setValidAccount] = useState(false);
   const { toggleShowComponent } = useShowComponent();
 
-
   const { myValue, updateValue } = useContext(MyContext)!;
+  const {isFilled} = useContext(MyContext)!;
+
   // const { tokenValue, setTokenValue } = useState(0);
-
-
 
   function swapButtonsOnExchange() {
     setSwapButtons(!swapButtons);
@@ -85,8 +82,6 @@ const ExchangeModal = (props: Props) => {
     },
   });
   console.log(query);
-
-  
 
   return (
     <>
@@ -127,16 +122,17 @@ const ExchangeModal = (props: Props) => {
                   </InputLeftAddon>
 
                   <Input
-                    // isInvalid={}
                     h={["8", "12", "12", "12"]}
                     w="75%"
+                    type="Number"
                     placeholder="0"
-                    value={myValue!} 
-                    onChange={(e) =>  updateValue(Number(e.target.value))}
+                    value={myValue!}
+                    onChange={(e) => updateValue(Number(e.target.value))}
                     textAlign="right"
                     borderRadius={6}
                     background="#dff0f5"
                     focusBorderColor="transparent"
+                    isRequired
                   />
                   {swapButtons && (
                     <Flex alignItems="center" paddingLeft="8px">
@@ -302,14 +298,13 @@ const ExchangeModal = (props: Props) => {
               </FormControl>
             </Box>
             <Button
-              
               colorScheme="blue"
               mb={4}
               w="100%"
               onClick={toggleShowComponent}
-              isDisabled={!validAccount }
+              isDisabled={!validAccount || !isFilled}
             >
-              Swap
+              Swap  
             </Button>
             <Text
               style={{

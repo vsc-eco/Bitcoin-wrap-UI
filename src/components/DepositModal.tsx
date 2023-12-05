@@ -4,12 +4,11 @@ import { FaBitcoin } from "react-icons/fa";
 import { FaClipboardQuestion } from "react-icons/fa6";
 import { CiShare1 } from "react-icons/ci";
 import { BiCopy } from "react-icons/bi";
-import {hash160, sha256} from 'bitcoinjs-lib/src/crypto'
+import { hash160, sha256 } from "bitcoinjs-lib/src/crypto";
 import { useCreateTx } from "../hooks/VSC";
 import ProgressBar from "./ProgressBar";
 
 import { useQRCode } from "next-qrcode";
-
 
 import {
   Button,
@@ -22,13 +21,14 @@ import {
   Flex,
   Text,
   Icon,
+  Link,
 } from "@chakra-ui/react";
 import bs58check from "bs58check";
 import { MyContext } from "../context/TokenTransferContext";
 import { useAccountContext } from "../context/AccountContext";
 
-const WP_PUB = "034240ccd025374e0531945a65661aedaac5fff1b2ae46197623e594e0129e8b13"
-
+const WP_PUB =
+  "034240ccd025374e0531945a65661aedaac5fff1b2ae46197623e594e0129e8b13";
 
 function compileScript(pubKey, addrKey) {
   return Buffer.from(`21${pubKey}ad20${addrKey}`, "hex");
@@ -36,41 +36,43 @@ function compileScript(pubKey, addrKey) {
 
 type Props = {
   dest: {
-    username: string
-    did: string
-  }
+    username: string;
+    did: string;
+  };
 };
 
 const DepositModal = (props: Props) => {
-  const {myAuth} = useAccountContext()
+  const { myAuth } = useAccountContext();
   const response = JSON.parse(localStorage.getItem("login.auth")!)[
     "authId"
   ].split(":")[1];
 
-  let encodedAddr
-  if(props?.dest?.did) {
-    const scriptHash = hash160(compileScript(WP_PUB, sha256(Buffer.from(props?.dest?.did)).toString('hex')))
-  
-    let addr = new Uint8Array(21)
-    addr.set([0x05])
-    addr.set(scriptHash, 1)
-    encodedAddr = bs58check.encode(addr)
+  let encodedAddr;
+  if (props?.dest?.did) {
+    const scriptHash = hash160(
+      compileScript(
+        WP_PUB,
+        sha256(Buffer.from(props?.dest?.did)).toString("hex")
+      )
+    );
+
+    let addr = new Uint8Array(21);
+    addr.set([0x05]);
+    addr.set(scriptHash, 1);
+    encodedAddr = bs58check.encode(addr);
   }
 
-
-  console.log('myDid:61', myAuth)
-  const {registerAddr} = useCreateTx()
+  console.log("myDid:61", myAuth);
+  const { registerAddr } = useCreateTx();
   useEffect(() => {
-    if(props.dest.did) {
+    if (props.dest.did) {
       registerAddr({
-        addr:props.dest.did,
+        addr: props.dest.did,
         encodedAddr,
-        did: myAuth
-      })
+        did: myAuth,
+      });
     }
-  }, [props.dest.did, myAuth])
-  
-
+  }, [props.dest.did, myAuth]);
 
   //for qr code
   const { Image } = useQRCode();
@@ -101,9 +103,12 @@ const DepositModal = (props: Props) => {
                     as={FaClipboardQuestion}
                     boxSize={["12px", "12px", "16px", "18px"]}
                   />
-                  <Text fontSize={["8px", "10px", "12px", "16px"]}>
+                  <Link
+                    href="https://discord.gg/6DtpaSHM"
+                    fontSize={["8px", "10px", "12px", "16px"]}
+                  >
                     Need help?
-                  </Text>
+                  </Link>
                 </Flex>
               </a>
             </Container>
