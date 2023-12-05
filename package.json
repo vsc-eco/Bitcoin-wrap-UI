@@ -29,6 +29,7 @@
     "@types/react-dom": "18.2.7",
     "bitcoinjs-lib": "^6.1.5",
     "bs58check": "^3.0.1",
+    "clipboard-copy": "^4.0.1",
     "dids": "^4.0.4",
     "eslint": "8.49.0",
     "eslint-config-next": "13.4.19",
