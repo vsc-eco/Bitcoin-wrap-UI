@@ -6,7 +6,7 @@ import Transaction from "../transactions/Transaction";
 import LoginComponent from "../components/LoginComponent";
 import ThirdSection from "./ThirdSection";
 import { useAccountContext } from "../context/AccountContext";
-import TradeChart from "../components/TradeChart";
+import Dashboard from "../components/Dashboard";
 
 type Props = {};
 
@@ -67,10 +67,10 @@ const SecondSection = (props: Props) => {
         />
       </Flex>
       <Flex w="70%" id="transaction-swap" m={0} p={0}>
-      {!myDid && <LoginComponent />}
-      {myDid && showTransaction && !showTradeComp && <Transaction />}
-      {myDid && !showTransaction && showTradeComp && <TradeChart />}
-      {myDid && !showTransaction && !showTradeComp && <ThirdSection />}
+        {!myDid && <LoginComponent />}
+        {myDid && showTransaction && !showTradeComp && <Transaction />}
+        {myDid && !showTransaction && showTradeComp && <Dashboard />}
+        {myDid && !showTransaction && !showTradeComp && <ThirdSection />}
       </Flex>
     </Flex>
   );

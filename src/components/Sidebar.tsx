@@ -8,7 +8,11 @@ import { AccountContext, useAccountContext } from "../context/AccountContext";
 import { useContext } from "react";
 import { ResolveUsername } from "../hooks/Hive";
 
-const Sidebar = ({ handleExchangeOnClick, handleTransactionOnClick, handleTradeComponent }) => {
+const Sidebar = ({
+  handleExchangeOnClick,
+  handleTransactionOnClick,
+  handleTradeComponent,
+}) => {
   const { triggerLoginWithHive, myDid } = useAccountContext();
   const ac = useContext(AccountContext);
 
@@ -22,7 +26,7 @@ const Sidebar = ({ handleExchangeOnClick, handleTransactionOnClick, handleTradeC
       boxShadow="0 0 10px rgba(0, 0, 0, 0.2)"
       borderRadius={8}
       bgColor="white"
-      paddingY="10px" 
+      paddingY="10px"
     >
       <VStack align="start">
         <Flex alignItems="center" justifyContent="space-between" marginX="10px">
@@ -43,6 +47,23 @@ const Sidebar = ({ handleExchangeOnClick, handleTransactionOnClick, handleTradeC
           <Flex
             alignItems="center"
             _hover={{ color: "blue.500" }}
+            onClick={handleTradeComponent}
+          >
+            <TfiMenuAlt />
+            <Text
+              ml={1}
+              fontSize="lg"
+              fontWeight="bold"
+              style={{ cursor: "pointer" }}
+            >
+              Dashboard
+            </Text>
+          </Flex>
+        </Flex>
+        <Flex alignItems="center" justifyContent="space-between" marginX="10px">
+          <Flex
+            alignItems="center"
+            _hover={{ color: "blue.500" }}
             onClick={handleTransactionOnClick}
           >
             <TfiMenuAlt />
@@ -53,23 +74,6 @@ const Sidebar = ({ handleExchangeOnClick, handleTransactionOnClick, handleTradeC
               style={{ cursor: "pointer" }}
             >
               Transactions
-            </Text>
-          </Flex>
-        </Flex>
-        <Flex alignItems="center" justifyContent="space-between" marginX="10px">
-          <Flex
-            alignItems="center"
-            _hover={{ color: "blue.500" }}
-            onClick={handleTradeComponent}
-          >
-            <TfiMenuAlt />
-            <Text
-              ml={1}
-              fontSize="lg"
-              fontWeight="bold"
-              style={{ cursor: "pointer" }}
-            >
-              Trade
             </Text>
           </Flex>
         </Flex>
