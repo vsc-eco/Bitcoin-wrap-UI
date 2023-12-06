@@ -7,7 +7,6 @@ import { BiCopy } from "react-icons/bi";
 import { hash160, sha256 } from "bitcoinjs-lib/src/crypto";
 import { useCreateTx } from "../hooks/VSC";
 import ProgressBar from "./ProgressBar";
-import copy from "clipboard-copy";
 
 import { useQRCode } from "next-qrcode";
 
@@ -109,6 +108,7 @@ const DepositModal = (props: Props) => {
                   <Link
                     href="https://discord.gg/6DtpaSHM"
                     fontSize={["8px", "10px", "12px", "16px"]}
+                    target="_blank"
                   >
                     Need help?
                   </Link>
@@ -187,11 +187,11 @@ const DepositModal = (props: Props) => {
                 </Text>
 
                 <Flex alignItems="center">
-                  <Link href={`https://mempool.space/${encodedAddr}`} size={["xs", "sm", "l"]} px={["2"]} target="_blank">
+                  <Link href={`https://mempool.space/address/${encodedAddr}`} size={["xs", "sm", "l"]} px={["2"]} target="_blank">
                     <CiShare1 color="black" fontWeight="bold" />
                   </Link>
                   <Button size={["xs", "sm", "l"]} px={["2"]}>
-                    <BiCopy color="black" fontWeight="bold" onClick={() => {navigator.clipboard.writeText(encodedAddr), window.alert("Text copied to clipboard")}} />
+                    <BiCopy color="black" fontWeight="bold" onClick={() => {navigator.clipboard.writeText(encodedAddr)}} />
                   </Button>
                 </Flex>
               </Container>

@@ -158,10 +158,6 @@ const Transaction = (props: Props) => {
                 Add Filter
               </Text>
             </Button>
-            {/* <Button alignItems="center">
-              <HiDownload />
-              <Text fontSize="xs">Export</Text>
-            </Button> */}
             <Menu>
               <MenuButton as={Button} rightIcon={<ChevronDownIcon />} fontSize='xs'>
                 Actions

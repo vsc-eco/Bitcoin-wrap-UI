@@ -8,12 +8,11 @@ import { AccountContext, useAccountContext } from "../context/AccountContext";
 import { useContext } from "react";
 import { ResolveUsername } from "../hooks/Hive";
 
-const Sidebar = ({ handleExchangeOnClick, handleTransactionOnClick }) => {
+const Sidebar = ({ handleExchangeOnClick, handleTransactionOnClick, handleTradeComponent }) => {
   const { triggerLoginWithHive, myDid } = useAccountContext();
   const ac = useContext(AccountContext);
 
   const did = ResolveUsername("vaultec");
-
 
   return (
     <Box
@@ -23,7 +22,7 @@ const Sidebar = ({ handleExchangeOnClick, handleTransactionOnClick }) => {
       boxShadow="0 0 10px rgba(0, 0, 0, 0.2)"
       borderRadius={8}
       bgColor="white"
-      paddingY="10px" // Add margin to the entire sidebar
+      paddingY="10px" 
     >
       <VStack align="start">
         <Flex alignItems="center" justifyContent="space-between" marginX="10px">
@@ -54,6 +53,23 @@ const Sidebar = ({ handleExchangeOnClick, handleTransactionOnClick }) => {
               style={{ cursor: "pointer" }}
             >
               Transactions
+            </Text>
+          </Flex>
+        </Flex>
+        <Flex alignItems="center" justifyContent="space-between" marginX="10px">
+          <Flex
+            alignItems="center"
+            _hover={{ color: "blue.500" }}
+            onClick={handleTradeComponent}
+          >
+            <TfiMenuAlt />
+            <Text
+              ml={1}
+              fontSize="lg"
+              fontWeight="bold"
+              style={{ cursor: "pointer" }}
+            >
+              Trade
             </Text>
           </Flex>
         </Flex>
