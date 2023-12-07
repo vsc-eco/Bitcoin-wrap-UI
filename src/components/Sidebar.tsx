@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, VStack, Text, Flex } from "@chakra-ui/react";
 import { TbExchange } from "react-icons/tb";
+import { MdAssessment } from "react-icons/md";
 import { TfiMenuAlt } from "react-icons/tfi";
 import Image from "next/image";
 
@@ -49,7 +50,7 @@ const Sidebar = ({
             _hover={{ color: "blue.500" }}
             onClick={handleTradeComponent}
           >
-            <TfiMenuAlt />
+            <MdAssessment />
             <Text
               ml={1}
               fontSize="lg"

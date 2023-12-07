@@ -15,10 +15,14 @@ import ChartComponent from "./ChartComponent";
 type Props = {};
 
 const Dashboard = (props: Props) => {
+  const response = JSON.parse(localStorage.getItem("login.auth")!)[
+    "authId"
+  ].split(":")[1];
+
   return (
     <Flex direction="column" mt={32}>
       <Flex>
-        <Text fontSize="xl">Welcome, User</Text>
+        <Text fontSize="xl">Welcome, {response}</Text>
       </Flex>
 
       <Flex mt={4} w="100%">
@@ -54,14 +58,6 @@ const Dashboard = (props: Props) => {
           <CardBody>
             <ChartComponent />
           </CardBody>
-          {/* <CardFooter>
-            <Flex w={"full"} justifyContent="space-evenly">
-              <Text>Nov 9</Text>
-              <Text>Nov 10</Text>
-              <Text>Nov 11</Text>
-              <Text>Nov 12</Text>
-            </Flex>
-          </CardFooter> */}
         </Card>
         {/* This is the another component  */}
         <AccountComponent />

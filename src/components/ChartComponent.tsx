@@ -17,6 +17,20 @@ const App = () => {
         data: [30, 40, 45, 50, 49, 60, 70, 91],
       },
     ],
+    fill: {
+      type: 'gradient',
+      gradient: {
+        shade: 'dark',
+        type: "horizontal",
+        shadeIntensity: 0.5,
+        gradientToColors: undefined, // optional, if not defined - uses the shades of same color in series
+        inverseColors: true,
+        opacityFrom: 1,
+        opacityTo: 1,
+        stops: [0, 50, 100],
+        colorStops: []
+      }
+    }
   });
 
   return (
