@@ -6,7 +6,6 @@ import { DID } from "dids";
 import { DHive } from "../const";
 import { createGlobalState } from "react-hooks-global-state";
 
-
 declare global {
   interface Window {
     hive_keychain: {
@@ -102,10 +101,9 @@ export class AccountContextClass {
       );
     });
 
-
     const { username } = loginResult.data;
 
-    localStorage.setItem
+    localStorage.setItem;
 
     const authId = `hive:${username}`;
     const authSecret = normalizeAuthSecret(
@@ -152,7 +150,6 @@ export class AccountContextClass {
   }
 }
 
- 
 export const AccountContext = React.createContext(new AccountContextClass()); //this is the export variables
 
 const initialState = { count: 0, did: null, didRaw: null, hiveName: null };
@@ -162,8 +159,8 @@ export const useAccountContext = function () {
   const ac = useContext(AccountContext);
 
   const [myDid, setMyDid] = useGlobalState("did");
-  const [myAuth, setMyAuth] = useGlobalState('didRaw')
-  const [myHiveName, setMyHiveName] = useGlobalState('hiveName')
+  const [myAuth, setMyAuth] = useGlobalState("didRaw");
+  const [myHiveName, setMyHiveName] = useGlobalState("hiveName");
 
   const triggerLoginWithHive = useCallback(async () => {
     console.log("Triggering login with Hive...");
@@ -180,34 +177,34 @@ export const useAccountContext = function () {
       }
 
       setMyDid(ac.getDid().id);
-      setMyAuth(ac.getDid())
-      setMyHiveName(ac.getHiveName().split(':')[1])
-      
+      setMyAuth(ac.getDid());
+      setMyHiveName(ac.getHiveName().split(":")[1]);
+
       console.log("Setting myDid:", ac.getDid());
     } catch (error) {
       console.error("Error during login:", error);
     }
   }, [ac, setMyDid]);
-  
+
   useEffect(() => {
-    ac.checkLogin().then(e => {
-      if(e) {
-        console.log('did check login', e)
-        setMyDid((e as any).id)
-        setMyAuth(e as any)
-        console.log('(e as any).getHiveName()', (ac).getHiveName())
-        setMyHiveName(ac.getHiveName().split(':')[1])
+    ac.checkLogin().then((e) => {
+      if (e) {
+        console.log("did check login", e);
+        setMyDid((e as any).id);
+        setMyAuth(e as any);
+        console.log("(e as any).getHiveName()", ac.getHiveName());
+        setMyHiveName(ac.getHiveName().split(":")[1]);
       }
-    })
-  }, [setMyDid])
+    });
+  }, [setMyDid]);
 
   return {
     loggedIn: !!myDid,
     myDid,
     myAuth,
     myHiveName,
-    triggerLoginWithHive
+    triggerLoginWithHive,
   };
 
-  // window.AccountContext = AccountContext; Not recommended, consider alternatives in a React application
+// window.AccountContext = AccountContext; Not recommended, consider alternatives in a React application
 };

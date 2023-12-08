@@ -3,6 +3,7 @@ import { Box, VStack, Text, Flex } from "@chakra-ui/react";
 import { TbExchange } from "react-icons/tb";
 import { MdAssessment } from "react-icons/md";
 import { TfiMenuAlt } from "react-icons/tfi";
+import { MdOutlineCurrencyExchange } from "react-icons/md";
 import Image from "next/image";
 
 import { AccountContext, useAccountContext } from "../context/AccountContext";
@@ -20,6 +21,7 @@ const Sidebar = ({
   const did = ResolveUsername("vaultec");
 
   return (
+    //TODO: rearranging the options from the menu
     <Box
       id="sidebar"
       w={["150px"]}
@@ -30,20 +32,6 @@ const Sidebar = ({
       paddingY="10px"
     >
       <VStack align="start">
-        <Flex alignItems="center" justifyContent="space-between" marginX="10px">
-          <Flex alignItems="center" _hover={{ color: "blue.500" }}>
-            <TbExchange />
-            <Text
-              ml={2}
-              fontSize="lg"
-              fontWeight="bold"
-              onClick={handleExchangeOnClick}
-              style={{ cursor: "pointer" }}
-            >
-              Swap
-            </Text>
-          </Flex>
-        </Flex>
         <Flex alignItems="center" justifyContent="space-between" marginX="10px">
           <Flex
             alignItems="center"
@@ -57,7 +45,35 @@ const Sidebar = ({
               fontWeight="bold"
               style={{ cursor: "pointer" }}
             >
-              Dashboard
+              Home
+            </Text>
+          </Flex>
+        </Flex>
+        <Flex alignItems="center" justifyContent="space-between" marginX="10px">
+          <Flex alignItems="center" _hover={{ color: "blue.500" }}>
+            <TbExchange />
+            <Text
+              ml={2}
+              fontSize="lg"
+              fontWeight="bold"
+              onClick={handleExchangeOnClick}
+              style={{ cursor: "pointer" }}
+            >
+              Wrap
+            </Text>
+          </Flex>
+        </Flex>
+        <Flex alignItems="center" justifyContent="space-between" marginX="10px">
+          <Flex alignItems="center" _hover={{ color: "blue.500" }}>
+            <MdOutlineCurrencyExchange />
+            <Text
+              ml={2}
+              fontSize="lg"
+              fontWeight="bold"
+              onClick={handleExchangeOnClick}
+              style={{ cursor: "pointer" }}
+            >
+              Dex
             </Text>
           </Flex>
         </Flex>

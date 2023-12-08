@@ -11,6 +11,7 @@ import AccountComponent from "./AccountComponent";
 import { FaChartLine } from "react-icons/fa";
 import { FaCalendarDays } from "react-icons/fa6";
 import ChartComponent from "./ChartComponent";
+import { IoChevronDownOutline } from "react-icons/io5";
 
 type Props = {};
 
@@ -33,6 +34,7 @@ const Dashboard = (props: Props) => {
           maxH={"60vh"}
           w={["400px", "300px", "580px", "600px"]}
           m={["0", "0", "1", "3"]}
+          p={0} // Set padding to 0 to remove margins
         >
           <CardHeader>
             <Text>
@@ -45,7 +47,7 @@ const Dashboard = (props: Props) => {
                   $5, 20001
                 </Text>
               </Flex>
-              <Flex >
+              <Flex>
                 <Flex px={2} fontSize={"xl"}>
                   <FaChartLine />
                 </Flex>
@@ -54,10 +56,17 @@ const Dashboard = (props: Props) => {
                 </Flex>
               </Flex>
             </Flex>
+            <Flex>
+            <Flex justifyContent="space-between">
+              <Text fontSize="xs">Last 30 days</Text>
+              <Flex mx={1} color={"grey.700"}>
+                <IoChevronDownOutline />
+              </Flex>
+            </Flex>
+            </Flex>
           </CardHeader>
-          <CardBody>
-            <ChartComponent />
-          </CardBody>
+          {/* Set width to 100% to fill the entire width */}
+          <ChartComponent />
         </Card>
         {/* This is the another component  */}
         <AccountComponent />
