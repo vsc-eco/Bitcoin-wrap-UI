@@ -22,13 +22,14 @@ const Sidebar = ({
 
   return (
     <Box
-      id="sidebar"
-      w={["150px"]}
-      h={["60vh"]}
-      boxShadow="0 0 10px rgba(0, 0, 0, 0.2)"
-      borderRadius={8}
-      bgColor="white"
-      paddingY="10px"
+    id="sidebar"
+    w={["150px"]}
+    h={["60vh"]}
+    boxShadow="0 0 10px rgba(0, 0, 0, 0.2)"
+    borderRadius={8}
+    bgColor="white"
+    paddingY="10px"
+    position="relative"
     >
       <VStack align="start">
         <Flex alignItems="center" justifyContent="space-between" marginX="10px">
@@ -93,14 +94,14 @@ const Sidebar = ({
             </Text>
           </Flex>
         </Flex>
-        <Flex alignItems="center" justifyContent="space-between" marginX="10px">
+        <Flex alignItems="center" justifyContent="space-between" marginX="10px" position={"absolute"} bottom={"55px"} width={"100%"}>
           <Flex alignItems="center">
             <Text ml={2} fontSize="lg" fontWeight="bold">
               Sign in with:
             </Text>
           </Flex>
         </Flex>
-        <Flex alignItems="center" justifyContent="space-between" marginX="10px">
+        <Flex alignItems="center" justifyContent="space-between" marginX="10px"  position={"absolute"} bottom={"10px"} width={"100%"}>
           <Flex
             bgColor="#1c1b1b"
             _hover={{ bgColor: "black" }}

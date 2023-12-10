@@ -85,7 +85,8 @@ export class AccountContextClass {
 
   async loginWithHive(hiveName: string) {
     const loginResult: any = await new Promise((resolve, reject) => {
-      window!.hive_keychain.requestSignBuffer(
+      if(typeof window !== undefined){
+      window.hive_keychain.requestSignBuffer(
         null,
         "Allow this account to control your identity",
         "Posting",
@@ -100,7 +101,7 @@ export class AccountContextClass {
         "https://hive-api.3speak.tv",
         "Login to Hive Finance"
       );
-    });
+  }});
 
     const { username } = loginResult.data;
 
@@ -118,7 +119,8 @@ export class AccountContextClass {
     let json_metadata = JSON.parse(accountInfo.posting_json_metadata);
     if (json_metadata?.did !== did.id) {
       json_metadata.did = did.id;
-      window!.hive_keychain.requestBroadcast(
+      if(typeof window !== undefined){
+      window.hive_keychain.requestBroadcast(
         username,
         [
           [
@@ -133,7 +135,7 @@ export class AccountContextClass {
         "Posting",
         (e: any) => console.log(e)
       );
-    }
+    }}
   }
 
   async runLoginComplete() {
