@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useCallback, useContext, useEffect } from "react";
 import { hash } from "@stablelib/sha256";
 import { Ed25519Provider } from "key-did-provider-ed25519";
@@ -83,10 +83,9 @@ export class AccountContextClass {
     return did;
   }
 
-  
   async loginWithHive(hiveName: string) {
     const loginResult: any = await new Promise((resolve, reject) => {
-      window.hive_keychain.requestSignBuffer(
+      window!.hive_keychain.requestSignBuffer(
         null,
         "Allow this account to control your identity",
         "Posting",
@@ -96,7 +95,7 @@ export class AccountContextClass {
           } else {
             return reject(e);
           }
-          console.log(window)
+          console.log(window);
         },
         "https://hive-api.3speak.tv",
         "Login to Hive Finance"
@@ -119,7 +118,7 @@ export class AccountContextClass {
     let json_metadata = JSON.parse(accountInfo.posting_json_metadata);
     if (json_metadata?.did !== did.id) {
       json_metadata.did = did.id;
-      window.hive_keychain.requestBroadcast(
+      window!.hive_keychain.requestBroadcast(
         username,
         [
           [
@@ -208,5 +207,5 @@ export const useAccountContext = function () {
     triggerLoginWithHive,
   };
 
-// window.AccountContext = AccountContext; Not recommended, consider alternatives in a React application
+  // window.AccountContext = AccountContext; Not recommended, consider alternatives in a React application
 };
