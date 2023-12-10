@@ -43,15 +43,10 @@ const App = () => {
       fill: {
         type: "gradient",
         gradient: {
-          shade: "lightblue", // Set the light blue color
-          type: "horizontal",
-          shadeIntensity: 0.2, // Adjust shade intensity as needed
-          gradientToColors: undefined,
-          inverseColors: true,
-          opacityFrom: 1,
-          opacityTo: 1,
-          stops: [0, 50, 100],
-          colorStops: [],
+          shadeIntensity: 1,
+          opacityFrom: 0.7,
+          opacityTo: 0.9,
+          stops: [0, 100]
         },
       },
     },
