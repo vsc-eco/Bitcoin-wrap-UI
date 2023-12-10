@@ -1,3 +1,4 @@
+"use client"
 import React, { useCallback, useContext, useEffect } from "react";
 import { hash } from "@stablelib/sha256";
 import { Ed25519Provider } from "key-did-provider-ed25519";
@@ -82,7 +83,7 @@ export class AccountContextClass {
     return did;
   }
 
-  //
+  
   async loginWithHive(hiveName: string) {
     const loginResult: any = await new Promise((resolve, reject) => {
       window.hive_keychain.requestSignBuffer(
@@ -95,6 +96,7 @@ export class AccountContextClass {
           } else {
             return reject(e);
           }
+          console.log(window)
         },
         "https://hive-api.3speak.tv",
         "Login to Hive Finance"
