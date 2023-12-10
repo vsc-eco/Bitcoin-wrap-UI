@@ -12,6 +12,7 @@ import { FaChartLine } from "react-icons/fa";
 import { FaCalendarDays } from "react-icons/fa6";
 import ChartComponent from "./ChartComponent";
 import { IoChevronDownOutline } from "react-icons/io5";
+import { MdArrowOutward } from "react-icons/md";
 
 type Props = {};
 
@@ -48,27 +49,35 @@ const Dashboard = (props: Props) => {
                 </Text>
               </Flex>
               <Flex>
-                <Flex px={2} fontSize={"xl"}>
+                <Flex mx={2} my={1} p={1} fontSize={"l"} boxShadow="2px 2px rgba(0, 0, 0, 0.2)" borderRadius={"sm"} cursor={"pointer"}>
                   <FaChartLine />
                 </Flex>
-                <Flex px={2} fontSize={"xl"}>
+                <Flex mx={2} my={1} p={1} fontSize={"l"} boxShadow="2px 2px rgba(0, 0, 0, 0.2)" borderRadius={"sm"} cursor={"pointer"}>
                   <FaCalendarDays />
                 </Flex>
               </Flex>
             </Flex>
-            <Flex>
             <Flex justifyContent="space-between">
-              <Text fontSize="xs">Last 30 days</Text>
-              <Flex mx={1} color={"grey.700"}>
-                <IoChevronDownOutline />
+              <Flex>
+                <Flex mx={1} color={"grey.700"}>
+                  <Text fontSize="xs">Last 30 days</Text>
+                  <Text fontSize="s">
+                    <IoChevronDownOutline />
+                  </Text>
+                </Flex>
+              </Flex>
+              <Flex fontSize={"l"}>
+                <Flex color={"green.700"}>
+                  <MdArrowOutward />
+                </Flex>
+                <Flex>
+                  <Text fontSize={"sm"} pr={2}>$72,966</Text>
+                </Flex>
               </Flex>
             </Flex>
-            </Flex>
           </CardHeader>
-          {/* Set width to 100% to fill the entire width */}
           <ChartComponent />
         </Card>
-        {/* This is the another component  */}
         <AccountComponent />
       </Flex>
     </Flex>

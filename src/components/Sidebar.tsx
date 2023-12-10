@@ -21,7 +21,6 @@ const Sidebar = ({
   const did = ResolveUsername("vaultec");
 
   return (
-    //TODO: rearranging the options from the menu
     <Box
       id="sidebar"
       w={["150px"]}
