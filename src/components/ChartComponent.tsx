@@ -1,3 +1,4 @@
+"use client";
 import { Flex } from "@chakra-ui/react";
 import React, { useState } from "react";
 import Chart from "react-apexcharts";
