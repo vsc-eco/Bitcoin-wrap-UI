@@ -85,7 +85,7 @@ export class AccountContextClass {
 
   async loginWithHive(hiveName: string) {
     const loginResult: any = await new Promise((resolve, reject) => {
-      if(window == undefined){
+      if(window.hive_keychain == undefined){
         return 
       }
       window.hive_keychain.requestSignBuffer(
@@ -121,7 +121,7 @@ export class AccountContextClass {
     let json_metadata = JSON.parse(accountInfo.posting_json_metadata);
     if (json_metadata?.did !== did.id) {
       json_metadata.did = did.id;
-      if(window == undefined){
+      if(window.hive_keychain == undefined){
         return 
       }
       window.hive_keychain.requestBroadcast(
