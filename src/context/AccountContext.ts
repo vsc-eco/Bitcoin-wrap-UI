@@ -1,4 +1,3 @@
-"use client";
 import React, { useCallback, useContext, useEffect } from "react";
 import { hash } from "@stablelib/sha256";
 import { Ed25519Provider } from "key-did-provider-ed25519";
