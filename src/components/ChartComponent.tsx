@@ -1,9 +1,7 @@
-"use client";
-import { Flex } from "@chakra-ui/react";
 import React, { useState } from "react";
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic";
 
-const Chart = dynamic(() => import('react-apexcharts'))
+const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 const App = () => {
   const [chartData, setChartData] = useState({
@@ -49,20 +47,21 @@ const App = () => {
           shadeIntensity: 1,
           opacityFrom: 0.7,
           opacityTo: 0.9,
-          stops: [0, 100]
+          stops: [0, 100],
         },
       },
     },
     series: [
       {
-
         name: "series-1",
         data: [30, 40, 45, 50, 49, 60, 70, 91],
         dataLabels: {
-          enabled: false, // Set to false to hide the price labels
+          enabled: false,
         },
       },
+     
     ],
+   
   });
 
   return (
