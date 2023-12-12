@@ -12,7 +12,9 @@ const App = () => {
           show: false,
         },
       },
-
+      dataLabels: {
+        enabled: false,
+      },
       xaxis: {
         categories: [
           "",
@@ -53,23 +55,18 @@ const App = () => {
     },
     series: [
       {
-        name: "series-1",
+        name: "series",
         data: [30, 40, 45, 50, 49, 60, 70, 91],
-        dataLabels: {
-          enabled: false,
-        },
       },
-     
     ],
-   
   });
 
   return (
     <Chart
       options={chartData.options}
       series={chartData.series}
-      type="area"
       width="610"
+      type="area"
     />
   );
 };
