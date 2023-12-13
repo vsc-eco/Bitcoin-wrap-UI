@@ -20,12 +20,10 @@ const DexComponent = () => {
   const [activeTab, setActiveTab] = useState<"swap" | "liquidity">("swap");
 
   const handleSolChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // Conversion logic here
     setSolAmount(event.target.value);
   };
 
   const handleUsdcChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // Conversion logic here
     setUsdcAmount(event.target.value);
   };
 
@@ -43,10 +41,12 @@ const DexComponent = () => {
         borderRadius="md"
         boxShadow="base"
         spacing={4}
+        background="#f5f9fa"
       >
         <ButtonGroup isAttached variant="outline">
           <Button
-            mr="-px"
+            borderRadius={"3xl"}
+            w={24}
             colorScheme="blue"
             variant={activeTab === "swap" ? "solid" : "outline"}
             onClick={() => setActiveTab("swap")}
@@ -54,6 +54,7 @@ const DexComponent = () => {
             Swap
           </Button>
           <Button
+          borderRadius={"3xl"}
             colorScheme="blue"
             variant={activeTab === "liquidity" ? "solid" : "outline"}
             onClick={() => setActiveTab("liquidity")}
@@ -69,6 +70,10 @@ const DexComponent = () => {
                 placeholder="SOL"
                 value={solAmount}
                 onChange={handleSolChange}
+                borderRadius={6}
+                background="#dff0f5"
+                focusBorderColor="transparent"
+                isRequired
               />
               <InputRightElement width="4.5rem">
                 <Button
@@ -93,6 +98,10 @@ const DexComponent = () => {
                 placeholder="USDC"
                 value={usdcAmount}
                 onChange={handleUsdcChange}
+                borderRadius={6}
+                background="#dff0f5"
+                focusBorderColor="transparent"
+                isRequired
               />
               <InputRightElement width="4.5rem">
                 <Button

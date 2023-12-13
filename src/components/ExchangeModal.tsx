@@ -101,8 +101,8 @@ const ExchangeModal = (props: Props) => {
             pb={["1", "2", "4", "6"]}
             mx={["1", "2", "4", "8"]}
             background="#f5f9fa"
-            maxH={"50vh"}
             borderRadius="10px"
+            maxH={"50vh"}
           >
             <Box px={8} borderRadius={6}>
               <FormControl>

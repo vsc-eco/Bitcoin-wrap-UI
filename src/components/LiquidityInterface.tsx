@@ -52,7 +52,7 @@ const LiquidityInterface = () => {
   const borderColor = useColorModeValue('gray.200', 'gray.600');
 
   return (
-    <Box maxW={"400px"} bg={bgColor} p={4} borderRadius="md" boxShadow="base">
+    <Box maxW={"600px"} bg={bgColor} p={4} borderRadius="md" boxShadow="base" background="#f5f9fa">
       <Tabs isFitted variant="enclosed">
         <TabList mb="1em">
         </TabList>
