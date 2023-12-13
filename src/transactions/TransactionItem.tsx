@@ -12,7 +12,6 @@ import {
 } from "@chakra-ui/react";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import Moment from 'moment'
-import { transactions } from "./data";
 
 const TransactionItem = ({
   showDateProp,
