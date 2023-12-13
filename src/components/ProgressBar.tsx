@@ -19,7 +19,8 @@ const steps = [
 
 const ProgressBar = ({ currentStep = 0 }) => {
   return (
-    <Box display="flex" justifyContent="space-evenly" alignItems="end">
+    <>
+    <Box display="flex" justifyContent="space-evenly" alignItems="end" position="relative" >
       {steps.map((step, i) => (
         <> 
         <Box key={i}>
@@ -37,7 +38,18 @@ const ProgressBar = ({ currentStep = 0 }) => {
         {i <steps.length - 1 && <Divider orientation="vertical" borderColor="gray.300" />}
         </>
       ))}
+      <Box
+     as="hr"
+     w="70%"
+     h={1}
+     position="absolute"
+     right="60px"
+     top="9px"
+     zIndex={1}
+    />
     </Box>
+   
+    </>
   );
 };
 
