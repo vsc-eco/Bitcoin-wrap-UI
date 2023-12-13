@@ -76,6 +76,7 @@ const SecondSection = (props: Props) => {
         {myDid && !showTransaction && showTradeComp && !showDex && (
           <Dashboard />
         )}
+        {/* TODO: show it default  */}
         {myDid && !showTransaction && !showTradeComp && !showDex && (
           <ThirdSection />
         )}
