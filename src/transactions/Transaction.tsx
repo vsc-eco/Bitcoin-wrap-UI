@@ -21,7 +21,7 @@ import { HiDownload } from "react-icons/hi";
 import { CiFilter } from "react-icons/ci";
 import { ErrorPolicy, gql } from "@apollo/client";
 import Axios from "axios";
-import Moment from 'moment'
+import Moment from "moment";
 
 //import the css
 // import "./Transaction.css"
@@ -33,7 +33,6 @@ import TransactionDetail from "./TransactionDetail";
 //graphql code for the integration of api
 import { client } from "../apollo/client";
 import { useQuery } from "@apollo/client";
-import { transactions } from "./data";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { AccountContext, useAccountContext } from "../context/AccountContext";
 import TransferModal from "../components/TransferModal";
@@ -42,7 +41,7 @@ import { useCreateTx } from "../hooks/VSC";
 
 //fetching the details
 
-const BTC_TOKEN_CONTRACT = '59dfb8383291734049bfab403ced85a57cbcde6a'
+const BTC_TOKEN_CONTRACT = "59dfb8383291734049bfab403ced85a57cbcde6a";
 
 const query = gql`
   query MyQuery($did: String) {
@@ -82,7 +81,7 @@ function useBitcoinPrice() {
 type Props = {};
 
 const Transaction = (props: Props) => {
-  const { transfer } = useCreateTx()
+  const { transfer } = useCreateTx();
   const { triggerLoginWithHive, myDid, myAuth } = useAccountContext();
   let lastDate = useRef(null);
 
@@ -90,37 +89,36 @@ const Transaction = (props: Props) => {
   const [isTransactionDetailOpen, setTransactionDetailOpen] = useState(false);
   const [selectedTransaction, setSelectedTransaction] = useState(null);
 
-
   useEffect(() => {
-    if(myDid) {
-    //   transfer({
-    //     dest: "did:key:z6MkryiH1U2zQ344Rtuq1iwk8xY5Fhf9Kwb4Xiwf7gbcZE2L",
-    //     did: myDid,
-    //     didAuth:myAuth,
-    //     amount: 0.0001
-    // })
+    if (myDid) {
+      //   transfer({
+      //     dest: "did:key:z6MkryiH1U2zQ344Rtuq1iwk8xY5Fhf9Kwb4Xiwf7gbcZE2L",
+      //     did: myDid,
+      //     didAuth:myAuth,
+      //     amount: 0.0001
+      // })
     }
-  }, [myDid])
+  }, [myDid]);
 
   const { data, refetch } = useQuery(query, {
     variables: {
-      did: myDid
+      did: myDid,
     },
-    errorPolicy: 'ignore'
+    errorPolicy: "ignore",
   });
 
   useEffect(() => {
     const pid = setInterval(() => {
-      refetch()
-    }, 15_000)
+      refetch();
+    }, 15_000);
     return () => {
-      clearInterval(pid)
-    }
-  })
-  
+      clearInterval(pid);
+    };
+  });
+
   const bitcoinPrice = useBitcoinPrice();
   const items = data?.findLedgerTXs?.txs || [];
-  console.log('items', items, data)
+  console.log("items", items, data);
 
   //function for handling the state
   const handleTransactionOpen = (transaction) => {
@@ -159,12 +157,16 @@ const Transaction = (props: Props) => {
               </Text>
             </Button>
             <Menu>
-              <MenuButton as={Button} rightIcon={<ChevronDownIcon />} fontSize='xs'>
+              <MenuButton
+                as={Button}
+                rightIcon={<ChevronDownIcon />}
+                fontSize="xs"
+              >
                 Actions
               </MenuButton>
               <MenuList style={{ minWidth: "100%" }}>
                 <MenuItem>
-                  <TransferModal refetch={refetch}/>
+                  <TransferModal refetch={refetch} />
                 </MenuItem>
                 <MenuItem>
                   <RedeemModal />
@@ -197,21 +199,20 @@ const Transaction = (props: Props) => {
                 <Tbody>
                   {items.map((transaction, index) => {
                     //making a separate object for the adding the date property to the transactions
-                    let date
-                    console.log('transaction.first_seen', transaction.first_seen)
-                    if(typeof transaction.first_seen === 'string') {
-                      date = new Date(
-                       transaction.first_seen
-                      )
+                    let date;
+                    console.log(
+                      "transaction.first_seen",
+                      transaction.first_seen
+                    );
+                    if (typeof transaction.first_seen === "string") {
+                      date = new Date(transaction.first_seen);
                     } else {
-                      date = new Date(
-                        transaction.first_seen
-                      )
+                      date = new Date(transaction.first_seen);
                     }
                     const newTransaction: any = {
                       date: date,
                       amount: transaction.decoded_tx.amount,
-                      amountPrefix: "BTC"
+                      amountPrefix: "BTC",
                     };
 
                     if (bitcoinPrice) {
@@ -226,47 +227,63 @@ const Transaction = (props: Props) => {
                       newTransaction[k] = transaction[k];
                     }
                     // console.log('newTransaction', newTransaction)
-                    if(newTransaction.decoded_tx.action === 'mint') {
-                      newTransaction['toFrom'] = `Incoming wrap (#${transaction.decoded_tx.tx_id.slice(0, 8)}...${transaction.decoded_tx.tx_id.slice(transaction.decoded_tx.tx_id.length -8)})`
-                      newTransaction['paymentMethod'] = 'Incoming wrap'
-                      newTransaction.TransferIn = true
-                      newTransaction.avatarUrl = `https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/1200px-Bitcoin.svg.png`
-                    } else if(newTransaction.decoded_tx?.action === 'applyTx') {
-                      const memo = JSON.parse(transaction.decoded_tx.memo) 
+                    if (newTransaction.decoded_tx.action === "mint") {
+                      newTransaction[
+                        "toFrom"
+                      ] = `Incoming wrap (#${transaction.decoded_tx.tx_id.slice(
+                        0,
+                        8
+                      )}...${transaction.decoded_tx.tx_id.slice(
+                        transaction.decoded_tx.tx_id.length - 8
+                      )})`;
+                      newTransaction["paymentMethod"] = "Incoming wrap";
+                      newTransaction.TransferIn = true;
+                      newTransaction.avatarUrl = `https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/1200px-Bitcoin.svg.png`;
+                    } else if (
+                      newTransaction.decoded_tx?.action === "applyTx"
+                    ) {
+                      const memo = JSON.parse(transaction.decoded_tx.memo);
                       // console.log(memo)
                       // console.log(newTransaction.decoded_tx)
-                      if(newTransaction.decoded_tx.dest === myDid && newTransaction.decoded_tx.from === myDid) {
-                        newTransaction['paymentMethod'] = 'Self transfer'
-                        newTransaction['toFrom'] = `${memo.from} (${memo.msg})`
-                        newTransaction.avatarUrl = `https://images.hive.blog/u/${memo.to || memo.from}/avatar`
-                        newTransaction.TransferIn = true
-                      } else if(newTransaction.decoded_tx.dest === myDid)  {
-                        newTransaction['paymentMethod'] = 'Incoming transfer'
-                        newTransaction.avatarUrl = `https://images.hive.blog/u/${memo.from}/avatar`
-                        newTransaction['toFrom'] = `${memo.from} (${memo.msg})`
-                        newTransaction.TransferIn = true
+                      if (
+                        newTransaction.decoded_tx.dest === myDid &&
+                        newTransaction.decoded_tx.from === myDid
+                      ) {
+                        newTransaction["paymentMethod"] = "Self transfer";
+                        newTransaction["toFrom"] = `${memo.from} (${memo.msg})`;
+                        newTransaction.avatarUrl = `https://images.hive.blog/u/${
+                          memo.to || memo.from
+                        }/avatar`;
+                        newTransaction.TransferIn = true;
+                      } else if (newTransaction.decoded_tx.dest === myDid) {
+                        newTransaction["paymentMethod"] = "Incoming transfer";
+                        newTransaction.avatarUrl = `https://images.hive.blog/u/${memo.from}/avatar`;
+                        newTransaction["toFrom"] = `${memo.from} (${memo.msg})`;
+                        newTransaction.TransferIn = true;
                       } else {
-                        newTransaction['paymentMethod'] = 'Outgoing transfer'
-                        newTransaction['toFrom'] = `${memo.to} (${memo.msg})`
-                        newTransaction.avatarUrl = `https://images.hive.blog/u/${memo.to}/avatar`
-                        newTransaction.TransferIn = false
-
+                        newTransaction["paymentMethod"] = "Outgoing transfer";
+                        newTransaction["toFrom"] = `${memo.to} (${memo.msg})`;
+                        newTransaction.avatarUrl = `https://images.hive.blog/u/${memo.to}/avatar`;
+                        newTransaction.TransferIn = false;
                       }
-                      newTransaction['memo'] = memo.msg
+                      newTransaction["memo"] = memo.msg;
                     }
 
                     //logic for the same dates
                     let showDateProp: boolean;
-                    if (lastDate.current === Moment(newTransaction.date).format('D MMM')) {
+                    if (
+                      lastDate.current ===
+                      Moment(newTransaction.date).format("D MMM")
+                    ) {
                       showDateProp = false;
                     } else {
                       showDateProp = true;
-                      lastDate.current = Moment(newTransaction.date).format('D MMM') as any;
+                      lastDate.current = Moment(newTransaction.date).format(
+                        "D MMM"
+                      ) as any;
                     }
-                    
-                    
 
-                    console.log("ITEM IN TX LIST")
+                    console.log("ITEM IN TX LIST");
 
                     return (
                       <TransactionItem

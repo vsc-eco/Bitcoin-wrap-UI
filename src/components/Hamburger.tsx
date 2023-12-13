@@ -10,7 +10,6 @@ const Hamburger = () => {
       <IconButton
         icon={<HamburgerIcon />}
         aria-label="Open sidebar"
-        // onClick={isOpen ? onClose : onOpen} 
       />
     </>
   );
