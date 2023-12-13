@@ -1,30 +1,51 @@
+"use client";
 // app/providers.tsx
-'use client'
-import { extendTheme } from '@chakra-ui/react'
-import { CacheProvider } from '@chakra-ui/next-js'
-import { ChakraProvider } from '@chakra-ui/react'
+import { extendTheme } from "@chakra-ui/react";
+import { CacheProvider } from "@chakra-ui/next-js";
+import { ChakraProvider } from "@chakra-ui/react";
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
 
-const colors = {
-  brand: {
-    50: '#dfe6e4',
-    100: "#cce4f6", // Lighter Blue
-    500: "#4099ed ", // Normal Blue
-    900: "#001a33" // Darker Blue
+import { AccountContext } from "../context/AccountContext";
+
+//import relevant font weights
+import "@fontsource/ia-writer-quattro/400.css";
+import "@fontsource/open-sans/700.css";
+import { client } from "../apollo/client";
+
+export const theme = extendTheme({
+  colors: {
+    transparent: "transparent",
+    black: "#000",
+    white: "#fff",
+    gray: {
+      50: "#f7fafc",
+      // ...
+      900: "#171923",
+    },
   },
-}
+  fonts: {
+    heading: `'Open Sans', sans-serif`,
+    body: `'ia-writer-quattro', sans-serif`,
+  },
+});
 
-export const theme = extendTheme({colors})
+const queryClient = new QueryClient();
 
-export function Providers({ 
-    children 
-  }: { 
-  children: React.ReactNode 
-  }) {
+export function Providers({ children }: { children: React.ReactNode }) {
   return (
-    <CacheProvider>
-      <ChakraProvider theme={theme}>
-        {children}
-      </ChakraProvider>
-    </CacheProvider>
-  )
+    <QueryClientProvider client={queryClient}>
+      <ApolloProvider client={client}>
+        <CacheProvider>
+          <ChakraProvider theme={theme}>{children}</ChakraProvider>
+        </CacheProvider>
+      </ApolloProvider>
+    </QueryClientProvider>
+  );
 }
