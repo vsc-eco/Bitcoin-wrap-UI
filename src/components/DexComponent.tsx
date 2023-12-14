@@ -49,11 +49,13 @@ const DexComponent = () => {
           </Button>
         </ButtonGroup>
 
-        {activeTab === "swap" && <SwapComponent />}
+        <Flex w={"600px"} justifyContent={"center"}>
+          {activeTab === "swap" && <SwapComponent />}
 
-        {activeTab === "liquidity" && <LiquidityInterface />}
+          {activeTab === "liquidity" && <LiquidityInterface />}
+        </Flex>
 
-        <Button colorScheme="blue" width="70%" mt={4}>
+        <Button colorScheme="blue" width="70%">
           {activeTab === "swap" ? "Swap" : "Add Liquidity"}
         </Button>
       </VStack>

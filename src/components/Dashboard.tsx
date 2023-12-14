@@ -40,7 +40,6 @@ const Dashboard = (props: Props) => {
           <CardHeader>
             <Text>
               Hive balance
-              {/* TODO: to fit the check icon here  */}
             </Text>
             <Flex justifyContent={"space-between"}>
               <Flex>

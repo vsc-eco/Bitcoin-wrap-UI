@@ -1,10 +1,10 @@
 // TODO: updating and modifying the component
+
 import {
   Button,
   Flex,
   Input,
   InputGroup,
-  InputRightElement,
   useColorModeValue,
   InputLeftAddon,
   Text,
@@ -15,28 +15,23 @@ import { TbCurrencySolana } from "react-icons/tb";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { MdOutlineSwapVert } from "react-icons/md";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { FaBitcoin } from "react-icons/fa";
 
 type Props = {};
 
 const SwapComponent = (props: Props) => {
-  const [solAmount, setSolAmount] = useState<string>("");
-  const [usdcAmount, setUsdcAmount] = useState<string>("");
+  const [tokenAmount, setTokenAmount] = useState<string>("");
 
   const handleSolChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSolAmount(event.target.value);
+    setTokenAmount(event.target.value);
   };
 
-  const handleUsdcChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUsdcAmount(event.target.value);
-  };
-
-  const bgColor = "white";
-  const buttonBgColor = useColorModeValue("blue.500", "blue.200");
+  const buttonBgColor = "gray.400";
   const buttonTextColor = useColorModeValue("white", "gray.800");
 
   return (
-    <Flex>
-      <Flex flexDirection="column" justifyContent={"center"}>
+    <Flex justifyContent={"center"} w={"full"}>
+      <Flex flexDirection="column">
         <InputGroup>
           <InputLeftAddon position={"relative"} h={24} background="#dff0f5">
             <Text fontSize={"xl"} px={1}>
@@ -55,20 +50,20 @@ const SwapComponent = (props: Props) => {
             ></Box>
             <Button
               h="1.75rem"
-              size="sm"
+              size="xs"
               bg={buttonBgColor}
               color={buttonTextColor}
-              onClick={() => setSolAmount("Max")}
+              onClick={() => setTokenAmount("Max")}
               mx={1}
             >
               Max
             </Button>
             <Button
               h="1.75rem"
-              size="sm"
+              size="xs"
               bg={buttonBgColor}
               color={buttonTextColor}
-              onClick={() => setSolAmount("Half")}
+              onClick={() => setTokenAmount("Half")}
               mx={1}
             >
               Half
@@ -80,7 +75,7 @@ const SwapComponent = (props: Props) => {
               top={2}
               right={2}
               zIndex={5}
-              fontSize={"sm"}
+              fontSize={"xs"}
             >
               Balance: [Wallet not connected!]
             </Text>
@@ -89,7 +84,7 @@ const SwapComponent = (props: Props) => {
               bottom={2}
               right={2}
               zIndex={5}
-              fontSize={"sm"}
+              fontSize={"xs"}
             >
               $41,2300
             </Text>
@@ -97,12 +92,13 @@ const SwapComponent = (props: Props) => {
               h={24}
               w={"full"}
               textAlign={"right"}
-              value={solAmount}
+              value={tokenAmount}
               onChange={handleSolChange}
               borderRadius="0px 6px 6px 0px"
               background="#dff0f5"
               focusBorderColor="transparent"
               isRequired
+              type="number"
             />
           </Flex>
         </InputGroup>
@@ -116,7 +112,7 @@ const SwapComponent = (props: Props) => {
             <Text fontSize={"2xl"}>
               <MdOutlineSwapVert />
             </Text>
-            <Text fontSize="sm" my={2} textAlign="center">
+            <Text fontSize="xs" my={2} textAlign="center">
               1 SOL ≈ 83.58375 USDC
             </Text>
           </Flex>
@@ -130,9 +126,9 @@ const SwapComponent = (props: Props) => {
         <InputGroup>
           <InputLeftAddon position={"relative"} h={24} background="#dff0f5">
             <Text fontSize={"xl"} px={1}>
-              <TbCurrencySolana />
+              <FaBitcoin />
             </Text>
-            <Text>HBD</Text>
+            <Text>BTC</Text>
             <IoMdArrowDropdown />
             <Text fontSize={"xs"} position={"absolute"} top={2}>
               From
@@ -145,21 +141,23 @@ const SwapComponent = (props: Props) => {
             ></Box>
             <Button
               h="1.75rem"
-              size="sm"
+              size="xs"
               bg={buttonBgColor}
               color={buttonTextColor}
-              onClick={() => setSolAmount("Max")}
+              onClick={() => setTokenAmount("Max")}
               mx={1}
+              isDisabled
             >
               Max
             </Button>
             <Button
               h="1.75rem"
-              size="sm"
-              bg={buttonBgColor}
+              size="xs"
+              background={buttonBgColor}
               color={buttonTextColor}
-              onClick={() => setSolAmount("Half")}
+              onClick={() => setTokenAmount("Half")}
               mx={1}
+              isDisabled
             >
               Half
             </Button>
@@ -170,7 +168,7 @@ const SwapComponent = (props: Props) => {
               top={2}
               right={2}
               zIndex={5}
-              fontSize={"sm"}
+              fontSize={"xs"}
             >
               Balance: [Wallet not connected!]
             </Text>
@@ -179,7 +177,7 @@ const SwapComponent = (props: Props) => {
               bottom={2}
               right={2}
               zIndex={5}
-              fontSize={"sm"}
+              fontSize={"xs"}
             >
               $41,2300
             </Text>
@@ -187,16 +185,16 @@ const SwapComponent = (props: Props) => {
               h={24}
               w={"full"}
               textAlign={"right"}
-              value={solAmount}
+              value={tokenAmount}
               onChange={handleSolChange}
               borderRadius="0px 6px 6px 0px"
               background="#dff0f5"
               focusBorderColor="transparent"
-              isRequired
+              readOnly
             />
           </Flex>
         </InputGroup>
-        <Text fontSize="sm" mt={2}>
+        <Text fontSize="xs" mt={2}>
           Balance: 129.978543 USDC
         </Text>
       </Flex>
