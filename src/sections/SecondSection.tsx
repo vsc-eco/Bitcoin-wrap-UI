@@ -12,43 +12,28 @@ import DexComponent from "../components/DexComponent";
 type Props = {};
 
 const SecondSection = (props: Props) => {
-  const [showTransaction, setShowTransaction] = useState(true);
-  const [showExchangeModal, setShowExchangeModal] = useState(false);
-  const [showTradeComp, setShowTradeComp] = useState(true);
-  const [showLogin, setShowLogin] = useState(true);
-  const [showDex, setShowDex] = useState(true);
   const { myDid } = useAccountContext();
+  
+  //intialize the variable useState variable
+  const [render, setRender] = useState<string>("");
 
-  //function for handling the TransactionModal
   const handleTransactionOnClick = () => {
-    setShowTransaction(true);
-    setShowDex(false);
-    setShowExchangeModal(false);
-    setShowTradeComp(false);
+    setRender("transaction");
   };
 
   //function for handling the TransactionModal
   const handleExchangeOnClick = () => {
-    setShowTransaction(false);
-    setShowDex(false);
-    setShowExchangeModal(true);
-    setShowTradeComp(false);
+    setRender("exchange");
   };
 
   //function for handling the TradeModal
   const handleTradeComponent = () => {
-    setShowTradeComp(true);
-    setShowDex(false);
-    setShowTransaction(false);
-    setShowExchangeModal(false);
+    setRender("trade");
   };
 
   //function for handling the dex component
   const handleDexComponent = () => {
-    setShowExchangeModal(false);
-    setShowTransaction(false);
-    setShowTradeComp(false);
-    setShowDex(true);
+    setRender("dex");
   };
 
   return (
@@ -70,19 +55,14 @@ const SecondSection = (props: Props) => {
       </Flex>
       <Flex w="70%" id="transaction-swap" m={0} p={0}>
         {!myDid && <LoginComponent />}
-        {myDid && showTransaction && !showTradeComp && !showDex && (
+        {/* showing it default  */}
+        {myDid && (render === "transaction" || render === "") && (
           <Transaction />
         )}
-        {myDid && !showTransaction && showTradeComp && !showDex && (
-          <Dashboard />
-        )}
-        {/* TODO: show it default  */}
-        {myDid && !showTransaction && !showTradeComp && !showDex && (
-          <ThirdSection />
-        )}
-        {myDid && !showTransaction && !showExchangeModal && showDex && (
-          <DexComponent />
-        )}
+
+        {myDid && render === "trade" && <Dashboard />}
+        {myDid && render === "exchange" && <ThirdSection />}
+        {myDid && render === "dex" && <DexComponent />}
       </Flex>
     </Flex>
   );
