@@ -1,4 +1,3 @@
-// TODO: updating and modifying the component
 
 import {
   Button,
@@ -17,6 +16,7 @@ import { MdOutlineSwapVert } from "react-icons/md";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { FaBitcoin } from "react-icons/fa";
 
+
 type Props = {};
 
 const SwapComponent = (props: Props) => {
@@ -26,11 +26,11 @@ const SwapComponent = (props: Props) => {
     setTokenAmount(event.target.value);
   };
 
-  const buttonBgColor = "gray.400";
+  const buttonBgColor = "#b8e3f2";
   const buttonTextColor = useColorModeValue("white", "gray.800");
 
   return (
-    <Flex justifyContent={"center"} w={"full"}>
+    <Flex justifyContent={"center"} w={"full"} h={96}>
       <Flex flexDirection="column">
         <InputGroup>
           <InputLeftAddon position={"relative"} h={24} background="#dff0f5">
@@ -112,9 +112,9 @@ const SwapComponent = (props: Props) => {
             <Text fontSize={"2xl"}>
               <MdOutlineSwapVert />
             </Text>
-            <Text fontSize="xs" my={2} textAlign="center">
+            {/* <Text fontSize="xs" my={2} textAlign="center">
               1 SOL ≈ 83.58375 USDC
-            </Text>
+            </Text> */}
           </Flex>
           <Flex>
             <Text>
@@ -194,9 +194,9 @@ const SwapComponent = (props: Props) => {
             />
           </Flex>
         </InputGroup>
-        <Text fontSize="xs" mt={2}>
+        {/* <Text fontSize="xs" mt={2}>
           Balance: 129.978543 USDC
-        </Text>
+        </Text> */}
       </Flex>
     </Flex>
   );

@@ -2,31 +2,21 @@ import React, { useState } from "react";
 import {
   Box,
   Button,
-  ButtonGroup,
-  Divider,
-  Flex,
+  Flex, // Fix: Remove duplicated import statement
   Input,
   InputGroup,
   InputLeftAddon,
-  Stat,
-  StatLabel,
-  StatNumber,
-  Tabs,
-  TabPanel,
-  TabPanels,
   Text,
-  useColorModeValue,
   VStack,
-  TabList,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { TbCurrencySolana } from "react-icons/tb";
 import { IoMdArrowDropdown } from "react-icons/io";
-import { MdOutlineSwapVert } from "react-icons/md";
 import { FaBitcoin } from "react-icons/fa";
-
-const buttonBgColor = "gray.400";
-const buttonTextColor = "black";
+import { HiMiniMagnifyingGlass } from "react-icons/hi2";
+import { CgArrowsExchange } from "react-icons/cg";
+import { FaPlus } from "react-icons/fa6";
 
 const LiquidityInterface = () => {
   const [tokenAmount, setTokenAmount] = useState<{ [key: string]: string }>({
@@ -56,6 +46,8 @@ const LiquidityInterface = () => {
 
   const bgColor = useColorModeValue("gray.100", "gray.700");
   const borderColor = useColorModeValue("gray.200", "gray.600");
+  const buttonTextColor = useColorModeValue("white", "gray.800");
+  const buttonBgColor = "#b8e3f2";
 
   return (
     <Box
@@ -98,6 +90,7 @@ const LiquidityInterface = () => {
               size="xs"
               bg={buttonBgColor}
               color={buttonTextColor}
+              borderColor={borderColor}
               onClick={() =>
                 setTokenAmount({
                   ...tokenAmount,
@@ -142,9 +135,27 @@ const LiquidityInterface = () => {
             />
           </Flex>
         </InputGroup>
-        <Text fontSize="xs" mt={2}>
-          Balance: 129.978543 USDC
-        </Text>
+        <Flex justifyContent={"space-between"} alignItems={"center"} w="full">
+          <Flex alignItems={"center"}>
+            <Text>
+              <FaPlus />
+            </Text>
+            <Text fontSize="xs" mt={1} px={1}>
+              Balance: 129.978543 USDC
+            </Text>
+            <Text>
+              <CgArrowsExchange />
+            </Text>
+          </Flex>
+          <Flex alignItems={"center"} w={12} justifyContent={"space-between"}>
+            <Text>
+              <HiMiniMagnifyingGlass />
+            </Text>
+            <Text>
+              <AiOutlineLoading3Quarters />
+            </Text>
+          </Flex>
+        </Flex>
         <InputGroup>
           <InputLeftAddon position={"relative"} h={24} background="#dff0f5">
             <Text fontSize={"xl"} px={1}>
@@ -211,26 +222,50 @@ const LiquidityInterface = () => {
               w={"full"}
               textAlign={"right"}
               value={tokenAmount["BTC"]}
+              onChange={() => {
+                handleTokenChange("BTC");
+              }}
               borderRadius="0px 6px 6px 0px"
               background="#dff0f5"
               focusBorderColor="transparent"
-              onChange={() => {handleTokenChange("BTC")}}
               type="number"
             />
           </Flex>
         </InputGroup>
-        <Stat>
-          <StatLabel>Pool Liquidity (HBD)</StatLabel>
-          <StatNumber>56,258.97 HBD</StatNumber>
-        </Stat>
-        <Stat>
-          <StatLabel>Pool Liquidity (BTC)</StatLabel>
-          <StatNumber>3,577,468.33 BTC</StatNumber>
-        </Stat>
-        <Stat>
-          <StatLabel>LP Supply</StatLabel>
-          <StatNumber>79,333.77 LP</StatNumber>
-        </Stat>
+        <Flex m={"auto"} direction={"column"} border={"solid"} borderWidth={"1px"} w="full" borderRadius={"lg"} p={4}>
+          <Flex justifyContent={"space-between"} alignItems={"center"} >
+            <Flex>
+              <Text>Base</Text>
+            </Flex>
+            <Flex>
+              <Text>HBD</Text>
+            </Flex>
+          </Flex>
+          <Flex justifyContent={"space-between"} alignItems={"center"}>
+            <Flex>
+              <Text>Pool Liquidity (HBD)</Text>
+            </Flex>
+            <Flex>
+              <Text>3232 HBD</Text>
+            </Flex>
+          </Flex>
+          <Flex justifyContent={"space-between"} alignItems={"center"}>
+            <Flex>
+              <Text>Pool liquidity (BTC)</Text>
+            </Flex>
+            <Flex>
+              <Text>3238 BTC</Text>
+            </Flex>
+          </Flex>
+          <Flex justifyContent={"space-between"} alignItems={"center"}>
+            <Flex>
+              <Text>LP supply</Text>
+            </Flex>
+            <Flex>
+              <Text>327382372 LP</Text>
+            </Flex>
+          </Flex>
+        </Flex>
       </VStack>
     </Box>
   );

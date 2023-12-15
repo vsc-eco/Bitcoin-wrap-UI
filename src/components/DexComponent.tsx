@@ -22,7 +22,7 @@ const DexComponent = () => {
     <Flex alignItems={"center"}>
       <VStack
         w={["700px"]}
-        h={"600px"}
+        h={"700px"}
         p={4}
         borderRadius="md"
         boxShadow="base"
@@ -49,14 +49,14 @@ const DexComponent = () => {
           </Button>
         </ButtonGroup>
 
-        <Flex w={"600px"} justifyContent={"center"}>
+        <Flex w={"600px"} justifyContent={"center"} alignItems={"center"}>
           {activeTab === "swap" && <SwapComponent />}
 
           {activeTab === "liquidity" && <LiquidityInterface />}
         </Flex>
 
         <Button colorScheme="blue" width="70%">
-          {activeTab === "swap" ? "Swap" : "Add Liquidity"}
+          {activeTab === "swap" ? "Swap" : "Enter an amount"}
         </Button>
       </VStack>
     </Flex>

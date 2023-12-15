@@ -10,8 +10,6 @@ interface Step {
   icon: React.ReactNode;
 }
 
-//TODO: make the line less visible
-
 const steps = [
   { name: "Pending deposit", icon: <MdPending /> },
   { name: "Confirming", icon: <IoReloadCircleSharp /> },
