@@ -1,4 +1,4 @@
-
+//TODO: make the input variant unstyled and border transparent
 import {
   Button,
   Flex,
@@ -16,8 +16,11 @@ import { MdOutlineSwapVert } from "react-icons/md";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { FaBitcoin } from "react-icons/fa";
 
-
-type Props = {};
+type Props = {
+  showModal: boolean;
+  handleOpen: () => void;
+  handleClose: () => void;
+};
 
 const SwapComponent = (props: Props) => {
   const [tokenAmount, setTokenAmount] = useState<string>("");
@@ -34,10 +37,12 @@ const SwapComponent = (props: Props) => {
       <Flex flexDirection="column">
         <InputGroup>
           <InputLeftAddon position={"relative"} h={24} background="#dff0f5">
-            <Text fontSize={"xl"} px={1}>
-              <TbCurrencySolana />
-            </Text>
-            <Text>HBD</Text>
+            <Flex cursor={"pointer"} onClick={props.handleOpen}>
+              <Text fontSize={"xl"} px={1}>
+                <TbCurrencySolana />
+              </Text>
+              <Text>HBD</Text>
+            </Flex>
             <IoMdArrowDropdown />
             <Text fontSize={"xs"} position={"absolute"} top={2}>
               From
@@ -112,9 +117,6 @@ const SwapComponent = (props: Props) => {
             <Text fontSize={"2xl"}>
               <MdOutlineSwapVert />
             </Text>
-            {/* <Text fontSize="xs" my={2} textAlign="center">
-              1 SOL ≈ 83.58375 USDC
-            </Text> */}
           </Flex>
           <Flex>
             <Text>
@@ -125,11 +127,13 @@ const SwapComponent = (props: Props) => {
 
         <InputGroup>
           <InputLeftAddon position={"relative"} h={24} background="#dff0f5">
-            <Text fontSize={"xl"} px={1}>
-              <FaBitcoin />
-            </Text>
-            <Text>BTC</Text>
-            <IoMdArrowDropdown />
+            <Flex cursor={"pointer"} onClick={props.handleOpen}>
+              <Text fontSize={"xl"} px={1}>
+                <FaBitcoin />
+              </Text>
+              <Text>BTC</Text>
+              <IoMdArrowDropdown />
+            </Flex>
             <Text fontSize={"xs"} position={"absolute"} top={2}>
               From
             </Text>

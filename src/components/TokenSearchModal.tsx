@@ -1,4 +1,4 @@
-//TODO: to conditionally add the component and render the 
+//TODO: to conditionally add the component and render the from the json data 
 import React from "react";
 import {
   Box,
@@ -15,9 +15,11 @@ import {
   ModalOverlay,
   VStack,
 } from "@chakra-ui/react";
+
 import { SearchIcon } from "@chakra-ui/icons";
 
-function SearchModal({ isOpen, onClose }) {
+
+function TokenSearchModal({ isOpen, onClose }) {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -41,21 +43,4 @@ function SearchModal({ isOpen, onClose }) {
     </Modal>
   );
 }
-
-function App() {
-  const [isOpen, setIsOpen] = React.useState(false);
-
-  const onOpen = () => setIsOpen(true);
-  const onClose = () => setIsOpen(false);
-
-  return (
-    <ChakraProvider>
-      <Box p={6}>
-        <Button onClick={onOpen}>Open Search Modal</Button>
-        <SearchModal isOpen={isOpen} onClose={onClose} />
-      </Box>
-    </ChakraProvider>
-  );
-}
-
-export default App;
+export default TokenSearchModal;

@@ -1,3 +1,4 @@
+//TODO: make the input variant unstyled and border transparent
 import React, { useState } from "react";
 import {
   Box,
@@ -18,7 +19,13 @@ import { HiMiniMagnifyingGlass } from "react-icons/hi2";
 import { CgArrowsExchange } from "react-icons/cg";
 import { FaPlus } from "react-icons/fa6";
 
-const LiquidityInterface = () => {
+type Props = {
+  showModal: boolean;
+  handleOpen: () => void;
+  handleClose: () => void;
+};
+
+const LiquidityInterface = (props: Props) => {
   const [tokenAmount, setTokenAmount] = useState<{ [key: string]: string }>({
     HBD: "",
     BTC: "",
@@ -61,11 +68,13 @@ const LiquidityInterface = () => {
       <VStack spacing={4}>
         <InputGroup>
           <InputLeftAddon position="relative" h={24} background="#dff0f5">
-            <Text fontSize="xl" px={1}>
-              <TbCurrencySolana />
-            </Text>
-            <Text>HBD</Text>
-            <IoMdArrowDropdown />
+            <Flex cursor={"pointer"} onClick={props.handleOpen}>
+              <Text fontSize="xl" px={1}>
+                <TbCurrencySolana />
+              </Text>
+              <Text>HBD</Text>
+              <IoMdArrowDropdown />
+            </Flex>
             <Text fontSize="xs" position="absolute" top={2}>
               From
             </Text>
@@ -158,11 +167,13 @@ const LiquidityInterface = () => {
         </Flex>
         <InputGroup>
           <InputLeftAddon position={"relative"} h={24} background="#dff0f5">
-            <Text fontSize={"xl"} px={1}>
-              <FaBitcoin />
-            </Text>
-            <Text>BTC</Text>
-            <IoMdArrowDropdown />
+            <Flex cursor={"pointer"} onClick={props.handleOpen}>
+              <Text fontSize={"xl"} px={1}>
+                <FaBitcoin />
+              </Text>
+              <Text>BTC</Text>
+              <IoMdArrowDropdown />
+            </Flex>
             <Text fontSize={"xs"} position={"absolute"} top={2}>
               From
             </Text>
@@ -232,8 +243,16 @@ const LiquidityInterface = () => {
             />
           </Flex>
         </InputGroup>
-        <Flex m={"auto"} direction={"column"} border={"solid"} borderWidth={"1px"} w="full" borderRadius={"lg"} p={4}>
-          <Flex justifyContent={"space-between"} alignItems={"center"} >
+        <Flex
+          m={"auto"}
+          direction={"column"}
+          border={"solid"}
+          borderWidth={"1px"}
+          w="full"
+          borderRadius={"lg"}
+          p={4}
+        >
+          <Flex justifyContent={"space-between"} alignItems={"center"}>
             <Flex>
               <Text>Base</Text>
             </Flex>

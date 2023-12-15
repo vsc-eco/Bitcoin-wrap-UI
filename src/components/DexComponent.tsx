@@ -1,3 +1,4 @@
+//TODO: Token modal render
 import React, { useState } from "react";
 import {
   Box,
@@ -6,10 +7,11 @@ import {
   Flex,
   Input,
   InputGroup,
-  InputRightElement,
   Text,
   VStack,
 } from "@chakra-ui/react";
+
+import TokenSearchModal from "./TokenSearchModal";
 
 //importing the components
 import LiquidityInterface from "./LiquidityInterface";
@@ -17,6 +19,17 @@ import SwapComponent from "./SwapComponent";
 
 const DexComponent = () => {
   const [activeTab, setActiveTab] = useState<"swap" | "liquidity">("swap");
+
+  //make the hookstate for rendering the transfer token modal
+  const [showModal, setShowModal] = useState<boolean>(false);
+
+  //make a function handleChange for the transfer token modal
+  const handleOpen = () => {
+    setShowModal(true);
+  };
+  const handleClose = () => {
+    setShowModal(false);
+  };
 
   return (
     <Flex alignItems={"center"}>
@@ -50,11 +63,24 @@ const DexComponent = () => {
         </ButtonGroup>
 
         <Flex w={"600px"} justifyContent={"center"} alignItems={"center"}>
-          {activeTab === "swap" && <SwapComponent />}
+          {activeTab === "swap" && (
+            <SwapComponent
+              showModal={showModal}
+              handleOpen={handleOpen}
+              handleClose={handleClose}
+            />
+          )}
 
-          {activeTab === "liquidity" && <LiquidityInterface />}
+          <TokenSearchModal isOpen={showModal} onClose={handleClose} />
+
+          {activeTab === "liquidity" && (
+            <LiquidityInterface
+              showModal={showModal}
+              handleOpen={handleOpen}
+              handleClose={handleClose}
+            />
+          )}
         </Flex>
-
         <Button colorScheme="blue" width="70%">
           {activeTab === "swap" ? "Swap" : "Enter an amount"}
         </Button>
