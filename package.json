@@ -15,7 +15,7 @@
     "@chakra-ui/icons": "^2.1.1",
     "@chakra-ui/media-query": "^3.3.0",
     "@chakra-ui/next-js": "^2.1.5",
-    "@chakra-ui/react": "^2.8.1",
+    "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@fontsource/ia-writer-quattro": "^5.0.7",
