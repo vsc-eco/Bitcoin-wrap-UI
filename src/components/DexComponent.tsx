@@ -1,4 +1,4 @@
-//TODO: Token modal render
+
 import React, { useState } from "react";
 import {
   Box,

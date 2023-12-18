@@ -1,4 +1,3 @@
-//TODO: make the input variant unstyled and border transparent
 import {
   Button,
   Flex,
@@ -36,7 +35,13 @@ const SwapComponent = (props: Props) => {
     <Flex justifyContent={"center"} w={"full"} h={96}>
       <Flex flexDirection="column">
         <InputGroup>
-          <InputLeftAddon position={"relative"} h={24} background="#dff0f5">
+          <InputLeftAddon
+            position={"relative"}
+            h={24}
+            background="#dff0f5"
+            border={"transparent"}
+          >
+            <Flex  _hover={{"background":"#d0ebf2"}} p={1} borderRadius={"md"}>
             <Flex cursor={"pointer"} onClick={props.handleOpen}>
               <Text fontSize={"xl"} px={1}>
                 <TbCurrencySolana />
@@ -44,6 +49,7 @@ const SwapComponent = (props: Props) => {
               <Text>HBD</Text>
             </Flex>
             <IoMdArrowDropdown />
+            </Flex>
             <Text fontSize={"xs"} position={"absolute"} top={2}>
               From
             </Text>
@@ -101,6 +107,7 @@ const SwapComponent = (props: Props) => {
               onChange={handleSolChange}
               borderRadius="0px 6px 6px 0px"
               background="#dff0f5"
+              border={"transparent"}
               focusBorderColor="transparent"
               isRequired
               type="number"
@@ -126,13 +133,20 @@ const SwapComponent = (props: Props) => {
         </Flex>
 
         <InputGroup>
-          <InputLeftAddon position={"relative"} h={24} background="#dff0f5">
+          <InputLeftAddon
+            position={"relative"}
+            h={24}
+            background="#dff0f5"
+            border={"transparent"}
+          >
+            <Flex _hover={{"background":"#d0ebf2"}} p={1} borderRadius={"md"}>
             <Flex cursor={"pointer"} onClick={props.handleOpen}>
               <Text fontSize={"xl"} px={1}>
                 <FaBitcoin />
               </Text>
               <Text>BTC</Text>
               <IoMdArrowDropdown />
+            </Flex>
             </Flex>
             <Text fontSize={"xs"} position={"absolute"} top={2}>
               From
@@ -194,6 +208,7 @@ const SwapComponent = (props: Props) => {
               borderRadius="0px 6px 6px 0px"
               background="#dff0f5"
               focusBorderColor="transparent"
+              border={"transparent"}
               readOnly
             />
           </Flex>

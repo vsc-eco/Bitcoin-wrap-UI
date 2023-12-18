@@ -1,4 +1,4 @@
-//TODO: to conditionally add the component and render the from the json data
+
 import React from "react";
 import {
   Box,

@@ -1,4 +1,3 @@
-//TODO: make the input variant unstyled and border transparent
 import React, { useState } from "react";
 import {
   Box,
@@ -67,13 +66,20 @@ const LiquidityInterface = (props: Props) => {
     >
       <VStack spacing={4}>
         <InputGroup>
-          <InputLeftAddon position="relative" h={24} background="#dff0f5">
-            <Flex cursor={"pointer"} onClick={props.handleOpen}>
-              <Text fontSize="xl" px={1}>
-                <TbCurrencySolana />
-              </Text>
-              <Text>HBD</Text>
-              <IoMdArrowDropdown />
+          <InputLeftAddon
+            position="relative"
+            h={24}
+            background="#dff0f5"
+            border={"transparent"}
+          >
+            <Flex _hover={{ background: "#d0ebf2" }} p={1} borderRadius={"md"} alignItems={"center"}>
+              <Flex cursor={"pointer"} onClick={props.handleOpen} alignItems={"center"}>
+                <Text fontSize="xl" px={1}>
+                  <TbCurrencySolana />
+                </Text>
+                <Text>HBD</Text>
+                <IoMdArrowDropdown />
+              </Flex>
             </Flex>
             <Text fontSize="xs" position="absolute" top={2}>
               From
@@ -139,6 +145,7 @@ const LiquidityInterface = (props: Props) => {
               borderRadius="0px 6px 6px 0px"
               background="#dff0f5"
               focusBorderColor="transparent"
+              border={"transparent"}
               isRequired
               type="number"
             />
@@ -166,13 +173,20 @@ const LiquidityInterface = (props: Props) => {
           </Flex>
         </Flex>
         <InputGroup>
-          <InputLeftAddon position={"relative"} h={24} background="#dff0f5">
-            <Flex cursor={"pointer"} onClick={props.handleOpen}>
-              <Text fontSize={"xl"} px={1}>
-                <FaBitcoin />
-              </Text>
-              <Text>BTC</Text>
-              <IoMdArrowDropdown />
+          <InputLeftAddon
+            position={"relative"}
+            h={24}
+            background="#dff0f5"
+            border={"transparent"}
+          >
+            <Flex _hover={{ background: "#d0ebf2" }} p={1} borderRadius={"md"} alignItems={"center"}>
+              <Flex cursor={"pointer"} onClick={props.handleOpen} alignItems={"center"}>
+                <Text fontSize={"xl"} px={1}>
+                  <FaBitcoin />
+                </Text>
+                <Text>BTC</Text>
+                <IoMdArrowDropdown />
+              </Flex>
             </Flex>
             <Text fontSize={"xs"} position={"absolute"} top={2}>
               From
@@ -237,6 +251,7 @@ const LiquidityInterface = (props: Props) => {
                 handleTokenChange("BTC");
               }}
               borderRadius="0px 6px 6px 0px"
+              border={"transparent"}
               background="#dff0f5"
               focusBorderColor="transparent"
               type="number"
