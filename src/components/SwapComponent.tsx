@@ -41,14 +41,23 @@ const SwapComponent = (props: Props) => {
             background="#dff0f5"
             border={"transparent"}
           >
-            <Flex  _hover={{"background":"#d0ebf2"}} p={1} borderRadius={"md"}>
-            <Flex cursor={"pointer"} onClick={props.handleOpen}>
-              <Text fontSize={"xl"} px={1}>
-                <TbCurrencySolana />
-              </Text>
-              <Text>HBD</Text>
-            </Flex>
-            <IoMdArrowDropdown />
+            <Flex
+              _hover={{ background: "#d0ebf2" }}
+              p={1}
+              borderRadius={"md"}
+              alignItems={"center"}
+            >
+              <Flex
+                cursor={"pointer"}
+                onClick={props.handleOpen}
+                alignItems={"center"}
+              >
+                <Text fontSize={"xl"} px={1}>
+                  <TbCurrencySolana />
+                </Text>
+                <Text>HBD</Text>
+              </Flex>
+              <IoMdArrowDropdown />
             </Flex>
             <Text fontSize={"xs"} position={"absolute"} top={2}>
               From
@@ -139,14 +148,23 @@ const SwapComponent = (props: Props) => {
             background="#dff0f5"
             border={"transparent"}
           >
-            <Flex _hover={{"background":"#d0ebf2"}} p={1} borderRadius={"md"}>
-            <Flex cursor={"pointer"} onClick={props.handleOpen}>
-              <Text fontSize={"xl"} px={1}>
-                <FaBitcoin />
-              </Text>
-              <Text>BTC</Text>
-              <IoMdArrowDropdown />
-            </Flex>
+            <Flex
+              _hover={{ background: "#d0ebf2" }}
+              p={1}
+              borderRadius={"md"}
+              alignItems={"center"}
+            >
+              <Flex
+                cursor={"pointer"}
+                onClick={props.handleOpen}
+                alignItems={"center"}
+              >
+                <Text fontSize={"xl"} px={1}>
+                  <FaBitcoin />
+                </Text>
+                <Text>BTC</Text>
+                <IoMdArrowDropdown />
+              </Flex>
             </Flex>
             <Text fontSize={"xs"} position={"absolute"} top={2}>
               From
