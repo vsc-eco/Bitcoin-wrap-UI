@@ -47,10 +47,9 @@ const SwapComponent = (props: Props) => {
   return (
     <Flex
       justifyContent={"center"}
-      w={"80%"}
       h={96}
       maxW="600px"
-      py={4}
+      p={4}
       borderRadius="md"
       boxShadow="base"
       background="#f5f9fa"

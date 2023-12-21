@@ -15,6 +15,7 @@ import TokenSearchModal from "./TokenSearchModal";
 //importing the components
 import LiquidityInterface from "./LiquidityInterface";
 import SwapComponent from "./SwapComponent";
+import HivePrice from "./HivePrice";
 
 const DexComponent = () => {
   const [activeTab, setActiveTab] = useState<"swap" | "liquidity">("swap");
@@ -63,11 +64,14 @@ const DexComponent = () => {
 
         <Flex w={"600px"} justifyContent={"center"} alignItems={"center"}>
           {activeTab === "swap" && (
-            <SwapComponent
-              showModal={showModal}
-              handleOpen={handleOpen}
-              handleClose={handleClose}
-            />
+            <Box>
+              <SwapComponent
+                showModal={showModal}
+                handleOpen={handleOpen}
+                handleClose={handleClose}
+              />
+              <HivePrice />
+            </Box>
           )}
 
           <TokenSearchModal isOpen={showModal} onClose={handleClose} />
