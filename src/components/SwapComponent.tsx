@@ -1,4 +1,4 @@
-//TODO: IsReload animation in the icon
+//TODO: button should be inside the component
 import { useEffect } from "react";
 import {
   Button,
@@ -258,6 +258,9 @@ const SwapComponent = (props: Props) => {
             />
           </Flex>
         </InputGroup>
+      <Button colorScheme="blue" w={"80%"}>
+        Swap
+      </Button>
       </VStack>
     </Flex>
   );

@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import {
   Box,
@@ -81,9 +80,6 @@ const DexComponent = () => {
             />
           )}
         </Flex>
-        <Button colorScheme="blue" width="70%">
-          {activeTab === "swap" ? "Swap" : "Enter an amount"}
-        </Button>
       </VStack>
     </Flex>
   );
