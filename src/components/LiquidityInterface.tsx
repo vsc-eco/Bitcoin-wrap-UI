@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+
+import React, { experimental_useEffectEvent, useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -17,6 +18,9 @@ import { FaBitcoin } from "react-icons/fa";
 import { HiMiniMagnifyingGlass } from "react-icons/hi2";
 import { CgArrowsExchange } from "react-icons/cg";
 import { FaPlus } from "react-icons/fa6";
+
+//importing motion component from framer
+import { motion } from "framer-motion";
 
 type Props = {
   showModal: boolean;
@@ -50,9 +54,19 @@ const LiquidityInterface = (props: Props) => {
     }));
   };
 
+  //useState for reloading
+  const [IsReload, setIsReload] = useState(true);
+
+
+  useEffect(()=>{
+  const reloadTime = setTimeout(()=>{
+     setIsReload(false);
+  }, 3000)
+  }, [])
+
   const bgColor = useColorModeValue("gray.100", "gray.700");
   const borderColor = useColorModeValue("gray.200", "gray.600");
-  const buttonTextColor = useColorModeValue("white", "gray.800");
+  const buttonTextColor = useColorModeValue("blue.600", "blue.800");
   const buttonBgColor = "#b8e3f2";
 
   return (
@@ -73,7 +87,7 @@ const LiquidityInterface = (props: Props) => {
             border={"transparent"}
           >
             <Flex _hover={{ background: "#d0ebf2" }} p={1} borderRadius={"md"} alignItems={"center"}>
-              <Flex cursor={"pointer"} onClick={props.handleOpen} alignItems={"center"}>
+              <Flex cursor={"pointer"} alignItems={"center"}>
                 <Text fontSize="xl" px={1}>
                   <TbCurrencySolana />
                 </Text>
@@ -164,11 +178,17 @@ const LiquidityInterface = (props: Props) => {
             </Text>
           </Flex>
           <Flex alignItems={"center"} w={12} justifyContent={"space-between"}>
-            <Text>
+            <Text  onClick={props.handleOpen} _hover={{ background: "#d0ebf2" }} p={1} borderRadius={"lg"} cursor={"pointer"}>
               <HiMiniMagnifyingGlass />
             </Text>
             <Text>
+            {IsReload ? (
+              <motion.div animate={{ rotate: 360 }} transition={{duration: 3}}>
+                  <AiOutlineLoading3Quarters />
+              </motion.div>
+            ) : (
               <AiOutlineLoading3Quarters />
+            )}
             </Text>
           </Flex>
         </Flex>
@@ -180,7 +200,7 @@ const LiquidityInterface = (props: Props) => {
             border={"transparent"}
           >
             <Flex _hover={{ background: "#d0ebf2" }} p={1} borderRadius={"md"} alignItems={"center"}>
-              <Flex cursor={"pointer"} onClick={props.handleOpen} alignItems={"center"}>
+              <Flex cursor={"pointer"} alignItems={"center"}>
                 <Text fontSize={"xl"} px={1}>
                   <FaBitcoin />
                 </Text>
@@ -189,7 +209,7 @@ const LiquidityInterface = (props: Props) => {
               </Flex>
             </Flex>
             <Text fontSize={"xs"} position={"absolute"} top={2}>
-              From
+              To
             </Text>
             <Box
               h="50%"

@@ -1,3 +1,5 @@
+//TODO: IsReload animation in the icon
+import { useEffect } from "react";
 import {
   Button,
   Flex,
@@ -7,6 +9,7 @@ import {
   InputLeftAddon,
   Text,
   Box,
+  VStack,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { TbCurrencySolana } from "react-icons/tb";
@@ -14,6 +17,9 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import { MdOutlineSwapVert } from "react-icons/md";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { FaBitcoin } from "react-icons/fa";
+
+//importing motion component from framer
+import { motion } from "framer-motion";
 
 type Props = {
   showModal: boolean;
@@ -23,17 +29,33 @@ type Props = {
 
 const SwapComponent = (props: Props) => {
   const [tokenAmount, setTokenAmount] = useState<string>("");
+  const [IsReload, setIsReload] = useState(true);
+
+  useEffect(() => {
+   const reloadTime = setTimeout(()=> {
+       setIsReload(false);
+   }, 3000)
+  },[]);
 
   const handleSolChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTokenAmount(event.target.value);
   };
 
   const buttonBgColor = "#b8e3f2";
-  const buttonTextColor = useColorModeValue("white", "gray.800");
+  const buttonTextColor = useColorModeValue("blue.600", "blue.800");
 
   return (
-    <Flex justifyContent={"center"} w={"full"} h={96}>
-      <Flex flexDirection="column">
+    <Flex
+      justifyContent={"center"}
+      w={"80%"}
+      h={96}
+      maxW="600px"
+      py={4}
+      borderRadius="md"
+      boxShadow="base"
+      background="#f5f9fa"
+    >
+      <VStack spacing={3}>
         <InputGroup>
           <InputLeftAddon
             position={"relative"}
@@ -46,6 +68,7 @@ const SwapComponent = (props: Props) => {
               p={1}
               borderRadius={"md"}
               alignItems={"center"}
+              justifyContent={"center"}
             >
               <Flex
                 cursor={"pointer"}
@@ -135,9 +158,13 @@ const SwapComponent = (props: Props) => {
             </Text>
           </Flex>
           <Flex>
-            <Text>
+            {IsReload ? (
+              <motion.div animate={{ rotate: 360 }} transition={{duration: 3}}>
+                  <AiOutlineLoading3Quarters />
+              </motion.div>
+            ) : (
               <AiOutlineLoading3Quarters />
-            </Text>
+            )}
           </Flex>
         </Flex>
 
@@ -167,7 +194,7 @@ const SwapComponent = (props: Props) => {
               </Flex>
             </Flex>
             <Text fontSize={"xs"} position={"absolute"} top={2}>
-              From
+              To
             </Text>
             <Box
               h="50%"
@@ -231,10 +258,7 @@ const SwapComponent = (props: Props) => {
             />
           </Flex>
         </InputGroup>
-        {/* <Text fontSize="xs" mt={2}>
-          Balance: 129.978543 USDC
-        </Text> */}
-      </Flex>
+      </VStack>
     </Flex>
   );
 };
