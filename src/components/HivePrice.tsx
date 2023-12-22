@@ -3,14 +3,14 @@ import { Flex, Text, Box } from "@chakra-ui/react";
 import Image from "next/image";
 
 //importing the chart
-import { LineChart, Line } from "recharts";
+import { AreaChart, Area, Tooltip } from "recharts";
 //making a data
 const data = [
-  { name: "Page A", uv: 400, pv: 2400, amt: 2400 },
-  { name: "Page B", uv: 300, pv: 1398, amt: 2210 },
-  { name: "Page C", uv: 200, pv: 1318, amt: 2110 },
-  { name: "Page D", uv: 100, pv: 1298, amt: 1910 },
-  { name: "Page E", uv: 50, pv: 1598, amt: 2410 },
+  { uv: 100, pv: 2400, amt: 2100 },
+  { uv: 200, pv: 1398, amt: 2210 },
+  { uv: 180, pv: 1318, amt: 2110 },
+  { uv: 250, pv: 1298, amt: 1910 },
+  { uv: 90, pv: 1598, amt: 2410 },
 ];
 
 type Props = {};
@@ -20,10 +20,10 @@ const HivePrice = (props: Props) => {
     <Flex
       direction={"column"}
       justifyContent={"center"}
-      background={""}
       my={4}
       h={16}
       borderRadius={"lg"}
+      background="#f5f9fa"
     >
       <Flex justifyContent={"space-between"} px={4}>
         <Box alignItems={"center"}>
@@ -32,7 +32,7 @@ const HivePrice = (props: Props) => {
           </Text>
           <Text>HBD</Text>
         </Box>
-        <Flex w={"70%"} justifyContent={"space-between"}>
+        <Flex w={"60%"} justifyContent={"space-between"}>
           <Box>
             <Text fontSize={"xs"}>Price</Text>
             <Text fontSize={"sm"}>$1.01</Text>
@@ -42,9 +42,10 @@ const HivePrice = (props: Props) => {
             <Text fontSize={"sm"}>$0.97</Text>
           </Box>
           <Box>
-            <LineChart width={48} height={24} data={data}>
-              <Line type="monotone" dataKey="uv" stroke="#236ee8" />
-            </LineChart>
+            <AreaChart width={124} height={36} data={data}>
+              <Tooltip />
+              <Area type="bump" dataKey="uv" stroke="#236ee8" fill="#80a7e8" dot={false} />
+            </AreaChart>
           </Box>
         </Flex>
       </Flex>

@@ -1,4 +1,4 @@
-//TODO: button should be inside the component
+
 import { useEffect } from "react";
 import {
   Button,
@@ -32,10 +32,10 @@ const SwapComponent = (props: Props) => {
   const [IsReload, setIsReload] = useState(true);
 
   useEffect(() => {
-   const reloadTime = setTimeout(()=> {
-       setIsReload(false);
-   }, 3000)
-  },[]);
+    const reloadTime = setTimeout(() => {
+      setIsReload(false);
+    }, 3000);
+  }, []);
 
   const handleSolChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTokenAmount(event.target.value);
@@ -47,9 +47,8 @@ const SwapComponent = (props: Props) => {
   return (
     <Flex
       justifyContent={"center"}
-      h={96}
+      p={10}
       maxW="600px"
-      p={4}
       borderRadius="md"
       boxShadow="base"
       background="#f5f9fa"
@@ -146,7 +145,7 @@ const SwapComponent = (props: Props) => {
           </Flex>
         </InputGroup>
         <Flex
-          h={24}
+          h={10}
           alignItems={"center"}
           justifyContent={"space-between"}
           w="90%"
@@ -158,8 +157,11 @@ const SwapComponent = (props: Props) => {
           </Flex>
           <Flex>
             {IsReload ? (
-              <motion.div animate={{ rotate: 360 }} transition={{duration: 3}}>
-                  <AiOutlineLoading3Quarters />
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 3 }}
+              >
+                <AiOutlineLoading3Quarters />
               </motion.div>
             ) : (
               <AiOutlineLoading3Quarters />
@@ -257,9 +259,9 @@ const SwapComponent = (props: Props) => {
             />
           </Flex>
         </InputGroup>
-      <Button colorScheme="blue" w={"80%"}>
-        Swap
-      </Button>
+        <Button colorScheme="blue" w="full" mt={10}>
+          Swap
+        </Button>
       </VStack>
     </Flex>
   );
