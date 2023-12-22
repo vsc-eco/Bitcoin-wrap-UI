@@ -18,6 +18,7 @@ import { HiMiniMagnifyingGlass } from "react-icons/hi2";
 import { CgArrowsExchange } from "react-icons/cg";
 import { FaPlus } from "react-icons/fa6";
 
+import Image from "next/image";
 //importing motion component from framer
 import { motion } from "framer-motion";
 
@@ -80,7 +81,7 @@ const LiquidityInterface = (props: Props) => {
         <InputGroup>
           <InputLeftAddon
             position="relative"
-            h={24}
+            h={16}
             background="#dff0f5"
             border={"transparent"}
           >
@@ -91,18 +92,18 @@ const LiquidityInterface = (props: Props) => {
               alignItems={"center"}
             >
               <Flex cursor={"pointer"} alignItems={"center"}>
-                <Text fontSize="xl" px={1}>
-                  <TbCurrencySolana />
+              <Text fontSize={"2xl"} px={1}>
+                  <Image src="./hive.svg" alt="hive" width="24" height="24" />
                 </Text>
-                <Text>HBD</Text>
+                <Text fontSize={"xl"}>HBD</Text>
                 <IoMdArrowDropdown />
               </Flex>
             </Flex>
-            <Text fontSize="xs" position="absolute" top={2}>
+            <Text fontSize="xs" position="absolute" top={0}>
               From
             </Text>
             <Box
-              h="50%"
+              h="100%"
               borderLeft="1px solid black"
               mx={1}
               alignSelf="center"
@@ -137,7 +138,7 @@ const LiquidityInterface = (props: Props) => {
           <Flex position="relative">
             <Text
               position="absolute"
-              top={2}
+              top={0}
               right={2}
               zIndex={5}
               fontSize="xs"
@@ -146,7 +147,7 @@ const LiquidityInterface = (props: Props) => {
             </Text>
             <Text
               position="absolute"
-              bottom={2}
+              bottom={0}
               right={2}
               zIndex={5}
               fontSize="xs"
@@ -154,7 +155,7 @@ const LiquidityInterface = (props: Props) => {
               $41,2300
             </Text>
             <Input
-              h={24}
+              h={16}
               w="full"
               textAlign="right"
               value={tokenAmount["HBD"]}
@@ -207,7 +208,7 @@ const LiquidityInterface = (props: Props) => {
         <InputGroup>
           <InputLeftAddon
             position={"relative"}
-            h={24}
+            h={16}
             background="#dff0f5"
             border={"transparent"}
           >
@@ -218,18 +219,18 @@ const LiquidityInterface = (props: Props) => {
               alignItems={"center"}
             >
               <Flex cursor={"pointer"} alignItems={"center"}>
-                <Text fontSize={"xl"} px={1}>
-                  <FaBitcoin />
+                <Text fontSize={"2xl"} px={1}>
+                  <FaBitcoin color="gold"/>
                 </Text>
-                <Text>BTC</Text>
+                <Text fontSize={"xl"}>BTC</Text>
                 <IoMdArrowDropdown />
               </Flex>
             </Flex>
-            <Text fontSize={"xs"} position={"absolute"} top={2}>
+            <Text fontSize={"xs"} position={"absolute"} top={0}>
               To
             </Text>
             <Box
-              h="50%"
+              h="100%"
               borderLeft="1px solid black"
               mx={1}
               alignSelf="center"
@@ -263,7 +264,7 @@ const LiquidityInterface = (props: Props) => {
           <Flex position="relative">
             <Text
               position={"absolute"}
-              top={2}
+              top={0}
               right={2}
               zIndex={5}
               fontSize={"xs"}
@@ -272,7 +273,7 @@ const LiquidityInterface = (props: Props) => {
             </Text>
             <Text
               position={"absolute"}
-              bottom={2}
+              bottom={0}
               right={2}
               zIndex={5}
               fontSize={"xs"}
@@ -280,7 +281,7 @@ const LiquidityInterface = (props: Props) => {
               $41,2300
             </Text>
             <Input
-              h={24}
+              h={16}
               w={"full"}
               textAlign={"right"}
               value={tokenAmount["BTC"]}

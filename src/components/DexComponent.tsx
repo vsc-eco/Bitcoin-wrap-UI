@@ -16,6 +16,7 @@ import TokenSearchModal from "./TokenSearchModal";
 import LiquidityInterface from "./LiquidityInterface";
 import SwapComponent from "./SwapComponent";
 import HivePrice from "./HivePrice";
+import WBTC from "./WBTC";
 
 const DexComponent = () => {
   const [activeTab, setActiveTab] = useState<"swap" | "liquidity">("swap");
@@ -71,6 +72,7 @@ const DexComponent = () => {
                 handleClose={handleClose}
               />
               <HivePrice />
+              <WBTC />
             </Box>
           )}
 

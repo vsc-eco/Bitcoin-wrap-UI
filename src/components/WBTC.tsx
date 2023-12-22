@@ -1,7 +1,9 @@
+//TODO: add a functionality where + is green and - is in red
+//TODO: to add the 
 import React from "react";
 import { Flex, Text, Box } from "@chakra-ui/react";
 import Image from "next/image";
-
+import { FaBitcoin } from "react-icons/fa6";
 //importing the chart
 import { AreaChart, Area, Tooltip } from "recharts";
 //making a data
@@ -15,7 +17,7 @@ const data = [
 
 type Props = {};
 
-const HivePrice = (props: Props) => {
+const WBTC = (props: Props) => {
   return (
     <Flex
       direction={"column"}
@@ -28,18 +30,18 @@ const HivePrice = (props: Props) => {
       <Flex justifyContent={"space-between"} px={4}>
         <Box alignItems={"center"}>
           <Text fontSize={"xl"} px={1}>
-            <Image src="./hive.svg" alt="hive" width={18} height={18} />
+          <FaBitcoin color="gold"/>
           </Text>
-          <Text>HBD</Text>
+          <Text>wBTC</Text>
         </Box>
         <Flex w={"60%"} justifyContent={"space-between"}>
           <Box>
             <Text fontSize={"sm"}>Price</Text>
-            <Text fontSize={"xs"}>$1.01</Text>
+            <Text fontSize={"xs"}>$45001.12</Text>
           </Box>
           <Box>
             <Text fontSize={"sm"} textAlign="center">24h</Text>
-            <Text fontSize={"xs"}>-1.90%</Text>
+            <Text fontSize={"xs"}>+4.90%</Text>
           </Box>
           <Box>
             <AreaChart width={124} height={36} data={data}>
@@ -53,4 +55,4 @@ const HivePrice = (props: Props) => {
   );
 };
 
-export default HivePrice;
+export default WBTC;

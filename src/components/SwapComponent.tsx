@@ -1,3 +1,5 @@
+//TODO: text seems too small and + is misplaced
+//TODO: adding the max and half functionality
 
 import { useEffect } from "react";
 import {
@@ -17,6 +19,7 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import { MdOutlineSwapVert } from "react-icons/md";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { FaBitcoin } from "react-icons/fa";
+import Image from "next/image";
 
 //importing motion component from framer
 import { motion } from "framer-motion";
@@ -47,7 +50,7 @@ const SwapComponent = (props: Props) => {
   return (
     <Flex
       justifyContent={"center"}
-      p={10}
+      p={5}
       maxW="600px"
       borderRadius="md"
       boxShadow="base"
@@ -57,7 +60,7 @@ const SwapComponent = (props: Props) => {
         <InputGroup>
           <InputLeftAddon
             position={"relative"}
-            h={24}
+            h={16}
             background="#dff0f5"
             border={"transparent"}
           >
@@ -73,18 +76,18 @@ const SwapComponent = (props: Props) => {
                 onClick={props.handleOpen}
                 alignItems={"center"}
               >
-                <Text fontSize={"xl"} px={1}>
-                  <TbCurrencySolana />
+                <Text fontSize={"2xl"} px={1}>
+                  <Image src="./hive.svg" alt="hive" width="24" height="24" />
                 </Text>
-                <Text>HBD</Text>
+                <Text fontSize={"xl"}>HBD</Text>
               </Flex>
               <IoMdArrowDropdown />
             </Flex>
-            <Text fontSize={"xs"} position={"absolute"} top={2}>
+            <Text fontSize={"xs"} position={"absolute"} top={0}>
               From
             </Text>
             <Box
-              h="50%"
+              h="100%"
               borderLeft="1px solid black"
               mx={1}
               alignSelf="center"
@@ -113,8 +116,8 @@ const SwapComponent = (props: Props) => {
           <Flex position="relative">
             <Text
               position={"absolute"}
-              top={2}
-              right={2}
+              top={0}
+              right={1}
               zIndex={5}
               fontSize={"xs"}
             >
@@ -122,15 +125,15 @@ const SwapComponent = (props: Props) => {
             </Text>
             <Text
               position={"absolute"}
-              bottom={2}
-              right={2}
+              bottom={0}
+              right={1}
               zIndex={5}
               fontSize={"xs"}
             >
               $41,2300
             </Text>
             <Input
-              h={24}
+              h={16}
               w={"full"}
               textAlign={"right"}
               value={tokenAmount}
@@ -145,7 +148,7 @@ const SwapComponent = (props: Props) => {
           </Flex>
         </InputGroup>
         <Flex
-          h={10}
+          h={5}
           alignItems={"center"}
           justifyContent={"space-between"}
           w="90%"
@@ -172,7 +175,7 @@ const SwapComponent = (props: Props) => {
         <InputGroup>
           <InputLeftAddon
             position={"relative"}
-            h={24}
+            h={16}
             background="#dff0f5"
             border={"transparent"}
           >
@@ -187,18 +190,18 @@ const SwapComponent = (props: Props) => {
                 onClick={props.handleOpen}
                 alignItems={"center"}
               >
-                <Text fontSize={"xl"} px={1}>
-                  <FaBitcoin />
+                <Text fontSize={"2xl"} px={1}>
+                  <FaBitcoin color="gold"/>
                 </Text>
-                <Text>BTC</Text>
+                <Text fontSize={"xl"}>BTC</Text>
                 <IoMdArrowDropdown />
               </Flex>
             </Flex>
-            <Text fontSize={"xs"} position={"absolute"} top={2}>
+            <Text fontSize={"xs"} position={"absolute"} top={0}>
               To
             </Text>
             <Box
-              h="50%"
+              h="100%"
               borderLeft="1px solid black"
               mx={1}
               alignSelf="center"
@@ -229,8 +232,8 @@ const SwapComponent = (props: Props) => {
           <Flex position="relative">
             <Text
               position={"absolute"}
-              top={2}
-              right={2}
+              top={0}
+              right={1}
               zIndex={5}
               fontSize={"xs"}
             >
@@ -238,15 +241,15 @@ const SwapComponent = (props: Props) => {
             </Text>
             <Text
               position={"absolute"}
-              bottom={2}
-              right={2}
+              bottom={0}
+              right={1}
               zIndex={5}
               fontSize={"xs"}
             >
               $41,2300
             </Text>
             <Input
-              h={24}
+              h={16}
               w={"full"}
               textAlign={"right"}
               value={tokenAmount}
@@ -259,7 +262,7 @@ const SwapComponent = (props: Props) => {
             />
           </Flex>
         </InputGroup>
-        <Button colorScheme="blue" w="full" mt={10}>
+        <Button colorScheme="blue" w="full" mt={5}>
           Swap
         </Button>
       </VStack>
