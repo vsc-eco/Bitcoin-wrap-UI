@@ -27,6 +27,7 @@
     "@types/node": "20.6.0",
     "@types/react": "^18.2.21",
     "@types/react-dom": "18.2.7",
+    "@vercel/analytics": "^1.1.1",
     "apexcharts": "^3.44.2",
     "bitcoinjs-lib": "^6.1.5",
     "bs58check": "^3.0.1",

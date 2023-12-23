@@ -16,6 +16,17 @@ const data = [
 type Props = {};
 
 const HivePrice = (props: Props) => {
+
+  //function 
+  const RedOrGreen = () => {
+    const textValue = document.getElementById("1")?.innerText;
+    if(textValue?.includes("-")){
+      return "red"
+    }else if(textValue?.includes("+")){
+      return "green"
+    }
+  }
+
   return (
     <Flex
       direction={"column"}
@@ -39,7 +50,7 @@ const HivePrice = (props: Props) => {
           </Box>
           <Box>
             <Text fontSize={"sm"} textAlign="center">24h</Text>
-            <Text fontSize={"xs"}>-1.90%</Text>
+            <Text fontSize={"xs"} id="1" color={`${RedOrGreen()}`}>-1.90%</Text>
           </Box>
           <Box>
             <AreaChart width={124} height={36} data={data}>

@@ -3,7 +3,8 @@
 import { Providers } from "./providers";
 import Navbar from "../components/Navbar";
 
-import { AccountContext } from "../context/AccountContext";
+//import the analytics
+import { Analytics } from "@vercel/analytics/react";
 
 export default function RootLayout({
   children,
@@ -16,6 +17,7 @@ export default function RootLayout({
         <Providers>
           <Navbar />
           {children}
+          <Analytics />
         </Providers>
       </body>
     </html>

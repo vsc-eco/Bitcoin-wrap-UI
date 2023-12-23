@@ -1,4 +1,4 @@
-//TODO: text seems too small and + is misplaced
+
 //TODO: adding the max and half functionality
 
 import { useEffect } from "react";
