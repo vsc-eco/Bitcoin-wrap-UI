@@ -1,5 +1,5 @@
 //TODO: add a functionality where + is green and - is in red
-import  React, {useEffect, useState } from "react";
+import  React, {useEffect, useRef, useState } from "react";
 import { Flex, Text, Box } from "@chakra-ui/react";
 import Image from "next/image";
 import { FaBitcoin } from "react-icons/fa6";
@@ -20,20 +20,7 @@ type Props = {};
 
 const WBTC = (props: Props) => {
 
-
-  const redOrGreen = () => {
-    const textValue = document.getElementById("1")?.innerText;
-    if(textValue!.includes("-")){
-      return "red"
-    }else{
-      return "green"
-    }
-  }
-
-  useEffect(() => {
-    console.log(redOrGreen());
-  })
-
+  const [InputValue, setInputValue] = useState<String | undefined>("+4.90%");
 
   return (
     <Flex
@@ -58,7 +45,7 @@ const WBTC = (props: Props) => {
           </Box>
           <Box>
             <Text fontSize={"sm"} textAlign="center">24h</Text>
-            <Text fontSize={"xs"} id="1" color={`${redOrGreen()}`}>+4.90%</Text>
+            <Text fontSize={"xs"} id="1" color={InputValue?.includes("+") ? "green" : "red"}>{InputValue}</Text>
           </Box>
           <Box>
             <AreaChart width={124} height={36} data={data}>

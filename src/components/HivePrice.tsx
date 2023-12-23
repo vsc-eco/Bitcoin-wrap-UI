@@ -1,9 +1,10 @@
-import React from "react";
+import React, {useState} from "react";
 import { Flex, Text, Box } from "@chakra-ui/react";
 import Image from "next/image";
 
 //importing the chart
 import { AreaChart, Area, Tooltip } from "recharts";
+
 //making a data
 const data = [
   { uv: 100, pv: 2400, amt: 2100 },
@@ -17,15 +18,8 @@ type Props = {};
 
 const HivePrice = (props: Props) => {
 
-  //function 
-  const RedOrGreen = () => {
-    const textValue = document.getElementById("1")?.innerText;
-    if(textValue?.includes("-")){
-      return "red"
-    }else if(textValue?.includes("+")){
-      return "green"
-    }
-  }
+  const [InputValue, setInputValue] = useState<String | undefined>("-1.90%");
+  
 
   return (
     <Flex
@@ -50,7 +44,7 @@ const HivePrice = (props: Props) => {
           </Box>
           <Box>
             <Text fontSize={"sm"} textAlign="center">24h</Text>
-            <Text fontSize={"xs"} id="1" color={`${RedOrGreen()}`}>-1.90%</Text>
+            <Text fontSize={"xs"} id="1" color={InputValue?.includes("+") ? "green" : "red"}>{InputValue}</Text>
           </Box>
           <Box>
             <AreaChart width={124} height={36} data={data}>
