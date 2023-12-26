@@ -1,4 +1,4 @@
-//TODO: add a functionality where + is green and - is in red
+
 import  React, {useEffect, useRef, useState } from "react";
 import { Flex, Text, Box } from "@chakra-ui/react";
 import Image from "next/image";

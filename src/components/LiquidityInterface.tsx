@@ -338,7 +338,7 @@ const LiquidityInterface = (props: Props) => {
             </Flex>
           </Flex>
         </Flex>
-        <Button colorScheme="blue" w={"80%"}>
+        <Button colorScheme="blue" w={"full"}>
           Enter an amount
         </Button>
       </VStack>
