@@ -40,7 +40,7 @@ const SwapComponent = (props: Props) => {
     }, 3000);
   }, []);
 
-  const handleSolChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleTokenChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTokenAmount(event.target.value);
   };
 
@@ -137,7 +137,7 @@ const SwapComponent = (props: Props) => {
               w={"full"}
               textAlign={"right"}
               value={tokenAmount}
-              onChange={handleSolChange}
+              onChange={handleTokenChange}
               borderRadius="0px 6px 6px 0px"
               background="#dff0f5"
               border={"transparent"}
@@ -253,7 +253,7 @@ const SwapComponent = (props: Props) => {
               w={"full"}
               textAlign={"right"}
               value={tokenAmount}
-              onChange={handleSolChange}
+              onChange={handleTokenChange}
               borderRadius="0px 6px 6px 0px"
               background="#dff0f5"
               focusBorderColor="transparent"
