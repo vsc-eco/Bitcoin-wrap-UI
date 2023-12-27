@@ -11,7 +11,6 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { TbCurrencySolana } from "react-icons/tb";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { FaBitcoin } from "react-icons/fa";
 import { HiMiniMagnifyingGlass } from "react-icons/hi2";
@@ -33,6 +32,11 @@ const LiquidityInterface = (props: Props) => {
     HBD: "",
     BTC: "",
   });
+  //making a useState for checking wether wallet is empty or not 
+  const [isWalletValid , setIsWalletValid] = useState<boolean | undefined>(false);
+
+  //function for checking wether these values are filled or empty 
+  const hasValues = Object.values(tokenAmount).some(value => value !== '')
 
   const handleTokenChange =
     (token: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -79,94 +83,108 @@ const LiquidityInterface = (props: Props) => {
     >
       <VStack spacing={4}>
         <InputGroup>
-          <InputLeftAddon
-            position="relative"
-            h={16}
+          <Flex
+            direction={"column"}
+            w="full"
+            borderRadius={6}
             background="#dff0f5"
             border={"transparent"}
           >
             <Flex
-              _hover={{ background: "#d0ebf2" }}
-              p={1}
-              borderRadius={"md"}
-              alignItems={"center"}
+              justifyContent={"space-between"}
+              px={5}
+              h={4}
+              mt={2}
+              alignItems={"flex-end"}
             >
-              <Flex cursor={"pointer"} alignItems={"center"}>
-              <Text fontSize={"2xl"} px={1}>
-                  <Image src="./hive.svg" alt="hive" width="24" height="24" />
-                </Text>
-                <Text fontSize={"xl"}>HBD</Text>
-                <IoMdArrowDropdown />
+              <Text fontSize={"xs"}>From</Text>
+              <Text fontSize={"xs"}>Balance [Wallet not connected]</Text>
+            </Flex>
+
+            <Flex>
+              <InputLeftAddon
+                h={12}
+                background="#dff0f5"
+                border={"transparent"}
+              >
+                <Flex
+                  _hover={{ background: "#d0ebf2" }}
+                  borderRadius={"md"}
+                  alignItems={"center"}
+                >
+                  <Flex
+                    cursor={"pointer"}
+                    onClick={props.handleOpen}
+                    alignItems={"center"}
+                  >
+                    <Text fontSize={"2xl"} px={1}>
+                      <Image
+                        src="./hive.svg"
+                        alt="hive"
+                        width="24"
+                        height="24"
+                      />
+                    </Text>
+                    <Text fontSize={"xl"}>HBD</Text>
+                  </Flex>
+                  <IoMdArrowDropdown />
+                </Flex>
+                <Box
+                  h="60%"
+                  borderLeft="1px solid black"
+                  mx={1}
+                  alignSelf="center"
+                ></Box>
+                <Button
+                  h="1.75rem"
+                  size="xs"
+                  bg={buttonBgColor}
+                  color={buttonTextColor}
+                  onClick={() => handleMax("HBD")}
+                  mx={1}
+                >
+                  Max
+                </Button>
+                <Button
+                  h="1.75rem"
+                  size="xs"
+                  bg={buttonBgColor}
+                  color={buttonTextColor}
+                  borderColor={borderColor}
+                  onClick={() =>
+                    setTokenAmount({
+                      ...tokenAmount,
+                      HBD: (parseFloat(tokenAmount.HBD) / 2).toString(),
+                    })
+                  }
+                  mx={1}
+                >
+                  Half
+                </Button>
+              </InputLeftAddon>
+              <Input
+                h={10}
+                w={"full"}
+                textAlign={"right"}
+                value={tokenAmount["HBD"]}
+                onChange={handleTokenChange("HBD")}
+                focusBorderColor="transparent"
+                border={"transparent"}
+              />
+            </Flex>
+            <Flex
+              justifyContent={"space-between"}
+              px={5}
+              h={4}
+              mb={2}
+              alignItems={"flex-start"}
+            >
+              <Flex></Flex>
+              <Flex>
+                {" "}
+                {hasValues && <Text fontSize={"xs"}>Max Value</Text>}
               </Flex>
             </Flex>
-            <Text fontSize="xs" position="absolute" top={0}>
-              From
-            </Text>
-            <Box
-              h="100%"
-              borderLeft="1px solid black"
-              mx={1}
-              alignSelf="center"
-            ></Box>
-            <Button
-              h="1.75rem"
-              size="xs"
-              bg={buttonBgColor}
-              color={buttonTextColor}
-              onClick={() => handleMax("HBD")}
-              mx={1}
-            >
-              Max
-            </Button>
-            <Button
-              h="1.75rem"
-              size="xs"
-              bg={buttonBgColor}
-              color={buttonTextColor}
-              borderColor={borderColor}
-              onClick={() =>
-                setTokenAmount({
-                  ...tokenAmount,
-                  HBD: (parseFloat(tokenAmount.HBD) / 2).toString(),
-                })
-              }
-              mx={1}
-            >
-              Half
-            </Button>
-          </InputLeftAddon>
-          <Flex position="relative">
-            <Text
-              position="absolute"
-              top={0}
-              right={2}
-              zIndex={5}
-              fontSize="xs"
-            >
-              Balance: [Wallet not connected!]
-            </Text>
-            <Text
-              position="absolute"
-              bottom={0}
-              right={2}
-              zIndex={5}
-              fontSize="xs"
-            >
-              $41,2300
-            </Text>
-            <Input
-              h={16}
-              w="full"
-              textAlign="right"
-              value={tokenAmount["HBD"]}
-              onChange={handleTokenChange("HBD")}
-              borderRadius="0px 6px 6px 0px"
-              background="#dff0f5"
-              focusBorderColor="transparent"
-              border={"transparent"}
-              isRequired
-              type="number"
-            />
           </Flex>
         </InputGroup>
         <Flex justifyContent={"space-between"} alignItems={"center"} w="full">
@@ -206,94 +224,103 @@ const LiquidityInterface = (props: Props) => {
           </Flex>
         </Flex>
         <InputGroup>
-          <InputLeftAddon
-            position={"relative"}
-            h={16}
+          <Flex
+            direction={"column"}
+            w="full"
+            borderRadius={6}
             background="#dff0f5"
             border={"transparent"}
           >
             <Flex
-              _hover={{ background: "#d0ebf2" }}
-              p={1}
-              borderRadius={"md"}
-              alignItems={"center"}
+              justifyContent={"space-between"}
+              px={5}
+              h={4}
+              mt={2}
+              alignItems={"flex-end"}
             >
-              <Flex cursor={"pointer"} alignItems={"center"}>
-                <Text fontSize={"2xl"} px={1}>
-                  <FaBitcoin color="gold"/>
-                </Text>
-                <Text fontSize={"xl"}>BTC</Text>
-                <IoMdArrowDropdown />
+              <Text fontSize={"xs"}>From</Text>
+              <Text fontSize={"xs"}>Balance [Wallet not connected]</Text>
+            </Flex>
+
+            <Flex>
+              <InputLeftAddon
+                h={12}
+                background="#dff0f5"
+                border={"transparent"}
+              >
+                <Flex
+                  _hover={{ background: "#d0ebf2" }}
+                  borderRadius={"md"}
+                  alignItems={"center"}
+                >
+                  <Flex
+                    cursor={"pointer"}
+                    onClick={props.handleOpen}
+                    alignItems={"center"}
+                  >
+                    <Text fontSize={"2xl"} px={1}>
+                      <FaBitcoin color="gold" />
+                    </Text>
+                    <Text fontSize={"xl"}>BTC</Text>
+                  </Flex>
+                  <IoMdArrowDropdown />
+                </Flex>
+                <Box
+                  h="60%"
+                  borderLeft="1px solid black"
+                  mx={1}
+                  alignSelf="center"
+                ></Box>
+                <Button
+                  h="1.75rem"
+                  size="xs"
+                  bg={buttonBgColor}
+                  color={buttonTextColor}
+                  onClick={() => handleMax("HBD")}
+                  mx={1}
+                >
+                  Max
+                </Button>
+                <Button
+                  h="1.75rem"
+                  size="xs"
+                  bg={buttonBgColor}
+                  color={buttonTextColor}
+                  borderColor={borderColor}
+                  onClick={() =>
+                    setTokenAmount({
+                      ...tokenAmount,
+                      HBD: (parseFloat(tokenAmount.HBD) / 2).toString(),
+                    })
+                  }
+                  mx={1}
+                >
+                  Half
+                </Button>
+              </InputLeftAddon>
+              <Input
+                h={10}
+                w={"full"}
+                textAlign={"right"}
+                value={tokenAmount["HBD"]}
+                onChange={handleTokenChange("HBD")}
+                focusBorderColor="transparent"
+                border={"transparent"}
+              />
+            </Flex>
+            <Flex
+              justifyContent={"space-between"}
+              px={5}
+              h={4}
+              mb={2}
+              alignItems={"flex-start"}
+            >
+              <Flex></Flex>
+              <Flex>
+                {" "}
+                {hasValues && <Text fontSize={"xs"}>Max Value</Text>}
               </Flex>
             </Flex>
-            <Text fontSize={"xs"} position={"absolute"} top={0}>
-              To
-            </Text>
-            <Box
-              h="100%"
-              borderLeft="1px solid black"
-              mx={1}
-              alignSelf="center"
-            ></Box>
-            <Button
-              h="1.75rem"
-              size="xs"
-              bg={buttonBgColor}
-              color={buttonTextColor}
-              onClick={() => handleMax("BTC")}
-              mx={1}
-            >
-              Max
-            </Button>
-            <Button
-              h="1.75rem"
-              size="xs"
-              background={buttonBgColor}
-              color={buttonTextColor}
-              onClick={() =>
-                setTokenAmount({
-                  ...tokenAmount,
-                  BTC: (parseFloat(tokenAmount.BTC) / 2).toString(),
-                })
-              }
-              mx={1}
-            >
-              Half
-            </Button>
-          </InputLeftAddon>
-          <Flex position="relative">
-            <Text
-              position={"absolute"}
-              top={0}
-              right={2}
-              zIndex={5}
-              fontSize={"xs"}
-            >
-              Balance: [Wallet not connected!]
-            </Text>
-            <Text
-              position={"absolute"}
-              bottom={0}
-              right={2}
-              zIndex={5}
-              fontSize={"xs"}
-            >
-              $41,2300
-            </Text>
-            <Input
-              h={16}
-              w={"full"}
-              textAlign={"right"}
-              value={tokenAmount["BTC"]}
-              onChange={() => {
-                handleTokenChange("BTC");
-              }}
-              borderRadius="0px 6px 6px 0px"
-              border={"transparent"}
-              background="#dff0f5"
-              focusBorderColor="transparent"
-              type="number"
-            />
           </Flex>
         </InputGroup>
         <Flex
@@ -338,11 +365,10 @@ const LiquidityInterface = (props: Props) => {
             </Flex>
           </Flex>
         </Flex>
-        <Button colorScheme="blue" w={"full"}>
-          Enter an amount
+        <Button colorScheme="blue" w={"full"} isDisabled={!isWalletValid}>
+          Add Liquidity
         </Button>
       </VStack>
-      
     </Box>
   );
 };
