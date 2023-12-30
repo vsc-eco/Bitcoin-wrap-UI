@@ -1,4 +1,5 @@
-//TODO: adding the max and half functionality
+//TODO: Reloading animation for the different style
+
 
 import { useEffect } from "react";
 import {
