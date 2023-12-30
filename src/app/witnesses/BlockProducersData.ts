@@ -14,7 +14,7 @@ export const blockProducers: BlockProducer[] = [
   {
     rank: 1,
     userName: 'gtg',
-    imageLink: '/logo.svg',
+    imageLink: '/hive.svg',
     userDescription: 'Description for gtg',
     version: '1.27.0',
     votes: 72.5,
@@ -24,7 +24,7 @@ export const blockProducers: BlockProducer[] = [
   {
     rank: 2,
     userName: 'blocktrades',
-    imageLink: '/logo.svg',
+    imageLink: '/hive.svg',
     userDescription: 'Description for blocktrades',
     version: '1.27.0',
     votes: 82.7,
@@ -34,7 +34,7 @@ export const blockProducers: BlockProducer[] = [
   {
     rank: 3,
     userName: 'blocktrades',
-    imageLink: '/logo.svg',
+    imageLink: '/hive.svg',
     userDescription: 'Description for blocktrades',
     version: '1.27.0',
     votes: 90.1,
@@ -44,7 +44,7 @@ export const blockProducers: BlockProducer[] = [
   {
     rank: 4,
     userName: 'user4',
-    imageLink: '/logo.svg',
+    imageLink: '/hive.svg',
     userDescription: 'Description for user4',
     version: '1.28.0',
     votes: 65.2,
@@ -54,7 +54,7 @@ export const blockProducers: BlockProducer[] = [
   {
     rank: 5,
     userName: 'user5',
-    imageLink: '/logo.svg',
+    imageLink: '/hive.svg',
     userDescription: 'Description for user5',
     version: '1.26.0',
     votes: 78.3,

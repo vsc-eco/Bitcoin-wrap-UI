@@ -18,10 +18,11 @@ import {
 import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
 import Image from "next/image";
 import { IoIosLink } from "react-icons/io";
+import { BsCircle } from "react-icons/bs";
 
 //exporting the mockup data
 import blockProducers from "./BlockProducersData";
-import { buildExecutionContext } from "graphql/execution/execute";
+import { CgEditBlackPoint } from "react-icons/cg";
 
 export default function Component() {
   return (
@@ -76,14 +77,14 @@ export default function Component() {
                   <Td>
                     <Flex>
                       <Image
-                        alt={""}
+                        alt={"dp"}
                         src={items.imageLink}
-                        height={50}
-                        width={50}
+                        height={24}
+                        width={24}
                       />
                       <Flex>
-                        <Box>
-                          <Flex>
+                        <Box px={2}>
+                          <Flex >
                             <Text pr={2}>{items.userName}</Text>
                             <Text>
                               <IoIosLink />
@@ -95,18 +96,29 @@ export default function Component() {
                     </Flex>
                   </Td>
                   <Td>
-                    <Box w={12} background={"gray.400"} borderRadius={"sm"}>
-                      <Text fontSize={"xs"} textAlign={"center"}>
-                        {items.version}
-                      </Text>
-                    </Box>
+                    <Flex alignItems={"center"}>
+                      <Text fontSize={"xs"} pr={2}><CgEditBlackPoint color="green" /></Text>
+                      <Box w={12} background={"gray.300"} borderRadius={"sm"}>
+                        <Text fontSize={"xs"} textAlign={"center"}>
+                          {items.version}
+                        </Text>
+                      </Box>
+                    </Flex>
                   </Td>
-                  <Td>{items.votes}m</Td>
-                  <Td>{items.lastBlock} 
-                  <Text fontSize={"xs"}>a minute ago</Text>
+                  <Td color={"blue.400"}>{items.votes}m</Td>
+                  <Td>
+                    {items.lastBlock}
+                    <Text fontSize={"xs"} textColor={"gray.600"}>a minute ago</Text>
                   </Td>
                   <Td>
-                    <Flex background={"gray.100"} w={8} h={8} justifyContent={"center"} alignItems={"center"} borderRadius={"lg"}>
+                    <Flex
+                      background={"gray.100"}
+                      w={8}
+                      h={8}
+                      justifyContent={"center"}
+                      alignItems={"center"}
+                      borderRadius={"lg"}
+                    >
                       {items.vote ? (
                         <Icon as={CheckIcon} color="green.500" />
                       ) : (
