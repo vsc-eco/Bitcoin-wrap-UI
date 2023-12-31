@@ -31,31 +31,31 @@ export default function Component() {
         <Flex justifyContent={"space-between"}>
           <Box>
             <Heading as="h1" fontSize="2xl" fontWeight="bold" mb={4}>
-              Hive Witnesses (aka Block Producers)
+              VSC Witnesses (aka Block Producers)
             </Heading>
             <List fontSize="sm" listStyleType="disc" pl={5} mb={4}>
               <ListItem>
-                Hive Witnesses operate consensus servers (nodes) and ensure the
+                VSC Witnesses operate consensus servers (nodes) and ensure the
                 correct behavior of the blockchain.
               </ListItem>
               <ListItem>
                 They also make consensus decisions for the future development of
-                Hive.
+                VSC.
               </ListItem>
               <ListItem>
                 Each account can vote for 30 witnesses, and the vote is
-                proportional to the amount of Hive Power controlled by the
+                proportional to the amount of VSC Power controlled by the
                 account.
               </ListItem>
             </List>
           </Box>
           <Flex display="flex" justifyContent="end" mb={4}>
-            <Button bg="#3498db" color="white" variant="solid" mx={2}>
+            {/* <Button bg="#3498db" color="white" variant="solid" mx={2}>
               GENERAL
-            </Button>
-            <Button bg="#3498db" color="white" variant="solid" mx={2}>
+            </Button> */}
+            {/* <Button bg="#3498db" color="white" variant="solid" mx={2}>
               PARAMS
-            </Button>
+            </Button> */}
           </Flex>
         </Flex>
         <Box overflowX="auto">
@@ -79,12 +79,12 @@ export default function Component() {
                       <Image
                         alt={"dp"}
                         src={items.imageLink}
-                        height={24}
-                        width={24}
+                        height={50}
+                        width={50}
                       />
                       <Flex>
                         <Box px={2}>
-                          <Flex >
+                          <Flex>
                             <Text pr={2}>{items.userName}</Text>
                             <Text>
                               <IoIosLink />
@@ -97,7 +97,9 @@ export default function Component() {
                   </Td>
                   <Td>
                     <Flex alignItems={"center"}>
-                      <Text fontSize={"xs"} pr={2}><CgEditBlackPoint color="green" /></Text>
+                      <Text fontSize={"xs"} pr={2}>
+                        <CgEditBlackPoint color="green" />
+                      </Text>
                       <Box w={12} background={"gray.300"} borderRadius={"sm"}>
                         <Text fontSize={"xs"} textAlign={"center"}>
                           {items.version}
@@ -108,7 +110,9 @@ export default function Component() {
                   <Td color={"blue.400"}>{items.votes}m</Td>
                   <Td>
                     {items.lastBlock}
-                    <Text fontSize={"xs"} textColor={"gray.600"}>a minute ago</Text>
+                    <Text fontSize={"xs"} textColor={"gray.600"}>
+                      a minute ago
+                    </Text>
                   </Td>
                   <Td>
                     <Flex
