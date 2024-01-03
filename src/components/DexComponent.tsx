@@ -6,47 +6,47 @@ import {
   Flex,
   Input,
   InputGroup,
-  InputRightElement,
   Text,
   VStack,
-  useColorModeValue,
 } from "@chakra-ui/react";
 
+import TokenSearchModal from "./TokenSearchModal";
+
+//importing the components
 import LiquidityInterface from "./LiquidityInterface";
+import SwapComponent from "./SwapComponent";
+import HivePrice from "./HivePrice";
+import WBTC from "./WBTC";
 
 const DexComponent = () => {
-  const [solAmount, setSolAmount] = useState<string>("");
-  const [usdcAmount, setUsdcAmount] = useState<string>("");
   const [activeTab, setActiveTab] = useState<"swap" | "liquidity">("swap");
 
-  const handleSolChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // Conversion logic here
-    setSolAmount(event.target.value);
-  };
+  //make the hookstate for rendering the transfer token modal
+  const [showModal, setShowModal] = useState<boolean>(false);
 
-  const handleUsdcChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // Conversion logic here
-    setUsdcAmount(event.target.value);
+  //make a function handleChange for the transfer token modal
+  const handleOpen = () => {
+    setShowModal(true);
   };
-
-  const bgColor = useColorModeValue("gray.100", "gray.700");
-  const buttonBgColor = useColorModeValue("blue.500", "blue.200");
-  const buttonTextColor = useColorModeValue("white", "gray.800");
+  const handleClose = () => {
+    setShowModal(false);
+  };
 
   return (
     <Flex alignItems={"center"}>
       <VStack
         w={["700px"]}
-        h={"600px"}
-        bg={bgColor}
+        h={"700px"}
         p={4}
         borderRadius="md"
         boxShadow="base"
         spacing={4}
+        background="white"
       >
         <ButtonGroup isAttached variant="outline">
           <Button
-            mr="-px"
+            borderRadius={"3xl"}
+            w={24}
             colorScheme="blue"
             variant={activeTab === "swap" ? "solid" : "outline"}
             onClick={() => setActiveTab("swap")}
@@ -54,6 +54,7 @@ const DexComponent = () => {
             Swap
           </Button>
           <Button
+            borderRadius={"3xl"}
             colorScheme="blue"
             variant={activeTab === "liquidity" ? "solid" : "outline"}
             onClick={() => setActiveTab("liquidity")}
@@ -62,61 +63,29 @@ const DexComponent = () => {
           </Button>
         </ButtonGroup>
 
-        {activeTab === "swap" && (
-          <Flex width="full" flexDirection="column">
-            <InputGroup>
-              <Input
-                placeholder="SOL"
-                value={solAmount}
-                onChange={handleSolChange}
+        <Flex w={"600px"} justifyContent={"center"} alignItems={"center"}>
+          {activeTab === "swap" && (
+            <Box>
+              <SwapComponent
+                showModal={showModal}
+                handleOpen={handleOpen}
+                handleClose={handleClose}
               />
-              <InputRightElement width="4.5rem">
-                <Button
-                  h="1.75rem"
-                  size="sm"
-                  bg={buttonBgColor}
-                  color={buttonTextColor}
-                  onClick={() => setSolAmount("Max")}
-                >
-                  Max
-                </Button>
-              </InputRightElement>
-            </InputGroup>
-            <Text fontSize="sm" mt={2}>
-              Balance: 0.28957553 SOL
-            </Text>
-            <Text fontSize="sm" my={2} textAlign="center">
-              1 SOL ≈ 83.58375 USDC
-            </Text>
-            <InputGroup>
-              <Input
-                placeholder="USDC"
-                value={usdcAmount}
-                onChange={handleUsdcChange}
-              />
-              <InputRightElement width="4.5rem">
-                <Button
-                  h="1.75rem"
-                  size="sm"
-                  bg={buttonBgColor}
-                  color={buttonTextColor}
-                  onClick={() => setUsdcAmount("Max")}
-                >
-                  Max
-                </Button>
-              </InputRightElement>
-            </InputGroup>
-            <Text fontSize="sm" mt={2}>
-              Balance: 129.978543 USDC
-            </Text>
-          </Flex>
-        )}
+              <HivePrice />
+              <WBTC />
+            </Box>
+          )}
 
-        {activeTab === "liquidity" && <LiquidityInterface />}
+          <TokenSearchModal isOpen={showModal} onClose={handleClose} />
 
-        <Button colorScheme="blue" width="full" mt={4}>
-          {activeTab === "swap" ? "Swap" : "Add Liquidity"}
-        </Button>
+          {activeTab === "liquidity" && (
+            <LiquidityInterface
+              showModal={showModal}
+              handleOpen={handleOpen}
+              handleClose={handleClose}
+            />
+          )}
+        </Flex>
       </VStack>
     </Flex>
   );
