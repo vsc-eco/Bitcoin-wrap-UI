@@ -26,7 +26,7 @@ import blockProducers from "./BlockProducersData";
 import { CgEditBlackPoint } from "react-icons/cg";
 
 export default function Component() {
-   if(process.env.NEXT_PUBLIC_DEV_FEATURE === 'true'){
+  if (process.env.NEXT_PUBLIC_DEV_FEATURE === "true") {
     return (
       <Flex justifyContent={"center"}>
         <Box bg="white" p={6} rounded="lg" shadow="md" w={"70%"}>
@@ -41,8 +41,8 @@ export default function Component() {
                   correct behavior of the blockchain.
                 </ListItem>
                 <ListItem>
-                  They also make consensus decisions for the future development of
-                  VSC.
+                  They also make consensus decisions for the future development
+                  of VSC.
                 </ListItem>
                 <ListItem>
                   Each account can vote for 30 witnesses, and the vote is
@@ -78,12 +78,14 @@ export default function Component() {
                     <Td textAlign={"center"}>{items.rank}</Td>
                     <Td>
                       <Flex>
-                        <Image
-                          alt={"dp"}
-                          src={items.imageLink}
-                          height={50}
-                          width={50}
-                        />
+                        <Box borderRadius="full" overflow="hidden">
+                          <Image
+                            alt={"dp"}
+                            src={items.imageLink}
+                            height={48}
+                            width={48}
+                          />
+                        </Box>
                         <Flex>
                           <Box px={2}>
                             <Flex>
@@ -140,11 +142,11 @@ export default function Component() {
         </Box>
       </Flex>
     );
-   }else{
-     return(
+  } else {
+    return (
       <Flex h={720} w="full" alignItems={"center"} justifyContent={"center"}>
         <Text fontSize={"4xl"}>Coming soon in production!</Text>
       </Flex>
-     )
-   }
+    );
+  }
 }
