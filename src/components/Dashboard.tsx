@@ -21,7 +21,6 @@ const Dashboard = (props: Props) => {
     "authId"
   ].split(":")[1];
 
-  if (process.env.NEXT_PUBLIC_DEV_FEATURE === "true") {
     return (
       <Flex direction="column" mt={32}>
         <Flex>
@@ -98,13 +97,6 @@ const Dashboard = (props: Props) => {
         </Flex>
       </Flex>
     );
-  } else {
-    return (
-      <Flex h={720} w={720} alignItems={"center"} justifyContent={"center"}>
-        <Text fontSize={"2xl"}>Coming soon in production!</Text>
-      </Flex>
-    );
-  }
 };
 
 export default Dashboard;

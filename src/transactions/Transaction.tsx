@@ -85,6 +85,7 @@ const Transaction = (props: Props) => {
   const { triggerLoginWithHive, myDid, myAuth } = useAccountContext();
   let lastDate = useRef(null);
 
+
   //useState
   const [isTransactionDetailOpen, setTransactionDetailOpen] = useState(false);
   const [selectedTransaction, setSelectedTransaction] = useState(null);
@@ -131,7 +132,6 @@ const Transaction = (props: Props) => {
     setTransactionDetailOpen(false);
   };
 
-  if (process.env.NEXT_PUBLIC_DEV_FEATURE === "true") {
     return (
       <>
         <Flex justifyContent="center" h="90vh">
@@ -321,13 +321,6 @@ const Transaction = (props: Props) => {
         </Flex>
       </>
     );
-  } else {
-    return (
-      <Flex h={720} w={720} alignItems={"center"} justifyContent={"center"}>
-        <Text fontSize={"2xl"}>Coming soon in production!</Text>
-      </Flex>
-    );
-  }
 };
 
 export default Transaction;
