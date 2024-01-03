@@ -3,11 +3,11 @@ import React, { useEffect, useState } from "react";
 import { Flex } from "@chakra-ui/react";
 import Sidebar from "../components/Sidebar";
 import Transaction from "../transactions/Transaction";
-import LoginComponent from "../components/LoginComponent";
 import ThirdSection from "./ThirdSection";
 import { useAccountContext } from "../context/AccountContext";
 import Dashboard from "../components/Dashboard";
 import DexComponent from "../components/DexComponent";
+import SignUpComponent from "../components/Login/SignUpComponent";
 
 type Props = {};
 
@@ -54,7 +54,7 @@ const SecondSection = (props: Props) => {
         />
       </Flex>
       <Flex w="70%" id="transaction-swap" m={0} p={0}>
-        {!myDid && <LoginComponent />}
+        {!myDid && <SignUpComponent />}
         {/* showing it default  */}
         {myDid && (render === "transaction" || render === "") && (
           <Transaction />
