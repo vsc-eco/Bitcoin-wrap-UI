@@ -15,7 +15,6 @@ type Props = {};
 const SecondSection = (props: Props) => {
   const { myDid } = useAccountContext();
 
-  //intialize the variable useState variable
   const [render, setRender] = useState<string>("");
 
   const handleTransactionOnClick = () => {
