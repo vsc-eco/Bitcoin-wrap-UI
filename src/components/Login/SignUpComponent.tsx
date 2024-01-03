@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -16,7 +16,6 @@ import { PiGoogleChromeLogoBold } from "react-icons/pi";
 import { FaGithub, FaDiscord } from "react-icons/fa";
 
 export default function SignUpComponent() {
-  if (process.env.NEXT_PUBLIC_DEV_FEATURE === "true") {
     return (
       <Flex justifyContent={"center"} alignItems={"center"}>
         <Center
@@ -70,11 +69,4 @@ export default function SignUpComponent() {
         </Center>
       </Flex>
     );
-  } else {
-    return (
-      <Flex h={720} w={720} alignItems={"center"} justifyContent={"center"}>
-        <Text fontSize={"2xl"}>Coming soon in production!</Text>
-      </Flex>
-    );
-  }
 }

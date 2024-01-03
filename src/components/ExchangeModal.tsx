@@ -33,6 +33,7 @@ import {
 import { useShowComponent } from "../context/ShowComponent";
 import { DHive } from "../const";
 import { MyContext } from "../context/TokenTransferContext";
+import { usePathname } from "next/navigation";
 
 type Props = {
   setDest: Function;
@@ -83,7 +84,6 @@ const ExchangeModal = (props: Props) => {
   });
   console.log(query);
 
-  if (process.env.NEXT_PUBLIC_DEV_FEATURE === "true") {
     return (
       <>
         <Flex justifyContent="center" py={8} alignItems="center">
@@ -334,13 +334,6 @@ const ExchangeModal = (props: Props) => {
         </Flex>
       </>
     );
-  } else {
-    return (
-      <Flex h={720} w={720} alignItems={"center"} justifyContent={"center"}>
-        <Text fontSize={"2xl"}>Coming soon in production!</Text>
-      </Flex>
-    );
-  }
 };
 
 export default ExchangeModal;
