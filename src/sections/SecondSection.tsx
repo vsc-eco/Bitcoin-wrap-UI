@@ -36,10 +36,9 @@ const SecondSection = (props: Props) => {
     setRender("dex");
   };
 
-  // console.log("pathanme", pathname);  
-  // console.log("hostname", window.location.hostname); //localhost
+  //for defining of the window object 
+  const isBrowser = typeof window !== "undefined";
   return (
-    //updates only for desktop view no mobile view from now
     <Flex w="100%" h="90vh">
       <Flex
         w="30%"
@@ -55,7 +54,7 @@ const SecondSection = (props: Props) => {
           handleTradeComponent={handleTradeComponent}
         />
       </Flex>
-      {window.location.hostname != "wrap.vsc.eco" ? (
+      { isBrowser && window.location.hostname != "wrap.vsc.eco" ? (
         <Flex w="70%" id="transaction-swap" m={0} p={0}>
           {!myDid && <SignUpComponent />}
           {/* showing it default  */}
