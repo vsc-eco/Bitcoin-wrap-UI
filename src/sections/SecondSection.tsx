@@ -8,7 +8,7 @@ import { useAccountContext } from "../context/AccountContext";
 import Dashboard from "../components/Dashboard";
 import DexComponent from "../components/DexComponent";
 import SignUpComponent from "../components/Login/SignUpComponent";
-import { usePathname } from "next/navigation";
+
 
 type Props = {};
 
@@ -36,7 +36,8 @@ const SecondSection = (props: Props) => {
     setRender("dex");
   };
 
-  const pathname = usePathname();
+  // console.log("pathanme", pathname);  
+  // console.log("hostname", window.location.hostname); //localhost
   return (
     //updates only for desktop view no mobile view from now
     <Flex w="100%" h="90vh">
@@ -54,7 +55,7 @@ const SecondSection = (props: Props) => {
           handleTradeComponent={handleTradeComponent}
         />
       </Flex>
-      {pathname === "/" ? (
+      {window.location.hostname != "wrap.vsc.eco" ? (
         <Flex w="70%" id="transaction-swap" m={0} p={0}>
           {!myDid && <SignUpComponent />}
           {/* showing it default  */}
