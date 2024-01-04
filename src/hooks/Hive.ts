@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useLayoutEffect, useState } from 'react'
 import {DHive} from '../const'
 
 export function ResolveUsername(name) {
     const [did, setDid] = useState(null)
-    useEffect(() => {
+    useLayoutEffect(() => {
         (async () => {
             if(name.startsWith('did:')) {
                 setDid(name)

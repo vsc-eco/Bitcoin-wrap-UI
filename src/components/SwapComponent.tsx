@@ -1,7 +1,7 @@
 //TODO: Reloading animation for the different style
 
 
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import {
   Button,
   Flex,
@@ -33,7 +33,7 @@ const SwapComponent = (props: Props) => {
   const [tokenAmount, setTokenAmount] = useState<string>("");
   const [IsReload, setIsReload] = useState(true);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const reloadTime = setTimeout(() => {
       setIsReload(false);
     }, 3000);

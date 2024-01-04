@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useLayoutEffect } from "react";
 import Navbar from "../components/Navbar";
 import { Box } from "@chakra-ui/react";
 import LandingPage from "../sections/LandingPage";

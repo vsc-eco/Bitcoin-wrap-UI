@@ -1,5 +1,5 @@
 
-import React, { useCallback, useContext, useEffect } from "react";
+import React, { useCallback, useContext, useLayoutEffect } from "react";
 import { hash } from "@stablelib/sha256";
 import { Ed25519Provider } from "key-did-provider-ed25519";
 import KeyResolver from "key-did-resolver";
@@ -193,7 +193,7 @@ export const useAccountContext = function () {
     }
   }, [ac, setMyDid]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     ac.checkLogin().then((e) => {
       if (e) {
         console.log("did check login", e);
@@ -203,7 +203,7 @@ export const useAccountContext = function () {
         setMyHiveName(ac.getHiveName().split(":")[1]);
       }
     });
-  }, [setMyDid]);
+  }, []);
 
   return {
     loggedIn: !!myDid,

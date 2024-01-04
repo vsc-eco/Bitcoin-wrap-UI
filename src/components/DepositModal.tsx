@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useLayoutEffect } from "react";
 import { FaBitcoin } from "react-icons/fa";
 import { FaClipboardQuestion } from "react-icons/fa6";
 import { CiShare1 } from "react-icons/ci";
@@ -66,7 +66,7 @@ const DepositModal = (props: Props) => {
 
   console.log("myDid:61", myAuth);
   const { registerAddr } = useCreateTx();
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (props.dest.did) {
       registerAddr({
         addr: props.dest.did,

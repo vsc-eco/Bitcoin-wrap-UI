@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useLayoutEffect, useReducer, useState } from "react";
 import { Flex, Text } from "@chakra-ui/react";
 import Sidebar from "../components/Sidebar";
 import Transaction from "../transactions/Transaction";
@@ -9,33 +9,55 @@ import Dashboard from "../components/Dashboard";
 import DexComponent from "../components/DexComponent";
 import SignUpComponent from "../components/Login/SignUpComponent";
 
-
 type Props = {};
+
+const initialState = {
+  render: "",
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "SET_RENDER":
+      return {
+        ...state,
+        render: action.payload
+      }
+      default: 
+      return state
+  }
+};
+
 
 const SecondSection = (props: Props) => {
   const { myDid } = useAccountContext();
   const [isClient, setClient] = useState<boolean>(false);
-  const [render, setRender] = useState<string>("");
+  const [state, dispatch] = useReducer(reducer,  initialState);
+
+
+
 
   const handleTransactionOnClick = () => {
-    setRender("transaction");
+    dispatch({ type: 'SET_RENDER',  payload: "transaction"});
   };
 
   const handleExchangeOnClick = () => {
-    setRender("exchange");
+    dispatch({ type: 'SET_RENDER', payload: "exchange"})
   };
 
   const handleTradeComponent = () => {
-    setRender("trade");
+    dispatch({ type:"SET_RENDER", payload: "trade"})
   };
-
+  
   const handleDexComponent = () => {
-    setRender("dex");
+    dispatch({ type:"SET_RENDER", payload: "dex"})
   };
 
-  useEffect(()=> {
+  useLayoutEffect(() => {
     setClient(true);
-  }, [])
+    return () => {
+      setClient(false);
+    };
+  }, []);
 
   return (
     <Flex w="100%" h="90vh">
@@ -53,17 +75,17 @@ const SecondSection = (props: Props) => {
           handleTradeComponent={handleTradeComponent}
         />
       </Flex>
-      { isClient && window.location.hostname !== "wrap.vsc.eco" ? (
+      {isClient && window.location.hostname !== "wrap.vsc.eco" ? (
         <Flex w="70%" id="transaction-swap" m={0} p={0}>
           {!myDid && <SignUpComponent />}
           {/* showing it default  */}
-          {myDid && (render === "transaction" || render === "") && (
+          {myDid && (state.render === "transaction" || state.render === "") && (
             <Transaction />
           )}
 
-          {myDid && render === "trade" && <Dashboard />}
-          {myDid && render === "exchange" && <ThirdSection />}
-          {myDid && render === "dex" && <DexComponent />}
+          {myDid && state.render === "trade" && <Dashboard />}
+          {myDid && state.render === "exchange" && <ThirdSection />}
+          {myDid && state.render === "dex" && <DexComponent />}
         </Flex>
       ) : (
         <Flex h={720} w={720} alignItems={"center"} justifyContent={"center"}>
