@@ -14,7 +14,7 @@ type Props = {};
 
 const SecondSection = (props: Props) => {
   const { myDid } = useAccountContext();
-
+  const [isClient, setClient] = useState<boolean>(false);
   const [render, setRender] = useState<string>("");
 
   const handleTransactionOnClick = () => {
@@ -36,8 +36,10 @@ const SecondSection = (props: Props) => {
     setRender("dex");
   };
 
-  //for defining of the window object 
-  const isBrowser = typeof window !== "undefined";
+  useEffect(()=> {
+    setClient(true);
+  }, [])
+
   return (
     <Flex w="100%" h="90vh">
       <Flex
@@ -54,7 +56,7 @@ const SecondSection = (props: Props) => {
           handleTradeComponent={handleTradeComponent}
         />
       </Flex>
-      { isBrowser && window.location.hostname != "wrap.vsc.eco" ? (
+      { isClient && window.location.hostname === "wrap.vsc.eco" ? (
         <Flex w="70%" id="transaction-swap" m={0} p={0}>
           {!myDid && <SignUpComponent />}
           {/* showing it default  */}
