@@ -21,17 +21,14 @@ const SecondSection = (props: Props) => {
     setRender("transaction");
   };
 
-  //function for handling the TransactionModal
   const handleExchangeOnClick = () => {
     setRender("exchange");
   };
 
-  //function for handling the TradeModal
   const handleTradeComponent = () => {
     setRender("trade");
   };
 
-  //function for handling the dex component
   const handleDexComponent = () => {
     setRender("dex");
   };
@@ -56,7 +53,7 @@ const SecondSection = (props: Props) => {
           handleTradeComponent={handleTradeComponent}
         />
       </Flex>
-      { isClient && window.location.hostname === "wrap.vsc.eco" ? (
+      { isClient && window.location.hostname !== "wrap.vsc.eco" ? (
         <Flex w="70%" id="transaction-swap" m={0} p={0}>
           {!myDid && <SignUpComponent />}
           {/* showing it default  */}
