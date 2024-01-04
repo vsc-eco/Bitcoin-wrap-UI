@@ -21,17 +21,14 @@ const SecondSection = (props: Props) => {
     setRender("transaction");
   };
 
-  //function for handling the TransactionModal
   const handleExchangeOnClick = () => {
     setRender("exchange");
   };
 
-  //function for handling the TradeModal
   const handleTradeComponent = () => {
     setRender("trade");
   };
 
-  //function for handling the dex component
   const handleDexComponent = () => {
     setRender("dex");
   };
