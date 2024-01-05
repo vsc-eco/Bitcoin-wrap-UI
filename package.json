@@ -38,6 +38,7 @@
     "eslint-config-next": "13.4.19",
     "framer-motion": "^10.16.4",
     "graphql": "^16.8.1",
+    "hivesigner": "^3.3.4",
     "install": "^0.13.0",
     "key-did-provider-ed25519": "^3.0.2",
     "key-did-resolver": "^3.0.0",
