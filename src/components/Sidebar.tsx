@@ -22,7 +22,7 @@ const Sidebar = ({
   const did = ResolveUsername("vaultec");
 
   return (
-    <Box
+    <Box 
       id="sidebar"
       w={["150px"]}
       h={["60vh"]}

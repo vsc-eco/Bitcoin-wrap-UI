@@ -13,10 +13,12 @@ import {
   Heading,
   Box,
   Flex,
+  Link,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { BiBorderRadius } from "react-icons/bi";
+import { useAccountContext } from "../../context/AccountContext";
 
 interface Props {
   onClose: () => void;
@@ -24,6 +26,17 @@ interface Props {
 }
 
 const LoginModal: React.FC<Props> = ({ isOpen, onClose }) => {
+
+  const [username, setUserName] = useState<string | undefined>("");
+
+  const handleUsername = (e: any) => {
+    setUserName(e.target.value);
+    console.log(username)
+  }
+
+  
+  
+  const { triggerLoginWithHive, myDid } = useAccountContext();
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -49,21 +62,58 @@ const LoginModal: React.FC<Props> = ({ isOpen, onClose }) => {
                 />
               </Box>
               <VStack spacing={4} w="full">
-                {["keychain", "hivesigner", "hiveauth"].map((service) => (
-                  <Flex align="center" key={service}>
-                    <Flex mx={2} color={"black"} borderRadius={"2xl"}>
-                      <Image
-                        alt={`${service} Logo`}
-                        height={90}
-                        width={200}
-                        src={`/${service}.png`}
-                        objectFit="cover"
-                      />
-                    </Flex>
-                    <Input placeholder="Enter username" flexGrow={1} />
-                    <Button ml={2}>→</Button>
+                <Flex align="center">
+                  <Flex
+                    mx={2}
+                    color={"black"}
+                    borderRadius={"2xl"}
+                    onClick={triggerLoginWithHive}
+                  >
+                    <Image
+                      alt="keychain Logo"
+                      height={90}
+                      width={200}
+                      src="/keychain.png"
+                      objectFit="cover"
+                    />
                   </Flex>
-                ))}
+                  <Input placeholder="Enter username" flexGrow={1} />
+                  <Link>
+                  <Button ml={2}>→</Button>
+                  </Link>
+                </Flex>
+
+                <Flex align="center">
+                  <Flex mx={2} borderRadius={"2xl"}>
+                    <Image
+                      alt="hivesigner Logo"
+                      height={90}
+                      width={200}
+                      src="/hivesigner.png"
+                      objectFit="cover"
+                    />
+                  </Flex>
+                  <Input placeholder="Enter username" flexGrow={1} value={username} onChange={handleUsername} />
+                  <Link href={`https://hivesigner.com/oauth2/authorize?client_id=${username}&redirect_uri=https://localhost:3000/api/callback/hivesigner-auth&scope=vote,comment`}>
+                    <Button ml={2} onClick={handleUsername}>→</Button>
+                  </Link>
+                </Flex>
+
+                <Flex align="center">
+                  <Flex mx={2} borderRadius={"2xl"}>
+                    <Image
+                      alt="hiveauth Logo"
+                      height={90}
+                      width={200}
+                      src="/hiveauth.png"
+                      objectFit="cover"
+                    />
+                  </Flex>
+                  <Input placeholder="Enter username" flexGrow={1} />
+                  <Link>
+                  <Button ml={2}>→</Button>
+                  </Link>
+                </Flex>
               </VStack>
             </VStack>
           </ModalBody>
