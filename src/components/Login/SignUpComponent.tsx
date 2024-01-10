@@ -19,6 +19,8 @@ import { useAccountContext } from "../../context/AccountContext";
 import { BUTTON_LABELS } from "../../constants";
 import LoginModal from "./LoginModal";
 
+
+
 const SignUpComponent = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -50,7 +52,7 @@ const SignUpComponent = () => {
             >
               {BUTTON_LABELS.signInWithHive}
             </Button>
-            <LoginModal isOpen={isOpen} onClose={onClose}/>
+            <LoginModal isOpen={isOpen} onClose={onClose} />
             <Button
               leftIcon={<PiGoogleChromeLogoBold fontSize="2xl" />}
               variant="outline"
