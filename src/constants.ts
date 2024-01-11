@@ -3,5 +3,12 @@ export const BUTTON_LABELS = {
     signUpWithGoogle: "Sign up with Google",
     signUpWithGithub: "Sign up with Github",
     signUpWithDiscord: "Sign up with Discord",
-    signUpWithMagicLink: "Sign up with magic link"
+    signUpWithEmail: "Sign up with Email",
+    signUpWithEth: "Sign in with Ethereum"
+}
+
+export const MagicApi = {
+    PUBLISHABLE_API_KEY: 'pk_live_FE121F1E404ECDD4',
+    SECRET_KEY: 'sk_live_4E2F26E7356703F9'
+
 }
