@@ -16,16 +16,16 @@ import {
   Flex,
   Link,
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
-import { useAccountContext } from "../../context/AccountContext";
+import { useAccountContext } from "../../../context/AccountContext";
 
 interface Props {
   onClose: () => void;
   isOpen: boolean;
 }
 
-const LoginModal: React.FC<Props> = ({ isOpen, onClose }) => {
+const HiveModal: React.FC<Props> = ({ isOpen, onClose }) => {
   const [username, setUserName] = useState<string | undefined>("");
 
   const handleUsername = (e: any) => {
@@ -143,30 +143,6 @@ const LoginModal: React.FC<Props> = ({ isOpen, onClose }) => {
                     </Link>
                   </Flex>
                 </Box>
-
-                {/* This is for the magic link  */}
-                {/* <Flex align="center">
-                  <Flex mx={2} borderRadius={"2xl"}>
-                    <Image
-                      src="/magic.png"
-                      alt="magiclink"
-                      height={90}
-                      width={200}
-                    />
-                  </Flex>
-                  <Input
-                    placeholder="Enter email"
-                    flexGrow={1}
-                    type="email"
-                    value={email}
-                    onChange={handleEmail}
-                  />
-                  <Link>
-                    <Button ml={2} onClick={handleMagicLink}>
-                      →
-                    </Button>
-                  </Link>
-                </Flex> */}
               </VStack>
             </VStack>
           </ModalBody>
@@ -182,4 +158,4 @@ const LoginModal: React.FC<Props> = ({ isOpen, onClose }) => {
   );
 };
 
-export default LoginModal;
+export default HiveModal;

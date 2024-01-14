@@ -21,6 +21,7 @@
     "@fontsource/ia-writer-quattro": "^5.0.7",
     "@fontsource/open-sans": "^5.0.15",
     "@hiveio/dhive": "^1.2.7",
+    "@magic-ext/oauth": "^15.6.0",
     "@next/font": "^13.5.4",
     "@stablelib/sha256": "^1.0.1",
     "@tanstack/react-query": "^5.8.9",

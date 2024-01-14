@@ -1,33 +1,67 @@
-//TODO: To put sign in with ethereum 
-// TODO: make it  greying which are coming soon
-
-import React, { useLayoutEffect, useState, memo } from "react";
+import React from "react";
 import {
+  Flex,
+  Center,
   Box,
   Button,
-  FormControl,
-  FormLabel,
-  Input,
-  VStack,
   Image,
-  Text,
-  Link,
-  Center,
-  Flex,
+  VStack,
   useDisclosure,
 } from "@chakra-ui/react";
-import { PiGoogleChromeLogoBold } from "react-icons/pi";
-import { FaGithub, FaDiscord } from "react-icons/fa";
+import { FaEthereum, FaGithub, FaDiscord } from "react-icons/fa";
 import { BiLogoGmail } from "react-icons/bi";
-import { FaEthereum } from "react-icons/fa";
+import { PiGoogleChromeLogoBold } from "react-icons/pi";
 import { BUTTON_LABELS } from "../../constants";
-import LoginModal from "./LoginModal";
-import EmailModal from "./MagicLink/EmailModal";
+import HiveModal from "./Hive/HiveModal";
+import MetaMaskModal from "./Ethereum/MetamaskModal";
+import SocialPopUp from "./SocialLinks/SocialPopUp";
+
+const SocialButton = ({ leftIcon, children, onClick }) => (
+  <Button variant="outline" width="full" mb={3} onClick={onClick}>
+    <Flex justifyContent="space-between" width="full" align="center">
+      <Box>{children}</Box>
+      <Box>{leftIcon}</Box>
+    </Flex>
+  </Button>
+);
+
+const MultipleIcons = ({ size }) => {
+  return (
+    <Flex>
+      <Flex px={2}>
+        <BiLogoGmail fontSize={size} />
+      </Flex>
+      <Flex px={2}>
+        <PiGoogleChromeLogoBold fontSize={size} />
+      </Flex>
+      <Flex px={2}>
+        <FaDiscord fontSize={size} />
+      </Flex>
+      <Flex px={2}>
+      <FaGithub fontSize={size} />
+      </Flex>
+    </Flex>
+  );
+};
 
 const SignUpComponent = () => {
-  const { isOpen: isLoginModalOpen, onOpen: onLoginModalOpen, onClose: onLoginModalClose } = useDisclosure();
-  const { isOpen: isEmailModalOpen, onOpen: onEmailModalOpen, onClose: onEmailModalClose } = useDisclosure();
-  
+  // Disclosure hooks for Hive, Ethereum, and SocialPopUp
+  const {
+    isOpen: isHiveModal,
+    onOpen: onHiveModalOpen,
+    onClose: onHiveModalClose,
+  } = useDisclosure();
+  const {
+    isOpen: isEthModalOpen,
+    onOpen: onEthModalOpen,
+    onClose: onEthModalClose,
+  } = useDisclosure();
+  const {
+    isOpen: isSocialOpen,
+    onOpen: onSocialOpen,
+    onClose: onSocialClose,
+  } = useDisclosure();
+
   return (
     <Flex justifyContent="center" alignItems="center">
       <Center
@@ -48,56 +82,30 @@ const SignUpComponent = () => {
         </Box>
         <Box width="full" maxWidth="md" p={1}>
           <VStack spacing={4}>
-            <Button
-              leftIcon={<Image src="/hive.svg" alt="Hive logo" boxSize="4" />}
-              variant="outline"
-              width="full"
-              onClick={onLoginModalOpen}
+            <SocialButton
+              leftIcon={
+                <Image src="/hive.svg" alt="hive_logo" height={6} width={6} />
+              }
+              onClick={onHiveModalOpen}
             >
               {BUTTON_LABELS.signInWithHive}
-            </Button>
-            <LoginModal isOpen={isLoginModalOpen} onClose={onLoginModalClose} />
+            </SocialButton>
+            <HiveModal isOpen={isHiveModal} onClose={onHiveModalClose} />
 
-            {/* For Ethereum  */}
-            <Button
-              leftIcon={<FaEthereum />}
-              variant="outline"
-              width="full"
-            >
+            {/* Ethereum Button */}
+            <SocialButton leftIcon={<FaEthereum fontSize={"20px"}/>} onClick={onEthModalOpen}>
               {BUTTON_LABELS.signUpWithEth}
-            </Button>
+            </SocialButton>
+            <MetaMaskModal isOpen={isEthModalOpen} onClose={onEthModalClose} />
 
-
-            <Button
-              leftIcon={<PiGoogleChromeLogoBold fontSize="2xl" />}
-              variant="outline"
-              width="full"
+            {/* Socials Button */}
+            <SocialButton
+              onClick={onSocialOpen}
+              leftIcon={<MultipleIcons size={22} />}
             >
-              {BUTTON_LABELS.signUpWithGoogle}
-            </Button>
-            <Button
-              leftIcon={<FaGithub fontSize="2xl" />}
-              variant="outline"
-              width="full"
-            >
-              {BUTTON_LABELS.signUpWithGithub}
-            </Button>
-            <Button
-              leftIcon={<FaDiscord fontSize="2xl" />}
-              variant="outline"
-              width="full"
-            >
-              {BUTTON_LABELS.signUpWithDiscord}
-            </Button>
-            <Button
-              leftIcon={<BiLogoGmail fontSize="2xl" />}
-              variant="outline"
-              width="full"
-              onClick={onEmailModalOpen}
-            >
-              {BUTTON_LABELS.signUpWithEmail}
-            </Button>
-            <EmailModal isOpen={isEmailModalOpen} onClose={onEmailModalClose} />
+              {BUTTON_LABELS.signUpWithSocials}
+            </SocialButton>
+            <SocialPopUp isOpen={isSocialOpen} onClose={onSocialClose} />
           </VStack>
         </Box>
       </Center>
