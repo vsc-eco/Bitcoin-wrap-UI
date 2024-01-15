@@ -18,12 +18,9 @@ import { FaGithub, FaDiscord } from "react-icons/fa";
 //exporting the button labels from the constants.ts file
 import { BUTTON_LABELS } from "../../../constants";
 
-const SocialButton = ({ leftIcon, children }) => (
-  <Button variant="outline" width="full" mb={3}>
-    <Flex justifyContent="space-between" width="full" align="center">
-      <Box fontSize={"20px"}>{leftIcon}</Box> 
-      <Box>{children}</Box> 
-    </Flex>
+const SocialButton = ({leftIcon, children }) => (
+  <Button variant="outline" width="full" mb={3} leftIcon={leftIcon}>
+    {children}
   </Button>
 );
 
@@ -41,18 +38,18 @@ const SocialPopUp = ({ isOpen, onClose }) => {
           </SocialButton>
 
           {/* Google Sign Up Button */}
-          <SocialButton leftIcon={<PiGoogleChromeLogoBold fontSize="2xl" />}>
+          <SocialButton  leftIcon={<PiGoogleChromeLogoBold fontSize="2xl" />}>
             {BUTTON_LABELS.signUpWithGoogle}
           </SocialButton>
 
           {/* Discord sign up button  */}
-          <SocialButton leftIcon={<FaDiscord fontSize="2xl" />}>
-            {BUTTON_LABELS.signUpWithGoogle}
+          <SocialButton  leftIcon={<FaDiscord fontSize="2xl" />}>
+            {BUTTON_LABELS.signUpWithDiscord}
           </SocialButton>
 
           {/* Github sign up button  */}
-          <SocialButton leftIcon={<FaGithub fontSize="2xl" />}>
-            {BUTTON_LABELS.signUpWithGoogle}
+          <SocialButton  leftIcon={<FaGithub fontSize="2xl" />}>
+            {BUTTON_LABELS.signUpWithGithub}
           </SocialButton>
         </ModalBody>
         <ModalFooter></ModalFooter>

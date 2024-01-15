@@ -16,15 +16,6 @@ import HiveModal from "./Hive/HiveModal";
 import MetaMaskModal from "./Ethereum/MetamaskModal";
 import SocialPopUp from "./SocialLinks/SocialPopUp";
 
-const SocialButton = ({ leftIcon, children, onClick }) => (
-  <Button variant="outline" width="full" mb={3} onClick={onClick}>
-    <Flex justifyContent="space-between" width="full" align="center">
-      <Box>{children}</Box>
-      <Box>{leftIcon}</Box>
-    </Flex>
-  </Button>
-);
-
 const MultipleIcons = ({ size }) => {
   return (
     <Flex>
@@ -38,7 +29,7 @@ const MultipleIcons = ({ size }) => {
         <FaDiscord fontSize={size} />
       </Flex>
       <Flex px={2}>
-      <FaGithub fontSize={size} />
+        <FaGithub fontSize={size} />
       </Flex>
     </Flex>
   );
@@ -82,29 +73,45 @@ const SignUpComponent = () => {
         </Box>
         <Box width="full" maxWidth="md" p={1}>
           <VStack spacing={4}>
-            <SocialButton
+            <Button
+              variant="outline"
+              width="full"
+              mb={3}
               leftIcon={
                 <Image src="/hive.svg" alt="hive_logo" height={6} width={6} />
               }
               onClick={onHiveModalOpen}
             >
               {BUTTON_LABELS.signInWithHive}
-            </SocialButton>
+            </Button>
             <HiveModal isOpen={isHiveModal} onClose={onHiveModalClose} />
 
             {/* Ethereum Button */}
-            <SocialButton leftIcon={<FaEthereum fontSize={"20px"}/>} onClick={onEthModalOpen}>
+            <Button
+              variant="outline"
+              width="full"
+              mb={3}
+              leftIcon={<FaEthereum fontSize={"20px"} />}
+              onClick={onEthModalOpen}
+            >
               {BUTTON_LABELS.signUpWithEth}
-            </SocialButton>
+            </Button>
             <MetaMaskModal isOpen={isEthModalOpen} onClose={onEthModalClose} />
 
             {/* Socials Button */}
-            <SocialButton
+            <Button
+              variant="outline"
+              width="full"
+              mb={3}
               onClick={onSocialOpen}
-              leftIcon={<MultipleIcons size={22} />}
+              rightIcon={
+                <Box>
+                  <MultipleIcons size={22} />
+                </Box>
+              }
             >
               {BUTTON_LABELS.signUpWithSocials}
-            </SocialButton>
+            </Button>
             <SocialPopUp isOpen={isSocialOpen} onClose={onSocialClose} />
           </VStack>
         </Box>
