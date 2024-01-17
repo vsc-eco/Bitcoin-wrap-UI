@@ -11,9 +11,9 @@ import {
   Input,
   useDisclosure,
 } from "@chakra-ui/react";
-import {MagicApi} from '../../../constants'
 //importing the magic link
 import { Magic } from "magic-sdk";
+
 
 function EmailModal({ isOpen, onClose }) {
   const [email, setEmail] = useState("");
@@ -26,7 +26,7 @@ function EmailModal({ isOpen, onClose }) {
   //function for handling the login by email
   const handleMagicLink = async () => {
     try {
-      const magic = new Magic(MagicApi.PUBLISHABLE_API_KEY);
+      const magic = new Magic(process.env.PUBLISHABLE_API_KEY!);
       const didToken = await magic.auth.loginWithMagicLink({ email: email });
       console.log(didToken);
     } catch (err) {

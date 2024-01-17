@@ -30,12 +30,12 @@
     "@types/react-dom": "18.2.7",
     "@vercel/analytics": "^1.1.1",
     "apexcharts": "^3.44.2",
+    "axios": "^1.6.5",
     "bitcoinjs-lib": "^6.1.5",
     "bs58check": "^3.0.1",
     "chart.js": "^4.4.1",
     "clipboard-copy": "^4.0.1",
     "dids": "^4.0.4",
-    "dotenv": "^16.3.1",
     "eslint": "8.49.0",
     "eslint-config-next": "13.4.19",
     "framer-motion": "^10.16.4",
@@ -45,6 +45,7 @@
     "key-did-resolver": "^3.0.0",
     "magic-sdk": "^21.5.0",
     "moment": "^2.29.4",
+    "mongoose": "^6.12.1",
     "next": "13.4.19",
     "next-qrcode": "^2.5.1",
     "qrcode.react": "^3.1.0",
@@ -57,6 +58,7 @@
     "zustand": "^4.4.1"
   },
   "devDependencies": {
+    "dotenv": "^16.3.1",
     "react-icons": "^4.11.0"
   }
 }

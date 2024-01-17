@@ -2,6 +2,7 @@ import Axios from "axios";
 
 const CMC_KEY = "5571dcf4-41b7-4e23-8f8d-b1e938cc0697";
 
+
 export default async function handler(req, res) {
   try {
     const { data } = await Axios.get(
@@ -24,3 +25,4 @@ export default async function handler(req, res) {
     throw ex
   }
 }
+
