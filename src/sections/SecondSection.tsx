@@ -52,6 +52,10 @@ const SecondSection = (props: Props) => {
     dispatch({ type:"SET_RENDER", payload: "dex"})
   };
 
+  const handleSignUpComponent = () => {
+    dispatch({ type:"SET_RENDER", payload: "signup"})
+  };
+
   useLayoutEffect(() => {
     setClient(true);
     return () => {
@@ -73,11 +77,12 @@ const SecondSection = (props: Props) => {
           handleTransactionOnClick={handleTransactionOnClick}
           handleDexComponent={handleDexComponent}
           handleTradeComponent={handleTradeComponent}
+          handleSignUpComponent={handleSignUpComponent}
         />
       </Flex>
       {isClient && window.location.hostname !== "wrap.vsc.eco" ? (
         <Flex w="70%" id="transaction-swap" m={0} p={0}>
-          {!myDid && <SignUpComponent />}
+          {!myDid && state.render === 'signup' && <SignUpComponent />}
           {/* showing it default  */}
           {myDid && (state.render === "transaction" || state.render === "") && (
             <Transaction />

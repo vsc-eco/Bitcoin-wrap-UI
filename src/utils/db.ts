@@ -1,10 +1,6 @@
 
 import mongoose, { Document, Schema } from "mongoose"
 
-// interface Connection  {
-//   isConnected?: number;
-// }
-
 
 const connection = {}
 
@@ -13,10 +9,6 @@ export async function connectDB() {
   let res = db.connections[0].readyState;
   console.log(res);
 }
-
-// export async function HelloWorld() {
-//   console.log("Hello World");
-// }
 
 
 

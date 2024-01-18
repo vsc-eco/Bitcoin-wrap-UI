@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, VStack, Text, Flex } from "@chakra-ui/react";
+import { Box, VStack, Text, Flex, Button } from "@chakra-ui/react";
 import { TbExchange } from "react-icons/tb";
 import { MdAssessment } from "react-icons/md";
 import { TfiMenuAlt } from "react-icons/tfi";
@@ -15,6 +15,7 @@ const Sidebar = ({
   handleTransactionOnClick,
   handleDexComponent,
   handleTradeComponent,
+  handleSignUpComponent
 }) => {
   const { triggerLoginWithHive, myDid } = useAccountContext();
   const ac = useContext(AccountContext);
@@ -22,7 +23,7 @@ const Sidebar = ({
   const did = ResolveUsername("vaultec");
 
   return (
-    <Box 
+    <Box
       id="sidebar"
       w={["150px"]}
       h={["60vh"]}
@@ -103,9 +104,9 @@ const Sidebar = ({
           bottom={"55px"}
           width={"100%"}
         >
-          <Flex alignItems="center">
-            <Text ml={2} fontSize="lg" fontWeight="bold">
-              Sign in with:
+          <Flex justifyContent="center" alignItems="center">
+            <Text ml={5} fontSize="lg" fontWeight="bold">
+              <Button onClick={handleSignUpComponent} colorScheme={"gray"}>Sign in</Button>
             </Text>
           </Flex>
         </Flex>
@@ -117,21 +118,6 @@ const Sidebar = ({
           bottom={"10px"}
           width={"100%"}
         >
-          <Flex
-            bgColor="#1c1b1b"
-            _hover={{ bgColor: "black" }}
-            p={2}
-            borderRadius={3}
-            onClick={triggerLoginWithHive}
-          >
-            <Image
-              src="/keychain.png"
-              height={112}
-              width={115}
-              alt="keychain logo"
-              style={{ cursor: "pointer" }}
-            />
-          </Flex>
         </Flex>
       </VStack>
     </Box>

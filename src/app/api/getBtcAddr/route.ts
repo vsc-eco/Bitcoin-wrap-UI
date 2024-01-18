@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { connectDB } from "./Database";
-import { BitcoinAddressModel } from "./Model";
+import { connectDB } from "../../../utils/db"
+import { BitcoinAddressModel } from "../../../utils/Model";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {

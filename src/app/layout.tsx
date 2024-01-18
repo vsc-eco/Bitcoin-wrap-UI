@@ -5,7 +5,6 @@ import Navbar from "../components/Navbar";
 
 //import the analytics
 import { Analytics } from "@vercel/analytics/react";
-import { connectDB } from "./api/Database";
 
 export default function RootLayout({
   children,
@@ -13,7 +12,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
 
-  connectDB();
   return (
     <html lang="en">
       <body>
