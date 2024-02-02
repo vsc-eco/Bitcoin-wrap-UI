@@ -29,10 +29,14 @@ import { BitcoinAddressModel } from "../../../utils/BitcoinAddressModel";
 //   }
 // }
 
-
+//TODO: why pinged_At is not getting stored as parameter
 export async function POST(req: Request) {
   // Connecting to the database (Assuming connectDB() is a function you've defined)
-  await connectDB();
+  const isConnected = await connectDB();
+
+  if(!isConnected){
+    return Response.json({ message: "Database connection failed"})
+  }
 
   const body = await req.json(); // Parse the incoming request body
 
@@ -57,15 +61,16 @@ export async function POST(req: Request) {
 
       // Check if the address already exists in the database
       const existingAddress = await BitcoinAddressModel.findOne({ address });
-      if (!existingAddress) {
-          // Create and save a new address if it doesn't exist
-          const newAddress = new BitcoinAddressModel({ address, status });
-          await newAddress.save();
-      }
+      if (existingAddress) {
+        return Response.json({message: "Address already exists"})
+    }
+    // Create and save a new address if it doesn't exist
+    const newAddress = new BitcoinAddressModel({ address, status });
+    await newAddress.save();
   }
 
   return new Response(JSON.stringify({ message: "Data processed successfully" }), {
-      status: 200,
+      status: 200, 
       headers: {
           'Content-Type': 'application/json',
       },

@@ -1,25 +1,19 @@
-//Schemas for storing the btc address , //address as a parameter in the post request  
+//Schemas for storing the btc address , //address as a parameter in the post request
 //Schema for storing the list of transactions associated particular btc adress
-import mongoose, {Schema, Document} from "mongoose";
+import mongoose, { Schema, Document } from "mongoose";
 
-interface BitcoinAddress {
-    address: string,
-    // to: String,
-    status: string,
-    createdAt: Date,
-    pinged_At: Date
-    
- }
- const BitcoinAddressSchema = new Schema<BitcoinAddress>({
+interface BitcoinAddress extends Document {
+  address: string;
+  status: string;
+  createdAt: Date;
+  pingedAt: Date;
+}
+const BitcoinAddressSchema = new Schema<BitcoinAddress>({
   address: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
-  // to:{
-  //   type: String,
-  //   required: true,
-  // },
   status: {
     type: String,
     required: true,
@@ -29,10 +23,17 @@ interface BitcoinAddress {
     default: Date.now,
   },
   //when it stops checking then it would reset
-  pinged_At: {
+  pingedAt: {
     type: Date,
-  }
+    default: Date.now
+  },
 });
 
+export const BitcoinAddressModel = mongoose.models.BitcoinAddress
+  ? mongoose.model<BitcoinAddress>("BitcoinAddress")
+  : mongoose.model<BitcoinAddress & Document>(
+      "BitcoinAddress",
+      BitcoinAddressSchema
+    );
 
- export const BitcoinAddressModel = mongoose.model("BitcoinAddress") || mongoose.model<BitcoinAddress & Document>('BitcoinAddress', BitcoinAddressSchema);
+
