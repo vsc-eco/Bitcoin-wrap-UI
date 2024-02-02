@@ -1,6 +1,3 @@
-//TODO: Reloading animation for the different style
-
-
 import { useLayoutEffect } from "react";
 import {
   Button,

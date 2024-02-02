@@ -22,14 +22,21 @@ export async function fetchTransactions(address: String) {
   
   async function checkForTx() {
     //connect the database
-    await connectDB();
-    const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
+    const isConnected = await connectDB();
+    if(!isConnected){
+       return Response.json({ message: "Database not connected"})
+    }
+    const oneHourAgo = new Date(Date.now()); 
+    console.log(Number(oneHourAgo))
     const fetchedAddresses = await BitcoinAddressModel.find({
         pinged_At: { $gt: oneHourAgo },
       });
+
+      console.log(fetchedAddresses);
     //check for the new transactions
     for (const {address} of fetchedAddresses) {
       try {
+        console.log(address)
         let transactions = await fetchTransactions(address);
   
         //process each pending transactions

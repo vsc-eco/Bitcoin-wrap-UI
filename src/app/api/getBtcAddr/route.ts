@@ -2,34 +2,6 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { connectDB } from "../../../utils/db";
 import { BitcoinAddressModel } from "../../../utils/BitcoinAddressModel";
 
-// export async function POST(req: Request) {
-//   //connecting to the database
-//   await connectDB();
-
-//   const body = await req.json();
-
-//   for (const item of body) {
-//     const { address, status } = item;
-
-//     // Input validation
-//     if (!address || !status) {
-//       return Response.json({ message: "Missing address or label" });
-//     }
-
-//     // if the address already exists
-//     const existingAddress = await BitcoinAddressModel.findOne({ address });
-//     if (existingAddress) {
-//       return Response.json({ message: "Address already exists" });
-//     }
-
-//     const newAddress = new BitcoinAddressModel({ address, status });
-//     await newAddress.save();
-
-//     return Response.json(newAddress);
-//   }
-// }
-
-//TODO: why pinged_At is not getting stored as parameter
 export async function POST(req: Request) {
   // Connecting to the database (Assuming connectDB() is a function you've defined)
   const isConnected = await connectDB();
@@ -65,7 +37,7 @@ export async function POST(req: Request) {
         return Response.json({message: "Address already exists"})
     }
     // Create and save a new address if it doesn't exist
-    const newAddress = new BitcoinAddressModel({ address, status });
+    const newAddress = new BitcoinAddressModel({ address, status, pingedAt: Number(Date.now()) });
     await newAddress.save();
   }
 

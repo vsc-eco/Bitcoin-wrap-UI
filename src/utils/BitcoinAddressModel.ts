@@ -6,7 +6,7 @@ interface BitcoinAddress extends Document {
   address: string;
   status: string;
   createdAt: Date;
-  pingedAt: Date;
+  pingedAt: Number;
 }
 const BitcoinAddressSchema = new Schema<BitcoinAddress>({
   address: {
@@ -24,8 +24,8 @@ const BitcoinAddressSchema = new Schema<BitcoinAddress>({
   },
   //when it stops checking then it would reset
   pingedAt: {
-    type: Date,
-    default: Date.now
+    type: Number,
+    
   },
 });
 
