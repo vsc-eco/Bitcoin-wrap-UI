@@ -46,40 +46,86 @@ export async function GET(req: NextRequest) {
   const fetchedAddresses = await bitcoinAddresses.find({}).toArray();
   // console.log(fetchedAddresses)
   
-  for (const result of fetchedAddresses) {
-    console.log("This is the address", result.address);
-    try {
-      const {data} = await axios.get<Transaction>(`https://mempool.space/api/address/${result.address}/txs`)
-      console.log("These are the transactions -> ", data)
+//   for (const result of fetchedAddresses) {
+//     console.log("This is the address", result.address);
+//     try {
+//       const {data} = await axios.get<Transaction>(`https://mempool.space/api/address/${result.address}/txs`)
+//       console.log("These are the transactions -> ", data)
      
-      const customData = data.map(item => (
-        {
-          txid: item.txid,
-          address: result.address,
-          vin:{
-            prevout: {
-              address: item.vin[0].prevout.scriptpubkey_address,
-              value: item.vin[0].prevout.value
-            }
-          },
-          vout: item.vout.map(i => (
-            {
-              destination: i.scriptpubkey_address,
-              value: i.value
-            }
-          )),
-            size: item.size,
-            fee: item.fee,
-            status: item.status.confirmed ? "confirmed" : "pending",
-            stored_at: Date.now()
-        }
-      ))
-      // store it into the database 
-      const isStored = await Transactions.insertMany(customData);
-      return NextResponse.json({message: "Addresses fetched from the database"})
-    } catch (error) {
-      console.error(`Error fetching transactions for address ${result.address}:`, error);
-    }
-  }
+//       const customData = data.map(item => (
+//         {
+//           txid: item.txid,
+//           address: result.address,
+//           vin:{
+//             prevout: {
+//               address: item.vin[0].prevout.scriptpubkey_address,
+//               value: item.vin[0].prevout.value
+//             }
+//           },
+//           vout: item.vout.map(i => (
+//             {
+//               destination: i.scriptpubkey_address,
+//               value: i.value
+//             }
+//           )),
+//             size: item.size,
+//             fee: item.fee,
+//             status: item.status.confirmed ? "confirmed" : "pending",
+//             stored_at: Date.now()
+//         }
+//       ))
+
+//       // store it into the database 
+//       const isStored = await Transactions.updateMany(customData);
+//       return NextResponse.json({message: "Addresses fetched from the database"})
+//     } catch (error) {
+//       console.error(`Error fetching transactions for address ${result.address}:`, error);
+//     }
+//   }
   
+// }
+
+
+for (const result of fetchedAddresses) {
+  console.log("This is the address", result.address);
+  try {
+    const {data} = await axios.get<Transaction>(`https://mempool.space/api/address/${result.address}/txs`)
+    console.log("These are the transactions -> ", data)
+   
+    const customData = data.map(item => (
+      {
+        txid: item.txid,
+        address: result.address,
+        vin:{
+          prevout: {
+            address: item.vin[0].prevout.scriptpubkey_address,
+            value: item.vin[0].prevout.value
+          }
+        },
+        vout: item.vout.map(i => (
+          {
+            destination: i.scriptpubkey_address,
+            value: i.value
+          }
+        )),
+          size: item.size,
+          fee: item.fee,
+          status: item.status.confirmed ? "confirmed" : "pending",
+          stored_at: new Date()
+      }
+    ))
+
+    // Update it into the database 
+    for (const transaction of customData) {
+      const filter = { txid: transaction.txid };
+      const updateDocument = {
+        $set: transaction,
+      };
+      const isUpdated = await Transactions.updateOne(filter, updateDocument, { upsert: true });
+    }
+    return NextResponse.json({message: "Transactions updated in the database"})
+  } catch (error) {
+    console.error(`Error fetching transactions for address ${result.address}:`, error);
+  }
+}
 }
