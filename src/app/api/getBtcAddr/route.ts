@@ -1,50 +1,44 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-import { connectDB } from "../../../utils/db";
-import { BitcoinAddressModel } from "../../../utils/BitcoinAddressModel";
+import { NextResponse } from "next/server";
+import { client } from "../../../utils/db";
 
-export async function POST(req: Request) {
-  // Connecting to the database (Assuming connectDB() is a function you've defined)
-  const isConnected = await connectDB();
 
-  if(!isConnected){
-    return Response.json({ message: "Database connection failed"})
-  }
+export async function POST(req: Request, ) {
+  
+  await client.connect();
+  try {
 
-  const body = await req.json(); // Parse the incoming request body
+    const db = client.db('test');
+    const bitcoinAddresses = db.collection('bitcoinAddresses');
 
-  // Check if the body is an array
-  if (!Array.isArray(body)) {
-      return new Response(JSON.stringify({ error: "Invalid input format" }), {
-          status: 400,
-          headers: {
-              'Content-Type': 'application/json',
-          },
-      });
-  }
+    const body = await req.json();
 
-  // Iterate over each object in the array
-  for (const item of body) {
+    if (!Array.isArray(body)) {
+      return NextResponse.json({ error: "Invalid input format" });
+
+    }
+
+    for (const item of body) {
       const { address, status } = item;
 
-      // Perform input validation for each item
       if (!address || !status) {
-          continue; // Skip invalid items or handle as needed
+        continue;
       }
 
-      // Check if the address already exists in the database
-      const existingAddress = await BitcoinAddressModel.findOne({ address });
+      const existingAddress = await bitcoinAddresses.findOne({ address });
       if (existingAddress) {
-        return Response.json({message: "Address already exists"})
-    }
-    // Create and save a new address if it doesn't exist
-    const newAddress = new BitcoinAddressModel({ address, status, pingedAt: Number(Date.now()) });
-    await newAddress.save();
-  }
+        return NextResponse.json({ message: "Address already exists" });
 
-  return new Response(JSON.stringify({ message: "Data processed successfully" }), {
-      status: 200, 
-      headers: {
-          'Content-Type': 'application/json',
-      },
-  });
+      }
+
+      const newAddress = { address, status, created_at: Date.now(), pingedAt: Date.now()};
+      await bitcoinAddresses.insertOne(newAddress);
+    }
+
+    return NextResponse.json({ message: "Data processed successfully" });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ message: "Couldnt Process it!" });
+  } finally {
+    await client.close();
+  }
 }

@@ -45,6 +45,7 @@
     "key-did-resolver": "^3.0.0",
     "magic-sdk": "^21.5.0",
     "moment": "^2.29.4",
+    "mongodb": "^6.3.0",
     "mongoose": "^6.12.1",
     "next": "13.4.19",
     "next-qrcode": "^2.5.1",
