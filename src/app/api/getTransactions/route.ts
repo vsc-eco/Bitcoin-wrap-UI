@@ -1,7 +1,5 @@
 import axios from "axios";
-import { connectDB } from "../../../utils/db";
-import { BitcoinTransactionModel } from "../../../utils/TransactionModel";
-import { BitcoinAddressModel } from "../../../utils/BitcoinAddressModel";
+import { client } from "../../../utils/db";}
 import cron from "node-cron";
 import { NextResponse } from "next/server";
 
@@ -34,21 +32,18 @@ import { NextResponse } from "next/server";
 //
 //TODO: we have to take the address as the user input
 export async function GET(req: Request) {
-  const url = new URL(req.url);
-  //we would be fetching the transactions directly from the database
-  const address = url.searchParams.get("address")
-  // const address = '1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv';
-  const response = await axios.get(`https://mempool.space/api/address/${address}/txs`);
   
-  // Assuming you want to return the JSON array of transactions directly:
-  return new Response(JSON.stringify(response.data), {
-      status: 200,
-      headers: {
-          'Content-Type': 'application/json'
-      }
-  });
+   await client.connect();
+   try{
+     const db = client.db('test');
+     const Transctions = db.collection('TransactionSchema')
 
-  //for pending and confirmed transactions 
+     const query = {}
+     
+   }catch(err){
+    console.error(err)
+   }
+
 }
 
 

@@ -1,43 +1,51 @@
-import mongoose from "mongoose";
-import { Schema, Document } from "mongoose";
+export type Transaction = Root2[]
 
-interface TransactionModel extends Document {
-  address: String;
-  txid: String;
-  value: Number;
-  status: String;
-  fee: Number;
-  created_at: Date;
+export interface Root2 {
+  txid: string
+  version: number
+  locktime: number
+  vin: Vin[]
+  vout: Vout[]
+  size: number
+  weight: number
+  sigops: number
+  fee: number
+  status: Status
 }
 
-const TransactionsSchema = new Schema<TransactionModel>({
-  address: {
-    type: String,
-    required: true,
-  },
-  txid: {
-    type: String,
-    required: true,
-  },
-  value: {
-    type: Number,
-    required: true,
-  },
-  status: {
-    type: String,
-    enum: ["pending", "confirmed", "failed"],
-    required: true,
-  },
-  fee: Number,
-  created_at: {
-    type: Date,
-    default: Date.now,
-  },
-});
+export interface Vin {
+  txid: string
+  vout: number
+  prevout: Prevout
+  scriptsig: string
+  scriptsig_asm: string
+  witness?: string[]
+  is_coinbase: boolean
+  sequence: number
+  inner_redeemscript_asm?: string
+  inner_witnessscript_asm?: string
+}
 
-export const BitcoinTransactionModel = mongoose.models.TransactionModel
-  ? mongoose.model<TransactionModel>("TransactionSchema")
-  : mongoose.model<TransactionModel & Document>(
-      "TransctionSchema",
-      TransactionsSchema
-    );
+export interface Prevout {
+  scriptpubkey: string
+  scriptpubkey_asm: string
+  scriptpubkey_type: string
+  scriptpubkey_address: string
+  value: number
+}
+
+export interface Vout {
+  scriptpubkey: string
+  scriptpubkey_asm: string
+  scriptpubkey_type: string
+  scriptpubkey_address: string
+  value: number
+}
+
+export interface Status {
+  confirmed: boolean
+  block_height: number
+  block_hash: string
+  block_time: number
+}
+
