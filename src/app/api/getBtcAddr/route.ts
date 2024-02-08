@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { client } from "../../../utils/db";
 
+//TODO: Updated the pingedAt
 
 export async function POST(req: Request, ) {
   
@@ -26,6 +27,12 @@ export async function POST(req: Request, ) {
 
       const existingAddress = await bitcoinAddresses.findOne({ address });
       if (existingAddress) {
+        const updatePing = {
+          $set: {
+            pingedAt: Date.now()
+          }
+        } 
+        await bitcoinAddresses.updateOne({}, updatePing)
         return NextResponse.json({ message: "Address already exists" });
 
       }
