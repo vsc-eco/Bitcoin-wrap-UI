@@ -1,9 +1,8 @@
 import axios from "axios";
 import { client } from "../../../utils/db";
 import cron from "node-cron";
+import { NextApiRequest, NextApiResponse } from "next";
 import { NextResponse } from "next/server";
-
-
 
 /**
  * get transactions
@@ -14,31 +13,41 @@ import { NextResponse } from "next/server";
  * - Decode transaction <-- talk with me when you get to that
  * -- Extracting the value
  * -- Extracting the destination
- * -- Extracting fee == 3390  
+ * -- Extracting fee == 3390
  * --
  */
 //
 //TODO: we have to take the address as the user input
 export async function GET(req: Request) {
-  
-   await client.connect();
-   try{
-     const db = client.db('test');
-     const Transactions = db.collection('TransactionSchema')
+  await client.connect();
+  try {
+    const db = client.db("test");
+    const Transactions = db.collection("TransactionSchema");
 
-     //apply the filter 
-     const query = {}
-     const options = {}
+    const url = new URL(req.url);
+    const params = url.searchParams
+    let fee = Number(params.get('fee'))
+    let status = params.get('status')
+    let address = params.get('address')
 
-     const result = await Transactions.find({}).toArray()
-     
-     return NextResponse.json(result)
-   }catch(err){
-    console.error(err)
-   }
 
+    const query = {}
+    if(fee){
+      query['fee'] = { $eq: fee}
+    }
+    if(status){
+      query['status'] = {$eq: status}
+    }
+    if(address){
+      query['address'] = {$eq: address}
+    }
+
+    const result = await Transactions.find(query).toArray();
+    return NextResponse.json(result);
+  } catch (err) {
+    console.error(err);
+    return NextResponse.json({
+      error: "An error occurred while fetching transactions",
+    });
+  }
 }
-
-
-//Things to figure out
-// How to start the cron job 
