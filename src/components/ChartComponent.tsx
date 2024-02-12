@@ -11,11 +11,26 @@ const App = () => {
         toolbar: {
           show: false,
         },
+        sparkline: {
+          enabled: true
+        }
       },
       dataLabels: {
         enabled: false,
       },
+      legend:{
+        show: false
+      },
+      stroke: {
+        width: 1
+      },
+      tooltip: {
+        enabled: false,
+      },
       xaxis: {
+        labels: {
+          show: true
+        },
         categories: [
           "",
           "Nov 10",
@@ -29,12 +44,12 @@ const App = () => {
           show: false,
         },
         axisLabel: {
-          show: false,
+          show: true,
         },
       },
       yaxis: {
         labels: {
-          show: false,
+          show: true,
         },
         min: 0,
         max: 100,
@@ -46,9 +61,9 @@ const App = () => {
       fill: {
         type: "gradient",
         gradient: {
-          shadeIntensity: 1,
-          opacityFrom: 0.7,
-          opacityTo: 0.9,
+          shadeIntensity: 0.8,
+          opacityFrom: 0.4,
+          opacityTo: 0.7,
           stops: [0, 100],
         },
       },
@@ -65,7 +80,7 @@ const App = () => {
     <Chart
       options={chartData.options}
       series={chartData.series}
-      width="610"
+      width="600"
       type="area"
     />
   );

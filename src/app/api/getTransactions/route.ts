@@ -16,8 +16,7 @@ import { NextResponse } from "next/server";
  * -- Extracting fee == 3390
  * --
  */
-//
-//TODO: we have to take the address as the user input
+
 export async function GET(req: Request) {
   await client.connect();
   try {

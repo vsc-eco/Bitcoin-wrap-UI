@@ -1,3 +1,4 @@
+//TODO: 
 import React from "react";
 import {
   Flex,
@@ -12,14 +13,24 @@ import { FaChartLine } from "react-icons/fa";
 import { FaCalendarDays } from "react-icons/fa6";
 import ChartComponent from "./ChartComponent";
 import { IoChevronDownOutline } from "react-icons/io5";
-import { MdArrowOutward } from "react-icons/md";
-
+import { GoArrowUpRight } from "react-icons/go";
 type Props = {};
 
 const Dashboard = (props: Props) => {
   const response = JSON.parse(localStorage.getItem("login.auth")!)[
     "authId"
   ].split(":")[1];
+
+  //function for making the font smaller after dots
+   const priceElement = document.getElementById("price");
+
+   //Get the text and split at the decimal point
+   const [dollars, cents] = (priceElement?.textContent || "").split('.');
+  //  const centElement = document.createElement('span');
+  //  centElement.textContent = cents;
+  //  centElement.style.fontSize = 'xs' 
+  //  priceElement!.textContent = dollars + '.';
+  //  priceElement?.appendChild(centElement);
 
     return (
       <Flex direction="column" mt={32}>
@@ -38,21 +49,21 @@ const Dashboard = (props: Props) => {
             p={0}
           >
             <CardHeader>
-              <Text>Hive balance</Text>
+              <Text fontSize={"sm"}>Hive balance</Text>
               <Flex justifyContent={"space-between"}>
                 <Flex>
-                  <Text fontWeight={"bolder"} fontSize={"larger"}>
-                    $5, 20001
+                  <Text id="price"  fontSize={"32px"}>
+                    {"$110"}.<span style={{ fontSize: "0.6em"}} >{"22"}</span>
                   </Text>
                 </Flex>
-                <Flex>
+                <Flex py={4}>
                   <Flex
                     mx={2}
                     my={1}
                     p={1}
                     fontSize={"l"}
                     boxShadow="2px 2px rgba(0, 0, 0, 0.2)"
-                    borderRadius={"sm"}
+                    borderRadius={"md"}
                     cursor={"pointer"}
                   >
                     <FaChartLine />
@@ -63,7 +74,7 @@ const Dashboard = (props: Props) => {
                     p={1}
                     fontSize={"l"}
                     boxShadow="2px 2px rgba(0, 0, 0, 0.2)"
-                    borderRadius={"sm"}
+                    borderRadius={"md"}
                     cursor={"pointer"}
                   >
                     <FaCalendarDays />
@@ -72,19 +83,19 @@ const Dashboard = (props: Props) => {
               </Flex>
               <Flex justifyContent="space-between">
                 <Flex>
-                  <Flex mx={1} color={"grey.700"}>
-                    <Text fontSize="xs">Last 30 days</Text>
+                  <Flex color={"grey.700"} alignItems={"center"}>
+                    <Text fontSize="sm">Last 30 days</Text>
                     <Text fontSize="s">
                       <IoChevronDownOutline />
                     </Text>
                   </Flex>
                 </Flex>
-                <Flex fontSize={"l"}>
-                  <Flex color={"green.700"}>
-                    <MdArrowOutward />
+                <Flex fontSize={"sm"} alignItems={"center"}>
+                  <Flex fontSize={"lg"} color={"green.700"}>
+                  <GoArrowUpRight />
                   </Flex>
                   <Flex>
-                    <Text fontSize={"sm"} pr={2}>
+                    <Text pr={2}>
                       $72,966
                     </Text>
                   </Flex>
@@ -93,7 +104,7 @@ const Dashboard = (props: Props) => {
             </CardHeader>
             <ChartComponent />
           </Card>
-          <AccountComponent />
+          {/* <AccountComponent /> */}
         </Flex>
       </Flex>
     );
