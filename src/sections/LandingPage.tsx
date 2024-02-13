@@ -3,7 +3,7 @@ import { Box, Text, Flex } from "@chakra-ui/react";
 import Image from "next/image";
 import Sidebar from "../components/Sidebar";
 
-
+//TODO: Hive Finance smooth Defi have to bit little bit shorter 
 type Props = {};
 
 const LandingPage = (props: Props) => {
@@ -15,13 +15,13 @@ const LandingPage = (props: Props) => {
       bgGradient="linear(to-l, #919ca9, #fefeff)"
     >
       <Flex
-        h="100vh"
+        h="90vh"
         w="full"
         justifyContent="center"
         alignItems="center"
         flex={1} // Flex to occupy available space
       >
-        <Box py={"4"} textAlign="center">
+        <Box  pb={64} textAlign="center">
           <Text fontSize={["2rem", "3rem", "4rem", "6rem"]} fontWeight="bolder">
             HIVE Finance: smooth DeFi experience
           </Text>

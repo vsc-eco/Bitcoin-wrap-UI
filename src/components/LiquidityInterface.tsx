@@ -1,4 +1,4 @@
-import React, { experimental_useEffectEvent, useEffect, useState } from "react";
+import React, {useLayoutEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -61,7 +61,7 @@ const LiquidityInterface = (props: Props) => {
   //useState for reloading
   const [IsReload, setIsReload] = useState(true);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const reloadTime = setTimeout(() => {
       setIsReload(false);
     }, 3000);

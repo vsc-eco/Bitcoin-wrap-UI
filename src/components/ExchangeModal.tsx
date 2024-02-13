@@ -21,7 +21,7 @@ import { FaBitcoin } from "react-icons/fa";
 import { MdCancelPresentation } from "react-icons/md";
 import { TbExchange } from "react-icons/tb";
 import { BiSolidLockOpenAlt } from "react-icons/bi";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useLayoutEffect } from "react";
 import { Card, CardHeader, CardBody } from "@chakra-ui/react";
 import {
   useQuery,

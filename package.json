@@ -21,14 +21,16 @@
     "@fontsource/ia-writer-quattro": "^5.0.7",
     "@fontsource/open-sans": "^5.0.15",
     "@hiveio/dhive": "^1.2.7",
+    "@magic-ext/oauth": "^15.6.0",
     "@next/font": "^13.5.4",
     "@stablelib/sha256": "^1.0.1",
-    "@tanstack/react-query": "^5.8.9",
+    "@tanstack/react-query": "^5.18.1",
     "@types/node": "20.6.0",
     "@types/react": "^18.2.21",
     "@types/react-dom": "18.2.7",
     "@vercel/analytics": "^1.1.1",
     "apexcharts": "^3.44.2",
+    "axios": "^1.6.5",
     "bitcoinjs-lib": "^6.1.5",
     "bs58check": "^3.0.1",
     "chart.js": "^4.4.1",
@@ -41,9 +43,13 @@
     "install": "^0.13.0",
     "key-did-provider-ed25519": "^3.0.2",
     "key-did-resolver": "^3.0.0",
+    "magic-sdk": "^21.5.0",
     "moment": "^2.29.4",
+    "mongodb": "^6.3.0",
+    "mongoose": "^6.12.1",
     "next": "13.4.19",
     "next-qrcode": "^2.5.1",
+    "node-cron": "^3.0.3",
     "qrcode.react": "^3.1.0",
     "react": "18.2.0",
     "react-apexcharts": "^1.4.1",
@@ -54,6 +60,7 @@
     "zustand": "^4.4.1"
   },
   "devDependencies": {
+    "dotenv": "^16.3.1",
     "react-icons": "^4.11.0"
   }
 }

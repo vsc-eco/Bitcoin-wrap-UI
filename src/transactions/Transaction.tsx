@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useLayoutEffect } from "react";
 import Head from "next/head"; // Import Head component
 import {
   Button,
@@ -20,7 +20,7 @@ import {
 import { HiDownload } from "react-icons/hi";
 import { CiFilter } from "react-icons/ci";
 import { ErrorPolicy, gql } from "@apollo/client";
-import Axios from "axios";
+import axios from "axios";
 import Moment from "moment";
 
 //import the css
@@ -68,9 +68,9 @@ const query = gql`
 function useBitcoinPrice() {
   const [price, setPrice] = useState();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     void (async () => {
-      const { data } = await Axios.get(`/api/bitcoin_price`);
+      const { data } = await axios.get(`/api/bitcoin_price`);
       setPrice(data.price);
     })();
   }, []);
@@ -90,7 +90,7 @@ const Transaction = (props: Props) => {
   const [isTransactionDetailOpen, setTransactionDetailOpen] = useState(false);
   const [selectedTransaction, setSelectedTransaction] = useState(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (myDid) {
       //   transfer({
       //     dest: "did:key:z6MkryiH1U2zQ344Rtuq1iwk8xY5Fhf9Kwb4Xiwf7gbcZE2L",
@@ -108,7 +108,7 @@ const Transaction = (props: Props) => {
     errorPolicy: "ignore",
   });
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const pid = setInterval(() => {
       refetch();
     }, 15_000);

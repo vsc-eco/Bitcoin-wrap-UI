@@ -1,5 +1,5 @@
 
-import  React, {useEffect, useRef, useState } from "react";
+import  React, {useLayoutEffect, useRef, useState } from "react";
 import { Flex, Text, Box } from "@chakra-ui/react";
 import Image from "next/image";
 import { FaBitcoin } from "react-icons/fa6";

@@ -29,12 +29,12 @@ const Navbar = () => {
           <RiArrowDropDownLine />
           </Flex>
         </Link>
-        <Link mx={4} fontWeight="bold">
+        {/* <Link mx={4} fontWeight="bold">
           <Flex alignItems="center">
           <Text fontSize={["10px", "10px", "12px", "16px"]}>FAQ</Text>
           <RiArrowDropDownLine />
           </Flex>
-        </Link>
+        </Link> */}
         {/* <Link color="#535454" mx={2} fontWeight="bold" >
           <Text size={size}>Contacts</Text>
         </Link>

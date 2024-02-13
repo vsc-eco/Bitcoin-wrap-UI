@@ -1,5 +1,4 @@
 "use client";
-import React, { useEffect } from "react";
 import Navbar from "../components/Navbar";
 import { Box } from "@chakra-ui/react";
 import LandingPage from "../sections/LandingPage";
@@ -12,6 +11,7 @@ import { ShowComponentProvider } from "../context/ShowComponent";
 import { TokenAmountProvider } from "../context/TokenTransferContext";
 
 type Props = {};
+
 
 const Page = (props: Props) => {
   return (

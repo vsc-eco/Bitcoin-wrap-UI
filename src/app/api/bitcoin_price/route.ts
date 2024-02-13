@@ -1,10 +1,10 @@
-import Axios from "axios";
+import axios from "axios";
 
 const CMC_KEY = "5571dcf4-41b7-4e23-8f8d-b1e938cc0697";
 
-export default async function handler(req, res) {
+export async function GET(req: Request) {
   try {
-    const { data } = await Axios.get(
+    const { data } = await axios.get(
       `https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest`,
       {
         params: {
@@ -16,7 +16,7 @@ export default async function handler(req, res) {
       }
     );
       console.log(data, data.data['1'].quote.USD.price)
-    res.status(200).json({
+    return Response.json({
       price:data.data['1'].quote.USD.price
     });
   } catch (ex) {
@@ -24,3 +24,4 @@ export default async function handler(req, res) {
     throw ex
   }
 }
+
