@@ -1,9 +1,9 @@
-import axios from "axios";
 import { client } from "../../../utils/db";
 import cron from "node-cron";
-import { NextApiRequest, NextApiResponse } from "next";
 import { NextResponse } from "next/server";
 
+
+export const dynamic = 'force-dynamic'
 /**
  * get transactions
  * Options:

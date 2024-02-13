@@ -20,7 +20,7 @@ import {
 import { HiDownload } from "react-icons/hi";
 import { CiFilter } from "react-icons/ci";
 import { ErrorPolicy, gql } from "@apollo/client";
-import Axios from "axios";
+import axios from "axios";
 import Moment from "moment";
 
 //import the css
@@ -70,7 +70,7 @@ function useBitcoinPrice() {
 
   useLayoutEffect(() => {
     void (async () => {
-      const { data } = await Axios.get(`/api/bitcoin_price`);
+      const { data } = await axios.get(`/api/bitcoin_price`);
       setPrice(data.price);
     })();
   }, []);
