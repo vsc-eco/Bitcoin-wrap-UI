@@ -1,21 +1,25 @@
 import { NextResponse } from "next/server";
 import { client } from "../../../utils/db";
 
-//TODO: Updated the pingedAt
+//TODO: Idhr ek problem hai deployment mei 
+
+async function withDatabaseConnection(handler){
+  await client.connect();
+  try{
+       return await handler()
+  }catch(err){
+    console.error(err);
+  }
+}
 
 export async function POST(req: Request, ) {
   
-  await client.connect();
-  try {
-
+  return withDatabaseConnection(async ()=> {
     const db = client.db('test');
     const bitcoinAddresses = db.collection('bitcoinAddresses');
-
     const body = await req.json();
-
     if (!Array.isArray(body)) {
       return NextResponse.json({ error: "Invalid input format" });
-
     }
 
     for (const item of body) {
@@ -24,7 +28,6 @@ export async function POST(req: Request, ) {
       if (!address || !status) {
         continue;
       }
-
       const existingAddress = await bitcoinAddresses.findOne({ address });
       if (existingAddress) {
         const updatePing = {
@@ -32,20 +35,13 @@ export async function POST(req: Request, ) {
             pingedAt: Date.now()
           }
         } 
-        await bitcoinAddresses.updateOne({}, updatePing)
+        await bitcoinAddresses.updateMany({}, updatePing)
         return NextResponse.json({ message: "Address already exists" });
-
       }
 
       const newAddress = { address, status, created_at: Date.now(), pingedAt: Date.now()};
       await bitcoinAddresses.insertOne(newAddress);
     }
-
     return NextResponse.json({ message: "Data processed successfully" });
-  } catch (error) {
-    console.error(error);
-    return NextResponse.json({ message: "Couldnt Process it!" });
-  } finally {
-    await client.close();
-  }
+  })
 }
