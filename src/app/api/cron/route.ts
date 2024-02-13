@@ -47,6 +47,10 @@ export async function GET(req: NextRequest) {
   //fetching the addresses
   const fetchedAddresses = await bitcoinAddresses.find(query).toArray();
 
+  if(fetchedAddresses.length === 0){
+    return NextResponse.json({message: "No Addresses that are pinged recently an hour ago!"})
+  }
+
   for (const result of fetchedAddresses) {
     console.log("This is the address", result.address);
     try {
@@ -90,7 +94,6 @@ export async function GET(req: NextRequest) {
           "vout.destination": 1
         })
 
-        //TODO: indexing to access the destination address
         // getting the indexes
         let indexes = await Transactions.indexInformation();
         console.log(indexes)
