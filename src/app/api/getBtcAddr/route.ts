@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
 import { client } from "../../../utils/db";
 
-//TODO: Idhr ek problem hai deployment mei 
-
+//TODO: Idhr ek problem hai deployment mei
 async function withDatabaseConnection(handler){
   await client.connect();
   try{
@@ -14,7 +13,7 @@ async function withDatabaseConnection(handler){
 
 export async function POST(req: Request, ) {
   
-  return withDatabaseConnection(async ()=> {
+    await client.connect();
     const db = client.db('test');
     const bitcoinAddresses = db.collection('bitcoinAddresses');
     const body = await req.json();
@@ -43,5 +42,4 @@ export async function POST(req: Request, ) {
       await bitcoinAddresses.insertOne(newAddress);
     }
     return NextResponse.json({ message: "Data processed successfully" });
-  })
 }
