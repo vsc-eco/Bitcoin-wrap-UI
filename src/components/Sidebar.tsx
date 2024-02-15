@@ -88,11 +88,11 @@ const Sidebar = ({
           justifyContent="space-between"
           marginX="10px"
           position={"absolute"}
-          bottom={"55px"}
+          bottom={"12px"}
           width={"100%"}
         >
           <Flex justifyContent="center" alignItems="center">
-            <BiSolidLogInCircle />
+            <BiSolidLogInCircle size={"18px"}/>
             <Text
               ml={2}
               fontSize="lg"
