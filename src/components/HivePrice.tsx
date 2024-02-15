@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect, useLayoutEffect} from "react";
 import { Flex, Text, Box } from "@chakra-ui/react";
 import Image from "next/image";
 
@@ -20,6 +20,12 @@ const HivePrice = (props: Props) => {
 
   const [InputValue, setInputValue] = useState<String | undefined>("-1.90%");
   
+  //for api use
+
+  // useLayoutEffect(()=> {
+  //   const updatedValue = fetchData();
+  //   setInputValue(udpatedValue)
+  // }, [])
 
   return (
     <Flex
@@ -48,7 +54,7 @@ const HivePrice = (props: Props) => {
           </Box>
           <Box>
             <AreaChart width={124} height={36} data={data}>
-              <Tooltip />
+              {/* <Tooltip /> */}
               <Area type="bump" dataKey="uv" stroke="#236ee8" fill="#80a7e8" dot={false} />
             </AreaChart>
           </Box>
@@ -57,5 +63,6 @@ const HivePrice = (props: Props) => {
     </Flex>
   );
 };
+
 
 export default HivePrice;

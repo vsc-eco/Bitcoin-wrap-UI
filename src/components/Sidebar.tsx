@@ -1,26 +1,50 @@
+import Image from "next/image";
 import React from "react";
 import { Box, VStack, Text, Flex, Button } from "@chakra-ui/react";
 import { TbExchange } from "react-icons/tb";
 import { MdAssessment } from "react-icons/md";
 import { TfiMenuAlt } from "react-icons/tfi";
 import { MdOutlineCurrencyExchange } from "react-icons/md";
-import Image from "next/image";
 
 import { AccountContext, useAccountContext } from "../context/AccountContext";
 import { useContext } from "react";
 import { ResolveUsername } from "../hooks/Hive";
+import { BiSolidLogInCircle } from "react-icons/bi";
 
 const Sidebar = ({
   handleExchangeOnClick,
   handleTransactionOnClick,
   handleDexComponent,
   handleTradeComponent,
-  handleSignUpComponent
+  handleSignUpComponent,
+  resolveUsername,
 }) => {
   const { triggerLoginWithHive, myDid } = useAccountContext();
-  const ac = useContext(AccountContext);
 
-  const did = ResolveUsername("vaultec");
+  const did = resolveUsername;
+
+  const menuItems = [
+    {
+      icon: <MdAssessment />,
+      text: "Home",
+      onClick: handleTradeComponent,
+    },
+    {
+      icon: <TbExchange />,
+      text: "Wrap",
+      onClick: handleExchangeOnClick,
+    },
+    {
+      icon: <MdOutlineCurrencyExchange />,
+      text: "Dex",
+      onClick: handleDexComponent,
+    },
+    {
+      icon: <TfiMenuAlt />,
+      text: "Transactions",
+      onClick: handleTransactionOnClick,
+    },
+  ];
 
   return (
     <Box
@@ -34,68 +58,31 @@ const Sidebar = ({
       position="relative"
     >
       <VStack align="start">
-        <Flex alignItems="center" justifyContent="space-between" marginX="10px">
+        {menuItems.map((item) => (
           <Flex
+            key={item.text}
             alignItems="center"
+            justifyContent={"center"}
             _hover={{ color: "blue.500" }}
-            onClick={handleTradeComponent}
+            onClick={item.onClick}
+            marginX={"10px"}
           >
-            <MdAssessment />
-            <Text
+            <Flex
+            alignItems={"center"}
+            >
+              {item.icon}
+              <Text
               ml={1}
               fontSize="lg"
-              fontWeight="bold"
-              style={{ cursor: "pointer" }}
-            >
-              Home
-            </Text>
+              fontWeight={"bold"}
+              cursor={"pointer"}
+              >
+               {item.text}
+              </Text>
+
+            </Flex>
           </Flex>
-        </Flex>
-        <Flex alignItems="center" justifyContent="space-between" marginX="10px">
-          <Flex alignItems="center" _hover={{ color: "blue.500" }}>
-            <TbExchange />
-            <Text
-              ml={2}
-              fontSize="lg"
-              fontWeight="bold"
-              onClick={handleExchangeOnClick}
-              style={{ cursor: "pointer" }}
-            >
-              Wrap
-            </Text>
-          </Flex>
-        </Flex>
-        <Flex alignItems="center" justifyContent="space-between" marginX="10px">
-          <Flex alignItems="center" _hover={{ color: "blue.500" }}>
-            <MdOutlineCurrencyExchange />
-            <Text
-              ml={2}
-              fontSize="lg"
-              fontWeight="bold"
-              onClick={handleDexComponent}
-              style={{ cursor: "pointer" }}
-            >
-              Dex
-            </Text>
-          </Flex>
-        </Flex>
-        <Flex alignItems="center" justifyContent="space-between" marginX="10px">
-          <Flex
-            alignItems="center"
-            _hover={{ color: "blue.500" }}
-            onClick={handleTransactionOnClick}
-          >
-            <TfiMenuAlt />
-            <Text
-              ml={1}
-              fontSize="lg"
-              fontWeight="bold"
-              style={{ cursor: "pointer" }}
-            >
-              Transactions
-            </Text>
-          </Flex>
-        </Flex>
+        ))}
         <Flex
           alignItems="center"
           justifyContent="space-between"
@@ -105,19 +92,18 @@ const Sidebar = ({
           width={"100%"}
         >
           <Flex justifyContent="center" alignItems="center">
-            <Text ml={5} fontSize="lg" fontWeight="bold">
-              <Button onClick={handleSignUpComponent} colorScheme={"gray"}>Sign in</Button>
+            <BiSolidLogInCircle />
+            <Text
+              ml={2}
+              fontSize="lg"
+              fontWeight="bold"
+              onClick={handleSignUpComponent}
+              cursor={"pointer"}
+              colorScheme="gray"
+            >
+              Sign in
             </Text>
           </Flex>
-        </Flex>
-        <Flex
-          alignItems="center"
-          justifyContent="space-between"
-          marginX="10px"
-          position={"absolute"}
-          bottom={"10px"}
-          width={"100%"}
-        >
         </Flex>
       </VStack>
     </Box>

@@ -1,4 +1,4 @@
-//TODO: make the logo between the Header and the Text
+//TODO: to work the button login 
 import {
   Modal,
   ModalOverlay,
@@ -62,19 +62,25 @@ const HiveModal: React.FC<Props> = ({ isOpen, onClose }) => {
                     mx={2}
                     color={"black"}
                     borderRadius={"2xl"}
-                    onClick={triggerLoginWithHive}
                   >
                     <Image
                       alt="keychain Logo"
                       height={90}
                       width={200}
-                      src="/keychain.png"
+                      src="/keychain.png"    
                       objectFit="cover"
                     />
                   </Flex>
-                  <Input placeholder="Enter username" flexGrow={1} />
+                  <Input
+                   placeholder="Enter username"
+                   flexGrow={1}
+                   onKeyDown={event => {
+                    if(event.key === "Enter"){
+                      triggerLoginWithHive();
+                    }
+                   }} />
                   <Link>
-                    <Button ml={2}>→</Button>
+                    <Button ml={2} onClick={triggerLoginWithHive}>→</Button>
                   </Link>
                 </Flex>
 

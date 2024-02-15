@@ -8,6 +8,7 @@ import { useAccountContext } from "../context/AccountContext";
 import Dashboard from "../components/Dashboard";
 import DexComponent from "../components/DexComponent";
 import SignUpComponent from "../components/Login/SignUpComponent";
+import { ResolveUsername } from "../hooks/Hive";
 
 type Props = {};
 
@@ -78,6 +79,7 @@ const SecondSection = (props: Props) => {
           handleDexComponent={handleDexComponent}
           handleTradeComponent={handleTradeComponent}
           handleSignUpComponent={handleSignUpComponent}
+          resolveUsername={ResolveUsername("vaultec")}
         />
       </Flex>
       {isClient && window.location.hostname !== "wrap.vsc.eco" ? (
