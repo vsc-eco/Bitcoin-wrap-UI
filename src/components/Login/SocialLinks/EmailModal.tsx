@@ -1,4 +1,4 @@
-//TODO: to fetch the details from the constant.ts and remove the .env file
+
 import React, { useState } from "react";
 import {
   Modal,
