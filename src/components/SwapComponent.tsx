@@ -17,6 +17,7 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { FaBitcoin } from "react-icons/fa";
 import Image from "next/image";
 
+//TODO: Input validation for the feilds
 //importing motion component from framer
 import { motion } from "framer-motion";
 
@@ -123,6 +124,7 @@ const SwapComponent = (props: Props) => {
               </InputLeftAddon>
               <Input
                 h={10}
+                type="number"
                 w={"full"}
                 textAlign={"right"}
                 value={tokenAmount}

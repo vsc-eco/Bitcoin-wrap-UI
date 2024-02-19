@@ -1,4 +1,4 @@
-//TODO: to fetch the details from the constant.ts and remove the .env file
+
 import React, { useState } from "react";
 import {
   Modal,
@@ -20,7 +20,6 @@ function EmailModal({ isOpen, onClose }) {
 
   const handleEmail = (e: any) => {
     setEmail(e.target.value);
-    console.log();
   };
 
   //function for handling the login by email
@@ -28,7 +27,6 @@ function EmailModal({ isOpen, onClose }) {
     try {
       const magic = new Magic(process.env.PUBLISHABLE_API_KEY!);
       const didToken = await magic.auth.loginWithMagicLink({ email: email });
-      console.log(didToken);
     } catch (err) {
       if (err) {
         throw err;

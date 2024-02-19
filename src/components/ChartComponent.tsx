@@ -12,7 +12,13 @@ const App = () => {
           show: false,
         },
         sparkline: {
-          enabled: true
+          enabled: false
+        },
+        padding: {
+          top: 0,
+          right: 0,
+          bottom: 0,
+          left: 0
         }
       },
       dataLabels: {
@@ -22,34 +28,40 @@ const App = () => {
         show: false
       },
       stroke: {
-        width: 1
+        width: 0
       },
       tooltip: {
-        enabled: false,
+        enabled: false, // Enable tooltips
+
       },
       xaxis: {
         labels: {
-          show: true
+          show: true,
+          offsetX: -10,
+          offsetY: 0
         },
         categories: [
           "",
-          "Nov 10",
           "Nov 11",
           "Nov 12",
           "Nov 13",
           "Nov 14",
           "Nov 15",
+          "Nov 16",
+          "",
         ],
         axisBorder: {
           show: false,
         },
         axisLabel: {
-          show: true,
+          show: false,
         },
       },
       yaxis: {
         labels: {
-          show: true,
+          show: false,
+          offsetX: 0,
+          offsetY: 0
         },
         min: 0,
         max: 100,
@@ -67,6 +79,25 @@ const App = () => {
           stops: [0, 100],
         },
       },
+      markers: {
+        size: 0, // size of the marker/circle
+        strokeWidth: 1, // border width of the circle
+        hover: {
+          size: 3 // size of the marker when hovered
+        }
+      },
+      annotations : {
+        xaxis: [{
+          x: "Nov 10",
+          label: {
+            text: "Nov 10",
+            style: {
+              color: "#333",
+              background: "transparent"
+            }
+          }
+        }]
+      }
     },
     series: [
       {

@@ -22,6 +22,13 @@ const WBTC = (props: Props) => {
 
   const [InputValue, setInputValue] = useState<String | undefined>("+4.90%");
 
+    //for api use
+
+  // useLayoutEffect(()=> {
+  //   const updatedValue = fetchData();
+  //   setInputValue(udpatedValue)
+  // }, [])
+
   return (
     <Flex
       direction={"column"}
@@ -49,7 +56,7 @@ const WBTC = (props: Props) => {
           </Box>
           <Box>
             <AreaChart width={124} height={36} data={data}>
-              <Tooltip />
+              {/* <Tooltip /> */}
               <Area type="bump" dataKey="uv" stroke="#236ee8" fill="#80a7e8" dot={false} />
             </AreaChart>
           </Box>

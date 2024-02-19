@@ -170,7 +170,7 @@ export const useAccountContext = function () {
   const [myHiveName, setMyHiveName] = useGlobalState("hiveName");
 
   const triggerLoginWithHive = useCallback(async () => {
-    console.log("Triggering login with Hive...");
+    // console.log("Triggering login with Hive...");
     console.log("Hive name:", ac.getHiveName());
 
     try {
