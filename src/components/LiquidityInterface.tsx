@@ -164,6 +164,7 @@ const LiquidityInterface = (props: Props) => {
               </InputLeftAddon>
               <Input
                 h={10}
+                type="number"
                 w={"full"}
                 textAlign={"right"}
                 value={tokenAmount["HBD"]}

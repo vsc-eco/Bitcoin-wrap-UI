@@ -65,7 +65,7 @@ const SecondSection = (props: Props) => {
   }, []);
 
   return (
-    <Flex w="100%" h="90vh">
+    <Flex w="100%" h="100vh">
       <Flex
         w="30%"
         id="sidebar"

@@ -11,6 +11,7 @@ import { useContext } from "react";
 import { ResolveUsername } from "../hooks/Hive";
 import { BiSolidLogInCircle } from "react-icons/bi";
 
+//TODO: disable the items when logged out 
 const Sidebar = ({
   handleExchangeOnClick,
   handleTransactionOnClick,
