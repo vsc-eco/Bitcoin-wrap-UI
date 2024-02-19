@@ -1,4 +1,4 @@
-//TODO: to work the button login 
+
 import {
   Modal,
   ModalOverlay,
@@ -81,6 +81,13 @@ const HiveModal: React.FC<Props> = ({ isOpen, onClose }) => {
                    }} />
                   <Link>
                     <Button ml={2} onClick={triggerLoginWithHive}>→</Button>
+                      src="/keychain.png"
+                      objectFit="cover"
+                    />
+                  </Flex>
+                  <Input placeholder="Enter username" flexGrow={1} />
+                  <Link>
+                    <Button ml={2}>→</Button>
                   </Link>
                 </Flex>
 

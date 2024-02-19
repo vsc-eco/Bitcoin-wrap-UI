@@ -80,6 +80,7 @@ const SecondSection = (props: Props) => {
           handleTradeComponent={handleTradeComponent}
           handleSignUpComponent={handleSignUpComponent}
           resolveUsername={ResolveUsername("vaultec")}
+
         />
       </Flex>
       {isClient && window.location.hostname !== "wrap.vsc.eco" ? (

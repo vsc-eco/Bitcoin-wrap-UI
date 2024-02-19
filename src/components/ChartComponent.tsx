@@ -28,17 +28,14 @@ const App = () => {
         show: false
       },
       stroke: {
-        width: 0
+        width: 1
       },
       tooltip: {
-        enabled: false, // Enable tooltips
-
+        enabled: false,
       },
       xaxis: {
         labels: {
-          show: true,
-          offsetX: -10,
-          offsetY: 0
+          show: true
         },
         categories: [
           "",
@@ -54,7 +51,7 @@ const App = () => {
           show: false,
         },
         axisLabel: {
-          show: false,
+          show: true,
         },
       },
       yaxis: {
