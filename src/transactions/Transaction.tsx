@@ -134,7 +134,7 @@ const Transaction = (props: Props) => {
 
     return (
       <>
-        <Flex justifyContent="center" h="90vh">
+        <Flex justifyContent="center" h="full" >
           <Flex
             direction="column"
             py={4}
@@ -144,8 +144,8 @@ const Transaction = (props: Props) => {
             borderRadius={8}
             margin="auto"
             maxW={["250px", "350px", "550px", "950px"]}
-            boxShadow="0 0 10px rgba(0, 0, 0, 0.1)"
             minH="60vh"
+            boxShadow="0 0 10px rgba(0, 0, 0, 0.2)"
           >
             <Text fontSize="l" fontWeight={"bolder"}>
               Transactions

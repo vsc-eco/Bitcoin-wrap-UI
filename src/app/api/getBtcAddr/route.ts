@@ -1,7 +1,5 @@
 import { NextResponse } from "next/server";
 import { client } from "../../../utils/db";
-
-//TODO: Idhr ek problem hai deployment mei
 async function withDatabaseConnection(handler){
   await client.connect();
   try{

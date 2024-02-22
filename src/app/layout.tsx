@@ -1,6 +1,7 @@
 "use client";
 // app/layout.tsx
 import { Providers } from "./providers";
+import { RouteComponentProvider } from "../context/routeContext";
 import Navbar from "../components/Navbar";
 
 //import the analytics
@@ -11,14 +12,15 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-
   return (
     <html lang="en">
       <body>
         <Providers>
-          <Navbar />
-          {children}
-          <Analytics />
+          <RouteComponentProvider>
+            <Navbar />
+            {children}
+            <Analytics />
+          </RouteComponentProvider>
         </Providers>
       </body>
     </html>

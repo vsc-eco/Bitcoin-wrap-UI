@@ -1,4 +1,4 @@
-//TODO: 
+
 import React from "react";
 import {
   Flex,
@@ -16,6 +16,7 @@ import { IoChevronDownOutline } from "react-icons/io5";
 import { GoArrowUpRight } from "react-icons/go";
 type Props = {};
 
+
 const Dashboard = (props: Props) => {
   const response = JSON.parse(localStorage.getItem("login.auth")!)[
     "authId"
@@ -26,11 +27,7 @@ const Dashboard = (props: Props) => {
 
    //Get the text and split at the decimal point
    const [dollars, cents] = (priceElement?.textContent || "").split('.');
-  //  const centElement = document.createElement('span');
-  //  centElement.textContent = cents;
-  //  centElement.style.fontSize = 'xs' 
-  //  priceElement!.textContent = dollars + '.';
-  //  priceElement?.appendChild(centElement);
+
 
     return (
       <Flex direction="column" mt={32}>
@@ -38,15 +35,16 @@ const Dashboard = (props: Props) => {
           <Text fontSize="xl">Welcome, {response}</Text>
         </Flex>
 
-        <Flex mt={4} w="100%">
+        <Flex mt={4} w="100%" h={"full"}>
           <Card
             bg="white"
             maxW="800px"
-            h="55vh"
+            h="full"
             maxH={"60vh"}
             w={["400px", "300px", "580px", "600px"]}
             m={["0", "0", "1", "3"]}
             p={0}
+            boxShadow="0 0 10px rgba(0, 0, 0, 0.2)"
           >
             <CardHeader>
               <Text fontSize={"sm"}>Hive balance</Text>
@@ -56,13 +54,13 @@ const Dashboard = (props: Props) => {
                     {"$110"}.<span style={{ fontSize: "0.6em"}} >{"22"}</span>
                   </Text>
                 </Flex>
-                <Flex py={4}>
+                {/* <Flex py={4}>
                   <Flex
                     mx={2}
                     my={1}
                     p={1}
                     fontSize={"l"}
-                    boxShadow="2px 2px rgba(0, 0, 0, 0.2)"
+                    boxShadow="0 0 10px rgba(0, 0, 0, 0.2)"
                     borderRadius={"md"}
                     cursor={"pointer"}
                   >
@@ -73,13 +71,12 @@ const Dashboard = (props: Props) => {
                     my={1}
                     p={1}
                     fontSize={"l"}
-                    boxShadow="2px 2px rgba(0, 0, 0, 0.2)"
                     borderRadius={"md"}
                     cursor={"pointer"}
                   >
                     <FaCalendarDays />
                   </Flex>
-                </Flex>
+                </Flex> */}
               </Flex>
               <Flex justifyContent="space-between">
                 <Flex>

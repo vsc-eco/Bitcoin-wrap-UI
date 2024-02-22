@@ -17,7 +17,6 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { FaBitcoin } from "react-icons/fa";
 import Image from "next/image";
 
-//TODO: Input validation for the feilds
 //importing motion component from framer
 import { motion } from "framer-motion";
 
@@ -47,13 +46,14 @@ const SwapComponent = (props: Props) => {
   return (
     <Flex
       justifyContent={"center"}
-      p={5}
+      px={5}
+      py={5}
       maxW="600px"
       borderRadius="md"
       boxShadow="base"
       background="#f5f9fa"
     >
-      <VStack spacing={3}>
+      <VStack spacing={1}>
         <InputGroup>
           <Flex
             direction={"column"}

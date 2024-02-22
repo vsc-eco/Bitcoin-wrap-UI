@@ -35,15 +35,14 @@ const DexComponent = () => {
   return (
     <Flex alignItems={"center"}>
       <VStack
-        w={["700px"]}
-        h={"700px"}
-        p={4}
+        w={["600px"]}
+        h={["60vh"]}
+        spacing={2}
         borderRadius="md"
-        boxShadow="base"
-        spacing={4}
         background="white"
+        boxShadow="0 0 10px rgba(0, 0, 0, 0.2)"
       >
-        <ButtonGroup isAttached variant="outline">
+        <ButtonGroup isAttached variant="outline" py={2}>
           <Button
             borderRadius={"3xl"}
             w={24}
@@ -63,7 +62,7 @@ const DexComponent = () => {
           </Button>
         </ButtonGroup>
 
-        <Flex w={"600px"} justifyContent={"center"} alignItems={"center"}>
+        <Flex w={"500px"} justifyContent={"center"} alignItems={"center"}>
           {activeTab === "swap" && (
             <Box>
               <SwapComponent
@@ -71,7 +70,7 @@ const DexComponent = () => {
                 handleOpen={handleOpen}
                 handleClose={handleClose}
               />
-              <HivePrice />
+              <HivePrice/>
               <WBTC />
             </Box>
           )}

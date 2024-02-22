@@ -10,8 +10,16 @@ import { AccountContext, useAccountContext } from "../context/AccountContext";
 import { useContext } from "react";
 import { ResolveUsername } from "../hooks/Hive";
 import { BiSolidLogInCircle } from "react-icons/bi";
+import { BiSolidLogOutCircle } from "react-icons/bi";
 
-//TODO: disable the items when logged out 
+//check for the auth.login token 
+const authToken = localStorage.getItem("login.auth");
+
+const logout = async () => {
+  await localStorage.removeItem("login.auth");
+  window.location.reload()
+}
+
 const Sidebar = ({
   handleExchangeOnClick,
   handleTransactionOnClick,
@@ -92,7 +100,7 @@ const Sidebar = ({
           bottom={"12px"}
           width={"100%"}
         >
-          <Flex justifyContent="center" alignItems="center">
+         { !authToken ? (<Flex justifyContent="center" alignItems="center">
             <BiSolidLogInCircle size={"18px"}/>
             <Text
               ml={2}
@@ -104,7 +112,20 @@ const Sidebar = ({
             >
               Sign in
             </Text>
-          </Flex>
+          </Flex>) : 
+          (<Flex justifyContent="center" alignItems="center">
+            <BiSolidLogOutCircle size={"18px"}/>
+            <Text
+              ml={2}
+              fontSize="lg"
+              fontWeight="bold"
+              onClick={logout}
+              cursor={"pointer"}
+              colorScheme="gray"
+            >
+              Sign out
+            </Text>
+          </Flex>)}
         </Flex>
       </VStack>
     </Box>

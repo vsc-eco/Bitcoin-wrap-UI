@@ -93,6 +93,7 @@ const ExchangeModal = (props: Props) => {
             h="60vh"
             maxH={"60vh"}
             w={["400px", "500px", "680px", "800px"]}
+            boxShadow="0 0 10px rgba(0, 0, 0, 0.2)"
             m={["0", "0", "1", "3"]}
           >
             <CardHeader>

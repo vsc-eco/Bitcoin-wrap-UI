@@ -1,4 +1,3 @@
-
 import React, { useCallback, useContext, useLayoutEffect } from "react";
 import { hash } from "@stablelib/sha256";
 import { Ed25519Provider } from "key-did-provider-ed25519";
@@ -6,6 +5,7 @@ import KeyResolver from "key-did-resolver";
 import { DID } from "dids";
 import { DHive } from "../const";
 import { createGlobalState } from "react-hooks-global-state";
+import { RouteComponentContext } from "./routeContext";
 
 declare global {
   interface Window {
@@ -85,8 +85,8 @@ export class AccountContextClass {
 
   async loginWithHive(hiveName: string) {
     const loginResult: any = await new Promise((resolve, reject) => {
-      if(window.hive_keychain == undefined){
-        return 
+      if (window.hive_keychain == undefined) {
+        return;
       }
       window.hive_keychain.requestSignBuffer(
         null,
@@ -103,7 +103,7 @@ export class AccountContextClass {
         "https://hive-api.3speak.tv",
         "Login to Hive Finance"
       );
-  });
+    });
 
     const { username } = loginResult.data;
 
@@ -121,8 +121,8 @@ export class AccountContextClass {
     let json_metadata = JSON.parse(accountInfo.posting_json_metadata);
     if (json_metadata?.did !== did.id) {
       json_metadata.did = did.id;
-      if(window.hive_keychain == undefined){
-        return 
+      if (window.hive_keychain == undefined) {
+        return;
       }
       window.hive_keychain.requestBroadcast(
         username,
@@ -164,7 +164,8 @@ const { useGlobalState } = createGlobalState(initialState);
 
 export const useAccountContext = function () {
   const ac = useContext(AccountContext);
-
+  //importing the routing context
+  const { state, dispatch } = useContext(RouteComponentContext)!;
   const [myDid, setMyDid] = useGlobalState("did");
   const [myAuth, setMyAuth] = useGlobalState("didRaw");
   const [myHiveName, setMyHiveName] = useGlobalState("hiveName");
@@ -188,6 +189,8 @@ export const useAccountContext = function () {
       setMyHiveName(ac.getHiveName().split(":")[1]);
 
       console.log("Setting myDid:", ac.getDid());
+      dispatch({ type:"SET_RENDER", payload: "trade"})
+      
     } catch (error) {
       console.error("Error during login:", error);
     }

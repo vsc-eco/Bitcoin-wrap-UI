@@ -89,6 +89,7 @@ const DepositModal = (props: Props) => {
           maxH="900px"
           w={["380px", "480px", "580px", "680px"]}
           m={["0", "0", "1", "4"]}
+          boxShadow="0 0 10px rgba(0, 0, 0, 0.2)"
         >
           <CardBody
             pb={["1", "2", "4", "6"]}

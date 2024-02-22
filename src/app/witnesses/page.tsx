@@ -1,4 +1,4 @@
-//TODO:  to extract the top 8 profile images from peakd
+
 "use client";
 import {
   Box,

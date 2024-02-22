@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
 
+//TODO: to figure out the hovering markers and margins
+
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 const App = () => {
@@ -34,21 +36,29 @@ const App = () => {
         enabled: false, // Enable tooltips
 
       },
+      markers: {
+        size: 0,
+        colors: ["#ffffff"], // size of the marker/circle
+        hover: {
+          size: 5,
+          sizeOffset: 5 // size of the marker when hovered
+        }
+      },
       xaxis: {
         labels: {
           show: true,
-          offsetX: -10,
+          offsetX: 0,
           offsetY: 0
         },
         categories: [
-          "",
+          "Nov 10",
           "Nov 11",
           "Nov 12",
           "Nov 13",
           "Nov 14",
           "Nov 15",
           "Nov 16",
-          "",
+          "Nov 17",
         ],
         axisBorder: {
           show: false,
@@ -79,25 +89,19 @@ const App = () => {
           stops: [0, 100],
         },
       },
-      markers: {
-        size: 0, // size of the marker/circle
-        strokeWidth: 1, // border width of the circle
-        hover: {
-          size: 3 // size of the marker when hovered
-        }
-      },
-      annotations : {
-        xaxis: [{
-          x: "Nov 10",
-          label: {
-            text: "Nov 10",
-            style: {
-              color: "#333",
-              background: "transparent"
-            }
-          }
-        }]
-      }
+
+      // annotations : {
+      //   xaxis: [{
+      //     x: "Nov 10",
+      //     label: {
+      //       text: "Nov 10",
+      //       style: {
+      //         color: "#333",
+      //         background: "transparent"
+      //       }
+      //     }
+      //   }]
+      // }
     },
     series: [
       {

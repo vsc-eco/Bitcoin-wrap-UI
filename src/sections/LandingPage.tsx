@@ -3,7 +3,6 @@ import { Box, Text, Flex } from "@chakra-ui/react";
 import Image from "next/image";
 import Sidebar from "../components/Sidebar";
 
-//TODO: Hive Finance smooth Defi have to bit little bit shorter 
 type Props = {};
 
 const LandingPage = (props: Props) => {
