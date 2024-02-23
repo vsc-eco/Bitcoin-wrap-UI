@@ -4,16 +4,6 @@ import { Box, Button, Text, CloseButton } from "@chakra-ui/react";
 const LoginAlert = () => {
   const [showAlert, setShowAlert] = useState(false);
 
-  useEffect(() => {
-    let isToken;
-    if(typeof window !== "undefined"){
-      const isToken = localStorage.getItem("login.auth");
-    }
-    if (isToken) {
-      setShowAlert(true);
-    }
-  }, []);
-
   if (!showAlert) {
     return null;
   }
