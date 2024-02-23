@@ -4,13 +4,9 @@ import React from "react";
 type Props = {};
 
 const AccountComponent = (props: Props) => {
-  let username;
-  if(typeof window !== "undefined"){
-      username = JSON.parse(window!.localStorage.getItem("login.auth")!)[
-      "authId"
-    ].split(":")[1];
-  }
-
+  const username = JSON.parse(localStorage.getItem("login.auth")!)[
+    "authId"
+  ].split(":")[1];
 
 
   return (  

@@ -13,11 +13,14 @@ import { BiSolidLogInCircle } from "react-icons/bi";
 import { BiSolidLogOutCircle } from "react-icons/bi";
 
 //check for the auth.login token 
-const authToken = window!.localStorage.getItem("login.auth");
+let authToken;
+if(typeof window !== 'undefined'){
+  authToken = localStorage.getItem("login.auth");
+}
 
 const logout = async () => {
   if(typeof window !== "undefined"){
-    await window!.localStorage.removeItem("login.auth");
+    await localStorage.removeItem("login.auth");
   }
   window.location.reload()
 }
