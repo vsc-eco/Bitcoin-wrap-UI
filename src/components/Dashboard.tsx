@@ -20,7 +20,7 @@ type Props = {};
 const Dashboard = (props: Props) => {
   let response;
   if(typeof window !== "undefined"){
-     response = JSON.parse(localStorage!.getItem("login.auth")!)[
+     response = JSON.parse(window!.localStorage.getItem("login.auth")!)[
       "authId"
     ].split(":")[1];
   }

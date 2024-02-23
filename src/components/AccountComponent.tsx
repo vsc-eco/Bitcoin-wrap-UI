@@ -6,7 +6,7 @@ type Props = {};
 const AccountComponent = (props: Props) => {
   let username;
   if(typeof window !== "undefined"){
-      username = JSON.parse(localStorage!.getItem("login.auth")!)[
+      username = JSON.parse(window!.localStorage.getItem("login.auth")!)[
       "authId"
     ].split(":")[1];
   }

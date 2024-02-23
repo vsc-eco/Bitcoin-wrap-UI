@@ -51,7 +51,7 @@ export class AccountContextClass {
   //function for storing the authInfo
   storeAuth(authInfo: AuthInfo) {
     if(typeof window !== "undefined"){
-      localStorage!.setItem("login.auth", JSON.stringify(authInfo));
+      window!.localStorage.setItem("login.auth", JSON.stringify(authInfo));
     }
   }
 
@@ -59,7 +59,7 @@ export class AccountContextClass {
   getAuth(): AuthInfo | null {
     let authInfo;
     if(typeof window !== "undefined"){
-      authInfo = localStorage!.getItem("login.auth");
+      authInfo = window!.localStorage.getItem("login.auth");
     }
     return authInfo ? JSON.parse(authInfo) : null;
   }
@@ -113,7 +113,7 @@ export class AccountContextClass {
     const { username } = loginResult.data;
 
     if(typeof window !== "undefined"){
-      localStorage!.setItem;
+      window!.localStorage.setItem;
     }
 
     const authId = `hive:${username}`;
