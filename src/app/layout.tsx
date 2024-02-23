@@ -1,7 +1,7 @@
 "use client";
 // app/layout.tsx
 import { Providers } from "./providers";
-import { RouteComponentProvider } from "../context/routeContext";
+
 import Navbar from "../components/Navbar";
 
 //import the analytics
@@ -16,12 +16,10 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Providers>
-          <RouteComponentProvider>
             <Navbar />
             {children}
             <Analytics />
-          </RouteComponentProvider>
-        </Providers>
+          </Providers>
       </body>
     </html>
   );
