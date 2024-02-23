@@ -45,9 +45,12 @@ type Props = {
 
 const DepositModal = (props: Props) => {
   const { myAuth } = useAccountContext();
-  const response = JSON.parse(localStorage!.getItem("login.auth")!)[
-    "authId"
-  ].split(":")[1];
+  let response;
+  if(typeof window !== "undefined"){
+    response = JSON.parse(localStorage!.getItem("login.auth")!)[
+      "authId"
+    ].split(":")[1];
+  }
 
   let encodedAddr;
   if (props?.dest?.did) {

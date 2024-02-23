@@ -18,9 +18,12 @@ type Props = {};
 
 
 const Dashboard = (props: Props) => {
-  const response = JSON.parse(localStorage!.getItem("login.auth")!)[
-    "authId"
-  ].split(":")[1];
+  let response;
+  if(typeof window !== "undefined"){
+     response = JSON.parse(localStorage!.getItem("login.auth")!)[
+      "authId"
+    ].split(":")[1];
+  }
 
   //function for making the font smaller after dots
    const priceElement = document.getElementById("price");
