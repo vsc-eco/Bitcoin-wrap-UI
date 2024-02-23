@@ -5,7 +5,10 @@ const LoginAlert = () => {
   const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
-    const isToken = localStorage.getItem("login.auth");
+    let isToken;
+    if(typeof window !== "undefined"){
+      const isToken = localStorage.getItem("login.auth");
+    }
     if (isToken) {
       setShowAlert(true);
     }

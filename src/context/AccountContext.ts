@@ -180,7 +180,6 @@ export const useAccountContext = function () {
 
       if (ac.getDid()) {
         console.log("Setting DID:", ac.getDid());
-
         console.log("DID set successfully");
       }
 
