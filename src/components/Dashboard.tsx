@@ -18,7 +18,7 @@ type Props = {};
 
 
 const Dashboard = (props: Props) => {
-  const response = JSON.parse(localStorage.getItem("login.auth")!)[
+  const response = JSON.parse(localStorage!.getItem("login.auth")!)[
     "authId"
   ].split(":")[1];
 

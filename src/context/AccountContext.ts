@@ -107,7 +107,7 @@ export class AccountContextClass {
 
     const { username } = loginResult.data;
 
-    localStorage.setItem;
+    localStorage!.setItem;
 
     const authId = `hive:${username}`;
     const authSecret = normalizeAuthSecret(

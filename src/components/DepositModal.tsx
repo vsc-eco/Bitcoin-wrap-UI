@@ -45,7 +45,7 @@ type Props = {
 
 const DepositModal = (props: Props) => {
   const { myAuth } = useAccountContext();
-  const response = JSON.parse(localStorage.getItem("login.auth")!)[
+  const response = JSON.parse(localStorage!.getItem("login.auth")!)[
     "authId"
   ].split(":")[1];
 
