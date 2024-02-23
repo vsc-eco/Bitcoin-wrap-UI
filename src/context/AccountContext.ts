@@ -50,12 +50,12 @@ export class AccountContextClass {
 
   //function for storing the authInfo
   storeAuth(authInfo: AuthInfo) {
-    localStorage.setItem("login.auth", JSON.stringify(authInfo));
+    localStorage!.setItem("login.auth", JSON.stringify(authInfo));
   }
 
   //function for retrieving the authInfo
   getAuth(): AuthInfo | null {
-    const authInfo = localStorage.getItem("login.auth");
+    const authInfo = localStorage!.getItem("login.auth");
     return authInfo ? JSON.parse(authInfo) : null;
   }
 

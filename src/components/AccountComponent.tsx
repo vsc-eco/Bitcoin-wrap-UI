@@ -4,7 +4,7 @@ import React from "react";
 type Props = {};
 
 const AccountComponent = (props: Props) => {
-  const username = JSON.parse(localStorage.getItem("login.auth")!)[
+  const username = JSON.parse(localStorage!.getItem("login.auth")!)[
     "authId"
   ].split(":")[1];
 
