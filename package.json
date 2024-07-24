@@ -20,7 +20,7 @@
     "@emotion/styled": "^11.11.0",
     "@fontsource/ia-writer-quattro": "^5.0.7",
     "@fontsource/open-sans": "^5.0.15",
-    "@hiveio/dhive": "^1.2.7",
+    "@hiveio/dhive": "^1.3.0",
     "@magic-ext/oauth": "^15.6.0",
     "@next/font": "^13.5.4",
     "@stablelib/sha256": "^1.0.1",
