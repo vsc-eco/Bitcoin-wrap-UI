@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import {
   Modal,
@@ -14,6 +13,11 @@ import {
 //importing the magic link
 import { Magic } from "magic-sdk";
 
+if (!process.env.NEXT_PUBLIC_PUBLISHABLE_API_KEY) {
+  throw Error(
+    "NEXT_PUBLIC_PUBLISHABLE_API_KEY env var is not set for Magic Link"
+  );
+}
 
 function EmailModal({ isOpen, onClose }) {
   const [email, setEmail] = useState("");
@@ -25,7 +29,7 @@ function EmailModal({ isOpen, onClose }) {
   //function for handling the login by email
   const handleMagicLink = async () => {
     try {
-      const magic = new Magic(process.env.PUBLISHABLE_API_KEY!);
+      const magic = new Magic(process.env.NEXT_PUBLIC_PUBLISHABLE_API_KEY!);
       const didToken = await magic.auth.loginWithMagicLink({ email: email });
     } catch (err) {
       if (err) {
@@ -36,13 +40,12 @@ function EmailModal({ isOpen, onClose }) {
     }
   };
 
-
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-  7        <ModalHeader>Enter Your Email</ModalHeader>
+          7 <ModalHeader>Enter Your Email</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
             <Input
