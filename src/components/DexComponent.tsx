@@ -9,13 +9,12 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-
 import TokenSearchModal from "./TokenSearchModal";
 
 //importing the components
 import LiquidityInterface from "./LiquidityInterface";
 import SwapComponent from "./SwapComponent";
-import HivePrice from "./HivePrice";
+import HivePrice from "./HivePrive";
 import WBTC from "./WBTC";
 
 const DexComponent = () => {
