@@ -1,12 +1,12 @@
 import React from "react";
 import { Flex, Text } from "@chakra-ui/react";
 import Image from "next/image";
-import { AccountContext, useAccountContext } from "../context/AccountContext";
+import { AccountContext, useAccountContext } from "../../context/AccountContext";
 import { useContext } from "react";
 
 type Props = {};
 
-const LoginComponent = (props: Props) => {
+const LoginButton = (props: Props) => {
   const { triggerLoginWithHive } = useAccountContext();
 
   return (
@@ -35,4 +35,4 @@ const LoginComponent = (props: Props) => {
   );
 };
 
-export default LoginComponent;
+export default LoginButton;

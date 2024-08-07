@@ -18,6 +18,7 @@ import { AccountContext } from "../context/AccountContext";
 import "@fontsource/ia-writer-quattro/400.css";
 import "@fontsource/open-sans/700.css";
 import { client } from "../apollo/client";
+import { ShowComponentProvider } from "../context/ShowComponent";
 
 export const theme = extendTheme({
   colors: {
@@ -43,7 +44,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
     <QueryClientProvider client={queryClient}>
       <ApolloProvider client={client}>
         <CacheProvider>
-          <ChakraProvider theme={theme}>{children}</ChakraProvider>
+          <ChakraProvider theme={theme}>
+            <ShowComponentProvider>{children}</ShowComponentProvider>
+          </ChakraProvider>
         </CacheProvider>
       </ApolloProvider>
     </QueryClientProvider>

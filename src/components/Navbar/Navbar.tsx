@@ -3,6 +3,7 @@ import { Box, Flex, Link, Text } from "@chakra-ui/react";
 import { useBreakpointValue } from "@chakra-ui/media-query";
 import Image from "next/image";
 import {RiArrowDropDownLine} from "react-icons/ri"
+import LogoComponent from "../Logo/LogoComponent";
 const Navbar = () => {
   const size = useBreakpointValue({ base: "xs", md: "md" });
   return (
@@ -16,8 +17,7 @@ const Navbar = () => {
       <Flex flexDirection="row"  alignItems="center">
         <Flex alignItems="center">
           <Box w={["12","16","20","24"]}>
-            {/* <Link color="#535454" size={size}></Link> */}
-            <Image src="/logo.svg" alt="Icon" width={150} height={150} />
+            <LogoComponent />
           </Box>
           <Text letterSpacing="0.1rem" fontWeight="bolder" fontSize={["12px", "16px", "20px", "24px"]}>VSC NETWORK</Text>
         </Flex>
@@ -29,18 +29,6 @@ const Navbar = () => {
           <RiArrowDropDownLine />
           </Flex>
         </Link>
-        {/* <Link mx={4} fontWeight="bold">
-          <Flex alignItems="center">
-          <Text fontSize={["10px", "10px", "12px", "16px"]}>FAQ</Text>
-          <RiArrowDropDownLine />
-          </Flex>
-        </Link> */}
-        {/* <Link color="#535454" mx={2} fontWeight="bold" >
-          <Text size={size}>Contacts</Text>
-        </Link>
-        <Link color="#535454" mx={2} fontWeight="bold" >
-          <Text size={size}>Blog</Text>
-        </Link> */}
       </Flex>
     </Flex>
   );

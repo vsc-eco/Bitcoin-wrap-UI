@@ -13,8 +13,8 @@ import {
 import TokenSearchModal from "./TokenSearchModal";
 
 //importing the components
-import LiquidityInterface from "./LiquidityInterface";
-import SwapComponent from "./SwapComponent";
+import LiquidityInterface from "./liquidity/LiquidityInterface";
+import SwapComponent from "./Swap/SwapComponent";
 import HivePrice from "./HivePrice";
 import WBTC from "./WBTC";
 

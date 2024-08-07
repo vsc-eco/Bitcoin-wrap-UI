@@ -5,13 +5,17 @@ import { TbExchange } from "react-icons/tb";
 import { MdAssessment } from "react-icons/md";
 import { TfiMenuAlt } from "react-icons/tfi";
 import { MdOutlineCurrencyExchange } from "react-icons/md";
-
-import { AccountContext, useAccountContext } from "../context/AccountContext";
+import {
+  AccountContext,
+  useAccountContext,
+} from "../../context/AccountContext";
 import { useContext } from "react";
-import { ResolveUsername } from "../hooks/Hive";
+import { ResolveUsername } from "../../hooks/Hive";
 import { BiSolidLogInCircle } from "react-icons/bi";
+import LogoComponent from "../Logo/LogoComponent";
 
-//TODO: disable the items when logged out 
+//TODO: restructure the items when logged out
+
 const Sidebar = ({
   handleExchangeOnClick,
   handleTransactionOnClick,
@@ -48,39 +52,31 @@ const Sidebar = ({
   ];
 
   return (
-    <Box
-      id="sidebar"
-      w={["150px"]}
-      h={["60vh"]}
-      boxShadow="0 0 10px rgba(0, 0, 0, 0.2)"
-      borderRadius={8}
+    <Flex
+      flexDirection={"column"}
+      gap={5}
+      boxShadow="base"
       bgColor="white"
       paddingY="10px"
+      paddingX={"20px"}
       position="relative"
     >
+      <LogoComponent />
       <VStack align="start">
         {menuItems.map((item) => (
           <Flex
             key={item.text}
             alignItems="center"
             justifyContent={"center"}
-            _hover={{ color: "blue.500" }}
+            _hover={{ color: "#7392ee"}}
             onClick={item.onClick}
-            marginX={"10px"}
+            marginX={"15px"}
           >
-            <Flex
-            alignItems={"center"}
-            >
+            <Flex alignItems={"center"} gap={2}>
               {item.icon}
-              <Text
-              ml={1}
-              fontSize="lg"
-              fontWeight={"bold"}
-              cursor={"pointer"}
-              >
-               {item.text}
+              <Text ml={1} fontSize="sm" fontWeight={"bold"} cursor={"pointer"}>
+                {item.text}
               </Text>
-
             </Flex>
           </Flex>
         ))}
@@ -93,10 +89,10 @@ const Sidebar = ({
           width={"100%"}
         >
           <Flex justifyContent="center" alignItems="center">
-            <BiSolidLogInCircle size={"18px"}/>
+            <BiSolidLogInCircle size={"18px"} />
             <Text
               ml={2}
-              fontSize="lg"
+              fontSize="md"
               fontWeight="bold"
               onClick={handleSignUpComponent}
               cursor={"pointer"}
@@ -107,7 +103,7 @@ const Sidebar = ({
           </Flex>
         </Flex>
       </VStack>
-    </Box>
+    </Flex>
   );
 };
 
