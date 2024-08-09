@@ -1,22 +1,16 @@
 import { Card, CardBody, Flex, Text } from "@chakra-ui/react";
 import React from "react";
 
-type Props = {};
+type Props = {
+  username: string;
+};
 
-const AccountComponent = (props: Props) => {
-  const username = JSON.parse(localStorage.getItem("login.auth")!)[
-    "authId"
-  ].split(":")[1];
-
-
-
-  return (  
-    <Flex>
+const AccountComponent = ({ username }: Props) => {
+  return (
+    <Flex alignItems={"center"} pt={12}>
       <Card
         bg="white"
-        maxW="800px"
-        h="55vh"
-        maxH={"60vh"}
+        height={"66vh"}
         w={["400px", "300px", "580px", "600px"]}
         m={["0", "0", "1", "3"]}
         alignItems={"center"}

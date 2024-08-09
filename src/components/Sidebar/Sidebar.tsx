@@ -1,4 +1,5 @@
-import Image from "next/image";
+//TODO: make the hover effects and the onFocus as well 
+
 import React from "react";
 import { Box, VStack, Text, Flex, Button } from "@chakra-ui/react";
 import { TbExchange } from "react-icons/tb";
@@ -14,7 +15,6 @@ import { ResolveUsername } from "../../hooks/Hive";
 import { BiSolidLogInCircle } from "react-icons/bi";
 import LogoComponent from "../Logo/LogoComponent";
 
-//TODO: restructure the items when logged out
 
 const Sidebar = ({
   handleExchangeOnClick,
@@ -96,7 +96,6 @@ const Sidebar = ({
               fontWeight="bold"
               onClick={handleSignUpComponent}
               cursor={"pointer"}
-              colorScheme="gray"
             >
               Sign in
             </Text>

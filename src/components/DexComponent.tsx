@@ -1,12 +1,11 @@
+//TODO: In Dex Component make the spinner animated once getting the values
+
 import React, { useState } from "react";
 import {
   Box,
   Button,
   ButtonGroup,
   Flex,
-  Input,
-  InputGroup,
-  Text,
   VStack,
 } from "@chakra-ui/react";
 

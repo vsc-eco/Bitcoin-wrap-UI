@@ -1,4 +1,4 @@
-import React from "react";
+import React, { SetStateAction } from "react";
 import { Box, Text, Flex, Button, Icon } from "@chakra-ui/react";
 import Image from "next/image";
 import Navbar from "../components/Navbar/Navbar";
@@ -6,9 +6,11 @@ import { ArrowForwardIcon } from "@chakra-ui/icons";
 import Link from "next/link";
 
 //TODO: Hive Finance smooth Defi have to bit little bit shorter
-type Props = {};
+type Props = {
+  setShow: React.Dispatch<SetStateAction<Boolean>>;
+};
 
-const LandingPage = (props: Props) => {
+const LandingPage = ({ setShow}: Props) => {
   return (
     <>
       <Navbar />
@@ -33,7 +35,7 @@ const LandingPage = (props: Props) => {
             </Text>
             <Box>
               <Link href={"/secondSection"}>
-                <Button colorScheme="blue">
+                <Button colorScheme="blue" onClick={() => setShow(true)}>
                   Launch
                   <Icon paddingLeft={1} as={ArrowForwardIcon} boxSize={"1m"} />
                 </Button>

@@ -1,6 +1,5 @@
 "use client";
 import React, { useRef, useState, useLayoutEffect } from "react";
-import Head from "next/head"; // Import Head component
 import {
   Button,
   Table,
@@ -23,10 +22,6 @@ import { ErrorPolicy, gql } from "@apollo/client";
 import axios from "axios";
 import Moment from "moment";
 
-//import the css
-// import "./Transaction.css"
-//import the data
-// import { transactions } from "./data";
 import TransactionItem from "./TransactionItem";
 import TransactionDetail from "./TransactionDetail";
 
@@ -85,21 +80,9 @@ const Transaction = (props: Props) => {
   const { triggerLoginWithHive, myDid, myAuth } = useAccountContext();
   let lastDate = useRef(null);
 
-
   //useState
   const [isTransactionDetailOpen, setTransactionDetailOpen] = useState(false);
   const [selectedTransaction, setSelectedTransaction] = useState(null);
-
-  useLayoutEffect(() => {
-    if (myDid) {
-      //   transfer({
-      //     dest: "did:key:z6MkryiH1U2zQ344Rtuq1iwk8xY5Fhf9Kwb4Xiwf7gbcZE2L",
-      //     did: myDid,
-      //     didAuth:myAuth,
-      //     amount: 0.0001
-      // })
-    }
-  }, [myDid]);
 
   const { data, refetch } = useQuery(query, {
     variables: {
@@ -117,6 +100,8 @@ const Transaction = (props: Props) => {
     };
   });
 
+
+  //using the api
   const bitcoinPrice = useBitcoinPrice();
   const items = data?.findLedgerTXs?.txs || [];
   console.log("items", items, data);

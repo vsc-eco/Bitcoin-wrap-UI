@@ -1,9 +1,16 @@
 // app/layout.tsx
+import localFont from "next/font/local";
 import { Providers } from "./providers";
 
 //import the analytics
 import { Analytics } from "@vercel/analytics/react";
 
+
+const myFont = localFont({
+    src: './ArcadiaText-Variable.woff2',
+    display: 'swap',
+  })
+  
 export default function RootLayout({
   children,
 }: {
@@ -11,7 +18,7 @@ export default function RootLayout({
 }) {
 
   return (
-    <html lang="en">
+    <html lang="en" className={myFont.className}>
       <body>
         <Providers>
           {children}

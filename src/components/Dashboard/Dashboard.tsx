@@ -1,12 +1,11 @@
-//TODO: working on the dashboard
+//TODO: 
 import React from "react";
 import {
   Flex,
   Text,
   Card,
+  Box,
   CardHeader,
-  CardBody,
-  CardFooter,
 } from "@chakra-ui/react";
 import AccountComponent from "../AccountComponent";
 import { FaChartLine } from "react-icons/fa";
@@ -14,13 +13,12 @@ import { FaCalendarDays } from "react-icons/fa6";
 import ChartComponent from "./ChartComponent";
 import { IoChevronDownOutline } from "react-icons/io5";
 import { GoArrowUpRight } from "react-icons/go";
-type Props = {};
 
-const Dashboard = (props: Props) => {
-  const response = JSON.parse(localStorage.getItem("login.auth")!)[
-    "authId"
-  ].split(":")[1];
+type Props = {
+  username: string;
+};
 
+const Dashboard = ({ username }: Props) => {
   //function for making the font smaller after dots
   const priceElement = document.getElementById("price");
 
@@ -34,19 +32,19 @@ const Dashboard = (props: Props) => {
 
   return (
     <Flex direction="column" justifyContent={"center"}>
-      <Flex>
-        <Text fontSize="xl">Welcome, {response}</Text>
-      </Flex>
-
+        <Box pl={4}>
+          <Text fontSize="md" >
+            Welcome, {username}
+          </Text>
+        </Box>
       <Flex mt={4} w="100%">
         <Card
           bg="white"
           maxW="800px"
-          h="55vh"
-          maxH={"60vh"}
-          w={["400px", "300px", "580px", "600px"]}
+          h="max-content"
+        //   w={["400px", "300px", "580px", "600px"]}
+         w={"max-content"}
           m={["0", "0", "1", "3"]}
-          p={0}
         >
           <CardHeader>
             <Text fontSize={"sm"}>Hive balance</Text>
@@ -100,7 +98,6 @@ const Dashboard = (props: Props) => {
           </CardHeader>
           <ChartComponent />
         </Card>
-        <AccountComponent />
       </Flex>
     </Flex>
   );

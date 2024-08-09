@@ -86,12 +86,12 @@ const ExchangeModal = (props: Props) => {
 
     return (
       <>
-        <Flex justifyContent="center" py={8} alignItems="center">
+        <Flex justifyContent="center" alignItems="center">
           <Card
             bg="white"
             maxW="800px"
-            h="60vh"
-            maxH={"60vh"}
+            py={8}
+            height={"auto"}
             w={["400px", "500px", "680px", "800px"]}
             m={["0", "0", "1", "3"]}
           >
@@ -103,7 +103,6 @@ const ExchangeModal = (props: Props) => {
               mx={["1", "2", "4", "8"]}
               background="#f5f9fa"
               borderRadius="10px"
-              maxH={"50vh"}
             >
               <Box px={8} borderRadius={6}>
                 <FormControl>

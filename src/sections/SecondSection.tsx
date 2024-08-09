@@ -1,6 +1,8 @@
+//TODO: make a common card here and integrate all the components inside it
+
 "use client";
 import React, { useLayoutEffect, useReducer, useState } from "react";
-import { Flex, Text } from "@chakra-ui/react";
+import { Card, Flex, Text } from "@chakra-ui/react";
 import Sidebar from "../components/Sidebar/Sidebar";
 import Transaction from "../transactions/Transaction";
 import ThirdSection from "./ThirdSection";
@@ -10,6 +12,7 @@ import DexComponent from "../components/DexComponent";
 import SignUpComponent from "../components/Login/SignUpComponent";
 import { ResolveUsername } from "../hooks/Hive";
 import { AlertComponent } from "../components/Alerts/AlertComponent";
+import Home from "../components/Dashboard/Home";
 
 type Props = {};
 
@@ -65,7 +68,7 @@ const SecondSection = (props: Props) => {
   return (
     <>
       <Flex w="full" h={"full"}>
-        <Flex w="20%">
+        <Flex w="12%">
           <Sidebar
             handleExchangeOnClick={handleExchangeOnClick}
             handleTransactionOnClick={handleTransactionOnClick}
@@ -75,9 +78,10 @@ const SecondSection = (props: Props) => {
             resolveUsername={ResolveUsername("vaultec")}
           />
         </Flex>
-        <Flex w="70%" h="100vh" justifyContent={"center"}>
+        <Flex className="parent" w="full" h="100vh" justifyContent={"center"}>
           {isClient && window.location.hostname !== "wrap.vsc.eco" ? (
-            <Flex id="transaction-swap" m={0} p={0}>
+            <Flex className="child" id="transaction-swap" m={0} p={0}  maxW={"900px"} my={8}>
+              <Card>
               {state.render === "signup" ? (
                 !myDid ? (
                   <SignUpComponent />
@@ -86,12 +90,13 @@ const SecondSection = (props: Props) => {
                 )
               ) : null}
               {/* showing it default  */}
-              {myDid && state.render === "transaction" && <Transaction />}
               {myDid && (state.render === "" || state.render === "trade") && (
-                <Dashboard />
+                <Home />
               )}
               {myDid && state.render === "exchange" && <ThirdSection />}
               {myDid && state.render === "dex" && <DexComponent />}
+              {myDid && state.render === "transaction" && <Transaction />}
+              </Card>
             </Flex>
           ) : (
             <Flex
