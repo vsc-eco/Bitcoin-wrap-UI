@@ -1,11 +1,10 @@
-//TODO: make the hover effects and the onFocus as well 
 
-import React from "react";
+import React, { useState } from "react";
 import { Box, VStack, Text, Flex, Button } from "@chakra-ui/react";
-import { TbExchange } from "react-icons/tb";
-import { MdAssessment } from "react-icons/md";
-import { TfiMenuAlt } from "react-icons/tfi";
-import { MdOutlineCurrencyExchange } from "react-icons/md";
+import { LiaExchangeAltSolid } from "react-icons/lia";
+import { CiMenuBurger } from "react-icons/ci";
+import { BsCoin } from "react-icons/bs";
+import { GoHome } from "react-icons/go";
 import {
   AccountContext,
   useAccountContext,
@@ -14,7 +13,6 @@ import { useContext } from "react";
 import { ResolveUsername } from "../../hooks/Hive";
 import { BiSolidLogInCircle } from "react-icons/bi";
 import LogoComponent from "../Logo/LogoComponent";
-
 
 const Sidebar = ({
   handleExchangeOnClick,
@@ -30,51 +28,64 @@ const Sidebar = ({
 
   const menuItems = [
     {
-      icon: <MdAssessment />,
+      icon: <GoHome />,
       text: "Home",
       onClick: handleTradeComponent,
-    },
+    } as const,
     {
-      icon: <TbExchange />,
+      icon: <LiaExchangeAltSolid />,
       text: "Wrap",
       onClick: handleExchangeOnClick,
-    },
+    } as const,
     {
-      icon: <MdOutlineCurrencyExchange />,
+      icon: <BsCoin />,
       text: "Dex",
       onClick: handleDexComponent,
-    },
+    } as const,
     {
-      icon: <TfiMenuAlt />,
+      icon: <CiMenuBurger />,
       text: "Transactions",
       onClick: handleTransactionOnClick,
-    },
-  ];
+    } as const,
+  ] as const;
+
+  //initialized a useState and then we can have 
+  const [selectItems, setSelectedItem] = useState<typeof menuItems[number]['text']>("Home");
 
   return (
     <Flex
       flexDirection={"column"}
       gap={5}
       boxShadow="base"
-      bgColor="white"
       paddingY="10px"
       paddingX={"20px"}
       position="relative"
     >
       <LogoComponent />
-      <VStack align="start">
+      <VStack align="start" w="auto">
         {menuItems.map((item) => (
           <Flex
             key={item.text}
             alignItems="center"
             justifyContent={"center"}
-            _hover={{ color: "#7392ee"}}
             onClick={item.onClick}
-            marginX={"15px"}
           >
-            <Flex alignItems={"center"} gap={2}>
-              {item.icon}
-              <Text ml={1} fontSize="sm" fontWeight={"bold"} cursor={"pointer"}>
+            <Flex
+              alignItems={"center"}
+              gap={1}
+              w={36}
+              _hover={{ bgColor: "#f3f4f7"}}
+              paddingX={2}
+              paddingY={1}
+              borderRadius={"sm"}
+              color={selectItems === item.text ? "black" : "#75757d"}
+              fontWeight={selectItems === item.text ? 480 : undefined}
+              bgColor={selectItems === item.text ? "#f3f4f7" : "white"}
+              cursor={"pointer"}
+              onClick={() =>  setSelectedItem(item.text)}
+            >
+              <Text color={selectItems === item.text ? "#7b8aee" : "#75757d"}>{item.icon}</Text>
+              <Text ml={1} fontSize="xs" cursor={"pointer"}>
                 {item.text}
               </Text>
             </Flex>
@@ -88,14 +99,22 @@ const Sidebar = ({
           bottom={"12px"}
           width={"100%"}
         >
-          <Flex justifyContent="center" alignItems="center">
-            <BiSolidLogInCircle size={"18px"} />
+          <Flex
+            alignItems="center"
+            _hover={{bgColor: "#f3f4f7" , color: "black"}}
+            w={36}
+            px={2}
+            py={1}
+          >
+            <BiSolidLogInCircle size={"18px"} color={"#75757d"} />
             <Text
-              ml={2}
-              fontSize="md"
-              fontWeight="bold"
+              ml={1}
+              fontSize="xs"
+              fontWeight="regular"
               onClick={handleSignUpComponent}
               cursor={"pointer"}
+              color={"#75757d"}
+              _hover={{color: "black"}}
             >
               Sign in
             </Text>

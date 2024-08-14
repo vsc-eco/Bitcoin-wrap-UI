@@ -1,5 +1,5 @@
 //TODO: In Dex Component make the spinner animated once getting the values
-
+//TODO: rename the components to swap and liquidity  
 import React, { useState } from "react";
 import {
   Box,
@@ -7,6 +7,7 @@ import {
   ButtonGroup,
   Flex,
   VStack,
+  Text
 } from "@chakra-ui/react";
 
 import TokenSearchModal from "./TokenSearchModal";
@@ -22,6 +23,7 @@ const DexComponent = () => {
 
   //make the hookstate for rendering the transfer token modal
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [token, setToken] = useState("")
 
   //make a function handleChange for the transfer token modal
   const handleOpen = () => {
@@ -35,26 +37,22 @@ const DexComponent = () => {
     <Flex alignItems={"center"}>
       <VStack
         w={["700px"]}
-        h={"700px"}
-        p={4}
         borderRadius="md"
-        boxShadow="base"
         spacing={4}
-        background="white"
       >
-        <ButtonGroup isAttached variant="outline">
+        <ButtonGroup isAttached>
           <Button
-            borderRadius={"3xl"}
+            borderRadius={"xl"}
             w={24}
-            colorScheme="blue"
+            colorScheme={"gray"}
             variant={activeTab === "swap" ? "solid" : "outline"}
             onClick={() => setActiveTab("swap")}
           >
-            Swap
+            <Text fontSize={"md"} >Swap</Text>
           </Button>
           <Button
-            borderRadius={"3xl"}
-            colorScheme="blue"
+            borderRadius={"xl"}
+            colorScheme="indigo"
             variant={activeTab === "liquidity" ? "solid" : "outline"}
             onClick={() => setActiveTab("liquidity")}
           >
@@ -70,12 +68,13 @@ const DexComponent = () => {
                 handleOpen={handleOpen}
                 handleClose={handleClose}
               />
+              {/* TODO move into Swap */}
               <HivePrice />
               <WBTC />
             </Box>
           )}
 
-          <TokenSearchModal isOpen={showModal} onClose={handleClose} />
+          <TokenSearchModal isOpen={showModal} onClose={handleClose} setToken={setToken} />
 
           {activeTab === "liquidity" && (
             <LiquidityInterface

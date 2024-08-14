@@ -31,9 +31,9 @@ const Dashboard = ({ username }: Props) => {
   //  priceElement?.appendChild(centElement);
 
   return (
-    <Flex direction="column" justifyContent={"center"}>
+    <Flex direction="column" justifyContent={"center"} color={"#75757d"}>
         <Box pl={4}>
-          <Text fontSize="md" >
+          <Text fontSize="xl">
             Welcome, {username}
           </Text>
         </Box>
@@ -41,9 +41,8 @@ const Dashboard = ({ username }: Props) => {
         <Card
           bg="white"
           maxW="800px"
-          h="max-content"
-        //   w={["400px", "300px", "580px", "600px"]}
-         w={"max-content"}
+          h="400px"
+          w={"max-content"}
           m={["0", "0", "1", "3"]}
         >
           <CardHeader>

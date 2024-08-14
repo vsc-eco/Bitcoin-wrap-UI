@@ -111,7 +111,7 @@ const App = () => {
     <Chart
       options={chartData.options}
       series={chartData.series}
-      width="600"
+      width="400"
       type="area"
     />
   );

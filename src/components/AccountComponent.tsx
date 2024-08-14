@@ -7,12 +7,12 @@ type Props = {
 
 const AccountComponent = ({ username }: Props) => {
   return (
-    <Flex alignItems={"center"} pt={12}>
+    <Flex alignItems={"center"} mt={10}>
       <Card
         bg="white"
-        height={"66vh"}
-        w={["400px", "300px", "580px", "600px"]}
-        m={["0", "0", "1", "3"]}
+        height={"400px"}
+        width={"400px"}
+        mx={["0", "0", "1", "3"]}
         alignItems={"center"}
       >
         <Flex>

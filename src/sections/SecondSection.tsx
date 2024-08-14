@@ -80,23 +80,33 @@ const SecondSection = (props: Props) => {
         </Flex>
         <Flex className="parent" w="full" h="100vh" justifyContent={"center"}>
           {isClient && window.location.hostname !== "wrap.vsc.eco" ? (
-            <Flex className="child" id="transaction-swap" m={0} p={0}  maxW={"900px"} my={8}>
-              <Card>
-              {state.render === "signup" ? (
-                !myDid ? (
-                  <SignUpComponent />
-                ) : (
-                  <AlertComponent>You are already logged in!</AlertComponent>
-                )
-              ) : null}
-              {/* showing it default  */}
-              {myDid && (state.render === "" || state.render === "trade") && (
-                <Home />
-              )}
-              {myDid && state.render === "exchange" && <ThirdSection />}
-              {myDid && state.render === "dex" && <DexComponent />}
-              {myDid && state.render === "transaction" && <Transaction />}
-              </Card>
+            <Flex
+              className="child"
+              id="transaction-swap"
+              m={0}
+              p={0}
+              maxW={"900px"}
+              my={8}
+            >
+                <Flex w="full" justifyContent={"center"}>
+                  {state.render === "signup" ? (
+                    !myDid ? (
+                      <SignUpComponent />
+                    ) : (
+                      <AlertComponent>
+                        You are already logged in!
+                      </AlertComponent>
+                    )
+                  ) : null}
+                  {/* showing it default  */}
+                  {myDid &&
+                    (state.render === "" || state.render === "trade") && (
+                      <Home />
+                    )}
+                  {myDid && state.render === "exchange" && <ThirdSection />}
+                  {myDid && state.render === "dex" && <DexComponent />}
+                  {myDid && state.render === "transaction" && <Transaction />}
+                </Flex>
             </Flex>
           ) : (
             <Flex

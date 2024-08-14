@@ -125,11 +125,10 @@ const Transaction = (props: Props) => {
             py={4}
             textAlign={"center"}
             bgColor={"white"}
-            p={8}
+            p={4}
             borderRadius={8}
             margin="auto"
-            maxW={["250px", "350px", "550px", "950px"]}
-            boxShadow="0 0 10px rgba(0, 0, 0, 0.1)"
+            w="full"
             minH="60vh"
           >
             <Text fontSize="l" fontWeight={"bolder"}>

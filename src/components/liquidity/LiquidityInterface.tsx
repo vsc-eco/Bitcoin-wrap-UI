@@ -1,4 +1,4 @@
-//TODO: add To instead of from 
+//TODO: 
 import React, {useLayoutEffect, useState } from "react";
 import {
   Box,
@@ -61,6 +61,9 @@ const LiquidityInterface = (props: Props) => {
 
   //useState for reloading
   const [IsReload, setIsReload] = useState(true);
+  const [fromToken, setFromToken] = useState<string>("HIVE");
+  const [toToken, setToToken] = useState<string>("HBD");
+
 
   useLayoutEffect(() => {
     const reloadTime = setTimeout(() => {
@@ -93,13 +96,13 @@ const LiquidityInterface = (props: Props) => {
           >
             <Flex
               justifyContent={"space-between"}
-              px={5}
-              h={4}
+              px={4}
+              h={3}
               mt={2}
               alignItems={"flex-end"}
             >
-              <Text fontSize={"xs"}>From</Text>
-              <Text fontSize={"xs"}>Balance [Wallet not connected]</Text>
+              <Text fontSize="10px">From</Text>
+              <Text fontSize="8px">Balance [Wallet not connected]</Text>
             </Flex>
 
             <Flex>
@@ -126,7 +129,7 @@ const LiquidityInterface = (props: Props) => {
                         height="24"
                       />
                     </Text>
-                    <Text fontSize={"xl"}>HBD</Text>
+                    <Text fontSize={"xl"}>{fromToken}</Text>
                   </Flex>
                   <IoMdArrowDropdown />
                 </Flex>
@@ -181,7 +184,6 @@ const LiquidityInterface = (props: Props) => {
               mb={2}
               alignItems={"flex-start"}
             >
-              <Flex></Flex>
               <Flex>
                 {" "}
                 {hasValues && <Text fontSize={"xs"}>Max Value</Text>}
@@ -235,13 +237,13 @@ const LiquidityInterface = (props: Props) => {
           >
             <Flex
               justifyContent={"space-between"}
-              px={5}
-              h={4}
+              px={4}
+              h={3}
               mt={2}
               alignItems={"flex-end"}
             >
-              <Text fontSize={"xs"}>From</Text>
-              <Text fontSize={"xs"}>Balance [Wallet not connected]</Text>
+              <Text fontSize={"10px"}>To</Text>
+              <Text fontSize={"8px"}>Balance [Wallet not connected]</Text>
             </Flex>
 
             <Flex>
@@ -261,9 +263,14 @@ const LiquidityInterface = (props: Props) => {
                     alignItems={"center"}
                   >
                     <Text fontSize={"2xl"} px={1}>
-                      <FaBitcoin color="gold" />
+                      <Image 
+                       src="./hive.svg"
+                       alt="hive"
+                       width="24"
+                       height="24"
+                      />
                     </Text>
-                    <Text fontSize={"xl"}>BTC</Text>
+                    <Text fontSize={"xl"}>{toToken}</Text>
                   </Flex>
                   <IoMdArrowDropdown />
                 </Flex>

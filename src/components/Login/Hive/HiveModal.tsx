@@ -1,4 +1,7 @@
-//TODO: to work the button login 
+//TODO: hook up the functionality
+//TODO: change the name to login with HIVE
+//TODO: import the icons and have title element beside it put it 2 in a row
+//TODO:
 import {
   Modal,
   ModalOverlay,
@@ -15,10 +18,17 @@ import {
   Box,
   Flex,
   Link,
+  Grid,
+  GridItem,
+  Icon,
+  Checkbox,
+  RadioGroup,
+  Radio,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import Image from "next/image";
 import { useAccountContext } from "../../../context/AccountContext";
+import { MdArrowCircleRight } from "react-icons/md";
 
 interface Props {
   onClose: () => void;
@@ -27,10 +37,29 @@ interface Props {
 
 const HiveModal: React.FC<Props> = ({ isOpen, onClose }) => {
   const [username, setUserName] = useState<string | undefined>("");
+  const [selectedItem, setSelectedItem] =  useState<string>("Keychain")
 
   const handleUsername = (e: any) => {
     setUserName(e.target.value);
   };
+
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === "Enter") {
+      triggerLoginWithHive();
+    }
+  };
+
+  const handleTick = (optionName: string) => {
+     setSelectedItem(optionName)
+  }
+
+  const loginOptions = [
+    { name: "Keychain", image: "/keychain.svg", disabled: false },
+    { name: "Hivesigner", image: "/hivesigner.svg", disabled: false },
+    { name: "Hiveauth", image: "/hiveauth-light.svg", disabled: false },
+    { name: "HiveLedger", image: "/ledger.svg", disabled: false },
+    { name: "PeakVault", image: "/peakvault.svg", disabled: false },
+  ];
 
   const { triggerLoginWithHive, myDid } = useAccountContext();
 
@@ -42,121 +71,64 @@ const HiveModal: React.FC<Props> = ({ isOpen, onClose }) => {
           <ModalCloseButton />
           <ModalBody>
             <VStack spacing={8} align="center">
-              <Heading as="h2" size="xl" fontWeight="bold" mb={4}>
-                <Box mb={4}>Login to VSC</Box>
+              <Heading size="md" fontWeight="semibold" mb={4}>
+                Login with HIVE
               </Heading>
               <Image
                 alt="vsc logo"
-                height={200}
-                width={200}
-                src="/logo.svg"
+                height={100}
+                width={100}
+                src="/hive.svg"
                 objectFit="cover"
               />
-              <Text mb={8}>
+              <Text mb={4} textAlign="center">
                 Select one of the supported login options that help keep your
                 access safe and decentralized.
               </Text>
-              <VStack spacing={4} w="full">
-                <Flex align="center">
-                  <Flex
-                    mx={2}
-                    color={"black"}
-                    borderRadius={"2xl"}
-                  >
-                    <Image
-                      alt="keychain Logo"
-                      height={90}
-                      width={200}
-                      src="/keychain.png"    
-                      objectFit="cover"
-                    />
-                  </Flex>
-                  <Input
-                   placeholder="Enter username"
-                   flexGrow={1}
-                   onKeyDown={event => {
-                    if(event.key === "Enter"){
-                      triggerLoginWithHive();
-                    }
-                   }} />
-                  <Link>
-                    <Button ml={2} onClick={triggerLoginWithHive}>→</Button>
-                  </Link>
-                </Flex>
-
-                <Box border={"1px solid grey"} borderRadius={"xl"} p={1}>
-                  <Flex
-                    align="center"
-                    backgroundColor={"grey.200"}
-                    opacity={0.5}
-                    position={"relative"}
-                    py={4}
-                  >
-                    <Text
-                      position={"absolute"}
-                      left={32}
-                      fontSize={"2xl"}
-                      top={8}
-                    >
-                      Coming Soon
-                    </Text>
-                    <Flex mx={2} borderRadius={"2xl"}>
-                      <Image
-                        alt="hivesigner Logo"
-                        height={90}
-                        width={200}
-                        src="/hivesigner.png"
-                        objectFit="cover"
-                      />
-                    </Flex>
-                    <Input
-                      placeholder="Enter username"
-                      flexGrow={1}
-                      value={username}
-                      onChange={handleUsername}
-                      isDisabled
-                    />
-                    <Link
-                      href={`https://hivesigner.com/oauth2/authorize?client_id=${username}&redirect_uri=REDIRECT_URI&scope=vote,comment`}
-                    >
-                      <Button ml={2} onClick={handleUsername}>
-                        →
-                      </Button>
-                    </Link>
-                  </Flex>
-
-                  <Flex
-                    align="center"
-                    backgroundColor={"grey.200"}
-                    opacity={0.5}
-                  >
-                    <Flex mx={2} borderRadius={"2xl"}>
-                      <Image
-                        alt="hiveauth Logo"
-                        height={90}
-                        width={200}
-                        src="/hiveauth.png"
-                        objectFit="cover"
-                      />
-                    </Flex>
-                    <Input
-                      placeholder="Enter username"
-                      flexGrow={1}
-                      isDisabled
-                    />
-                    <Link>
-                      <Button ml={2}>→</Button>
-                    </Link>
-                  </Flex>
-                </Box>
-              </VStack>
+              <Flex w="full" justifyContent="space-between" gap="2">
+                <Input
+                  placeholder="Enter username"
+                  value={username}
+                  onChange={handleUsername}
+                  onKeyDown={handleKeyDown}
+                />
+                <Button bgColor={"gray.50"} variant="sm" size={"sm"}>
+                  <Icon as={MdArrowCircleRight} />
+                </Button>
+              </Flex>
+              <Grid templateColumns="repeat(2, 1fr)" gap={2} w="full">
+                {loginOptions.map((option, index) => (
+                  <GridItem key={index}>
+                    <VStack>
+                      <Flex gap={2} alignItems={"center"} position={"relative"} w={36} onClick={() => handleTick(option.name)}>
+                        <Image
+                          alt={`${option.name} Logo`}
+                          height={25}
+                          width={25}
+                          src={option.image}
+                          objectFit="contain"
+                        />
+                        <Text fontSize="sm" fontWeight={"semibold"}>
+                          {option.name}
+                        </Text>
+                        <Checkbox position="absolute" top="0" right="0" h={1} w={1} colorScheme="green" isChecked={selectedItem === option.name}>
+                        </Checkbox>
+                      </Flex>
+                      {option.disabled && (
+                        <Text fontSize="xs" color="gray.500">
+                          Coming Soon
+                        </Text>
+                      )}
+                    </VStack>
+                  </GridItem>
+                ))}
+              </Grid>
             </VStack>
           </ModalBody>
           <ModalFooter>
-            <Button variant="ghost" mr={3} onClick={onClose}>
+            <Button variant="ghost" onClick={onClose}>
               Close
             </Button>
-            {/* <Button colorScheme="blue">Login</Button> */}
           </ModalFooter>
         </ModalContent>
       </Modal>
@@ -165,3 +137,4 @@ const HiveModal: React.FC<Props> = ({ isOpen, onClose }) => {
 };
 
 export default HiveModal;
+

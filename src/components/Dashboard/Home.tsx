@@ -12,7 +12,7 @@ const Home = (props: Props) => {
       ].split(":")[1];
 
   return (
-    <Flex w="auto" h="full" justifyContent={"center"}>
+    <Flex w="auto" h="full" justifyContent={"center"} py={12}>
       <Flex>
         <Dashboard username={response}/>
       </Flex>
