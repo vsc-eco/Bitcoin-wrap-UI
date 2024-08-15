@@ -25,10 +25,13 @@ import {
   RadioGroup,
   Radio,
 } from "@chakra-ui/react";
+
 import React, { useState } from "react";
 import Image from "next/image";
 import { useAccountContext } from "../../../context/AccountContext";
 import { MdArrowCircleRight } from "react-icons/md";
+import styles from "./Hive.module.css";
+import { FaCheckCircle } from "react-icons/fa";
 
 interface Props {
   onClose: () => void;
@@ -37,7 +40,7 @@ interface Props {
 
 const HiveModal: React.FC<Props> = ({ isOpen, onClose }) => {
   const [username, setUserName] = useState<string | undefined>("");
-  const [selectedItem, setSelectedItem] =  useState<string>("Keychain")
+  const [selectedItem, setSelectedItem] = useState<string>("Keychain");
 
   const handleUsername = (e: any) => {
     setUserName(e.target.value);
@@ -50,8 +53,8 @@ const HiveModal: React.FC<Props> = ({ isOpen, onClose }) => {
   };
 
   const handleTick = (optionName: string) => {
-     setSelectedItem(optionName)
-  }
+    setSelectedItem(optionName);
+  };
 
   const loginOptions = [
     { name: "Keychain", image: "/keychain.svg", disabled: false },
@@ -100,19 +103,32 @@ const HiveModal: React.FC<Props> = ({ isOpen, onClose }) => {
                 {loginOptions.map((option, index) => (
                   <GridItem key={index}>
                     <VStack>
-                      <Flex gap={2} alignItems={"center"} position={"relative"} w={36} onClick={() => handleTick(option.name)}>
-                        <Image
-                          alt={`${option.name} Logo`}
-                          height={25}
-                          width={25}
-                          src={option.image}
-                          objectFit="contain"
-                        />
-                        <Text fontSize="sm" fontWeight={"semibold"}>
-                          {option.name}
-                        </Text>
-                        <Checkbox position="absolute" top="0" right="0" h={1} w={1} colorScheme="green" isChecked={selectedItem === option.name}>
-                        </Checkbox>
+                      <Flex
+                        gap={1}
+                        alignItems={"center"}
+                        position={"relative"}
+                        w={24}
+                        onClick={() => handleTick(option.name)}
+                       >
+                        <Button colorScheme="gray">
+                          <label className={styles.container}>
+                            <Image
+                              alt={`${option.name} Logo`}
+                              height={25}
+                              width={25}
+                              src={option.image}
+                              objectFit="contain"
+                            />
+                            <Text fontSize={"sm"}>{option.name}</Text>
+                            <input type="radio" name="radio" />
+                            <span className={styles.checkmark}>
+                              <Icon
+                                className={styles.icon}
+                                as={FaCheckCircle}
+                              />
+                            </span>
+                          </label>
+                        </Button>
                       </Flex>
                       {option.disabled && (
                         <Text fontSize="xs" color="gray.500">
@@ -137,4 +153,3 @@ const HiveModal: React.FC<Props> = ({ isOpen, onClose }) => {
 };
 
 export default HiveModal;
-

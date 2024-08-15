@@ -36,7 +36,7 @@ export const theme = extendTheme({
     Button: {
       baseStyle: {
         fontWeight: "regular",
-        bg: "gray.50"
+        bg: "gray.100"
       },
       sizes: {
         lg: {
