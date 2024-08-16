@@ -51,13 +51,6 @@ function lazy<T extends Record<any, any>>(f: () => T): T {
           console.log("using handler", handlerType);
           if (!value) {
             value = f();
-            if (!value.getState().authenticated) {
-              throw new Error(
-                `not authenticated on: ${
-                  typeof window === "undefined" ? "Server" : "Client"
-                }`
-              );
-            }
           }
           return Reflect[handlerType](value, ...args);
         };
