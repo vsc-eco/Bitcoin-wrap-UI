@@ -16,7 +16,7 @@ const Home = (props: Props) => {
   return (
     <Flex w="auto" h="full" justifyContent={"center"} py={12}>
       <Flex>
-        <Dashboard username={userId} />
+        <Dashboard username={username} />
       </Flex>
       <Flex>
         <AccountComponent username={username} />
