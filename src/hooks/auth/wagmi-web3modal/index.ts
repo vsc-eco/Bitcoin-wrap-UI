@@ -12,7 +12,6 @@ export const ETH_PREFIX = "did:pkh:eip155:1:";
 export const eth = {
   async login() {
     console.log("eth connecting");
-    console.log(web3Modal.getState());
     await this.logout();
     let done = false;
     return new Promise((resolve, reject) => {
@@ -21,6 +20,12 @@ export const eth = {
           return;
         }
         console.log("events log", events.data);
+        if (events.data.event === "MODAL_CLOSE") {
+          done = true;
+          unsubscribe();
+          reject(new Error("Web3Modal has closed"));
+          return;
+        }
         if (events.data.event === "CONNECT_ERROR") {
           done = true;
           unsubscribe();

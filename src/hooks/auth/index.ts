@@ -1,3 +1,4 @@
+"use client";
 import {
   MagicLinkPopupActions,
   useMagicLinkPopup,
@@ -12,6 +13,8 @@ import {
   LOCAL_STORAGE_DID_PUBLIC_KEY_KEY,
 } from "./localStorageKeys";
 import { eth } from "./wagmi-web3modal";
+import { cookieStorage, parseCookie } from "wagmi";
+import { cookies } from "../../app/providers";
 
 type AuthState = {
   authenticated: boolean;
@@ -25,14 +28,49 @@ type AuthState = {
     }
 );
 
-const AuthStore = create<AuthState>(() => {
-  if (typeof window === "undefined") {
-    // TODO SSR support
-    return {
-      authenticated: false,
-    };
-  } else {
-    const userId = window.localStorage.getItem(LOCAL_STORAGE_USER_ID_KEY);
+function cookieToInitialState(cookie?: string | null) {
+  if (!cookie) return undefined;
+  const key = LOCAL_STORAGE_USER_ID_KEY;
+  const parsed = parseCookie(cookie, key);
+  if (!parsed) return undefined;
+  return parsed;
+}
+
+function lazy<T extends Record<any, any>>(f: () => T): T {
+  let value: T | undefined;
+  return new Proxy<T>(
+    (() => {}) as any,
+    new Proxy<ProxyHandler<T>>({} as any, {
+      get(
+        target,
+        handlerType,
+        receiver
+      ): ProxyHandler<T>[keyof ProxyHandler<T>] {
+        console.log("getting handler", handlerType);
+        return (target, ...args) => {
+          console.log("using handler", handlerType);
+          if (!value) {
+            value = f();
+            if (!value.getState().authenticated) {
+              throw new Error(
+                `not authenticated on: ${
+                  typeof window === "undefined" ? "Server" : "Client"
+                }`
+              );
+            }
+          }
+          return Reflect[handlerType](value, ...args);
+        };
+      },
+    })
+  );
+}
+
+const AuthStore = lazy(() =>
+  create<AuthState>(() => {
+    const userId =
+      cookieToInitialState(cookies) ||
+      cookieStorage.getItem(LOCAL_STORAGE_USER_ID_KEY);
     if (userId) {
       return {
         authenticated: true,
@@ -42,8 +80,8 @@ const AuthStore = create<AuthState>(() => {
     return {
       authenticated: false,
     };
-  }
-});
+  })
+);
 
 export const useAuth = AuthStore;
 
@@ -59,7 +97,7 @@ type AuthOptions<Method extends AuthMethod> = Parameters<
 >;
 
 const requestLogin = async ({ userId }: AuthInfo) => {
-  window.localStorage.setItem(LOCAL_STORAGE_USER_ID_KEY, userId);
+  cookieStorage.setItem(LOCAL_STORAGE_USER_ID_KEY, userId);
   AuthStore.setState(
     {
       authenticated: true,
@@ -82,7 +120,7 @@ export const AuthActions = {
     );
   },
   logout() {
-    window.localStorage.removeItem(LOCAL_STORAGE_USER_ID_KEY);
+    cookieStorage.removeItem(LOCAL_STORAGE_USER_ID_KEY);
     for (const authenticator of Object.values(authenticators)) {
       authenticator.logout();
     }

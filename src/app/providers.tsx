@@ -18,6 +18,8 @@ import { ShowComponentProvider } from "../context/ShowComponent";
 import { createWeb3Modal } from "@web3modal/wagmi";
 import { multiConfig, projectId } from "../hooks/auth/wagmi-web3modal/config";
 import { PropsWithChildren, useEffect } from "react";
+import { State } from "@wagmi/core";
+import { Hydrate } from "wagmi";
 
 if (!projectId) {
   throw new Error("Project ID is not defined");
@@ -25,6 +27,7 @@ if (!projectId) {
 
 export const web3Modal = createWeb3Modal({
   wagmiConfig: multiConfig,
+  allowUnsupportedChain: true,
   projectId,
 });
 
@@ -109,18 +112,30 @@ const Web3ModalThemeUpdater = ({ children }: PropsWithChildren<{}>) => {
   return children;
 };
 
-export function Providers({ children }: { children: React.ReactNode }) {
+export let cookies: string | null = null;
+
+export function Providers({
+  children,
+  initialState,
+  cookies: pCookies,
+}: PropsWithChildren<{
+  initialState: State | undefined;
+  cookies: string | null;
+}>) {
+  cookies = pCookies;
   return (
-    <QueryClientProvider client={queryClient}>
-      <ApolloProvider client={client}>
-        <CacheProvider>
-          <ChakraProvider theme={theme}>
-            <Web3ModalThemeUpdater>
-              <ShowComponentProvider>{children}</ShowComponentProvider>
-            </Web3ModalThemeUpdater>
-          </ChakraProvider>
-        </CacheProvider>
-      </ApolloProvider>
-    </QueryClientProvider>
+    <Hydrate config={multiConfig} initialState={initialState}>
+      <QueryClientProvider client={queryClient}>
+        <ApolloProvider client={client}>
+          <CacheProvider>
+            <ChakraProvider theme={theme}>
+              <Web3ModalThemeUpdater>
+                <ShowComponentProvider>{children}</ShowComponentProvider>
+              </Web3ModalThemeUpdater>
+            </ChakraProvider>
+          </CacheProvider>
+        </ApolloProvider>
+      </QueryClientProvider>
+    </Hydrate>
   );
 }

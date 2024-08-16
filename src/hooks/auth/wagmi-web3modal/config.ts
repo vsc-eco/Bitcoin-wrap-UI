@@ -14,7 +14,10 @@ export const multiConfig = defaultWagmiConfig({
   metadata: {
     name: "My App",
     description: "My app description",
-    url: "https://myapp.com",
+    url:
+      globalThis?.location?.hostname === "localhost"
+        ? `http://${window.location.host}`
+        : "https://wrap.vsc.eco",
     icons: ["https://myapp.com/favicon.ico"],
   },
   enableWalletConnect: true,
