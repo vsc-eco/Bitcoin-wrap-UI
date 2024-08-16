@@ -8,15 +8,18 @@ import { Providers } from "./providers";
 //import the analytics
 import { Analytics } from "@vercel/analytics/react";
 
-const cookies = headers().get("cookie");
-
-const initialState = cookieToInitialState(multiConfig, headers().get("cookie"));
-
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const cookies = headers().get("cookie");
+
+  const initialState = cookieToInitialState(
+    multiConfig,
+    headers().get("cookie")
+  );
+
   return (
     <html lang="en" className={arcadiaFont.variable}>
       <body>
