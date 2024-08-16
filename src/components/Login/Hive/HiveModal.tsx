@@ -28,7 +28,6 @@ import {
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { useAccountContext } from "../../../context/AccountContext";
 import { MdArrowCircleRight } from "react-icons/md";
 import styles from "./Hive.module.css";
 import { FaCheckCircle } from "react-icons/fa";
@@ -64,7 +63,9 @@ const HiveModal: React.FC<Props> = ({ isOpen, onClose }) => {
     { name: "PeakVault", image: "/peakvault.svg", disabled: false },
   ];
 
-  const { triggerLoginWithHive, myDid } = useAccountContext();
+  const triggerLoginWithHive = () => {
+    console.log("TODO hive sign in");
+  };
 
   return (
     <>
@@ -109,7 +110,7 @@ const HiveModal: React.FC<Props> = ({ isOpen, onClose }) => {
                         position={"relative"}
                         w={24}
                         onClick={() => handleTick(option.name)}
-                       >
+                      >
                         <Button colorScheme="gray">
                           <label className={styles.container}>
                             <Image

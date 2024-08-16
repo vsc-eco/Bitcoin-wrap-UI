@@ -25,7 +25,7 @@ import {
 } from "@chakra-ui/react";
 import bs58check from "bs58check";
 import { MyContext } from "../context/TokenTransferContext";
-import { useAccountContext } from "../context/AccountContext";
+import { useAuth } from "../hooks/auth";
 
 const WP_PUB =
   "034240ccd025374e0531945a65661aedaac5fff1b2ae46197623e594e0129e8b13";
@@ -41,13 +41,10 @@ type Props = {
   };
 };
 
-
-
 const DepositModal = (props: Props) => {
-  const { myAuth } = useAccountContext();
-  const response = JSON.parse(localStorage.getItem("login.auth")!)[
-    "authId"
-  ].split(":")[1];
+  const auth = useAuth();
+
+  const response = auth.authenticated ? auth.userId : "";
 
   let encodedAddr;
   if (props?.dest?.did) {
@@ -63,18 +60,6 @@ const DepositModal = (props: Props) => {
     addr.set(scriptHash, 1);
     encodedAddr = bs58check.encode(addr);
   }
-
-  console.log("myDid:61", myAuth);
-  const { registerAddr } = useCreateTx();
-  useLayoutEffect(() => {
-    if (props.dest.did) {
-      registerAddr({
-        addr: props.dest.did,
-        encodedAddr,
-        did: myAuth,
-      });
-    }
-  }, [props.dest.did, myAuth]);
 
   //for qr code
   const { Image } = useQRCode();
@@ -187,11 +172,22 @@ const DepositModal = (props: Props) => {
                 </Text>
 
                 <Flex alignItems="center">
-                  <Link href={`https://mempool.space/address/${encodedAddr}`} size={["xs", "sm", "l"]} px={["2"]} target="_blank">
+                  <Link
+                    href={`https://mempool.space/address/${encodedAddr}`}
+                    size={["xs", "sm", "l"]}
+                    px={["2"]}
+                    target="_blank"
+                  >
                     <CiShare1 color="black" fontWeight="bold" />
                   </Link>
                   <Button size={["xs", "sm", "l"]} px={["2"]}>
-                    <BiCopy color="black" fontWeight="bold" onClick={() => {navigator.clipboard.writeText(encodedAddr)}} />
+                    <BiCopy
+                      color="black"
+                      fontWeight="bold"
+                      onClick={() => {
+                        navigator.clipboard.writeText(encodedAddr);
+                      }}
+                    />
                   </Button>
                 </Flex>
               </Container>

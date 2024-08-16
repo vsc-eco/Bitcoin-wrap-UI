@@ -11,15 +11,15 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
-import Moment from 'moment'
+import Moment from "moment";
+import { readableUsername } from "../components/Sidebar/UserInfo";
 
-const TransactionItem = ({
-  showDateProp,
-  handleTransactionOpen,
-  transaction,
-}) => {
+const START_BLOCK = 88079516;
+const START_BLOCK_TIME = Moment("2024-08-16T02:46:48Z");
+
+const TransactionItem = (props) => {
+  const { showDateProp, handleTransactionOpen, transaction, userId } = props;
   const [showDate, setShowDate] = useState(showDateProp);
-  const [selectedTransaction, setSelectedTransaction] = useState(null);
 
   function handleMouseEnter() {
     //if showDate is false then make it true
@@ -36,9 +36,15 @@ const TransactionItem = ({
 
   //function for toggling the transaction detail modal
   const handleTransactionClick = () => {
-    setSelectedTransaction(transaction);
     handleTransactionOpen();
   };
+
+  const otherAccount =
+    userId === transaction.owner ? transaction.from : transaction.owner;
+
+  const readableOtherAccount = readableUsername(otherAccount);
+
+  const moneyIn = userId === transaction.owner;
 
   return (
     <Tr
@@ -49,15 +55,30 @@ const TransactionItem = ({
       onClick={handleTransactionClick}
     >
       <Td w={22} h={12}>
-        {showDate ? Moment(transaction.date).format('D MMM') : null}
+        {showDate
+          ? ((transaction.block_height - START_BLOCK) * 3 < 0
+              ? START_BLOCK_TIME.clone().subtract(
+                  -(transaction.block_height - START_BLOCK) * 3,
+                  "seconds"
+                )
+              : START_BLOCK_TIME.clone().add(
+                  (transaction.block_height - START_BLOCK) * 3,
+                  "seconds"
+                )
+            ).format("D MMM hh:mma")
+          : null}
       </Td>
 
       <Td display="flex" alignItems="center" w={412} h={14}>
         <WrapItem>
-          <Avatar name="Coffe Fondo" src={transaction.avatarUrl} size="sm" />
+          <Avatar
+            name={readableOtherAccount}
+            src={transaction.avatarUrl}
+            size="sm"
+          />
         </WrapItem>
         <Text px={2} fontSize={["12px"]}>
-          {transaction.toFrom}
+          {readableOtherAccount}
         </Text>
         {transaction.status !== "CONFIRMED" && (
           <Button
@@ -71,10 +92,10 @@ const TransactionItem = ({
         )}
       </Td>
       <Td isNumeric>
-        {transaction.amountPrefix}
+        {transaction.amount / 1_000}
         &nbsp;
-        {transaction.amount}
-        &nbsp; (${transaction.dollar})
+        {transaction.tk}
+        {/* &nbsp; (${transaction.dollar}) */}
       </Td>
 
       <Td>
@@ -86,12 +107,10 @@ const TransactionItem = ({
             !transaction.TransferIn ? (
             <BsArrowRight />
           ) : null} */}
-          {transaction.TransferIn ? (
-            <BsArrowLeft />
-          ) : <BsArrowRight/>}
-          {'  '}
+          {moneyIn ? <BsArrowLeft /> : <BsArrowRight />}
+          {"  "}
           &nbsp;
-          <Text>{transaction.paymentMethod}</Text>
+          <Text>{transaction.t}</Text>
         </Flex>
       </Td>
     </Tr>

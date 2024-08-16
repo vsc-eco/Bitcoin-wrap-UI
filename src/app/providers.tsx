@@ -2,7 +2,7 @@
 
 "use client";
 // app/providers.tsx
-import { extendTheme } from "@chakra-ui/react";
+import { extendTheme, useColorMode } from "@chakra-ui/react";
 import { CacheProvider } from "@chakra-ui/next-js";
 import { ChakraProvider } from "@chakra-ui/react";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
@@ -13,9 +13,20 @@ import {
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
-import { AccountContext } from "../context/AccountContext";
 import { client } from "../apollo/client";
 import { ShowComponentProvider } from "../context/ShowComponent";
+import { createWeb3Modal } from "@web3modal/wagmi";
+import { multiConfig, projectId } from "../hooks/auth/wagmi-web3modal/config";
+import { PropsWithChildren, useEffect } from "react";
+
+if (!projectId) {
+  throw new Error("Project ID is not defined");
+}
+
+export const web3Modal = createWeb3Modal({
+  wagmiConfig: multiConfig,
+  projectId,
+});
 
 export const theme = extendTheme({
   components: {
@@ -36,7 +47,7 @@ export const theme = extendTheme({
     Button: {
       baseStyle: {
         fontWeight: "regular",
-        bg: "gray.100"
+        bg: "gray.100",
       },
       sizes: {
         lg: {
@@ -85,13 +96,28 @@ export const theme = extendTheme({
 
 const queryClient = new QueryClient();
 
+const Web3ModalThemeUpdater = ({ children }: PropsWithChildren<{}>) => {
+  const { colorMode } = useColorMode();
+  useEffect(() => {
+    if (colorMode === "light") {
+      web3Modal.setThemeMode("light");
+    } else {
+      web3Modal.setThemeMode("dark");
+    }
+  }, [colorMode]);
+
+  return children;
+};
+
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <QueryClientProvider client={queryClient}>
       <ApolloProvider client={client}>
         <CacheProvider>
           <ChakraProvider theme={theme}>
-            <ShowComponentProvider>{children}</ShowComponentProvider>
+            <Web3ModalThemeUpdater>
+              <ShowComponentProvider>{children}</ShowComponentProvider>
+            </Web3ModalThemeUpdater>
           </ChakraProvider>
         </CacheProvider>
       </ApolloProvider>

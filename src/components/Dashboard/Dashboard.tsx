@@ -1,12 +1,6 @@
-//TODO: 
+//TODO:
 import React from "react";
-import {
-  Flex,
-  Text,
-  Card,
-  Box,
-  CardHeader,
-} from "@chakra-ui/react";
+import { Flex, Text, Card, Box, CardHeader } from "@chakra-ui/react";
 import AccountComponent from "../AccountComponent";
 import { FaChartLine } from "react-icons/fa";
 import { FaCalendarDays } from "react-icons/fa6";
@@ -20,10 +14,10 @@ type Props = {
 
 const Dashboard = ({ username }: Props) => {
   //function for making the font smaller after dots
-  const priceElement = document.getElementById("price");
+  // const priceElement = document.getElementById("price");
 
   //Get the text and split at the decimal point
-  const [dollars, cents] = (priceElement?.textContent || "").split(".");
+  // const [dollars, cents] = (priceElement?.textContent || "").split(".");
   //  const centElement = document.createElement('span');
   //  centElement.textContent = cents;
   //  centElement.style.fontSize = 'xs'
@@ -32,11 +26,9 @@ const Dashboard = ({ username }: Props) => {
 
   return (
     <Flex direction="column" justifyContent={"center"} color={"#75757d"}>
-        <Box pl={4}>
-          <Text fontSize="xl">
-            Welcome, {username}
-          </Text>
-        </Box>
+      <Box pl={4}>
+        <Text fontSize="xl">Welcome, {username}</Text>
+      </Box>
       <Flex mt={4} w="100%">
         <Card
           bg="white"

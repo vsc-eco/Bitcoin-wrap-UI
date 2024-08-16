@@ -15,13 +15,12 @@ import { BUTTON_LABELS } from "../../constants";
 import HiveModal from "./Hive/HiveModal";
 import MetaMaskModal from "./Ethereum/MetamaskModal";
 import SocialPopUp from "./SocialLinks/SocialPopUp";
+import { AuthActions, useAuth } from "../../hooks/auth";
+import { useNavigate } from "react-router-dom";
 
 const MultipleIcons = ({ size }) => {
   return (
     <Flex>
-      <Flex px={2}>
-        <BiLogoGmail fontSize={size} />
-      </Flex>
       <Flex px={2}>
         <PiGoogleChromeLogoBold fontSize={size} />
       </Flex>
@@ -35,6 +34,14 @@ const MultipleIcons = ({ size }) => {
   );
 };
 
+const EmailIcon = ({ size }) => (
+  <Flex>
+    <Flex px={2}>
+      <BiLogoGmail fontSize={size} />
+    </Flex>
+  </Flex>
+);
+
 const SignUpComponent = () => {
   // Disclosure hooks for Hive, Ethereum, and SocialPopUp
   const {
@@ -42,16 +49,8 @@ const SignUpComponent = () => {
     onOpen: onHiveModalOpen,
     onClose: onHiveModalClose,
   } = useDisclosure();
-  const {
-    isOpen: isEthModalOpen,
-    onOpen: onEthModalOpen,
-    onClose: onEthModalClose,
-  } = useDisclosure();
-  const {
-    isOpen: isSocialOpen,
-    onOpen: onSocialOpen,
-    onClose: onSocialClose,
-  } = useDisclosure();
+
+  const navigate = useNavigate();
 
   return (
     <Flex justifyContent="center" alignItems="center">
@@ -92,18 +91,17 @@ const SignUpComponent = () => {
               width="full"
               mb={3}
               leftIcon={<FaEthereum fontSize={"20px"} />}
-              onClick={onEthModalOpen}
+              onClick={() => AuthActions.login("eth").then(() => navigate("/"))}
             >
               {BUTTON_LABELS.signUpWithEth}
             </Button>
-            <MetaMaskModal isOpen={isEthModalOpen} onClose={onEthModalClose} />
 
             {/* Socials Button */}
             <Button
               variant="outline"
               width="full"
               mb={3}
-              onClick={onSocialOpen}
+              onClick={() => AuthActions.login("eth").then(() => navigate("/"))}
               rightIcon={
                 <Box>
                   <MultipleIcons size={22} />
@@ -112,7 +110,21 @@ const SignUpComponent = () => {
             >
               {BUTTON_LABELS.signUpWithSocials}
             </Button>
-            <SocialPopUp isOpen={isSocialOpen} onClose={onSocialClose} />
+
+            {/* Email Button */}
+            <Button
+              variant="outline"
+              width="full"
+              mb={3}
+              onClick={() => AuthActions.login("eth").then(() => navigate("/"))}
+              rightIcon={
+                <Box>
+                  <EmailIcon size={22} />
+                </Box>
+              }
+            >
+              {BUTTON_LABELS.signUpWithEmail}
+            </Button>
           </VStack>
         </Box>
       </Center>

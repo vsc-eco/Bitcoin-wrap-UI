@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aioha/aioha": "^1.4.0",
     "@apollo/client": "^3.8.7",
     "@ceramicnetwork/core": "^2.46.0",
     "@ceramicnetwork/http-client": "^2.36.0",
@@ -28,6 +29,9 @@
     "@types/react": "^18.2.21",
     "@types/react-dom": "18.2.7",
     "@vercel/analytics": "^1.1.1",
+    "@wagmi/connectors": "^5.1.5",
+    "@wagmi/core": "^2.13.4",
+    "@web3modal/wagmi": "^5.0.11",
     "apexcharts": "^3.44.2",
     "axios": "^1.6.5",
     "bitcoinjs-lib": "^6.1.5",
@@ -41,6 +45,8 @@
     "graphql": "^16.8.1",
     "key-did-provider-ed25519": "^3.0.2",
     "key-did-resolver": "^3.0.0",
+    "magic-link-popup": "^0.1.0",
+    "magic-link-popup-react": "^0.3.0",
     "magic-sdk": "^21.5.0",
     "moment": "^2.29.4",
     "mongodb": "^6.3.0",
@@ -53,8 +59,11 @@
     "react-apexcharts": "^1.4.1",
     "react-dom": "18.2.0",
     "react-hooks-global-state": "^2.1.0",
+    "react-router-dom": "^6.26.0",
     "recharts": "^2.10.3",
     "typescript": "5.2.2",
+    "viem": "^2.19.4",
+    "wagmi": "^2.12.5",
     "zustand": "^4.4.1"
   },
   "devDependencies": {
