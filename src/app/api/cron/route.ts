@@ -28,6 +28,7 @@ type TransctionsSchema = {
 };
 
 export async function GET(req: NextRequest) {
+  return NextResponse.json({});
   // //connect to the mongo client
   // await client.connect();
   // const db = client.db("test");
