@@ -73,7 +73,7 @@ const TransactionItem = (props) => {
         <WrapItem>
           <Avatar
             name={readableOtherAccount}
-            src={transaction.avatarUrl}
+            src={`https://images.hive.blog/u/${readableOtherAccount}/avatar`}
             size="sm"
           />
         </WrapItem>

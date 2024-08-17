@@ -13,12 +13,16 @@ import {
   ModalHeader,
   ModalOverlay,
   useDisclosure,
+  InputLeftElement,
+  Select,
 } from "@chakra-ui/react";
 
 import React, { useState } from "react";
 import { getOutputs, useCreateTx } from "../hooks/VSC";
 import { useQuery } from "@tanstack/react-query";
 import { DHive } from "../const";
+
+import styles from "./TransferModal.module.css"
 
 type Props = {
   refetch: Function;
@@ -90,36 +94,62 @@ const TransferModal = (props: Props) => {
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Transfer</ModalHeader>
+        <ModalContent className={styles.murPrompt}>
+          <ModalHeader
+          style={{
+            fontFamily: "var(--font-arcadia), system-ui, sans-serif",
+            fontWeight: 240,
+            lineHeight: "28px",
+            fontSize: "19px"
+          }}
+          >
+            Transfer
+          </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <InputGroup my={2}>
-              <InputLeftAddon w={32}>Destination</InputLeftAddon>
+            <InputGroup my={2} className={styles.murInput}>
+              <InputLeftElement pointerEvents='none' color='gray.300' fontSize='1.1em'>
+                @
+              </InputLeftElement>
               <Input
+
+                placeholder="Username"
                 isRequired
                 value={destination}
                 onChange={(e) => setDestination(e.target.value)}
               />
             </InputGroup>
-            {isValidDestination ? (
-              <Text color="green" fontSize="xs" px={2}>
-                Account found!
-              </Text>
+            {/* {isValidDestination ? (
+              
             ) : (
               <Text color="tomato" fontSize="xs" px={2}>
                 Account must be registered on this web portal.
               </Text>
-            )}
-            <InputGroup py={4}>
-              <InputLeftAddon w={32}>Amount</InputLeftAddon>
-              <Input
-                isRequired
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-                isInvalid={!isAmountValid}
-              />
-            </InputGroup>
+            )} */}
+            <div style={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center'
+            }}>
+              <InputGroup >
+                <InputLeftElement pointerEvents='none' color='gray.300' fontSize='1.1em'>
+                  $
+                </InputLeftElement>
+                <Input
+                  placeholder="0.00"
+                  isRequired
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                  isInvalid={!isAmountValid}
+                />
+              </InputGroup>
+              
+              <Select marginLeft="2.5%" placeholder='Select Asset'>
+                <option value='option1'>Hive</option>
+                <option value='option2'>Hive Dollar</option>
+              </Select>
+            </div>
             <Text color="black" fontSize={"medium"}>
               Available Balance: {"TODO"}
             </Text>
@@ -137,15 +167,23 @@ const TransferModal = (props: Props) => {
 
           <ModalFooter>
             <Button
-              colorScheme="blue"
+            style={{
+              
+            }}
               mr={3}
-              isDisabled={isDisabled}
-              onClick={handleSend}
+              
+              onClick={onClose}
+              className={`${styles.murButton} ${styles.murButtonSecondary}`}
+            >
+              Cancel
+            </Button>
+            <Button 
+            isDisabled={isDisabled} 
+            colorScheme="blue" mr={3}
+            onClick={handleSend}
+            className={`${styles.murButton} ${styles.murButtonPrimary}`}
             >
               Send
-            </Button>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Cancel
             </Button>
           </ModalFooter>
         </ModalContent>
