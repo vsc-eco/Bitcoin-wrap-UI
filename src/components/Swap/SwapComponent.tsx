@@ -309,7 +309,7 @@ const SwapComponent = (props: Props) => {
             </Flex>
           </Flex>
         </InputGroup>
-        <Button w="full" mt={5} bgColor={"indigo"}> 
+        <Button w="full" mt={5} bgColor={"indigo.700"}> 
           Swap
         </Button>
       </VStack>

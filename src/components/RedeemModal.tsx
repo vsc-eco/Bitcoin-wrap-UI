@@ -17,6 +17,7 @@ import {
 import { getOutputs, useCreateTx } from "../hooks/VSC";
 import { DHive } from "../const";
 import { useQuery } from "@tanstack/react-query";
+import styles from "./RedeemModal.module.css";
 
 type Props = {};
 
@@ -54,15 +55,18 @@ const RedeemModal = (props: Props) => {
         Redeem
       </Button>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose} className={styles.modal}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Redeem</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <InputGroup my={2}>
-              <InputLeftAddon w={32}>BTC Address</InputLeftAddon>
+              <InputLeftAddon w={32} className={styles.modalLabel}>
+                BTC Address
+              </InputLeftAddon>
               <Input
+                className={styles.input}
                 value={destination}
                 onChange={(e) => setDestination(e.target.value)}
               />
@@ -71,14 +75,18 @@ const RedeemModal = (props: Props) => {
               Account not found!
             </Text> */}
             <InputGroup py={2}>
-              <InputLeftAddon w={32}>Amount</InputLeftAddon>
+              <InputLeftAddon w={32} className={styles.modalLabel}>
+                Amount
+              </InputLeftAddon>
               <Input
+                className={styles.input}
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
                 isInvalid={!isAmountValid}
+                errorBorderColor="transaparent"
               />
             </InputGroup>
-            <Text color="black" fontSize={"medium"}>
+            <Text className={styles.text}>
               Available Balance: {"TODO"}
             </Text>
             {!isAmountValid && (
@@ -95,15 +103,20 @@ const RedeemModal = (props: Props) => {
 
           <ModalFooter>
             <Button
-              colorScheme="blue"
+              className={`${styles.reButton} ${styles.secButton}`}
+              colorScheme="gray"
+              mr={3}
+              onClick={onClose}
+            >
+              Cancel
+            </Button>
+            <Button
+              className={`${styles.reButton} ${styles.priButton}`}
               mr={3}
               onClick={handleSend}
               isDisabled={!isAmountValid}
             >
               Send
-            </Button>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Cancel
             </Button>
           </ModalFooter>
         </ModalContent>

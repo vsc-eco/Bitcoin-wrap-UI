@@ -52,11 +52,12 @@ const DexComponent = () => {
           </Button>
           <Button
             borderRadius={"xl"}
-            colorScheme="indigo"
+            w={24}
+            colorScheme={"gray"}
             variant={activeTab === "liquidity" ? "solid" : "outline"}
             onClick={() => setActiveTab("liquidity")}
           >
-            Liquidity
+           <Text>Liquidity</Text>
           </Button>
         </ButtonGroup>
 

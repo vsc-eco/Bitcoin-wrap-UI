@@ -96,7 +96,7 @@ const HiveModal: React.FC<Props> = ({ isOpen, onClose }) => {
                   onChange={handleUsername}
                   onKeyDown={handleKeyDown}
                 />
-                <Button bgColor={"gray.50"} variant="sm" size={"sm"}>
+                <Button bgColor={"gray.50"} variant="sm" size={"sm"} onClick={triggerLoginWithHive}>
                   <Icon as={MdArrowCircleRight} />
                 </Button>
               </Flex>
@@ -110,7 +110,7 @@ const HiveModal: React.FC<Props> = ({ isOpen, onClose }) => {
                         position={"relative"}
                         w={24}
                         onClick={() => handleTick(option.name)}
-                      >
+                       >
                         <Button colorScheme="gray">
                           <label className={styles.container}>
                             <Image

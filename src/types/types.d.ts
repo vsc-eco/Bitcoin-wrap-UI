@@ -6,3 +6,10 @@ export interface TokenInterface {
     image: string;
     balanceAddr: string;
   }
+
+  export interface accountData {
+    id: number,
+    name: string;
+    price: string;
+    decimalValue: string;
+  }

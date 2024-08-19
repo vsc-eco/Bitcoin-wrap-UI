@@ -19,8 +19,7 @@ const SecondSection = () => {
           <Sidebar />
         </Flex>
         <Flex className="parent" w="full" h="100vh" justifyContent={"center"}>
-          <Flex className="child" m={0} p={0} maxW={"900px"} my={8}>
-            <Card>
+          <Flex className="child" m={0} p={0} maxW={"1100px"} my={8}>
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/signup" element={<SignUpComponent />} />
@@ -28,7 +27,6 @@ const SecondSection = () => {
                 <Route path="/dex" element={<DexComponent />} />
                 <Route path="/transaction" element={<Transaction />} />
               </Routes>
-            </Card>
           </Flex>
         </Flex>
       </Flex>

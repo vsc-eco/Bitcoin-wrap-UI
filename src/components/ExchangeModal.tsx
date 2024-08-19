@@ -1,3 +1,5 @@
+//TODO: there is the error not rendering the ui
+
 "use client";
 import {
   Button,
@@ -11,6 +13,9 @@ import {
   Text,
   Flex,
   Box,
+  Card,
+  CardHeader, 
+  CardBody,
   Accordion,
   AccordionItem,
   AccordionButton,
@@ -22,7 +27,6 @@ import { MdCancelPresentation } from "react-icons/md";
 import { TbExchange } from "react-icons/tb";
 import { BiSolidLockOpenAlt } from "react-icons/bi";
 import { useContext, useState, useLayoutEffect } from "react";
-import { Card, CardHeader, CardBody } from "@chakra-ui/react";
 import {
   useQuery,
   useMutation,
@@ -87,7 +91,15 @@ const ExchangeModal = (props: Props) => {
   return (
     <>
       <Flex justifyContent="center" alignItems="center" position={"relative"}>
-        <Text fontSize={"4xl"} position={"absolute"} top={"50%"} right={"35%"} fontWeight={"xl"} >Coming Soon</Text>
+        <Text
+          fontSize={"4xl"}
+          position={"absolute"}
+          top={"50%"}
+          right={"35%"}
+          fontWeight={"xl"}
+        >
+          Coming Soon
+        </Text>
         <Box
           bg="white"
           maxW="800px"

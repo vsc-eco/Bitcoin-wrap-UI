@@ -1,0 +1,39 @@
+.parent_container {
+  display: block;
+  padding: 8px 4px;
+  width: 391px;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px 0 rgba(4, 4, 52, 0.06),
+    0 0 2px 0 rgba(91, 95, 107, 0.24);
+  font-weight: 360;
+  line-height: 16.0003px;
+  height: 550;
+}
+
+.heading {
+  display: flex;
+  padding: 0px 24px;
+  width: auto;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.heading Button {
+  background-color: rgba(112, 115, 147, 0.06);
+  border-radius: 50%;
+  padding: 4px 0px;
+}
+
+.icon {
+  padding: 4px;
+  color: rgb(30, 30, 42);
+  font-size: 24px;
+  font-weight: 360;
+  align-items: center;
+  cursor: pointer;
+}
+
+.account_data {
+  display: block;
+  padding: 0;
+}

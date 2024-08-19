@@ -1,4 +1,4 @@
-import { web3Modal } from "../../../app/providers";
+// import { web3Modal } from "../../../app/providers";
 import { Authenticator } from "../types";
 import { disconnect, getAccount } from "@wagmi/core";
 import { multiConfig } from "./config";

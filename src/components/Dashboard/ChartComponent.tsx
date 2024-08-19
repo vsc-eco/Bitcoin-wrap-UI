@@ -12,33 +12,32 @@ const App = () => {
           show: false,
         },
         sparkline: {
-          enabled: false
+          enabled: false,
         },
         padding: {
           top: 0,
           right: 0,
           bottom: 0,
-          left: 0
-        }
+          left: 0,
+        },
       },
       dataLabels: {
         enabled: false,
       },
-      legend:{
-        show: false
+      legend: {
+        show: false,
       },
       stroke: {
-        width: 0
+        width: 0,
       },
       tooltip: {
         enabled: false, // Enable tooltips
-
       },
       xaxis: {
         labels: {
           show: true,
           offsetX: -10,
-          offsetY: 0
+          offsetY: 0,
         },
         categories: [
           "",
@@ -61,7 +60,7 @@ const App = () => {
         labels: {
           show: false,
           offsetX: 0,
-          offsetY: 0
+          offsetY: 0,
         },
         min: 0,
         max: 100,
@@ -71,7 +70,9 @@ const App = () => {
         show: false,
       },
       fill: {
+
         type: "gradient",
+        colors:['rgb(123, 138, 238)'],
         gradient: {
           shadeIntensity: 0.8,
           opacityFrom: 0.4,
@@ -83,21 +84,23 @@ const App = () => {
         size: 0, // size of the marker/circle
         strokeWidth: 1, // border width of the circle
         hover: {
-          size: 3 // size of the marker when hovered
-        }
+          size: 3, // size of the marker when hovered
+        },
       },
-      annotations : {
-        xaxis: [{
-          x: "Nov 10",
-          label: {
-            text: "Nov 10",
-            style: {
-              color: "#333",
-              background: "transparent"
-            }
-          }
-        }]
-      }
+      annotations: {
+        xaxis: [
+          {
+            x: "Nov 10",
+            label: {
+              text: "Nov 10",
+              style: {
+                color: "#333",
+                background: "transparent",
+              },
+            },
+          },
+        ],
+      },
     },
     series: [
       {
@@ -111,7 +114,7 @@ const App = () => {
     <Chart
       options={chartData.options}
       series={chartData.series}
-      width="400"
+      width="550"
       type="area"
     />
   );

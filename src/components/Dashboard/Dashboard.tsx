@@ -1,12 +1,13 @@
 //TODO:
 import React from "react";
 import { Flex, Text, Card, Box, CardHeader } from "@chakra-ui/react";
-import AccountComponent from "../AccountComponent";
+import AccountComponent from "./AccountComponent";
 import { FaChartLine } from "react-icons/fa";
 import { FaCalendarDays } from "react-icons/fa6";
 import ChartComponent from "./ChartComponent";
 import { IoChevronDownOutline } from "react-icons/io5";
 import { GoArrowUpRight } from "react-icons/go";
+import styles from "./Dashboard.module.css";
 
 type Props = {
   username: string;
@@ -30,23 +31,19 @@ const Dashboard = ({ username }: Props) => {
         <Text fontSize="xl">Welcome, {username}</Text>
       </Box>
       <Flex mt={4} w="100%">
-        <Card
-          bg="white"
-          maxW="800px"
-          h="400px"
-          w={"max-content"}
-          m={["0", "0", "1", "3"]}
-        >
+        <Card className={styles.parent_container}>
           <CardHeader>
-            <Text fontSize={"sm"}>Hive balance</Text>
+            <Text fontSize={"sm"} className={styles.heading}>
+              Hive balance
+            </Text>
             <Flex justifyContent={"space-between"}>
               <Flex>
-                <Text id="price" fontSize={"xl"} fontWeight={"bold"}>
-                  {"$110"}.<span style={{ fontSize: "0.6em" }}>{"22"}</span>
+                <Text id="price" className={styles.price}>
+                  {"$110"}.<span className={styles.small_text}>{"22"}</span>
                 </Text>
               </Flex>
-              <Flex>
-                <Flex
+              {/* <Flex>
+                 <Flex
                   mx={2}
                   my={1}
                   p={1}
@@ -68,12 +65,14 @@ const Dashboard = ({ username }: Props) => {
                 >
                   <FaCalendarDays />
                 </Flex>
-              </Flex>
+              </Flex> */}
             </Flex>
             <Flex justifyContent="space-between">
               <Flex>
                 <Flex color={"grey.700"} alignItems={"center"}>
                   <Text fontSize="xs">Last 30 days</Text>
+                </Flex>
+                <Flex alignItems={"center"} mt={1} fontSize={"sm"}>
                   <IoChevronDownOutline />
                 </Flex>
               </Flex>

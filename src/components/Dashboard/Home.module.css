@@ -1,0 +1,7 @@
+.parent_container {
+    grid-gap: 24px;
+    display: grid;
+    grid-template-columns: auto 1fr;;
+    vertical-align: initial;
+}
+
