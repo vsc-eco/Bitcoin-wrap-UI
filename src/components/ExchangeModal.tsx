@@ -14,7 +14,7 @@ import {
   Flex,
   Box,
   Card,
-  CardHeader, 
+  CardHeader,
   CardBody,
   Accordion,
   AccordionItem,
@@ -100,7 +100,7 @@ const ExchangeModal = (props: Props) => {
         >
           Coming Soon
         </Text>
-        <Box
+        <Card
           bg="white"
           maxW="800px"
           py={8}
@@ -336,7 +336,7 @@ const ExchangeModal = (props: Props) => {
               Terms of Service
             </Text>
           </CardBody>
-        </Box>
+        </Card>
       </Flex>
     </>
   );
