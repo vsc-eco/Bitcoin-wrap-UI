@@ -14,29 +14,29 @@ export const eth = {
     console.log("eth connecting");
     await this.logout();
     let done = false;
+    let socialLogin = false;
     return new Promise((resolve, reject) => {
       const unsubscribe = web3Modal.subscribeEvents((events) => {
         if (done) {
           return;
         }
         console.log("events log", events.data);
-        if (events.data.event === "MODAL_CLOSE") {
+        if (events.data.event === "SOCIAL_LOGIN_STARTED") {
+          socialLogin = true;
+          return;
+        }
+        if (!socialLogin && events.data.event === "MODAL_CLOSE") {
           done = true;
           unsubscribe();
           reject(new Error("Web3Modal has closed"));
           return;
         }
         if (events.data.event === "CONNECT_ERROR") {
-          done = true;
-          unsubscribe();
-          reject(new Error(events.data.properties.message));
-          return;
+          throw new Error(events.data.properties.message);
         }
         if (events.data.event === "SOCIAL_LOGIN_ERROR") {
-          done = true;
-          unsubscribe();
-          reject(
-            new Error(`Failed to login with ${events.data.properties.provider}`)
+          throw new Error(
+            `Failed to login with ${events.data.properties.provider}`
           );
         }
         if (
