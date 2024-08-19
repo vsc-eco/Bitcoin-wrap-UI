@@ -111,6 +111,7 @@ const HiveModal: React.FC<Props> = ({ isOpen, onClose }) => {
                     pattern="^(?=.{3,16}$)[a-z][0-9a-z\-]{1,}[0-9a-z]([\.][a-z][0-9a-z\-]{1,}[0-9a-z]){0,}$"
                   />
                   <Button
+                    zIndex="calc(var(--chakra-zIndices-modal) + 10)"
                     position="absolute"
                     right="0px"
                     transform="translateX(-45%)"
