@@ -1,41 +1,40 @@
-.reButton {
-    border-radius: 26px;
-    font-family: var(--font-arcadia), system-ui, sans-serif;
-    font-size: 15px;
-    font-weight: 480;
-    opacity: 1 !important;
-    line-height: 24px;
+.parent_container {
+  font-family: var(--font-arcadia), system-ui, sans-serif;
 }
 
+.reButton {
+  border-radius: 26px;
+  font-family: var(--font-arcadia), system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 480;
+  opacity: 1 !important;
+  line-height: 24px;
+}
 
- .priButton {
-    background-color: #5266eb; ;
-    color: white;
+.priButton {
+  background-color: #5266eb;
+  color: white;
 }
 
 .secButton {
-    color: #5266eb;
+  color: #5266eb;
 }
 
-.modalLabel { 
-    display: flex;
-    justify-content: center;
-    border-radius: 26px 0px 0px 26px !important;
+.modalLabel {
+  display: flex;
+  justify-content: center;
+  border-radius: 26px 0px 0px 26px !important;
 }
 
 .input {
-    border-radius: 0px 26px 26px 0px !important;
+  border-radius: 0px 26px 26px 0px !important;
 }
 .input:focus {
-    box-shadow: 0px 1.5px 0px 0px #5266eb;
+  box-shadow: 0px 1.5px 0px 0px #5266eb;
 }
 
 .text {
-    color: rgb(37, 37, 37);
-    font-size: 12px;
-    margin-left: 8px;
-}
-
-.modal {
-    font-family: var(--font-arcadia), system-ui, sans-serif;
+  color: rgb(37, 37, 37);
+  font-size: 12px;
+  margin-left: 8px;
 }
