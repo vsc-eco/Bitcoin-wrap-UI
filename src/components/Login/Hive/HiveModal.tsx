@@ -111,15 +111,18 @@ const HiveModal: React.FC<Props> = ({ isOpen, onClose }) => {
                     pattern="^(?=.{3,16}$)[a-z][0-9a-z\-]{1,}[0-9a-z]([\.][a-z][0-9a-z\-]{1,}[0-9a-z]){0,}$"
                   />
                   <Button
+                    position="absolute"
+                    right="0px"
+                    transform="translateX(-45%)"
                     type="submit"
                     bgColor={"gray.50"}
                     variant="sm"
-                    size={"sm"}
+                    size={"md"}
                   >
-                    <Icon as={MdArrowCircleRight} />
+                    <Icon fontSize="22px" as={MdArrowCircleRight} />
                   </Button>
                 </Flex>
-                <Grid templateColumns="repeat(2, 1fr)" gap={2} w="full">
+                <Flex gap={2} w="full" wrap="wrap" justifyContent="center">
                   {loginOptions.map((option, index) => (
                     <GridItem key={index}>
                       <VStack>
@@ -127,33 +130,36 @@ const HiveModal: React.FC<Props> = ({ isOpen, onClose }) => {
                           gap={1}
                           alignItems={"center"}
                           position={"relative"}
-                          w={24}
                         >
-                          <Button colorScheme="gray">
-                            <label className={styles.container}>
-                              <Image
-                                alt={`${option.name} Logo`}
-                                height={25}
-                                width={25}
-                                src={option.image}
-                                objectFit="contain"
+                          <Button
+                            as="label"
+                            aria-description={option.name}
+                            colorScheme="gray"
+                            w={125}
+                            className={styles.container}
+                          >
+                            <Image
+                              alt={`${option.name} Logo`}
+                              height={25}
+                              width={25}
+                              src={option.image}
+                              objectFit="contain"
+                            />
+                            <Text fontSize={"sm"}>{option.name}</Text>
+                            <input
+                              type="radio"
+                              name={LOGIN_METHOD_FIELD}
+                              value={option.name}
+                              defaultChecked={
+                                option.name === DEFAULT_AUTH_OPTION
+                              }
+                            />
+                            <span className={styles.checkmark}>
+                              <Icon
+                                className={styles.icon}
+                                as={FaCheckCircle}
                               />
-                              <Text fontSize={"sm"}>{option.name}</Text>
-                              <input
-                                type="radio"
-                                name={LOGIN_METHOD_FIELD}
-                                value={option.name}
-                                defaultChecked={
-                                  option.name === DEFAULT_AUTH_OPTION
-                                }
-                              />
-                              <span className={styles.checkmark}>
-                                <Icon
-                                  className={styles.icon}
-                                  as={FaCheckCircle}
-                                />
-                              </span>
-                            </label>
+                            </span>
                           </Button>
                         </Flex>
                         {option.disabled && (
@@ -164,7 +170,7 @@ const HiveModal: React.FC<Props> = ({ isOpen, onClose }) => {
                       </VStack>
                     </GridItem>
                   ))}
-                </Grid>
+                </Flex>
               </VStack>
             </form>
           </ModalBody>

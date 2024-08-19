@@ -1,15 +1,12 @@
 .container {
-    display: block;
-    position: relative;
-    padding-left: 35px;
-    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
     cursor: pointer;
-    font-size: 22px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    color: black;
   }
   
   /* Hide the browser's default radio button */
@@ -31,9 +28,9 @@
   }
    */
   /* On mouse-over, add a grey background color */
-  .container:hover input ~ .checkmark {
+  /* .container:hover input ~ .checkmark {
     background-color: #ccc;
-  } 
+  }  */
   
   /* When the radio button is checked, add a blue background */
   /* .container input:checked ~ .checkmark {
@@ -64,8 +61,12 @@
   } */
 
   .container input:checked ~ .checkmark .icon {
+    position: absolute;
+    font-size: 16px;
+    right: -6px;
+    bottom: -6px;
     display: block;
-    color: green;
+    color: rgb(29, 170, 29);
   }
 
   .icon {
