@@ -113,14 +113,15 @@ const HiveModal: React.FC<Props> = ({ isOpen, onClose }) => {
                   <Button
                     zIndex="calc(var(--chakra-zIndices-modal) + 10)"
                     position="absolute"
-                    right="0px"
+                    right="1px"
+                    margin={1}
                     transform="translateX(-45%)"
                     type="submit"
                     bgColor={"gray.50"}
                     variant="sm"
-                    size={"md"}
+                    size={"sm"}
                   >
-                    <Icon fontSize="22px" as={MdArrowCircleRight} />
+                    <Icon fontSize="20px" as={MdArrowCircleRight} />
                   </Button>
                 </Flex>
                 <Flex gap={2} w="full" wrap="wrap" justifyContent="center">
@@ -141,8 +142,8 @@ const HiveModal: React.FC<Props> = ({ isOpen, onClose }) => {
                           >
                             <Image
                               alt={`${option.name} Logo`}
-                              height={25}
-                              width={25}
+                              height={option.name === "Hivesigner" ? 20 : 25}
+                              width={option.name === "Hivesigner" ? 20 : 25}
                               src={option.image}
                               objectFit="contain"
                             />

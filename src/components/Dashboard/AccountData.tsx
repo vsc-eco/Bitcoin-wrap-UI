@@ -4,6 +4,8 @@ import styles from "./AccountData.module.css";
 import Image from "next/image";
 import { accountData } from "../../types/types";
 
+//TODO: make hive and hbd and then give their respective logos 
+
 type Props = {
   item: accountData;
 };
