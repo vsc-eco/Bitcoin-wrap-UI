@@ -9,6 +9,7 @@ import {
   VStack,
   Text
 } from "@chakra-ui/react";
+import styles from "./DexComponent.module.css";
 
 import TokenSearchModal from "./TokenSearchModal";
 
@@ -34,7 +35,7 @@ const DexComponent = () => {
   };
 
   return (
-    <Flex alignItems={"center"}>
+    <Flex alignItems={"center"} className={styles.parent_container}>
       <VStack
         w={["700px"]}
         borderRadius="md"

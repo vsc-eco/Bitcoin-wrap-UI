@@ -4,8 +4,6 @@ import styles from "./AccountData.module.css";
 import Image from "next/image";
 import { accountData } from "../../types/types";
 
-//TODO: make hive and hbd and then give their respective logos 
-
 type Props = {
   item: accountData;
 };
@@ -13,8 +11,8 @@ type Props = {
 const AccountData = ({ item }: Props) => {
   return (
     <Box className={styles.parent_container} key={item.id}>
-      <Flex className={styles.mini_container}>
-        <Image src={"./logo.svg"} alt={"logo"} width={50} height={50} />
+      <Flex className={styles.mini_container} gap={2}>
+        <Image src={item.image} alt={"logo"} width={20} height={20} />
         <Text>{item.name}</Text>
       </Flex>
       <Flex className={styles.price}>

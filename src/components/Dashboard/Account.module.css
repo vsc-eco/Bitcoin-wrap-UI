@@ -12,7 +12,7 @@
 
 .heading {
   display: flex;
-  padding: 0px 24px;
+  padding: 0px 12px;
   width: auto;
   align-items: center;
   justify-content: space-between;
@@ -21,7 +21,7 @@
 .heading Button {
   background-color: rgba(112, 115, 147, 0.06);
   border-radius: 50%;
-  padding: 4px 0px;
+  padding: 4px;
 }
 
 .icon {

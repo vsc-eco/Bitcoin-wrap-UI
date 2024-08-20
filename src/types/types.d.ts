@@ -12,4 +12,5 @@ export interface TokenInterface {
     name: string;
     price: string;
     decimalValue: string;
+    image: string;
   }
