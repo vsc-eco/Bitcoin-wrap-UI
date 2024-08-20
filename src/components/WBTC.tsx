@@ -1,5 +1,4 @@
-
-import  React, {useLayoutEffect, useRef, useState } from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import { Flex, Text, Box } from "@chakra-ui/react";
 import Image from "next/image";
 import { FaBitcoin } from "react-icons/fa6";
@@ -16,13 +15,10 @@ const data = [
 
 type Props = {};
 
-
-
 const WBTC = (props: Props) => {
-
   const [InputValue, setInputValue] = useState<String | undefined>("+4.90%");
 
-    //for api use
+  //for api use
 
   // useLayoutEffect(()=> {
   //   const updatedValue = fetchData();
@@ -36,14 +32,14 @@ const WBTC = (props: Props) => {
       my={4}
       h={16}
       borderRadius={"lg"}
-      background="#f5f9fa"
+      boxShadow={"base"}
     >
       <Flex justifyContent={"space-between"} px={4}>
         <Box alignItems={"center"}>
           <Text fontSize={"xl"} px={1}>
-          <FaBitcoin color="gold"/>
+            <Image src="./hive.svg" alt="hive" width={18} height={18} />
           </Text>
-          <Text>wBTC</Text>
+          <Text>HBD</Text>
         </Box>
         <Flex w={"60%"} justifyContent={"space-between"}>
           <Box>
@@ -51,13 +47,27 @@ const WBTC = (props: Props) => {
             <Text fontSize={"xs"}>$45001.12</Text>
           </Box>
           <Box>
-            <Text fontSize={"sm"} textAlign="center">24h</Text>
-            <Text fontSize={"xs"} id="1" color={InputValue?.includes("+") ? "green" : "red"}>{InputValue}</Text>
+            <Text fontSize={"sm"} textAlign="center">
+              24h
+            </Text>
+            <Text
+              fontSize={"xs"}
+              id="1"
+              color={InputValue?.includes("+") ? "green" : "red"}
+            >
+              {InputValue}
+            </Text>
           </Box>
           <Box>
             <AreaChart width={124} height={36} data={data}>
               {/* <Tooltip /> */}
-              <Area type="bump" dataKey="uv" stroke="#236ee8" fill="#80a7e8" dot={false} />
+              <Area
+                type="bump"
+                dataKey="uv"
+                stroke="#364ee7"
+                fill="#5266eb"
+                dot={false}
+              />
             </AreaChart>
           </Box>
         </Flex>

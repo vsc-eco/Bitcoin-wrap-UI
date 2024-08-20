@@ -1,7 +1,7 @@
 
 
 .murButtonSecondary {
-    color: rgb(82, 102, 235);
+    color: #5b7384;
 }
 
 .murButtonSecondary:not(:disabled):hover {
@@ -24,7 +24,7 @@
 }
 
 .murButtonPrimary:hover {
-    background-color: #5266eb !important;
+    background-color: #364ee7 !important;
 }
 
 .murButton {
@@ -35,18 +35,14 @@
     opacity: 1 !important;
 }
 
-.murPrompt {
-    border-radius: 12px;
+
+.icons {
+    color: #5b7384;
+    font-size: 16px;
+    font-weight: 500;
 }
 
-.murInput {
-    border-radius: 3px !important;
-}
-
-.murInput:focus {
-    box-shadow: 0px 1.5px 0px 0px #5266eb;
-}
-
-.murInput input:focus {
-    box-shadow: none;
+.text {
+    font-family: var(--font-arcadia), system-ui, sans-serif;
+    color: #5b7384;
 }

@@ -42,3 +42,10 @@
   padding-left: 0.7665px;
   text-align: right;
 }
+
+.text_name {
+    color: rgb(54, 54, 68);
+    font-family: var(--font-arcadia),system-ui, sans-serif;
+    font-weight: 400;
+    font-size: 15px;    
+}

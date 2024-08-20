@@ -167,11 +167,7 @@ const TransferModal = (props: Props) => {
 
           <ModalFooter>
             <Button
-            style={{
-              
-            }}
               mr={3}
-              
               onClick={onClose}
               className={`${styles.murButton} ${styles.murButtonSecondary}`}
             >

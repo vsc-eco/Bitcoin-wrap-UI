@@ -17,7 +17,7 @@ type Props = {
 const AccountsData = [
     {
       id: 1,
-      name: "HIVE",
+      name: "Hive",
       price: "1209",
       decimalValue: "23",
       image: "./hive.svg"

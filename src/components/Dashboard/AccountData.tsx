@@ -13,7 +13,7 @@ const AccountData = ({ item }: Props) => {
     <Box className={styles.parent_container} key={item.id}>
       <Flex className={styles.mini_container} gap={2}>
         <Image src={item.image} alt={"logo"} width={20} height={20} />
-        <Text>{item.name}</Text>
+        <Text className={styles.text_name}>{item.name}</Text>
       </Flex>
       <Flex className={styles.price}>
         <Text>$ {item.price}</Text>

@@ -1,9 +1,10 @@
-//TODO: 
-import React, {useLayoutEffect, useState } from "react";
+//TODO:
+import React, { useLayoutEffect, useState } from "react";
 import {
   Box,
   Button,
-  Flex, // Fix: Remove duplicated import statement
+  Flex,
+  Icon, // Fix: Remove duplicated import statement
   Input,
   InputGroup,
   InputLeftAddon,
@@ -17,10 +18,12 @@ import { FaBitcoin } from "react-icons/fa";
 import { HiMiniMagnifyingGlass } from "react-icons/hi2";
 import { CgArrowsExchange } from "react-icons/cg";
 import { FaPlus } from "react-icons/fa6";
+import styles from "./LiquidityInterface.module.css";
 
 import Image from "next/image";
 //importing motion component from framer
 import { motion } from "framer-motion";
+import { MdAccountBalanceWallet } from "react-icons/md";
 
 type Props = {
   showModal: boolean;
@@ -33,11 +36,13 @@ const LiquidityInterface = (props: Props) => {
     HBD: "",
     BTC: "",
   });
-  //making a useState for checking wether wallet is empty or not 
-  const [isWalletValid , setIsWalletValid] = useState<boolean | undefined>(false);
+  //making a useState for checking wether wallet is empty or not
+  const [isWalletValid, setIsWalletValid] = useState<boolean | undefined>(
+    false
+  );
 
-  //function for checking wether these values are filled or empty 
-  const hasValues = Object.values(tokenAmount).some(value => value !== '')
+  //function for checking wether these values are filled or empty
+  const hasValues = Object.values(tokenAmount).some((value) => value !== "");
 
   const handleTokenChange =
     (token: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,34 +69,21 @@ const LiquidityInterface = (props: Props) => {
   const [fromToken, setFromToken] = useState<string>("HIVE");
   const [toToken, setToToken] = useState<string>("HBD");
 
-
   useLayoutEffect(() => {
     const reloadTime = setTimeout(() => {
       setIsReload(false);
     }, 3000);
   }, []);
 
-  const bgColor = useColorModeValue("gray.100", "gray.700");
-  const borderColor = useColorModeValue("gray.200", "gray.600");
-  const buttonTextColor = useColorModeValue("blue.600", "blue.800");
-  const buttonBgColor = "#b8e3f2";
-
   return (
-    <Box
-      maxW="600px"
-      bg={bgColor}
-      p={4}
-      borderRadius="md"
-      boxShadow="base"
-      background="#f5f9fa"
-    >
+    <Box maxW="600px" p={4} borderRadius="md" boxShadow="base">
       <VStack spacing={4}>
         <InputGroup>
           <Flex
             direction={"column"}
             w="full"
             borderRadius={6}
-            background="#dff0f5"
+            boxShadow={"base"}
             border={"transparent"}
           >
             <Flex
@@ -101,18 +93,17 @@ const LiquidityInterface = (props: Props) => {
               mt={2}
               alignItems={"flex-end"}
             >
-              <Text fontSize="10px">From</Text>
-              <Text fontSize="8px">Balance [Wallet not connected]</Text>
+              <Text fontSize="12px">From</Text>
+              <Flex alignItems={"center"} gap={1}>
+                <Icon as={MdAccountBalanceWallet} className={styles.icons} />
+                <Text fontSize={"xs"} className={styles.text}>Wallet not connected</Text>
+              </Flex>
             </Flex>
 
             <Flex>
-              <InputLeftAddon
-                h={12}
-                background="#dff0f5"
-                border={"transparent"}
-              >
+              <InputLeftAddon h={10} border={"transparent"} bgColor={"white"}>
                 <Flex
-                  _hover={{ background: "#d0ebf2" }}
+                  _hover={{ color: "#5266eb" }}
                   borderRadius={"md"}
                   alignItems={"center"}
                 >
@@ -142,8 +133,7 @@ const LiquidityInterface = (props: Props) => {
                 <Button
                   h="1.75rem"
                   size="xs"
-                  bg={buttonBgColor}
-                  color={buttonTextColor}
+                  className={`${styles.murButton} ${styles.murButtonSecondary}`}
                   onClick={() => handleMax("HBD")}
                   mx={1}
                 >
@@ -152,9 +142,6 @@ const LiquidityInterface = (props: Props) => {
                 <Button
                   h="1.75rem"
                   size="xs"
-                  bg={buttonBgColor}
-                  color={buttonTextColor}
-                  borderColor={borderColor}
                   onClick={() =>
                     setTokenAmount({
                       ...tokenAmount,
@@ -162,6 +149,7 @@ const LiquidityInterface = (props: Props) => {
                     })
                   }
                   mx={1}
+                  className={`${styles.murButton} ${styles.murButtonSecondary}`}
                 >
                   Half
                 </Button>
@@ -192,14 +180,14 @@ const LiquidityInterface = (props: Props) => {
           </Flex>
         </InputGroup>
         <Flex justifyContent={"space-between"} alignItems={"center"} w="full">
-          <Flex alignItems={"center"}>
-            <Text>
+          <Flex alignItems={"center"} gap={1}>
+            <Text className={styles.icons}>
               <FaPlus />
             </Text>
-            <Text fontSize="xs" mt={1} px={1}>
+            <Text fontSize="sm" px={1}>
               Balance: 129.978543 USDC
             </Text>
-            <Text>
+            <Text className={styles.icons}>
               <CgArrowsExchange />
             </Text>
           </Flex>
@@ -210,10 +198,11 @@ const LiquidityInterface = (props: Props) => {
               p={1}
               borderRadius={"lg"}
               cursor={"pointer"}
+              className={styles.icons}
             >
               <HiMiniMagnifyingGlass />
             </Text>
-            <Text>
+            <Text className={styles.icons}>
               {IsReload ? (
                 <motion.div
                   animate={{ rotate: 360 }}
@@ -232,7 +221,7 @@ const LiquidityInterface = (props: Props) => {
             direction={"column"}
             w="full"
             borderRadius={6}
-            background="#dff0f5"
+            boxShadow={"base"}
             border={"transparent"}
           >
             <Flex
@@ -242,18 +231,19 @@ const LiquidityInterface = (props: Props) => {
               mt={2}
               alignItems={"flex-end"}
             >
-              <Text fontSize={"10px"}>To</Text>
-              <Text fontSize={"8px"}>Balance [Wallet not connected]</Text>
+              <Text fontSize={"12px"} className={styles.text}>
+                To
+              </Text>
+              <Flex alignItems={"center"} gap={1}>
+                <Icon as={MdAccountBalanceWallet} className={styles.icons} />
+                <Text fontSize={"xs"} className={styles.text}>Wallet not connected</Text>
+              </Flex>
             </Flex>
 
             <Flex>
-              <InputLeftAddon
-                h={12}
-                background="#dff0f5"
-                border={"transparent"}
-              >
+              <InputLeftAddon h={10} border={"transparent"} bgColor={"white"}>
                 <Flex
-                  _hover={{ background: "#d0ebf2" }}
+                  _hover={{ color: "#5266eb" }}
                   borderRadius={"md"}
                   alignItems={"center"}
                 >
@@ -263,11 +253,11 @@ const LiquidityInterface = (props: Props) => {
                     alignItems={"center"}
                   >
                     <Text fontSize={"2xl"} px={1}>
-                      <Image 
-                       src="./hive.svg"
-                       alt="hive"
-                       width="24"
-                       height="24"
+                      <Image
+                        src="./hbd_green.svg"
+                        alt="hive"
+                        width="24"
+                        height="24"
                       />
                     </Text>
                     <Text fontSize={"xl"}>{toToken}</Text>
@@ -283,8 +273,7 @@ const LiquidityInterface = (props: Props) => {
                 <Button
                   h="1.75rem"
                   size="xs"
-                  bg={buttonBgColor}
-                  color={buttonTextColor}
+                  className={`${styles.murButton} ${styles.murButtonSecondary}`}
                   onClick={() => handleMax("HBD")}
                   mx={1}
                 >
@@ -293,9 +282,7 @@ const LiquidityInterface = (props: Props) => {
                 <Button
                   h="1.75rem"
                   size="xs"
-                  bg={buttonBgColor}
-                  color={buttonTextColor}
-                  borderColor={borderColor}
+                  className={`${styles.murButton} ${styles.murButtonSecondary}`}
                   onClick={() =>
                     setTokenAmount({
                       ...tokenAmount,
@@ -335,13 +322,12 @@ const LiquidityInterface = (props: Props) => {
         <Flex
           m={"auto"}
           direction={"column"}
-          border={"solid"}
-          borderWidth={"1px"}
+          boxShadow={"base"}
           w="full"
           borderRadius={"lg"}
           p={4}
         >
-          <Flex justifyContent={"space-between"} alignItems={"center"}>
+          <Flex justifyContent={"space-between"} alignItems={"center"} className={styles.text}>
             <Flex>
               <Text>Base</Text>
             </Flex>
@@ -349,7 +335,7 @@ const LiquidityInterface = (props: Props) => {
               <Text>HBD</Text>
             </Flex>
           </Flex>
-          <Flex justifyContent={"space-between"} alignItems={"center"}>
+          <Flex justifyContent={"space-between"} alignItems={"center"} className={styles.text}>
             <Flex>
               <Text>Pool Liquidity (HBD)</Text>
             </Flex>
@@ -357,7 +343,7 @@ const LiquidityInterface = (props: Props) => {
               <Text>3232 HBD</Text>
             </Flex>
           </Flex>
-          <Flex justifyContent={"space-between"} alignItems={"center"}>
+          <Flex justifyContent={"space-between"} alignItems={"center"} className={styles.text}>
             <Flex>
               <Text>Pool liquidity (BTC)</Text>
             </Flex>
@@ -365,7 +351,7 @@ const LiquidityInterface = (props: Props) => {
               <Text>3238 BTC</Text>
             </Flex>
           </Flex>
-          <Flex justifyContent={"space-between"} alignItems={"center"}>
+          <Flex justifyContent={"space-between"} alignItems={"center"} className={styles.text}>
             <Flex>
               <Text>LP supply</Text>
             </Flex>
@@ -374,7 +360,11 @@ const LiquidityInterface = (props: Props) => {
             </Flex>
           </Flex>
         </Flex>
-        <Button colorScheme="blue" w={"full"} isDisabled={!isWalletValid}>
+        <Button
+          w={"full"}
+          isDisabled={!isWalletValid}
+          className={`${styles.murButton} ${styles.murButtonPrimary}`}
+        >
           Add Liquidity
         </Button>
       </VStack>

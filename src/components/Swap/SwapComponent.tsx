@@ -1,4 +1,3 @@
-import { useEffect, useLayoutEffect } from "react";
 import {
   Button,
   Flex,
@@ -9,6 +8,7 @@ import {
   Text,
   Box,
   VStack,
+  Icon,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
@@ -16,12 +16,11 @@ import { MdOutlineSwapVert } from "react-icons/md";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { FaBitcoin } from "react-icons/fa";
 import Image from "next/image";
-
-//TODO: Input validation for the feilds
-//importing motion component from framer
 import { motion } from "framer-motion";
 import { tokens, TokenName } from "../../TokenData";
 import TokenSearchModal from "../TokenSearchModal";
+import { MdAccountBalanceWallet } from "react-icons/md";
+import styles from "./SwapComponents.module.css";
 
 type Props = {
   showModal: boolean;
@@ -35,13 +34,14 @@ const SwapComponent = (props: Props) => {
   const [fromToken, setFromToken] = useState<TokenName>("HIVE");
   const [toToken, setToToken] = useState<TokenName>("HBD");
 
-  const [choosingToken, setChoosingToken] = useState<'to' | 'from' | null>(null);
+  const [choosingToken, setChoosingToken] = useState<"to" | "from" | null>(
+    null
+  );
 
   // <compoenent tokenName={fromToken}  />
   // import tokens from the tokenData
   // tokens[token]
   // <compoenent token={toToken}  />
-
 
   const handleTokenChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTokenAmount(event.target.value);
@@ -51,37 +51,37 @@ const SwapComponent = (props: Props) => {
   const buttonTextColor = useColorModeValue("blue.600", "blue.800");
 
   const setToken = (chosenToken: TokenName) => {
-    const prevChosenToken = choosingToken === 'to' ? toToken : fromToken;
-    const prevOtherToken = choosingToken === 'from' ? toToken : fromToken;
+    const prevChosenToken = choosingToken === "to" ? toToken : fromToken;
+    const prevOtherToken = choosingToken === "from" ? toToken : fromToken;
     if (chosenToken === prevChosenToken) {
       setChoosingToken(null);
       return;
     }
 
     if (chosenToken === prevOtherToken) {
-      if (choosingToken === 'to') {
-        setFromToken(prevChosenToken)
-        setToToken(prevOtherToken)
+      if (choosingToken === "to") {
+        setFromToken(prevChosenToken);
+        setToToken(prevOtherToken);
       } else {
-        setToToken(prevChosenToken)
-        setFromToken(prevOtherToken)
+        setToToken(prevChosenToken);
+        setFromToken(prevOtherToken);
       }
       setChoosingToken(null);
       return;
     }
 
-    if (choosingToken === 'to') {
-      setToToken(chosenToken)
+    if (choosingToken === "to") {
+      setToToken(chosenToken);
     } else {
-      setFromToken(chosenToken)
+      setFromToken(chosenToken);
     }
     setChoosingToken(null);
-  }
+  };
 
   const swapTokens = () => {
     setToToken(fromToken);
     setFromToken(toToken);
-  }
+  };
 
   return (
     <Flex
@@ -90,16 +90,20 @@ const SwapComponent = (props: Props) => {
       maxW="700px"
       borderRadius="md"
       boxShadow="base"
-      background="#f5f9fa"
+      className={styles.parent_container}
     >
-      <TokenSearchModal isOpen={choosingToken !== null} onClose={() => setChoosingToken(null)} setToken={setToken} />
+      <TokenSearchModal
+        isOpen={choosingToken !== null}
+        onClose={() => setChoosingToken(null)}
+        setToken={setToken}
+      />
       <VStack spacing={3}>
         <InputGroup>
           <Flex
             direction={"column"}
             w="full"
             borderRadius={6}
-            background="#dff0f5"
+            boxShadow={"base"}
             border={"transparent"}
           >
             <Flex
@@ -108,25 +112,27 @@ const SwapComponent = (props: Props) => {
               h={3}
               mt={2}
               alignItems={"flex-end"}
+              className={styles.from_input}
             >
-              <Text fontSize="12px">From</Text>
-              <Text fontSize="10px">Balance [Wallet not connected]</Text>
+              <Text fontSize="12px" className={styles.text}>
+                From
+              </Text>
+              <Flex alignItems={"center"} gap={1}>
+                <Icon as={MdAccountBalanceWallet} className={styles.icon} />
+                <Text fontSize={"xs"} className={styles.text}>Wallet not connected</Text>
+              </Flex>
             </Flex>
 
             <Flex>
-              <InputLeftAddon
-                h={12}
-                background="#dff0f5"
-                border={"transparent"}
-              >
+              <InputLeftAddon h={12} border={"transparent"} bgColor={"white"}>
                 <Flex
-                  _hover={{ background: "#d0ebf2" }}
+                  _hover={{ color: "#5266eb" }}
                   borderRadius={"md"}
                   alignItems={"center"}
                 >
                   <Flex
                     cursor={"pointer"}
-                    onClick={() => setChoosingToken('from')}
+                    onClick={() => setChoosingToken("from")}
                     alignItems={"center"}
                   >
                     <Text fontSize={"2xl"} px={1}>
@@ -150,8 +156,7 @@ const SwapComponent = (props: Props) => {
                 <Button
                   h="1.75rem"
                   size="xs"
-                  bg={buttonBgColor}
-                  color={buttonTextColor}
+                  className={`${styles.murButton} ${styles.murButtonSecondary}`}
                   onClick={() => setTokenAmount("Max")}
                   mx={1}
                 >
@@ -160,8 +165,7 @@ const SwapComponent = (props: Props) => {
                 <Button
                   h="1.75rem"
                   size="xs"
-                  background={buttonBgColor}
-                  color={buttonTextColor}
+                  className={`${styles.murButton} ${styles.murButtonSecondary}`}
                   onClick={() => setTokenAmount("Half")}
                   mx={1}
                 >
@@ -186,7 +190,6 @@ const SwapComponent = (props: Props) => {
               mb={2}
               alignItems={"flex-start"}
             >
-
               <Flex>
                 {" "}
                 {tokenAmount && <Text fontSize={"xs"}>Max Value</Text>}
@@ -200,12 +203,17 @@ const SwapComponent = (props: Props) => {
           justifyContent={"space-between"}
           w="90%"
         >
-          <Flex px={4} alignItems={"center"} onClick={swapTokens} cursor="pointer">
-            <Text fontSize={"2xl"}>
+          <Flex
+            px={4}
+            alignItems={"center"}
+            onClick={swapTokens}
+            cursor="pointer"
+          >
+            <Text fontSize={"2xl"} className={styles.icon}>
               <MdOutlineSwapVert />
             </Text>
           </Flex>
-          <Flex>
+          <Flex className={styles.icon}>
             {IsReload ? (
               <motion.div
                 animate={{ rotate: 360 }}
@@ -224,28 +232,27 @@ const SwapComponent = (props: Props) => {
             direction={"column"}
             w="full"
             borderRadius={6}
-            background="#dff0f5"
+            boxShadow={"base"}
             border={"transparent"}
           >
             <Flex justifyContent={"space-between"} px={4} h={4} mt={2}>
-              <Text fontSize={"12px"}>To</Text>
-              <Text fontSize={"8px"}>Balance [Wallet not connected]</Text>
+              <Text fontSize={"12px"} className={styles.text}>To</Text>
+              <Flex alignItems={"center"} gap={1}>
+                <Icon as={MdAccountBalanceWallet} className={styles.icon} />
+                <Text fontSize={"xs"} className={styles.text}>Wallet not connected</Text>
+              </Flex>
             </Flex>
 
             <Flex>
-              <InputLeftAddon
-                h={12}
-                background="#dff0f5"
-                border={"transparent"}
-              >
+              <InputLeftAddon h={12} bgColor={"white"} border={"transparent"}>
                 <Flex
-                  _hover={{ background: "#d0ebf2" }}
+                  _hover={{ color: "#5266eb" }}
                   borderRadius={"md"}
                   alignItems={"center"}
                 >
                   <Flex
                     cursor={"pointer"}
-                    onClick={() => setChoosingToken('to')}
+                    onClick={() => setChoosingToken("to")}
                     alignItems={"center"}
                   >
                     <Text fontSize={"2xl"} px={1}>
@@ -269,8 +276,7 @@ const SwapComponent = (props: Props) => {
                 <Button
                   h="1.75rem"
                   size="xs"
-                  bg={buttonBgColor}
-                  color={buttonTextColor}
+                  className={`${styles.murButton} ${styles.murButtonSecondary}`}
                   onClick={() => setTokenAmount("Max")}
                   mx={1}
                   isDisabled
@@ -280,13 +286,12 @@ const SwapComponent = (props: Props) => {
                 <Button
                   h="1.75rem"
                   size="xs"
-                  background={buttonBgColor}
-                  color={buttonTextColor}
+                  isDisabled
+                  className={`${styles.murButton} ${styles.murButtonSecondary}`}
                   onClick={() => setTokenAmount("Half")}
                   mx={1}
-                  isDisabled
                 >
-                  Half
+                  <Text>Half</Text>
                 </Button>
               </InputLeftAddon>
               <Input
@@ -309,7 +314,10 @@ const SwapComponent = (props: Props) => {
             </Flex>
           </Flex>
         </InputGroup>
-        <Button w="full" mt={5} bgColor={"indigo.700"}> 
+        <Button
+          w="full"
+          className={`${styles.murButton} ${styles.murButtonPrimary}`}
+        >
           Swap
         </Button>
       </VStack>
