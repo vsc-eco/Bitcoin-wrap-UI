@@ -15,24 +15,22 @@ import {
   Text,
   Heading,
   Flex,
-  Grid,
-  GridItem,
   Icon,
+  HStack,
+  Card,
+  Box,
 } from "@chakra-ui/react";
 
 import React from "react";
 import Image from "next/image";
 import { MdArrowCircleRight } from "react-icons/md";
-import styles from "./Hive.module.css";
-import { FaCheckCircle } from "react-icons/fa";
 import { Providers } from "@aioha/aioha";
 import { AuthActions } from "../../../hooks/auth";
 import { useNavigate } from "react-router-dom";
-
-const DEFAULT_AUTH_OPTION: LoginOption = "Keychain";
+import { LoginOptions } from "./LoginOptionContainer";
+import { LOGIN_METHOD_FIELD, LoginOption } from "./LoginOption";
 
 const USERNAME_FIELD = "username";
-const LOGIN_METHOD_FIELD = "loginMethod";
 
 interface Props {
   onClose: () => void;
@@ -41,21 +39,24 @@ interface Props {
 
 const loginOptions = [
   { name: "Keychain", image: "/keychain.svg", disabled: false },
-  { name: "Hivesigner", image: "/hivesigner.svg", disabled: false },
-  { name: "Hiveauth", image: "/hiveauth-light.svg", disabled: false },
   { name: "HiveLedger", image: "/ledger.svg", disabled: false },
-  { name: "PeakVault", image: "/peakvault.svg", disabled: false },
+  { name: "Hivesigner", image: "/hivesigner.svg", disabled: true },
+  { name: "Hiveauth", image: "/hiveauth-light.svg", disabled: true },
 ] as const;
 
-type LoginOption = (typeof loginOptions)[number]["name"];
+const ANY_LOGIN_OPTION_DISABLED = !loginOptions.every(
+  (option) => !option.disabled
+);
+
+export type LoginOptionName = (typeof loginOptions)[number]["name"];
+export type LoginOptionType = (typeof loginOptions)[number];
 
 const providerMap = {
   Keychain: Providers.Keychain,
   Hivesigner: Providers.HiveSigner,
   Hiveauth: Providers.HiveAuth,
   HiveLedger: Providers.Ledger,
-  PeakVault: Providers.PeakVault,
-} satisfies Record<LoginOption, Providers>;
+} satisfies Record<LoginOptionName, Providers>;
 
 function broke(what: string): never {
   throw new Error(`This is a bug: what=${what}`);
@@ -74,7 +75,7 @@ const HiveModal: React.FC<Props> = ({ isOpen, onClose }) => {
               action={(data) => {
                 const loginMethod = data
                   .get(LOGIN_METHOD_FIELD)
-                  ?.valueOf() as LoginOption;
+                  ?.valueOf() as LoginOptionName;
                 if (typeof loginMethod !== "string") {
                   return broke("loginMethod");
                 }
@@ -124,55 +125,29 @@ const HiveModal: React.FC<Props> = ({ isOpen, onClose }) => {
                     <Icon fontSize="20px" as={MdArrowCircleRight} />
                   </Button>
                 </Flex>
-                <Flex gap={2} w="full" wrap="wrap" justifyContent="center">
-                  {loginOptions.map((option, index) => (
-                    <GridItem key={index}>
-                      <VStack>
-                        <Flex
-                          gap={1}
-                          alignItems={"center"}
-                          position={"relative"}
-                        >
-                          <Button
-                            as="label"
-                            aria-description={option.name}
-                            colorScheme="gray"
-                            w={125}
-                            className={styles.container}
-                          >
-                            <Image
-                              alt={`${option.name} Logo`}
-                              height={option.name === "Hivesigner" ? 20 : 25}
-                              width={option.name === "Hivesigner" ? 20 : 25}
-                              src={option.image}
-                              objectFit="contain"
-                            />
-                            <Text fontSize={"sm"}>{option.name}</Text>
-                            <input
-                              type="radio"
-                              name={LOGIN_METHOD_FIELD}
-                              value={option.name}
-                              defaultChecked={
-                                option.name === DEFAULT_AUTH_OPTION
-                              }
-                            />
-                            <span className={styles.checkmark}>
-                              <Icon
-                                className={styles.icon}
-                                as={FaCheckCircle}
-                              />
-                            </span>
-                          </Button>
-                        </Flex>
-                        {option.disabled && (
-                          <Text fontSize="xs" color="gray.500">
-                            Coming Soon
-                          </Text>
-                        )}
-                      </VStack>
-                    </GridItem>
-                  ))}
-                </Flex>
+                <VStack w="full">
+                  <LoginOptions>
+                    {loginOptions.map(
+                      (option, index) =>
+                        !option.disabled && <LoginOption option={option} />
+                    )}
+                  </LoginOptions>
+                  {ANY_LOGIN_OPTION_DISABLED && (
+                    <VStack paddingTop={5} w="full">
+                      <Text fontSize="md" fontWeight="semibold" opacity={0.9}>
+                        Coming Soon
+                      </Text>
+                      <Box opacity={0.4}>
+                        <LoginOptions>
+                          {loginOptions.map(
+                            (option, index) =>
+                              option.disabled && <LoginOption option={option} />
+                          )}
+                        </LoginOptions>
+                      </Box>
+                    </VStack>
+                  )}
+                </VStack>
               </VStack>
             </form>
           </ModalBody>

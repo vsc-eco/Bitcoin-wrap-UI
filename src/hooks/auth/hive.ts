@@ -24,6 +24,12 @@ export const hive = {
       .login(provider, username, {
         keyType: KeyTypes.Active,
         msg: `Allow VSC Defi to initiate transactions for you`,
+        hiveauth: {
+          cbWait(payload, evt, cancel) {
+            console.log("hiveauth event", evt);
+            console.log("hiveauth payload", payload);
+          },
+        },
       })
       .then((res) => {
         if (res.success) {
