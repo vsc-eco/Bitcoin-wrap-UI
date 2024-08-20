@@ -8,6 +8,10 @@
     -ms-user-select: none;
     user-select: none;
   }
+
+  .container.disabled {
+    cursor: default;
+  }
   
   /* Hide the browser's default radio button */
   .container input {
