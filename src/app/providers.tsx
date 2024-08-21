@@ -72,12 +72,11 @@ export const theme = extendTheme({
           900: '#171923',
         },
       },
-
-      fonts: {
-        heading: `var(--font-arcadia)`,
-        body: `var(--font-arcadia)`,
-      },
     },
+  },
+  fonts: {
+    heading: `var(--font-arcadia)`,
+    body: `var(--font-arcadia)`,
   },
 })
 
