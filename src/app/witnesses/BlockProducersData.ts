@@ -1,14 +1,13 @@
 type BlockProducer = {
-  rank: number;
-  userName: string;
-  imageLink: string;
-  userDescription: string;
-  version: string; 
-  votes: number;
-  lastBlock: number;
-  vote: boolean;
-};
-
+  rank: number
+  userName: string
+  imageLink: string
+  userDescription: string
+  version: string
+  votes: number
+  lastBlock: number
+  vote: boolean
+}
 
 export const blockProducers: BlockProducer[] = [
   {
@@ -91,7 +90,6 @@ export const blockProducers: BlockProducer[] = [
     lastBlock: 81241732,
     vote: false,
   },
+]
 
-];
-
-export default blockProducers;
+export default blockProducers

@@ -1,9 +1,9 @@
-import React, { useLayoutEffect, useRef, useState } from "react";
-import { Flex, Text, Box } from "@chakra-ui/react";
-import Image from "next/image";
-import { FaBitcoin } from "react-icons/fa6";
+import React, { useLayoutEffect, useRef, useState } from 'react'
+import { Flex, Text, Box } from '@chakra-ui/react'
+import Image from 'next/image'
+import { FaBitcoin } from 'react-icons/fa6'
 //importing the chart
-import { AreaChart, Area, Tooltip } from "recharts";
+import { AreaChart, Area, Tooltip } from 'recharts'
 //making a data
 const data = [
   { uv: 100, pv: 2400, amt: 2100 },
@@ -11,12 +11,12 @@ const data = [
   { uv: 180, pv: 1318, amt: 2110 },
   { uv: 250, pv: 1298, amt: 1910 },
   { uv: 90, pv: 1598, amt: 2410 },
-];
+]
 
-type Props = {};
+type Props = {}
 
 const WBTC = (props: Props) => {
-  const [InputValue, setInputValue] = useState<String | undefined>("+4.90%");
+  const [InputValue, setInputValue] = useState<String | undefined>('+4.90%')
 
   //for api use
 
@@ -27,39 +27,60 @@ const WBTC = (props: Props) => {
 
   return (
     <Flex
-      direction={"column"}
-      justifyContent={"center"}
+      direction={'column'}
+      justifyContent={'center'}
       my={4}
       h={16}
-      borderRadius={"lg"}
-      boxShadow={"base"}
+      borderRadius={'lg'}
+      boxShadow={'base'}
     >
-      <Flex justifyContent={"space-between"} px={4}>
-        <Box alignItems={"center"}>
-          <Text fontSize={"xl"} px={1}>
-            <Image src="./hive.svg" alt="hive" width={18} height={18} />
+      <Flex
+        justifyContent={'space-between'}
+        px={4}
+      >
+        <Box alignItems={'center'}>
+          <Text
+            fontSize={'xl'}
+            px={1}
+          >
+            <Image
+              src="./hive.svg"
+              alt="hive"
+              width={18}
+              height={18}
+            />
           </Text>
           <Text>HBD</Text>
         </Box>
-        <Flex w={"60%"} justifyContent={"space-between"}>
+        <Flex
+          w={'60%'}
+          justifyContent={'space-between'}
+        >
           <Box>
-            <Text fontSize={"sm"}>Price</Text>
-            <Text fontSize={"xs"}>$45001.12</Text>
+            <Text fontSize={'sm'}>Price</Text>
+            <Text fontSize={'xs'}>$45001.12</Text>
           </Box>
           <Box>
-            <Text fontSize={"sm"} textAlign="center">
+            <Text
+              fontSize={'sm'}
+              textAlign="center"
+            >
               24h
             </Text>
             <Text
-              fontSize={"xs"}
+              fontSize={'xs'}
               id="1"
-              color={InputValue?.includes("+") ? "green" : "red"}
+              color={InputValue?.includes('+') ? 'green' : 'red'}
             >
               {InputValue}
             </Text>
           </Box>
           <Box>
-            <AreaChart width={124} height={36} data={data}>
+            <AreaChart
+              width={124}
+              height={36}
+              data={data}
+            >
               {/* <Tooltip /> */}
               <Area
                 type="bump"
@@ -73,7 +94,7 @@ const WBTC = (props: Props) => {
         </Flex>
       </Flex>
     </Flex>
-  );
-};
+  )
+}
 
-export default WBTC;
+export default WBTC

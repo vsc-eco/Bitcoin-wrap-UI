@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 import {
   Flex,
   Center,
@@ -7,16 +7,16 @@ import {
   Image,
   VStack,
   useDisclosure,
-} from "@chakra-ui/react";
-import { FaEthereum, FaGithub, FaDiscord } from "react-icons/fa";
-import { BiLogoGmail } from "react-icons/bi";
-import { PiGoogleChromeLogoBold } from "react-icons/pi";
-import { BUTTON_LABELS } from "../../constants";
-import HiveModal from "./Hive/HiveModal";
-import MetaMaskModal from "./Ethereum/MetamaskModal";
-import SocialPopUp from "./SocialLinks/SocialPopUp";
-import { AuthActions, useAuth } from "../../hooks/auth";
-import { useNavigate } from "react-router-dom";
+} from '@chakra-ui/react'
+import { FaEthereum, FaGithub, FaDiscord } from 'react-icons/fa'
+import { BiLogoGmail } from 'react-icons/bi'
+import { PiGoogleChromeLogoBold } from 'react-icons/pi'
+import { BUTTON_LABELS } from '../../constants'
+import HiveModal from './Hive/HiveModal'
+import MetaMaskModal from './Ethereum/MetamaskModal'
+import SocialPopUp from './SocialLinks/SocialPopUp'
+import { AuthActions, useAuth } from '../../hooks/auth'
+import { useNavigate } from 'react-router-dom'
 
 const MultipleIcons = ({ size }) => {
   return (
@@ -31,8 +31,8 @@ const MultipleIcons = ({ size }) => {
         <FaGithub fontSize={size} />
       </Flex>
     </Flex>
-  );
-};
+  )
+}
 
 const EmailIcon = ({ size }) => (
   <Flex>
@@ -40,7 +40,7 @@ const EmailIcon = ({ size }) => (
       <BiLogoGmail fontSize={size} />
     </Flex>
   </Flex>
-);
+)
 
 const SignUpComponent = () => {
   // Disclosure hooks for Hive, Ethereum, and SocialPopUp
@@ -48,17 +48,20 @@ const SignUpComponent = () => {
     isOpen: isHiveModal,
     onOpen: onHiveModalOpen,
     onClose: onHiveModalClose,
-  } = useDisclosure();
+  } = useDisclosure()
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   return (
-    <Flex justifyContent="center" alignItems="center">
+    <Flex
+      justifyContent="center"
+      alignItems="center"
+    >
       <Center
         p={1}
         flexDir="column"
         height="60vh"
-        width={{ base: "90%", md: "600px" }}
+        width={{ base: '90%', md: '600px' }}
         boxShadow="lg"
       >
         <Box mb={8}>
@@ -70,28 +73,40 @@ const SignUpComponent = () => {
             src="/VSC-Logo.png"
           />
         </Box>
-        <Box width="full" maxWidth="md" p={1}>
+        <Box
+          width="full"
+          maxWidth="md"
+          p={1}
+        >
           <VStack spacing={4}>
             <Button
               variant="outline"
               width="full"
               mb={3}
               leftIcon={
-                <Image src="/hive.svg" alt="hive_logo" height={6} width={6} />
+                <Image
+                  src="/hive.svg"
+                  alt="hive_logo"
+                  height={6}
+                  width={6}
+                />
               }
               onClick={onHiveModalOpen}
             >
               {BUTTON_LABELS.signInWithHive}
             </Button>
-            <HiveModal isOpen={isHiveModal} onClose={onHiveModalClose} />
+            <HiveModal
+              isOpen={isHiveModal}
+              onClose={onHiveModalClose}
+            />
 
             {/* Ethereum Button */}
             <Button
               variant="outline"
               width="full"
               mb={3}
-              leftIcon={<FaEthereum fontSize={"20px"} />}
-              onClick={() => AuthActions.login("eth").then(() => navigate("/"))}
+              leftIcon={<FaEthereum fontSize={'20px'} />}
+              onClick={() => AuthActions.login('eth').then(() => navigate('/'))}
             >
               {BUTTON_LABELS.signUpWithEth}
             </Button>
@@ -101,7 +116,7 @@ const SignUpComponent = () => {
               variant="outline"
               width="full"
               mb={3}
-              onClick={() => AuthActions.login("eth").then(() => navigate("/"))}
+              onClick={() => AuthActions.login('eth').then(() => navigate('/'))}
               rightIcon={
                 <Box>
                   <MultipleIcons size={22} />
@@ -116,7 +131,7 @@ const SignUpComponent = () => {
               variant="outline"
               width="full"
               mb={3}
-              onClick={() => AuthActions.login("eth").then(() => navigate("/"))}
+              onClick={() => AuthActions.login('eth').then(() => navigate('/'))}
               rightIcon={
                 <Box>
                   <EmailIcon size={22} />
@@ -129,7 +144,7 @@ const SignUpComponent = () => {
         </Box>
       </Center>
     </Flex>
-  );
-};
+  )
+}
 
-export default SignUpComponent;
+export default SignUpComponent

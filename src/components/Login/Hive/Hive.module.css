@@ -1,48 +1,46 @@
 .container {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 
-  .container.disabled {
-    cursor: default;
-  }
-  
-  /* Hide the browser's default radio button */
-  .container input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-  }
-  
-  
-  /* Create the indicator (the dot/circle - hidden when not checked) */
-  .checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-  }
-  
-  /* Show the indicator (dot/circle) when checked */
-  .container input:checked ~ .checkmark:after {
-    display: block;
-  }
-  
+.container.disabled {
+  cursor: default;
+}
 
-  .container input:checked ~ .checkmark .icon {
-    position: absolute;
-    font-size: 16px;
-    right: -6px;
-    bottom: -6px;
-    display: block;
-    color: rgb(29, 170, 29);
-  }
+/* Hide the browser's default radio button */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
 
-  .icon {
-    display: none;
-  }
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.container input:checked ~ .checkmark .icon {
+  position: absolute;
+  font-size: 16px;
+  right: -6px;
+  bottom: -6px;
+  display: block;
+  color: rgb(29, 170, 29);
+}
+
+.icon {
+  display: none;
+}

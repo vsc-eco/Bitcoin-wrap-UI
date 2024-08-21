@@ -48,4 +48,3 @@ export interface Status {
   block_hash: string
   block_time: number
 }
-

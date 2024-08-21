@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import dynamic from "next/dynamic";
+import React, { useState } from 'react'
+import dynamic from 'next/dynamic'
 
-const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
+const Chart = dynamic(() => import('react-apexcharts'), { ssr: false })
 
 const App = () => {
   const [chartData, setChartData] = useState({
     options: {
       chart: {
-        id: "trade",
+        id: 'trade',
         toolbar: {
           show: false,
         },
@@ -40,14 +40,14 @@ const App = () => {
           offsetY: 0,
         },
         categories: [
-          "",
-          "Nov 11",
-          "Nov 12",
-          "Nov 13",
-          "Nov 14",
-          "Nov 15",
-          "Nov 16",
-          "",
+          '',
+          'Nov 11',
+          'Nov 12',
+          'Nov 13',
+          'Nov 14',
+          'Nov 15',
+          'Nov 16',
+          '',
         ],
         axisBorder: {
           show: false,
@@ -70,9 +70,8 @@ const App = () => {
         show: false,
       },
       fill: {
-
-        type: "gradient",
-        colors:['rgb(123, 138, 238)'],
+        type: 'gradient',
+        colors: ['rgb(123, 138, 238)'],
         gradient: {
           shadeIntensity: 0.8,
           opacityFrom: 0.4,
@@ -90,12 +89,12 @@ const App = () => {
       annotations: {
         xaxis: [
           {
-            x: "Nov 10",
+            x: 'Nov 10',
             label: {
-              text: "Nov 10",
+              text: 'Nov 10',
               style: {
-                color: "#333",
-                background: "transparent",
+                color: '#333',
+                background: 'transparent',
               },
             },
           },
@@ -104,11 +103,11 @@ const App = () => {
     },
     series: [
       {
-        name: "series",
+        name: 'series',
         data: [30, 40, 45, 50, 49, 60, 70, 91],
       },
     ],
-  });
+  })
 
   return (
     <Chart
@@ -117,7 +116,7 @@ const App = () => {
       width="550"
       type="area"
     />
-  );
-};
+  )
+}
 
-export default App;
+export default App

@@ -1,5 +1,5 @@
-"use client";
-import React, { useLayoutEffect, useState } from "react";
+'use client'
+import React, { useLayoutEffect, useState } from 'react'
 import {
   Tr,
   Td,
@@ -9,67 +9,75 @@ import {
   Flex,
   Box,
   Button,
-} from "@chakra-ui/react";
-import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
-import Moment from "moment";
-import { readableUsername } from "../components/Sidebar/UserInfo";
+} from '@chakra-ui/react'
+import { BsArrowLeft, BsArrowRight } from 'react-icons/bs'
+import Moment from 'moment'
+import { readableUsername } from '../components/Sidebar/UserInfo'
 
-const START_BLOCK = 88079516;
-const START_BLOCK_TIME = Moment("2024-08-16T02:46:48Z");
+const START_BLOCK = 88079516
+const START_BLOCK_TIME = Moment('2024-08-16T02:46:48Z')
 
-const TransactionItem = (props) => {
-  const { showDateProp, handleTransactionOpen, transaction, userId } = props;
-  const [showDate, setShowDate] = useState(showDateProp);
+const TransactionItem = props => {
+  const { showDateProp, handleTransactionOpen, transaction, userId } = props
+  const [showDate, setShowDate] = useState(showDateProp)
 
   function handleMouseEnter() {
     //if showDate is false then make it true
     if (!showDateProp) {
-      setShowDate(true); //updating the state not the prop
+      setShowDate(true) //updating the state not the prop
     }
   }
 
   function handleMouseLeave() {
     if (!showDateProp) {
-      setShowDate(false);
+      setShowDate(false)
     }
   }
 
   //function for toggling the transaction detail modal
   const handleTransactionClick = () => {
-    handleTransactionOpen();
-  };
+    handleTransactionOpen()
+  }
 
   const otherAccount =
-    userId === transaction.owner ? transaction.from : transaction.owner;
+    userId === transaction.owner ? transaction.from : transaction.owner
 
-  const readableOtherAccount = readableUsername(otherAccount);
+  const readableOtherAccount = readableUsername(otherAccount)
 
-  const moneyIn = userId === transaction.owner;
+  const moneyIn = userId === transaction.owner
 
   return (
     <Tr
-      _hover={{ bg: "blue.100" }}
+      _hover={{ bg: 'blue.100' }}
       cursor="pointer"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={handleTransactionClick}
     >
-      <Td w={22} h={12}>
+      <Td
+        w={22}
+        h={12}
+      >
         {showDate
           ? ((transaction.block_height - START_BLOCK) * 3 < 0
               ? START_BLOCK_TIME.clone().subtract(
                   -(transaction.block_height - START_BLOCK) * 3,
-                  "seconds"
+                  'seconds',
                 )
               : START_BLOCK_TIME.clone().add(
                   (transaction.block_height - START_BLOCK) * 3,
-                  "seconds"
+                  'seconds',
                 )
-            ).format("D MMM hh:mma")
+            ).format('D MMM hh:mma')
           : null}
       </Td>
 
-      <Td display="flex" alignItems="center" w={412} h={14}>
+      <Td
+        display="flex"
+        alignItems="center"
+        w={412}
+        h={14}
+      >
         <WrapItem>
           <Avatar
             name={readableOtherAccount}
@@ -77,15 +85,18 @@ const TransactionItem = (props) => {
             size="sm"
           />
         </WrapItem>
-        <Text px={2} fontSize={["12px"]}>
+        <Text
+          px={2}
+          fontSize={['12px']}
+        >
           {readableOtherAccount}
         </Text>
-        {transaction.status !== "CONFIRMED" && (
+        {transaction.status !== 'CONFIRMED' && (
           <Button
             variant="outline"
             size="xs"
             fontWeight="normal"
-            fontSize={["12", "6", "8", "10"]}
+            fontSize={['12', '6', '8', '10']}
           >
             Pending
           </Button>
@@ -108,13 +119,13 @@ const TransactionItem = (props) => {
             <BsArrowRight />
           ) : null} */}
           {moneyIn ? <BsArrowLeft /> : <BsArrowRight />}
-          {"  "}
+          {'  '}
           &nbsp;
           <Text>{transaction.t}</Text>
         </Flex>
       </Td>
     </Tr>
-  );
-};
+  )
+}
 
-export default TransactionItem;
+export default TransactionItem

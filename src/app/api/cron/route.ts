@@ -1,34 +1,34 @@
-import { NextRequest, NextResponse } from "next/server";
-import axios from "axios";
-import { BitcoinAddress } from "../../../utils/BitcoinAddressModel";
-import { Transaction } from "../../../utils/TransactionModel";
-import { callbackify } from "util";
+import { NextRequest, NextResponse } from 'next/server'
+import axios from 'axios'
+import { BitcoinAddress } from '../../../utils/BitcoinAddressModel'
+import { Transaction } from '../../../utils/TransactionModel'
+import { callbackify } from 'util'
 
 //TODO: adding the indexing for the destinations
 
 type TransctionsSchema = {
-  txid: string;
-  address: any;
+  txid: string
+  address: any
   vin: {
     prevout: {
-      scriptpubkey_address: string;
-      value: number;
-    };
-  }[];
+      scriptpubkey_address: string
+      value: number
+    }
+  }[]
   vout: {
-    scriptpubkey_address: string;
-    value: number;
-  }[];
-  size: number;
-  fee: number;
+    scriptpubkey_address: string
+    value: number
+  }[]
+  size: number
+  fee: number
   status: {
-    confirmed: boolean;
-  };
-  stored_at: Date;
-};
+    confirmed: boolean
+  }
+  stored_at: Date
+}
 
 export async function GET(req: NextRequest) {
-  return NextResponse.json({});
+  return NextResponse.json({})
   // //connect to the mongo client
   // await client.connect();
   // const db = client.db("test");

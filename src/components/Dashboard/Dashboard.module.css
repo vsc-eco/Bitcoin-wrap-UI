@@ -1,35 +1,36 @@
 .parent_container {
-    
-    width: 553px;
-    box-shadow: 0 2px 4px 0 rgba(4, 4, 52, .06), 0 0 2px 0 rgba(91, 95, 107, .24);
-    border-radius: 12px;
-    font-family: var(--font-arcadia), system-ui, sans-serif;
-    min-height: 550;
+  width: 553px;
+  box-shadow:
+    0 2px 4px 0 rgba(4, 4, 52, 0.06),
+    0 0 2px 0 rgba(91, 95, 107, 0.24);
+  border-radius: 12px;
+  font-family: var(--font-arcadia), system-ui, sans-serif;
+  min-height: 550;
 }
 
 .heading {
-    font-size: 15px;
-    font-weight: 400;
-    line-height: 24px;
-    vertical-align: baseline;
-    font-stretch: 100%;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 24px;
+  vertical-align: baseline;
+  font-stretch: 100%;
 }
 
 .price {
-    font-size: 28px;
-    font-weight: 380;
-    line-height: 36px;
-    vertical-align: baseline;
-    color: rgb(30, 30, 42);
+  font-size: 28px;
+  font-weight: 380;
+  line-height: 36px;
+  vertical-align: baseline;
+  color: rgb(30, 30, 42);
 }
 
 .small_text {
-    font-size: 22.44px;
-    font-weight: 380;
-    vertical-align: baseline;
-    letter-spacing: 0.01022px;
-    line-height: 36px;
-    position: relative;
-    text-wrap: nowrap;
-    top: -5.4166px;
+  font-size: 22.44px;
+  font-weight: 380;
+  vertical-align: baseline;
+  letter-spacing: 0.01022px;
+  line-height: 36px;
+  position: relative;
+  text-wrap: nowrap;
+  top: -5.4166px;
 }

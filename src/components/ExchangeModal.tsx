@@ -1,6 +1,6 @@
 //TODO: there is the error not rendering the ui
 
-"use client";
+'use client'
 import {
   Button,
   FormControl,
@@ -21,82 +21,86 @@ import {
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
-} from "@chakra-ui/react";
-import { FaBitcoin } from "react-icons/fa";
-import { MdCancelPresentation } from "react-icons/md";
-import { TbExchange } from "react-icons/tb";
-import { BiSolidLockOpenAlt } from "react-icons/bi";
-import { useContext, useState, useLayoutEffect } from "react";
+} from '@chakra-ui/react'
+import { FaBitcoin } from 'react-icons/fa'
+import { MdCancelPresentation } from 'react-icons/md'
+import { TbExchange } from 'react-icons/tb'
+import { BiSolidLockOpenAlt } from 'react-icons/bi'
+import { useContext, useState, useLayoutEffect } from 'react'
 import {
   useQuery,
   useMutation,
   useQueryClient,
   QueryClient,
   QueryClientProvider,
-} from "@tanstack/react-query";
-import { useShowComponent } from "../context/ShowComponent";
-import { DHive } from "../const";
-import { MyContext } from "../context/TokenTransferContext";
-import { usePathname } from "next/navigation";
+} from '@tanstack/react-query'
+import { useShowComponent } from '../context/ShowComponent'
+import { DHive } from '../const'
+import { MyContext } from '../context/TokenTransferContext'
+import { usePathname } from 'next/navigation'
 
 type Props = {
-  setDest: Function;
-};
+  setDest: Function
+}
 
 const ExchangeModal = (props: Props) => {
-  const [walletAddress, setWalletAddress] = useState("");
-  const [swapButtons, setSwapButtons] = useState(true);
-  const [validAccount, setValidAccount] = useState(false);
-  const { toggleShowComponent } = useShowComponent();
+  const [walletAddress, setWalletAddress] = useState('')
+  const [swapButtons, setSwapButtons] = useState(true)
+  const [validAccount, setValidAccount] = useState(false)
+  const { toggleShowComponent } = useShowComponent()
 
-  const { myValue, updateValue } = useContext(MyContext)!;
-  const { isFilled } = useContext(MyContext)!;
+  const { myValue, updateValue } = useContext(MyContext)!
+  const { isFilled } = useContext(MyContext)!
 
   // const { tokenValue, setTokenValue } = useState(0);
 
   function swapButtonsOnExchange() {
-    setSwapButtons(!swapButtons);
+    setSwapButtons(!swapButtons)
   }
 
-  let passAmount = 0;
+  let passAmount = 0
 
   // Queries
   const query = useQuery({
-    queryKey: ["account_status", walletAddress],
+    queryKey: ['account_status', walletAddress],
     queryFn: async () => {
       try {
-        const [account] = await DHive.database.getAccounts([walletAddress]);
-        console.log(account);
+        const [account] = await DHive.database.getAccounts([walletAddress])
+        console.log(account)
         if (account) {
-          const json = JSON.parse(account.posting_json_metadata);
+          const json = JSON.parse(account.posting_json_metadata)
           if (json.did) {
             if (props.setDest) {
-              props.setDest(json.did);
+              props.setDest(json.did)
             }
-            setValidAccount(true);
+            setValidAccount(true)
           } else {
-            setValidAccount(false);
+            setValidAccount(false)
           }
         } else {
-          setValidAccount(false);
+          setValidAccount(false)
         }
       } catch {
-        setValidAccount(false);
+        setValidAccount(false)
       }
-      return true;
+      return true
     },
-  });
-  console.log(query);
+  })
+  console.log(query)
 
   return (
     <>
-      <Flex justifyContent="center" alignItems="center" position={"relative"}>
+      <Flex
+        justifyContent="center"
+        alignItems="center"
+        position={'relative'}
+      >
         <Text
-          fontSize={"4xl"}
-          position={"absolute"}
-          top={"50%"}
-          right={"35%"}
-          fontWeight={"xl"}
+          fontSize={'4xl'}
+          position={'absolute'}
+          top={'50%'}
+          right={'35%'}
+          fontWeight={'xl'}
         >
           Coming Soon
         </Text>
@@ -104,26 +108,29 @@ const ExchangeModal = (props: Props) => {
           bg="white"
           maxW="800px"
           py={8}
-          height={"auto"}
-          w={["400px", "500px", "680px", "800px"]}
-          m={["0", "0", "1", "3"]}
+          height={'auto'}
+          w={['400px', '500px', '680px', '800px']}
+          m={['0', '0', '1', '3']}
           opacity={0.2}
-          pointerEvents={"none"}
+          pointerEvents={'none'}
         >
           <CardHeader>
             <Center fontWeight="bold">Add exchange details</Center>
           </CardHeader>
           <CardBody
-            pb={["1", "2", "4", "6"]}
-            mx={["1", "2", "4", "8"]}
+            pb={['1', '2', '4', '6']}
+            mx={['1', '2', '4', '8']}
             background="#f5f9fa"
             borderRadius="10px"
           >
-            <Box px={8} borderRadius={6}>
+            <Box
+              px={8}
+              borderRadius={6}
+            >
               <FormControl>
                 <InputGroup size="sm">
                   <InputLeftAddon
-                    h={["8", "12", "12", "12"]}
+                    h={['8', '12', '12', '12']}
                     w="25%"
                     display="flex"
                     justifyContent="center"
@@ -137,12 +144,12 @@ const ExchangeModal = (props: Props) => {
                   </InputLeftAddon>
 
                   <Input
-                    h={["8", "12", "12", "12"]}
+                    h={['8', '12', '12', '12']}
                     w="75%"
                     type="Number"
                     placeholder="0"
                     value={myValue!}
-                    onChange={(e) => updateValue(Number(e.target.value))}
+                    onChange={e => updateValue(Number(e.target.value))}
                     textAlign="right"
                     borderRadius={6}
                     background="#dff0f5"
@@ -150,41 +157,60 @@ const ExchangeModal = (props: Props) => {
                     isRequired
                   />
                   {swapButtons && (
-                    <Flex alignItems="center" paddingLeft="8px">
-                      <FaBitcoin size="1.5em" color="#F7931A" />
-                      <span style={{ paddingLeft: "12px", fontWeight: "bold" }}>
-                        {" "}
+                    <Flex
+                      alignItems="center"
+                      paddingLeft="8px"
+                    >
+                      <FaBitcoin
+                        size="1.5em"
+                        color="#F7931A"
+                      />
+                      <span style={{ paddingLeft: '12px', fontWeight: 'bold' }}>
+                        {' '}
                         BTC
                       </span>
                     </Flex>
                   )}
                   {!swapButtons && (
-                    <Flex alignItems="center" paddingLeft="4px">
-                      <FaBitcoin size="1.5em" color="#F7931A" />
-                      <span style={{ paddingLeft: "4px", fontWeight: "bold" }}>
+                    <Flex
+                      alignItems="center"
+                      paddingLeft="4px"
+                    >
+                      <FaBitcoin
+                        size="1.5em"
+                        color="#F7931A"
+                      />
+                      <span style={{ paddingLeft: '4px', fontWeight: 'bold' }}>
                         WBTC
                       </span>
                     </Flex>
                   )}
                 </InputGroup>
               </FormControl>
-              <Flex style={{ justifyContent: "space-between" }}>
+              <Flex style={{ justifyContent: 'space-between' }}>
                 <Flex alignItems="center">
-                  <Box background="#c1f5e6" borderRadius={12} p={1}>
+                  <Box
+                    background="#c1f5e6"
+                    borderRadius={12}
+                    p={1}
+                  >
                     <BiSolidLockOpenAlt />
                   </Box>
-                  <Text fontSize={["10px", "10px", "12px", "14px"]} px={1}>
+                  <Text
+                    fontSize={['10px', '10px', '12px', '14px']}
+                    px={1}
+                  >
                     Floating rate
                   </Text>
                 </Flex>
-                <Button _hover={{ bg: "brand.500", color: "white" }}>
+                <Button _hover={{ bg: 'brand.500', color: 'white' }}>
                   <TbExchange onClick={swapButtonsOnExchange} />
                 </Button>
               </Flex>
               <FormControl my={4}>
                 <InputGroup size="sm">
                   <InputLeftAddon
-                    h={["8", "12", "12", "12"]}
+                    h={['8', '12', '12', '12']}
                     w="25%"
                     display="flex"
                     justifyContent="center"
@@ -198,7 +224,7 @@ const ExchangeModal = (props: Props) => {
                   </InputLeftAddon>
                   <Input
                     isRequired
-                    h={["8", "12", "12", "12"]}
+                    h={['8', '12', '12', '12']}
                     w="75%"
                     textAlign="right"
                     borderRadius={6}
@@ -208,18 +234,30 @@ const ExchangeModal = (props: Props) => {
                     value={myValue! - 0.00016}
                   ></Input>
                   {!swapButtons && (
-                    <Flex alignItems="center" paddingLeft="8px">
-                      <FaBitcoin size="1.5em" color="#F7931A" />
-                      <span style={{ paddingLeft: "12px", fontWeight: "bold" }}>
-                        {" "}
+                    <Flex
+                      alignItems="center"
+                      paddingLeft="8px"
+                    >
+                      <FaBitcoin
+                        size="1.5em"
+                        color="#F7931A"
+                      />
+                      <span style={{ paddingLeft: '12px', fontWeight: 'bold' }}>
+                        {' '}
                         BTC
                       </span>
                     </Flex>
                   )}
                   {swapButtons && (
-                    <Flex alignItems="center" paddingLeft="4px">
-                      <FaBitcoin size="1.5em" color="#F7931A" />
-                      <span style={{ paddingLeft: "4px", fontWeight: "bold" }}>
+                    <Flex
+                      alignItems="center"
+                      paddingLeft="4px"
+                    >
+                      <FaBitcoin
+                        size="1.5em"
+                        color="#F7931A"
+                      />
+                      <span style={{ paddingLeft: '4px', fontWeight: 'bold' }}>
                         WBTC
                       </span>
                     </Flex>
@@ -228,23 +266,30 @@ const ExchangeModal = (props: Props) => {
               </FormControl>
             </Box>
 
-            <Box px={8} my={4} borderRadius={6}>
+            <Box
+              px={8}
+              my={4}
+              borderRadius={6}
+            >
               <FormControl>
                 <FormLabel>
                   <Text
                     fontWeight="bold"
-                    fontSize={["12px", "16px", "18px", "20px"]}
+                    fontSize={['12px', '16px', '18px', '20px']}
                   >
                     Enter HIVE username
                   </Text>
-                  <Flex alignItems="center" position="relative">
+                  <Flex
+                    alignItems="center"
+                    position="relative"
+                  >
                     <Text
                       style={{
-                        position: "absolute",
-                        top: "10px",
-                        left: "8px",
+                        position: 'absolute',
+                        top: '10px',
+                        left: '8px',
                       }}
-                      fontSize={["8px", "10px", "12px", "12px"]}
+                      fontSize={['8px', '10px', '12px', '12px']}
                       color="gray.600"
                       zIndex={5}
                     >
@@ -256,15 +301,15 @@ const ExchangeModal = (props: Props) => {
                       h="60px"
                       fontWeight="bold"
                       value={walletAddress}
-                      onChange={(e) => setWalletAddress(e.target.value)}
+                      onChange={e => setWalletAddress(e.target.value)}
                       border="2px solid #dff0f5"
                       background="# "
                       borderRadius={8}
                       focusBorderColor="transparent"
                     />
                     <Button
-                      _hover={{ bg: "brand.500", color: "white" }}
-                      mx={["1", "2", "3", "4"]}
+                      _hover={{ bg: 'brand.500', color: 'white' }}
+                      mx={['1', '2', '3', '4']}
                     >
                       <MdCancelPresentation color="black" />
                     </Button>
@@ -272,22 +317,29 @@ const ExchangeModal = (props: Props) => {
 
                   {validAccount ? (
                     <Text
-                      fontSize={["8px", "10px", "12px", "14px"]}
+                      fontSize={['8px', '10px', '12px', '14px']}
                       color="green"
                     >
                       Account exists!
                     </Text>
                   ) : (
                     <Text
-                      fontSize={["8px", "10px", "12px", "14px"]}
+                      fontSize={['8px', '10px', '12px', '14px']}
                       color="red"
                     >
                       HIVE account must be registered on this web portal.
                     </Text>
                   )}
 
-                  <Flex py={2} w="100%">
-                    <Accordion defaultIndex={[0]} allowMultiple w="100%">
+                  <Flex
+                    py={2}
+                    w="100%"
+                  >
+                    <Accordion
+                      defaultIndex={[0]}
+                      allowMultiple
+                      w="100%"
+                    >
                       <AccordionItem>
                         <h2>
                           <AccordionButton>
@@ -305,7 +357,10 @@ const ExchangeModal = (props: Props) => {
                         <AccordionPanel pb={2}>
                           <Flex justifyContent="space-between">
                             <Text fontSize="xs">Bitcoin Mainnet Fee</Text>
-                            <Text fontSize="xs" px={12}>
+                            <Text
+                              fontSize="xs"
+                              px={12}
+                            >
                               0.00016 BTC ($6)
                             </Text>
                           </Flex>
@@ -327,9 +382,9 @@ const ExchangeModal = (props: Props) => {
             </Button>
             <Text
               style={{
-                fontSize: "9px",
-                textAlign: "center",
-                paddingBottom: "12px",
+                fontSize: '9px',
+                textAlign: 'center',
+                paddingBottom: '12px',
               }}
             >
               By Clicking Create an exchange, I agree to the Privacy Policy and
@@ -339,7 +394,7 @@ const ExchangeModal = (props: Props) => {
         </Card>
       </Flex>
     </>
-  );
-};
+  )
+}
 
-export default ExchangeModal;
+export default ExchangeModal

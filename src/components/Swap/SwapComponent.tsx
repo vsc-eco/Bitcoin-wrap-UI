@@ -9,34 +9,32 @@ import {
   Box,
   VStack,
   Icon,
-} from "@chakra-ui/react";
-import React, { useState } from "react";
-import { IoMdArrowDropdown } from "react-icons/io";
-import { MdOutlineSwapVert } from "react-icons/md";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { FaBitcoin } from "react-icons/fa";
-import Image from "next/image";
-import { motion } from "framer-motion";
-import { tokens, TokenName } from "../../TokenData";
-import TokenSearchModal from "../TokenSearchModal";
-import { MdAccountBalanceWallet } from "react-icons/md";
-import styles from "./SwapComponents.module.css";
+} from '@chakra-ui/react'
+import React, { useState } from 'react'
+import { IoMdArrowDropdown } from 'react-icons/io'
+import { MdOutlineSwapVert } from 'react-icons/md'
+import { AiOutlineLoading3Quarters } from 'react-icons/ai'
+import { FaBitcoin } from 'react-icons/fa'
+import Image from 'next/image'
+import { motion } from 'framer-motion'
+import { tokens, TokenName } from '../../TokenData'
+import TokenSearchModal from '../TokenSearchModal'
+import { MdAccountBalanceWallet } from 'react-icons/md'
+import styles from './SwapComponents.module.css'
 
 type Props = {
-  showModal: boolean;
-  handleOpen: () => void;
-  handleClose: () => void;
-};
+  showModal: boolean
+  handleOpen: () => void
+  handleClose: () => void
+}
 
 const SwapComponent = (props: Props) => {
-  const [tokenAmount, setTokenAmount] = useState<string>("");
-  const [IsReload, setIsReload] = useState(true);
-  const [fromToken, setFromToken] = useState<TokenName>("HIVE");
-  const [toToken, setToToken] = useState<TokenName>("HBD");
+  const [tokenAmount, setTokenAmount] = useState<string>('')
+  const [IsReload, setIsReload] = useState(true)
+  const [fromToken, setFromToken] = useState<TokenName>('HIVE')
+  const [toToken, setToToken] = useState<TokenName>('HBD')
 
-  const [choosingToken, setChoosingToken] = useState<"to" | "from" | null>(
-    null
-  );
+  const [choosingToken, setChoosingToken] = useState<'to' | 'from' | null>(null)
 
   // <compoenent tokenName={fromToken}  />
   // import tokens from the tokenData
@@ -44,48 +42,48 @@ const SwapComponent = (props: Props) => {
   // <compoenent token={toToken}  />
 
   const handleTokenChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTokenAmount(event.target.value);
-  };
+    setTokenAmount(event.target.value)
+  }
 
-  const buttonBgColor = "#b8e3f2";
-  const buttonTextColor = useColorModeValue("blue.600", "blue.800");
+  const buttonBgColor = '#b8e3f2'
+  const buttonTextColor = useColorModeValue('blue.600', 'blue.800')
 
   const setToken = (chosenToken: TokenName) => {
-    const prevChosenToken = choosingToken === "to" ? toToken : fromToken;
-    const prevOtherToken = choosingToken === "from" ? toToken : fromToken;
+    const prevChosenToken = choosingToken === 'to' ? toToken : fromToken
+    const prevOtherToken = choosingToken === 'from' ? toToken : fromToken
     if (chosenToken === prevChosenToken) {
-      setChoosingToken(null);
-      return;
+      setChoosingToken(null)
+      return
     }
 
     if (chosenToken === prevOtherToken) {
-      if (choosingToken === "to") {
-        setFromToken(prevChosenToken);
-        setToToken(prevOtherToken);
+      if (choosingToken === 'to') {
+        setFromToken(prevChosenToken)
+        setToToken(prevOtherToken)
       } else {
-        setToToken(prevChosenToken);
-        setFromToken(prevOtherToken);
+        setToToken(prevChosenToken)
+        setFromToken(prevOtherToken)
       }
-      setChoosingToken(null);
-      return;
+      setChoosingToken(null)
+      return
     }
 
-    if (choosingToken === "to") {
-      setToToken(chosenToken);
+    if (choosingToken === 'to') {
+      setToToken(chosenToken)
     } else {
-      setFromToken(chosenToken);
+      setFromToken(chosenToken)
     }
-    setChoosingToken(null);
-  };
+    setChoosingToken(null)
+  }
 
   const swapTokens = () => {
-    setToToken(fromToken);
-    setFromToken(toToken);
-  };
+    setToToken(fromToken)
+    setFromToken(toToken)
+  }
 
   return (
     <Flex
-      justifyContent={"center"}
+      justifyContent={'center'}
       p={5}
       maxW="700px"
       borderRadius="md"
@@ -100,42 +98,63 @@ const SwapComponent = (props: Props) => {
       <VStack spacing={3}>
         <InputGroup>
           <Flex
-            direction={"column"}
+            direction={'column'}
             w="full"
             borderRadius={6}
-            boxShadow={"base"}
-            border={"transparent"}
+            boxShadow={'base'}
+            border={'transparent'}
           >
             <Flex
-              justifyContent={"space-between"}
+              justifyContent={'space-between'}
               px={4}
               h={3}
               mt={2}
-              alignItems={"flex-end"}
+              alignItems={'flex-end'}
               className={styles.from_input}
             >
-              <Text fontSize="12px" className={styles.text}>
+              <Text
+                fontSize="12px"
+                className={styles.text}
+              >
                 From
               </Text>
-              <Flex alignItems={"center"} gap={1}>
-                <Icon as={MdAccountBalanceWallet} className={styles.icon} />
-                <Text fontSize={"xs"} className={styles.text}>Wallet not connected</Text>
+              <Flex
+                alignItems={'center'}
+                gap={1}
+              >
+                <Icon
+                  as={MdAccountBalanceWallet}
+                  className={styles.icon}
+                />
+                <Text
+                  fontSize={'xs'}
+                  className={styles.text}
+                >
+                  Wallet not connected
+                </Text>
               </Flex>
             </Flex>
 
             <Flex>
-              <InputLeftAddon h={12} border={"transparent"} bgColor={"white"}>
+              <InputLeftAddon
+                h={12}
+                border={'transparent'}
+                bgColor={'white'}
+              >
                 <Flex
-                  _hover={{ color: "#5266eb" }}
-                  borderRadius={"md"}
-                  alignItems={"center"}
+                  _hover={{ color: '#5266eb' }}
+                  borderRadius={'md'}
+                  alignItems={'center'}
                 >
                   <Flex
-                    cursor={"pointer"}
-                    onClick={() => setChoosingToken("from")}
-                    alignItems={"center"}
+                    cursor={'pointer'}
+                    onClick={() => setChoosingToken('from')}
+                    alignItems={'center'}
                   >
-                    <Text fontSize={"2xl"} px={1}>
+                    <Text
+                      fontSize={'2xl'}
+                      px={1}
+                    >
                       <Image
                         src={tokens[fromToken].image}
                         alt={fromToken}
@@ -143,7 +162,7 @@ const SwapComponent = (props: Props) => {
                         height="24"
                       />
                     </Text>
-                    <Text fontSize={"xl"}>{fromToken}</Text>
+                    <Text fontSize={'xl'}>{fromToken}</Text>
                   </Flex>
                   <IoMdArrowDropdown />
                 </Flex>
@@ -157,7 +176,7 @@ const SwapComponent = (props: Props) => {
                   h="1.75rem"
                   size="xs"
                   className={`${styles.murButton} ${styles.murButtonSecondary}`}
-                  onClick={() => setTokenAmount("Max")}
+                  onClick={() => setTokenAmount('Max')}
                   mx={1}
                 >
                   Max
@@ -166,7 +185,7 @@ const SwapComponent = (props: Props) => {
                   h="1.75rem"
                   size="xs"
                   className={`${styles.murButton} ${styles.murButtonSecondary}`}
-                  onClick={() => setTokenAmount("Half")}
+                  onClick={() => setTokenAmount('Half')}
                   mx={1}
                 >
                   Half
@@ -175,41 +194,44 @@ const SwapComponent = (props: Props) => {
               <Input
                 h={10}
                 type="number"
-                w={"full"}
-                textAlign={"right"}
+                w={'full'}
+                textAlign={'right'}
                 value={tokenAmount}
                 onChange={handleTokenChange}
                 focusBorderColor="transparent"
-                border={"transparent"}
+                border={'transparent'}
               />
             </Flex>
             <Flex
-              justifyContent={"space-between"}
+              justifyContent={'space-between'}
               px={5}
               h={4}
               mb={2}
-              alignItems={"flex-start"}
+              alignItems={'flex-start'}
             >
               <Flex>
-                {" "}
-                {tokenAmount && <Text fontSize={"xs"}>Max Value</Text>}
+                {' '}
+                {tokenAmount && <Text fontSize={'xs'}>Max Value</Text>}
               </Flex>
             </Flex>
           </Flex>
         </InputGroup>
         <Flex
           h={5}
-          alignItems={"center"}
-          justifyContent={"space-between"}
+          alignItems={'center'}
+          justifyContent={'space-between'}
           w="90%"
         >
           <Flex
             px={4}
-            alignItems={"center"}
+            alignItems={'center'}
             onClick={swapTokens}
             cursor="pointer"
           >
-            <Text fontSize={"2xl"} className={styles.icon}>
+            <Text
+              fontSize={'2xl'}
+              className={styles.icon}
+            >
               <MdOutlineSwapVert />
             </Text>
           </Flex>
@@ -229,33 +251,61 @@ const SwapComponent = (props: Props) => {
 
         <InputGroup>
           <Flex
-            direction={"column"}
+            direction={'column'}
             w="full"
             borderRadius={6}
-            boxShadow={"base"}
-            border={"transparent"}
+            boxShadow={'base'}
+            border={'transparent'}
           >
-            <Flex justifyContent={"space-between"} px={4} h={4} mt={2}>
-              <Text fontSize={"12px"} className={styles.text}>To</Text>
-              <Flex alignItems={"center"} gap={1}>
-                <Icon as={MdAccountBalanceWallet} className={styles.icon} />
-                <Text fontSize={"xs"} className={styles.text}>Wallet not connected</Text>
+            <Flex
+              justifyContent={'space-between'}
+              px={4}
+              h={4}
+              mt={2}
+            >
+              <Text
+                fontSize={'12px'}
+                className={styles.text}
+              >
+                To
+              </Text>
+              <Flex
+                alignItems={'center'}
+                gap={1}
+              >
+                <Icon
+                  as={MdAccountBalanceWallet}
+                  className={styles.icon}
+                />
+                <Text
+                  fontSize={'xs'}
+                  className={styles.text}
+                >
+                  Wallet not connected
+                </Text>
               </Flex>
             </Flex>
 
             <Flex>
-              <InputLeftAddon h={12} bgColor={"white"} border={"transparent"}>
+              <InputLeftAddon
+                h={12}
+                bgColor={'white'}
+                border={'transparent'}
+              >
                 <Flex
-                  _hover={{ color: "#5266eb" }}
-                  borderRadius={"md"}
-                  alignItems={"center"}
+                  _hover={{ color: '#5266eb' }}
+                  borderRadius={'md'}
+                  alignItems={'center'}
                 >
                   <Flex
-                    cursor={"pointer"}
-                    onClick={() => setChoosingToken("to")}
-                    alignItems={"center"}
+                    cursor={'pointer'}
+                    onClick={() => setChoosingToken('to')}
+                    alignItems={'center'}
                   >
-                    <Text fontSize={"2xl"} px={1}>
+                    <Text
+                      fontSize={'2xl'}
+                      px={1}
+                    >
                       <Image
                         src={tokens[toToken].image}
                         alt={toToken}
@@ -263,7 +313,7 @@ const SwapComponent = (props: Props) => {
                         height="24"
                       />
                     </Text>
-                    <Text fontSize={"xl"}>{toToken}</Text>
+                    <Text fontSize={'xl'}>{toToken}</Text>
                   </Flex>
                   <IoMdArrowDropdown />
                 </Flex>
@@ -277,7 +327,7 @@ const SwapComponent = (props: Props) => {
                   h="1.75rem"
                   size="xs"
                   className={`${styles.murButton} ${styles.murButtonSecondary}`}
-                  onClick={() => setTokenAmount("Max")}
+                  onClick={() => setTokenAmount('Max')}
                   mx={1}
                   isDisabled
                 >
@@ -288,7 +338,7 @@ const SwapComponent = (props: Props) => {
                   size="xs"
                   isDisabled
                   className={`${styles.murButton} ${styles.murButtonSecondary}`}
-                  onClick={() => setTokenAmount("Half")}
+                  onClick={() => setTokenAmount('Half')}
                   mx={1}
                 >
                   <Text>Half</Text>
@@ -296,20 +346,25 @@ const SwapComponent = (props: Props) => {
               </InputLeftAddon>
               <Input
                 h={10}
-                w={"full"}
-                textAlign={"right"}
+                w={'full'}
+                textAlign={'right'}
                 value={tokenAmount}
                 onChange={handleTokenChange}
                 focusBorderColor="transparent"
-                border={"transparent"}
+                border={'transparent'}
                 readOnly
               />
             </Flex>
-            <Flex justifyContent={"space-between"} px={5} h={4} mb={2}>
+            <Flex
+              justifyContent={'space-between'}
+              px={5}
+              h={4}
+              mb={2}
+            >
               <Flex></Flex>
               <Flex>
-                {" "}
-                {tokenAmount && <Text fontSize={"xs"}>Max Value</Text>}
+                {' '}
+                {tokenAmount && <Text fontSize={'xs'}>Max Value</Text>}
               </Flex>
             </Flex>
           </Flex>
@@ -322,7 +377,7 @@ const SwapComponent = (props: Props) => {
         </Button>
       </VStack>
     </Flex>
-  );
-};
+  )
+}
 
-export default SwapComponent;
+export default SwapComponent

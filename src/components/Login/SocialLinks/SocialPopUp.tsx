@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 import {
   Modal,
   ModalOverlay,
@@ -10,23 +10,31 @@ import {
   Button,
   Flex,
   Box,
-} from "@chakra-ui/react";
-import { PiGoogleChromeLogoBold } from "react-icons/pi";
-import { BiLogoGmail } from "react-icons/bi";
-import { FaGithub, FaDiscord } from "react-icons/fa";
+} from '@chakra-ui/react'
+import { PiGoogleChromeLogoBold } from 'react-icons/pi'
+import { BiLogoGmail } from 'react-icons/bi'
+import { FaGithub, FaDiscord } from 'react-icons/fa'
 
 //exporting the button labels from the constants.ts file
-import { BUTTON_LABELS } from "../../../constants";
+import { BUTTON_LABELS } from '../../../constants'
 
 const SocialButton = ({ leftIcon, children }) => (
-  <Button variant="outline" width="full" mb={3} leftIcon={leftIcon}>
+  <Button
+    variant="outline"
+    width="full"
+    mb={3}
+    leftIcon={leftIcon}
+  >
     {children}
   </Button>
-);
+)
 
 const SocialPopUp = ({ isOpen, onClose }) => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+    >
       <ModalOverlay />
       <ModalContent>
         <ModalHeader></ModalHeader>
@@ -55,7 +63,7 @@ const SocialPopUp = ({ isOpen, onClose }) => {
         <ModalFooter></ModalFooter>
       </ModalContent>
     </Modal>
-  );
-};
+  )
+}
 
-export default SocialPopUp;
+export default SocialPopUp

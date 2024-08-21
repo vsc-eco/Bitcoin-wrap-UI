@@ -1,17 +1,17 @@
 //TODO:
-import React from "react";
-import { Flex, Text, Card, Box, CardHeader } from "@chakra-ui/react";
-import AccountComponent from "./AccountComponent";
-import { FaChartLine } from "react-icons/fa";
-import { FaCalendarDays } from "react-icons/fa6";
-import ChartComponent from "./ChartComponent";
-import { IoChevronDownOutline } from "react-icons/io5";
-import { GoArrowUpRight } from "react-icons/go";
-import styles from "./Dashboard.module.css";
+import React from 'react'
+import { Flex, Text, Card, Box, CardHeader } from '@chakra-ui/react'
+import AccountComponent from './AccountComponent'
+import { FaChartLine } from 'react-icons/fa'
+import { FaCalendarDays } from 'react-icons/fa6'
+import ChartComponent from './ChartComponent'
+import { IoChevronDownOutline } from 'react-icons/io5'
+import { GoArrowUpRight } from 'react-icons/go'
+import styles from './Dashboard.module.css'
 
 type Props = {
-  username: string;
-};
+  username: string
+}
 
 const Dashboard = ({ username }: Props) => {
   //function for making the font smaller after dots
@@ -26,20 +26,33 @@ const Dashboard = ({ username }: Props) => {
   //  priceElement?.appendChild(centElement);
 
   return (
-    <Flex direction="column" justifyContent={"center"} color={"#75757d"}>
+    <Flex
+      direction="column"
+      justifyContent={'center'}
+      color={'#75757d'}
+    >
       <Box pl={4}>
         <Text fontSize="xl">Welcome, {username}</Text>
       </Box>
-      <Flex mt={4} w="100%">
+      <Flex
+        mt={4}
+        w="100%"
+      >
         <Card className={styles.parent_container}>
           <CardHeader>
-            <Text fontSize={"sm"} className={styles.heading}>
+            <Text
+              fontSize={'sm'}
+              className={styles.heading}
+            >
               Hive balance
             </Text>
-            <Flex justifyContent={"space-between"}>
+            <Flex justifyContent={'space-between'}>
               <Flex>
-                <Text id="price" className={styles.price}>
-                  {"$110"}.<span className={styles.small_text}>{"22"}</span>
+                <Text
+                  id="price"
+                  className={styles.price}
+                >
+                  {'$110'}.<span className={styles.small_text}>{'22'}</span>
                 </Text>
               </Flex>
               {/* <Flex>
@@ -69,15 +82,28 @@ const Dashboard = ({ username }: Props) => {
             </Flex>
             <Flex justifyContent="space-between">
               <Flex>
-                <Flex color={"grey.700"} alignItems={"center"}>
+                <Flex
+                  color={'grey.700'}
+                  alignItems={'center'}
+                >
                   <Text fontSize="xs">Last 30 days</Text>
                 </Flex>
-                <Flex alignItems={"center"} mt={1} fontSize={"sm"}>
+                <Flex
+                  alignItems={'center'}
+                  mt={1}
+                  fontSize={'sm'}
+                >
                   <IoChevronDownOutline />
                 </Flex>
               </Flex>
-              <Flex fontSize={"sm"} alignItems={"center"}>
-                <Flex fontSize={"lg"} color={"green.700"}>
+              <Flex
+                fontSize={'sm'}
+                alignItems={'center'}
+              >
+                <Flex
+                  fontSize={'lg'}
+                  color={'green.700'}
+                >
                   <GoArrowUpRight />
                 </Flex>
                 <Flex>
@@ -90,7 +116,7 @@ const Dashboard = ({ username }: Props) => {
         </Card>
       </Flex>
     </Flex>
-  );
-};
+  )
+}
 
-export default Dashboard;
+export default Dashboard

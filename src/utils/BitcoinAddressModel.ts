@@ -2,10 +2,8 @@
 //Schema for storing the list of transactions associated particular btc adress
 
 export interface BitcoinAddress {
-  address: string;
-  status: string;
-  createdAt: Date;
-  pingedAt: number;
+  address: string
+  status: string
+  createdAt: Date
+  pingedAt: number
 }
-
-

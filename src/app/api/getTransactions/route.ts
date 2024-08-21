@@ -1,7 +1,7 @@
-import cron from "node-cron";
-import { NextResponse } from "next/server";
+import cron from 'node-cron'
+import { NextResponse } from 'next/server'
 
-export const dynamic = "force-dynamic";
+export const dynamic = 'force-dynamic'
 /**
  * get transactions
  * Options:

@@ -1,5 +1,5 @@
 //TODO: Connect with metamask button should be on the center
-import React from "react";
+import React from 'react'
 import {
   Modal,
   ModalOverlay,
@@ -11,13 +11,16 @@ import {
   Button,
   useDisclosure,
   Flex,
-} from "@chakra-ui/react";
-import Image from "next/image";
+} from '@chakra-ui/react'
+import Image from 'next/image'
 
 function MetaMaskModal({ isOpen, onClose }) {
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+      >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Connect to MetaMask</ModalHeader>
@@ -27,7 +30,7 @@ function MetaMaskModal({ isOpen, onClose }) {
           </ModalBody>
 
           <ModalFooter>
-            <Flex justifyContent={"center"}>
+            <Flex justifyContent={'center'}>
               <Button
                 leftIcon={
                   <Image
@@ -47,7 +50,7 @@ function MetaMaskModal({ isOpen, onClose }) {
         </ModalContent>
       </Modal>
     </>
-  );
+  )
 }
 
-export default MetaMaskModal;
+export default MetaMaskModal

@@ -3,7 +3,8 @@
   padding: 8px 4px;
   width: 391px;
   border-radius: 12px;
-  box-shadow: 0 2px 4px 0 rgba(4, 4, 52, 0.06),
+  box-shadow:
+    0 2px 4px 0 rgba(4, 4, 52, 0.06),
     0 0 2px 0 rgba(91, 95, 107, 0.24);
   font-weight: 360;
   line-height: 16.0003px;

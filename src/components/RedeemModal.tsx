@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
 import {
   Text,
   Button,
@@ -13,28 +13,28 @@ import {
   ModalHeader,
   ModalOverlay,
   useDisclosure,
-  Box
-} from "@chakra-ui/react";
-import { getOutputs, useCreateTx } from "../hooks/VSC";
-import { DHive } from "../const";
-import { useQuery } from "@tanstack/react-query";
-import styles from "./RedeemModal.module.css";
+  Box,
+} from '@chakra-ui/react'
+import { getOutputs, useCreateTx } from '../hooks/VSC'
+import { DHive } from '../const'
+import { useQuery } from '@tanstack/react-query'
+import styles from './RedeemModal.module.css'
 
-type Props = {};
+type Props = {}
 
 const RedeemModal = (props: Props) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const [amount, setAmount] = useState("");
-  const [destination, setDestination] = useState("");
-  const isAmountValid = amount.trim() !== "" && /^\d*\.?\d*$/.test(amount); // Check if amount is not empty or only whitespace
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const [amount, setAmount] = useState('')
+  const [destination, setDestination] = useState('')
+  const isAmountValid = amount.trim() !== '' && /^\d*\.?\d*$/.test(amount) // Check if amount is not empty or only whitespace
 
-  const { redeem } = useCreateTx();
+  const { redeem } = useCreateTx()
 
   const handleSend = async () => {
     // Add your logic to handle the "Send" button click
 
-    onClose();
-  };
+    onClose()
+  }
 
   // const allowedAmount = useQuery({
   //   queryKey: ["transfer_balance", myDid],
@@ -52,49 +52,70 @@ const RedeemModal = (props: Props) => {
 
   return (
     <>
-      <Button onClick={onOpen} bgColor={"transparent"} fontSize="xs">
+      <Button
+        onClick={onOpen}
+        bgColor={'transparent'}
+        fontSize="xs"
+      >
         Redeem
       </Button>
       <Box className={styles.parent_container}>
-        <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal
+          isOpen={isOpen}
+          onClose={onClose}
+        >
           <ModalOverlay />
           <ModalContent>
             <ModalHeader>Redeem</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
               <InputGroup my={2}>
-                <InputLeftAddon w={32} className={styles.modalLabel}>
+                <InputLeftAddon
+                  w={32}
+                  className={styles.modalLabel}
+                >
                   BTC Address
                 </InputLeftAddon>
                 <Input
                   className={styles.input}
                   value={destination}
-                  onChange={(e) => setDestination(e.target.value)}
+                  onChange={e => setDestination(e.target.value)}
                 />
               </InputGroup>
               {/* <Text color="tomato" fontSize="xs" px={2}>
               Account not found!
             </Text> */}
               <InputGroup py={2}>
-                <InputLeftAddon w={32} className={styles.modalLabel}>
+                <InputLeftAddon
+                  w={32}
+                  className={styles.modalLabel}
+                >
                   Amount
                 </InputLeftAddon>
                 <Input
                   className={styles.input}
                   value={amount}
-                  onChange={(e) => setAmount(e.target.value)}
+                  onChange={e => setAmount(e.target.value)}
                   isInvalid={!isAmountValid}
                   errorBorderColor="transaparent"
                 />
               </InputGroup>
-              <Text className={styles.text}>Available Balance: {"TODO"}</Text>
+              <Text className={styles.text}>Available Balance: {'TODO'}</Text>
               {!isAmountValid && (
-                <Text color="tomato" fontSize={"smaller"} px={2}>
+                <Text
+                  color="tomato"
+                  fontSize={'smaller'}
+                  px={2}
+                >
                   Please enter a valid amount
                 </Text>
               )}
               {false ? (
-                <Text color="tomato" fontSize={"smaller"} px={2}>
+                <Text
+                  color="tomato"
+                  fontSize={'smaller'}
+                  px={2}
+                >
                   Too low balance!
                 </Text>
               ) : null}
@@ -122,7 +143,7 @@ const RedeemModal = (props: Props) => {
         </Modal>
       </Box>
     </>
-  );
-};
+  )
+}
 
-export default RedeemModal;
+export default RedeemModal

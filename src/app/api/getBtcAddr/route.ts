@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextResponse } from 'next/server'
 
 export async function POST(req: Request) {
   // await client.connect();
@@ -29,5 +29,5 @@ export async function POST(req: Request) {
   //   const newAddress = { address, status, created_at: Date.now(), pingedAt: Date.now()};
   //   await bitcoinAddresses.insertOne(newAddress);
   // }
-  return NextResponse.json({ message: "Data processed successfully" });
+  return NextResponse.json({ message: 'Data processed successfully' })
 }

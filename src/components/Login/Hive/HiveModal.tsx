@@ -19,78 +19,88 @@ import {
   HStack,
   Card,
   Box,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react'
 
-import React from "react";
-import Image from "next/image";
-import { MdArrowCircleRight } from "react-icons/md";
-import { Providers } from "@aioha/aioha";
-import { AuthActions } from "../../../hooks/auth";
-import { useNavigate } from "react-router-dom";
-import { LoginOptions } from "./LoginOptionContainer";
-import { LOGIN_METHOD_FIELD, LoginOption } from "./LoginOption";
+import React from 'react'
+import Image from 'next/image'
+import { MdArrowCircleRight } from 'react-icons/md'
+import { Providers } from '@aioha/aioha'
+import { AuthActions } from '../../../hooks/auth'
+import { useNavigate } from 'react-router-dom'
+import { LoginOptions } from './LoginOptionContainer'
+import { LOGIN_METHOD_FIELD, LoginOption } from './LoginOption'
 
-const USERNAME_FIELD = "username";
+const USERNAME_FIELD = 'username'
 
 interface Props {
-  onClose: () => void;
-  isOpen: boolean;
+  onClose: () => void
+  isOpen: boolean
 }
 
 const loginOptions = [
-  { name: "Keychain", image: "/keychain.svg", disabled: false },
-  { name: "HiveLedger", image: "/ledger.svg", disabled: false },
-  { name: "Hivesigner", image: "/hivesigner.svg", disabled: true },
-  { name: "Hiveauth", image: "/hiveauth-light.svg", disabled: true },
-] as const;
+  { name: 'Keychain', image: '/keychain.svg', disabled: false },
+  { name: 'HiveLedger', image: '/ledger.svg', disabled: false },
+  { name: 'Hivesigner', image: '/hivesigner.svg', disabled: true },
+  { name: 'Hiveauth', image: '/hiveauth-light.svg', disabled: true },
+] as const
 
 const ANY_LOGIN_OPTION_DISABLED = !loginOptions.every(
-  (option) => !option.disabled
-);
+  option => !option.disabled,
+)
 
-export type LoginOptionName = (typeof loginOptions)[number]["name"];
-export type LoginOptionType = (typeof loginOptions)[number];
+export type LoginOptionName = (typeof loginOptions)[number]['name']
+export type LoginOptionType = (typeof loginOptions)[number]
 
 const providerMap = {
   Keychain: Providers.Keychain,
   Hivesigner: Providers.HiveSigner,
   Hiveauth: Providers.HiveAuth,
   HiveLedger: Providers.Ledger,
-} satisfies Record<LoginOptionName, Providers>;
+} satisfies Record<LoginOptionName, Providers>
 
 function broke(what: string): never {
-  throw new Error(`This is a bug: what=${what}`);
+  throw new Error(`This is a bug: what=${what}`)
 }
 
 const HiveModal: React.FC<Props> = ({ isOpen, onClose }) => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+      >
         <ModalOverlay />
         <ModalContent>
           <ModalCloseButton />
           <ModalBody>
             <form
-              action={(data) => {
+              action={data => {
                 const loginMethod = data
                   .get(LOGIN_METHOD_FIELD)
-                  ?.valueOf() as LoginOptionName;
-                if (typeof loginMethod !== "string") {
-                  return broke("loginMethod");
+                  ?.valueOf() as LoginOptionName
+                if (typeof loginMethod !== 'string') {
+                  return broke('loginMethod')
                 }
-                const username = data.get(USERNAME_FIELD)?.valueOf();
-                if (typeof username !== "string") {
-                  return broke("username");
+                const username = data.get(USERNAME_FIELD)?.valueOf()
+                if (typeof username !== 'string') {
+                  return broke('username')
                 }
-                const provider = providerMap[loginMethod];
-                AuthActions.login("hive", provider, username).then(() =>
-                  navigate("/")
-                );
+                const provider = providerMap[loginMethod]
+                AuthActions.login('hive', provider, username).then(() =>
+                  navigate('/'),
+                )
               }}
             >
-              <VStack spacing={8} align="center">
-                <Heading size="md" fontWeight="semibold" mb={4}>
+              <VStack
+                spacing={8}
+                align="center"
+              >
+                <Heading
+                  size="md"
+                  fontWeight="semibold"
+                  mb={4}
+                >
                   Login with HIVE
                 </Heading>
                 <Image
@@ -100,11 +110,18 @@ const HiveModal: React.FC<Props> = ({ isOpen, onClose }) => {
                   src="/hive.svg"
                   objectFit="cover"
                 />
-                <Text mb={4} textAlign="center">
+                <Text
+                  mb={4}
+                  textAlign="center"
+                >
                   Select one of the supported login options that help keep your
                   access safe and decentralized.
                 </Text>
-                <Flex w="full" justifyContent="space-between" gap="2">
+                <Flex
+                  w="full"
+                  justifyContent="space-between"
+                  gap="2"
+                >
                   <Input
                     name={USERNAME_FIELD}
                     placeholder="Enter username"
@@ -118,37 +135,50 @@ const HiveModal: React.FC<Props> = ({ isOpen, onClose }) => {
                     margin={1}
                     transform="translateX(-45%)"
                     type="submit"
-                    bgColor={"gray.50"}
+                    bgColor={'gray.50'}
                     variant="sm"
-                    size={"sm"}
+                    size={'sm'}
                   >
-                    <Icon fontSize="20px" as={MdArrowCircleRight} />
+                    <Icon
+                      fontSize="20px"
+                      as={MdArrowCircleRight}
+                    />
                   </Button>
                 </Flex>
                 <VStack w="full">
                   <LoginOptions>
                     {loginOptions.map(
-                      (option) =>
+                      option =>
                         !option.disabled && (
-                          <LoginOption key={option.name} option={option} />
-                        )
+                          <LoginOption
+                            key={option.name}
+                            option={option}
+                          />
+                        ),
                     )}
                   </LoginOptions>
                   {ANY_LOGIN_OPTION_DISABLED && (
-                    <VStack paddingTop={5} w="full">
-                      <Text fontSize="md" fontWeight="semibold" opacity={0.9}>
+                    <VStack
+                      paddingTop={5}
+                      w="full"
+                    >
+                      <Text
+                        fontSize="md"
+                        fontWeight="semibold"
+                        opacity={0.9}
+                      >
                         Coming Soon
                       </Text>
                       <Box opacity={0.4}>
                         <LoginOptions>
                           {loginOptions.map(
-                            (option) =>
+                            option =>
                               option.disabled && (
                                 <LoginOption
                                   key={option.name}
                                   option={option}
                                 />
-                              )
+                              ),
                           )}
                         </LoginOptions>
                       </Box>
@@ -159,14 +189,17 @@ const HiveModal: React.FC<Props> = ({ isOpen, onClose }) => {
             </form>
           </ModalBody>
           <ModalFooter>
-            <Button variant="ghost" onClick={onClose}>
+            <Button
+              variant="ghost"
+              onClick={onClose}
+            >
               Close
             </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
     </>
-  );
-};
+  )
+}
 
-export default HiveModal;
+export default HiveModal
