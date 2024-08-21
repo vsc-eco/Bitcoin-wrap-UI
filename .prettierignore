@@ -1,0 +1,6 @@
+.husky
+.next
+node_modules
+.env
+next-env.d.ts
+yarn.lock
