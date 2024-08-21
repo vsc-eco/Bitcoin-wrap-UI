@@ -128,8 +128,10 @@ const HiveModal: React.FC<Props> = ({ isOpen, onClose }) => {
                 <VStack w="full">
                   <LoginOptions>
                     {loginOptions.map(
-                      (option, index) =>
-                        !option.disabled && <LoginOption option={option} />
+                      (option) =>
+                        !option.disabled && (
+                          <LoginOption key={option.name} option={option} />
+                        )
                     )}
                   </LoginOptions>
                   {ANY_LOGIN_OPTION_DISABLED && (
@@ -140,8 +142,13 @@ const HiveModal: React.FC<Props> = ({ isOpen, onClose }) => {
                       <Box opacity={0.4}>
                         <LoginOptions>
                           {loginOptions.map(
-                            (option, index) =>
-                              option.disabled && <LoginOption option={option} />
+                            (option) =>
+                              option.disabled && (
+                                <LoginOption
+                                  key={option.name}
+                                  option={option}
+                                />
+                              )
                           )}
                         </LoginOptions>
                       </Box>

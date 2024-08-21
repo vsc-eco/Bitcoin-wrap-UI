@@ -15,7 +15,6 @@ export function LoginOption({ option }: { option: LoginOptionType }) {
         <Flex gap={1} alignItems={"center"} position={"relative"}>
           <Button
             as="label"
-            aria-description={option.name}
             colorScheme="gray"
             w={125}
             className={`${styles.container} ${

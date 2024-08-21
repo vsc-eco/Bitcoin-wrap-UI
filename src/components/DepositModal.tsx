@@ -147,6 +147,8 @@ const DepositModal = (props: Props) => {
                 justifyContent="space-between"
                 alignItems="center"
               >
+                {/* this is not a NextImage and we can not add an `alt` prop */}
+                {/* eslint-disable-next-line jsx-a11y/alt-text */}
                 <Image
                   text={`bitcoin:${encodedAddr}`}
                   options={{
