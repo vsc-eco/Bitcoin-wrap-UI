@@ -1,2 +1,4 @@
 yarn
+yarn format
 yarn lint
+git update-index --again
