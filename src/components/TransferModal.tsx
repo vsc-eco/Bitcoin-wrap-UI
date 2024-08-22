@@ -102,16 +102,7 @@ const TransferModal = (props: Props) => {
       >
         <ModalOverlay />
         <ModalContent className={styles.murPrompt}>
-          <ModalHeader
-            style={{
-              fontFamily: 'var(--font-arcadia), system-ui, sans-serif',
-              fontWeight: 240,
-              lineHeight: '28px',
-              fontSize: '19px',
-            }}
-          >
-            Transfer
-          </ModalHeader>
+          <ModalHeader>Transfer</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <InputGroup
