@@ -9,13 +9,8 @@ import {
   useDisclosure,
   Text,
 } from '@chakra-ui/react'
-import { FaEthereum, FaGithub, FaDiscord } from 'react-icons/fa'
-import { BiLogoGmail } from 'react-icons/bi'
-import { PiGoogleChromeLogoBold } from 'react-icons/pi'
 import { BUTTON_LABELS } from '../../constants'
 import HiveModal from './Hive/HiveModal'
-import MetaMaskModal from './Ethereum/MetamaskModal'
-import SocialPopUp from './SocialLinks/SocialPopUp'
 import { AuthActions, useAuth } from '../../hooks/auth'
 import { useNavigate } from 'react-router-dom'
 import styles from './SignUpComponent.module.css'

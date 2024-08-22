@@ -29,6 +29,7 @@ import { AuthActions } from '../../../hooks/auth'
 import { useNavigate } from 'react-router-dom'
 import { LoginOptions } from './LoginOptionContainer'
 import { LOGIN_METHOD_FIELD, LoginOption } from './LoginOption'
+import styles from "./HiveModal.module.css"
 
 const USERNAME_FIELD = 'username'
 
@@ -100,6 +101,7 @@ const HiveModal: React.FC<Props> = ({ isOpen, onClose }) => {
                   size="md"
                   fontWeight="semibold"
                   mb={4}
+                  className={styles.heading}
                 >
                   Login with HIVE
                 </Heading>
@@ -113,6 +115,7 @@ const HiveModal: React.FC<Props> = ({ isOpen, onClose }) => {
                 <Text
                   mb={4}
                   textAlign="center"
+                  className={styles.text}
                 >
                   Select one of the supported login options that help keep your
                   access safe and decentralized.
@@ -192,8 +195,9 @@ const HiveModal: React.FC<Props> = ({ isOpen, onClose }) => {
             <Button
               variant="ghost"
               onClick={onClose}
+              className={styles.secondaryButton}
             >
-              Close
+              Cancel
             </Button>
           </ModalFooter>
         </ModalContent>
