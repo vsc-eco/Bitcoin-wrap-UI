@@ -14,11 +14,13 @@ import { BsArrowLeft, BsArrowRight } from 'react-icons/bs'
 import Moment from 'moment'
 import { readableUsername } from '../components/Sidebar/UserInfo'
 
+import styles from './TransactionItem.module.css'
+
 const START_BLOCK = 88079516
 const START_BLOCK_TIME = Moment('2024-08-16T02:46:48Z')
 
 const TransactionItem = props => {
-  const { showDateProp, handleTransactionOpen, transaction, userId } = props
+  const { showDateProp, handleTransactionOpen, handleTransactionClose, transaction, userId, selectedId } = props
   const [showDate, setShowDate] = useState(showDateProp)
 
   function handleMouseEnter() {
@@ -46,6 +48,11 @@ const TransactionItem = props => {
 
   const moneyIn = userId === transaction.owner
 
+  const isSelected = transaction.id === selectedId;
+
+
+  console.log('transaction.id===selectedId',transaction.id, selectedId, isSelected)
+
   return (
     <Tr
       _hover={{ bg: 'blue.100' }}
@@ -53,6 +60,10 @@ const TransactionItem = props => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={handleTransactionClick}
+      className={`${styles.murItem} ${isSelected ? styles.murItemActive : ''}`}
+      // style={{
+      //   backgroundColor: transaction.id === selectedId ? 'rgba(112,115,147,.058823529411764705)' : undefined
+      // }}
     >
       <Td
         w={22}
@@ -68,15 +79,15 @@ const TransactionItem = props => {
                   (transaction.block_height - START_BLOCK) * 3,
                   'seconds',
                 )
-            ).format('D MMM hh:mma')
+            ).format('MMM D')
           : null}
       </Td>
 
       <Td
         display="flex"
         alignItems="center"
-        w={412}
-        h={14}
+        w={!props.isTransactionDetailOpen ? 412 : 0}
+        h={12}
       >
         <WrapItem>
           <Avatar
@@ -103,13 +114,23 @@ const TransactionItem = props => {
         )}
       </Td>
       <Td isNumeric>
-        {transaction.amount / 1_000}
-        &nbsp;
-        {transaction.tk}
+        {
+          moneyIn ? '' : '-'
+        }
+        <span
+        style={{
+          color: moneyIn ? 'green' : undefined
+        }}
+        > 
+          {transaction.amount / 1_000}
+          &nbsp;
+          {transaction.tk}
+
+        </span>
         {/* &nbsp; (${transaction.dollar}) */}
       </Td>
 
-      <Td>
+      {!props.isTransactionDetailOpen ? <Td>
         <Flex>
           {/* {transaction.paymentMethod === "Transfer" &&
           transaction.TransferIn ? (
@@ -121,9 +142,35 @@ const TransactionItem = props => {
           {moneyIn ? <BsArrowLeft /> : <BsArrowRight />}
           {'  '}
           &nbsp;
-          <Text>{transaction.t}</Text>
+           <Text>{transaction.t}</Text> 
         </Flex>
-      </Td>
+      </Td>: (transaction.id === selectedId ?
+      <Td style={{
+        width: '100%',
+        backgroundColor: 'white'
+      }}
+      onClick={
+        (e) => {
+          e.stopPropagation()
+
+          if(props.handleTransactionClose) {
+            props.handleTransactionClose()
+          }
+        }
+      }
+      >
+        <button
+          style={{
+            background: "url(https://cdn.mercury.com/builds/166851faa76e48b8184184d247eb053f891d60d9/icons/24/arrow-right.svg) 50%/24px 24px no-repeat",
+            width: '10px',
+            height: '20px'
+          }}
+        className={styles.murCancelItem}
+      >
+        
+      </button>
+      </Td> : null)
+      }
     </Tr>
   )
 }

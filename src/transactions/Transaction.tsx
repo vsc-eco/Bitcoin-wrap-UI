@@ -34,6 +34,8 @@ import RedeemModal from '../components/RedeemModal'
 import { useCreateTx } from '../hooks/VSC'
 import { useAuth } from '../hooks/auth'
 
+const START_BLOCK = 88079516
+const START_BLOCK_TIME = Moment('2024-08-16T02:46:48Z')
 //fetching the details
 
 const BTC_TOKEN_CONTRACT = '59dfb8383291734049bfab403ced85a57cbcde6a'
@@ -170,7 +172,9 @@ const Transaction = (props: Props) => {
             </Menu>
           </Box>
           <Box overflowY="auto">
-            <TableContainer alignSelf="center">
+            <TableContainer alignSelf="center" style={{
+              display: 'flex',
+            }}>
               <Table
                 variant="simple"
                 size="sm"
@@ -192,42 +196,72 @@ const Transaction = (props: Props) => {
                     >
                       Amount
                     </Th>
-                    <Th
+                    {!isTransactionDetailOpen ? <Th
                       textTransform="capitalize"
                       display="flex"
                       alignItems="center"
                     >
                       Payment Method
-                    </Th>
+                    </Th> : null}
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {data?.findLedgerTXs?.txs?.map((tx, index) => {
-                    return (
-                      <TransactionItem
-                        userId={auth.authenticated && auth.userId}
-                        showDateProp={true}
-                        key={tx.id}
-                        transaction={tx}
-                        handleTransactionOpen={() => handleTransactionOpen(tx)}
-                      />
-                    )
-                  })}
+                  {
+                    (() => {
+                      const map:Array<any> = []
+                      let lastDate = ''
+
+                      for(let tx of data?.findLedgerTXs?.txs || []) {
+                        const dateStr = ((tx.block_height - START_BLOCK) * 3 < 0
+                        ? START_BLOCK_TIME.clone().subtract(
+                            -(tx.block_height - START_BLOCK) * 3,
+                            'seconds',
+                          )
+                        : START_BLOCK_TIME.clone().add(
+                            (tx.block_height - START_BLOCK) * 3,
+                            'seconds',
+                          )
+                      ).format('D MMM')
+                      let showDateProp;
+                      if(lastDate !== dateStr) { 
+                        showDateProp = true
+                        lastDate = dateStr
+                      } else {
+                        showDateProp = false
+                      }
+                        map.push(<TransactionItem
+                          userId={auth.authenticated && auth.userId}
+                          showDateProp={showDateProp}
+                          key={tx.id}
+                          transaction={tx}
+                          handleTransactionOpen={() => handleTransactionOpen(tx)}
+                          isTransactionDetailOpen={isTransactionDetailOpen}
+                          selectedId={selectedTransaction ? selectedTransaction.id : null}
+                          handleTransactionClose={handleTransactionClose}
+                        />)
+                      }
+
+                      return map
+                    })()
+                  }
+                  
                 </Tbody>
               </Table>
+              <Box
+                className={`side-popup ${isTransactionDetailOpen} ? 'show-popup' : ''`}
+                style={{
+                  top: 0
+                }}
+              >
+                {isTransactionDetailOpen && (
+                  <TransactionDetail
+                    userId={auth.authenticated && auth.userId}
+                    toggleClose={handleTransactionClose}
+                    transaction={selectedTransaction}
+                  />
+                )}
+              </Box>
             </TableContainer>
-          </Box>
-        </Flex>
-        <Flex className="overlay">
-          <Box
-            className={`side-popup ${isTransactionDetailOpen} ? 'show-popup' : ''`}
-          >
-            {isTransactionDetailOpen && (
-              <TransactionDetail
-                toggleClose={handleTransactionClose}
-                transaction={selectedTransaction}
-              />
-            )}
           </Box>
         </Flex>
       </Flex>

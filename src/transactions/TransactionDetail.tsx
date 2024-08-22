@@ -25,18 +25,24 @@ import { readableUsername } from '../components/Sidebar/UserInfo'
 type Props = {
   toggleClose: () => void
   transaction: any
+  userId: string | undefined
 }
 
 const START_BLOCK = 88079516
 const START_BLOCK_TIME = Moment('2024-08-16T02:46:48Z')
 
-const TransactionDetail = ({ toggleClose, transaction }: Props) => {
+const TransactionDetail = ({ toggleClose, transaction, userId }: Props) => {
+
+  const moneyIn = transaction.owner === userId
+
   return (
     <Card
       w={356}
       display="float"
-      top={'140px'}
       h={580}
+      style={{
+        float: "left"
+      }}
     >
       <CardHeader>
         <Flex justify="space-between">
@@ -50,7 +56,7 @@ const TransactionDetail = ({ toggleClose, transaction }: Props) => {
           />
         </Flex>
         <Flex>
-          <Text fontSize="32px">$TODO</Text>
+          <Text fontSize="32px">{moneyIn ? '' : '-' } {transaction.amount} {transaction.tk}</Text>
         </Flex>
         <Flex
           direction="column"
@@ -61,10 +67,13 @@ const TransactionDetail = ({ toggleClose, transaction }: Props) => {
               <Icon
                 as={BsFillCircleFill}
                 boxSize={['4px', '6px', '8px', '10px']}
+                style={{
+                  color: "#ededf3"
+                }}
               />
               <Divider
                 orientation="vertical"
-                borderColor="gray.900"
+                borderColor="#ededf3"
                 borderWidth="1.5px"
                 height="50px"
               />
@@ -106,6 +115,9 @@ const TransactionDetail = ({ toggleClose, transaction }: Props) => {
             <Icon
               as={FaLocationPin}
               boxSize={['4px', '6px', '8px', '12px']}
+              style={{
+                color: moneyIn ? "#036e43" : "#5266eb"
+              }}
             />
             <Box mx={4}>
               <Text>{readableUsername(transaction.owner)}</Text>
