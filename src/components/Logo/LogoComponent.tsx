@@ -6,10 +6,10 @@ const LogoComponent = () => {
   return (
     <Flex justifyContent={'center'}>
       <Image
-        src={'./logo.svg'}
+        src="/VSC-Logo.png"
         alt="logo"
-        width={100}
-        height={100}
+        width={50}
+        height={50}
       />
     </Flex>
   )

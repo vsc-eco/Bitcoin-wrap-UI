@@ -7,6 +7,7 @@ import {
   Image,
   VStack,
   useDisclosure,
+  Text,
 } from '@chakra-ui/react'
 import { FaEthereum, FaGithub, FaDiscord } from 'react-icons/fa'
 import { BiLogoGmail } from 'react-icons/bi'
@@ -17,18 +18,40 @@ import MetaMaskModal from './Ethereum/MetamaskModal'
 import SocialPopUp from './SocialLinks/SocialPopUp'
 import { AuthActions, useAuth } from '../../hooks/auth'
 import { useNavigate } from 'react-router-dom'
+import styles from './SignUpComponent.module.css'
 
 const MultipleIcons = ({ size }) => {
   return (
-    <Flex>
-      <Flex px={2}>
-        <PiGoogleChromeLogoBold fontSize={size} />
+    <Flex
+      gap={2}
+      alignItems={'center'}
+    >
+      <Flex>
+        <Image
+          alt="Logo"
+          width={30}
+          height={30}
+          objectFit="cover"
+          src="/google.svg"
+        />
       </Flex>
-      <Flex px={2}>
-        <FaDiscord fontSize={size} />
+      <Flex>
+        <Image
+          alt="Logo"
+          width={25}
+          height={25}
+          objectFit="cover"
+          src="/discord.svg"
+        />
       </Flex>
-      <Flex px={2}>
-        <FaGithub fontSize={size} />
+      <Flex>
+        <Image
+          alt="Logo"
+          width={25}
+          height={25}
+          objectFit="cover"
+          src="/github.svg"
+        />
       </Flex>
     </Flex>
   )
@@ -37,7 +60,13 @@ const MultipleIcons = ({ size }) => {
 const EmailIcon = ({ size }) => (
   <Flex>
     <Flex px={2}>
-      <BiLogoGmail fontSize={size} />
+      <Image
+        alt="Logo"
+        width={25}
+        height={25}
+        objectFit="cover"
+        src="/gmail.svg"
+      />
     </Flex>
   </Flex>
 )
@@ -92,8 +121,11 @@ const SignUpComponent = () => {
                 />
               }
               onClick={onHiveModalOpen}
+              className={styles.button}
             >
-              {BUTTON_LABELS.signInWithHive}
+              <Text className={styles.text}>
+                {BUTTON_LABELS.signInWithHive}
+              </Text>
             </Button>
             <HiveModal
               isOpen={isHiveModal}
@@ -105,10 +137,18 @@ const SignUpComponent = () => {
               variant="outline"
               width="full"
               mb={3}
-              leftIcon={<FaEthereum fontSize={'20px'} />}
+              leftIcon={
+                <Image
+                  src="/eth.svg"
+                  alt="hive_logo"
+                  height={25}
+                  width={25}
+                />
+              }
               onClick={() => AuthActions.login('eth').then(() => navigate('/'))}
+              className={styles.button}
             >
-              {BUTTON_LABELS.signUpWithEth}
+              <Text>{BUTTON_LABELS.signUpWithEth} </Text>
             </Button>
 
             {/* Socials Button */}
@@ -122,8 +162,9 @@ const SignUpComponent = () => {
                   <MultipleIcons size={22} />
                 </Box>
               }
+              className={styles.button}
             >
-              {BUTTON_LABELS.signUpWithSocials}
+              <Text> {BUTTON_LABELS.signUpWithSocials} </Text>
             </Button>
 
             {/* Email Button */}
@@ -132,13 +173,14 @@ const SignUpComponent = () => {
               width="full"
               mb={3}
               onClick={() => AuthActions.login('eth').then(() => navigate('/'))}
-              rightIcon={
+              leftIcon={
                 <Box>
                   <EmailIcon size={22} />
                 </Box>
               }
+              className={styles.button}
             >
-              {BUTTON_LABELS.signUpWithEmail}
+              <Text>{BUTTON_LABELS.signUpWithEmail}</Text>
             </Button>
           </VStack>
         </Box>

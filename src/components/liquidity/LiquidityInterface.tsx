@@ -215,6 +215,7 @@ const LiquidityInterface = (props: Props) => {
             <Text
               fontSize="sm"
               px={1}
+              className={styles.text}
             >
               Balance: 129.978543 USDC
             </Text>

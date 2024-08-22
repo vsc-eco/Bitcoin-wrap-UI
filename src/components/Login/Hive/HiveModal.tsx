@@ -1,7 +1,7 @@
 //TODO: hook up the functionality
 //TODO: change the name to login with HIVE
 //TODO: import the icons and have title element beside it put it 2 in a row
-//TODO:
+//TODO: make it theme specific
 import {
   Modal,
   ModalOverlay,

@@ -1,0 +1,14 @@
+.button {
+  color: #5e5e63;
+  font-weight: 500;
+  border-radius: 16px;
+  font-size: 15px;
+  font-weight: 480;
+  line-height: 24px;
+  opacity: 1 !important;
+  background-color: rgba(112, 115, 147, 0.058823529411764705);
+}
+
+.text {
+  font-family: var(--font-arcadia), system-ui, sans-serif;
+}

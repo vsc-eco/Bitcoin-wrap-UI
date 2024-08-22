@@ -1,5 +1,3 @@
-//TODO: we should disable the search option for now as we got only hive and hbd as an option
-//TODO: wbtc opacity
 import React, { useEffect } from 'react'
 import {
   Box,
@@ -22,6 +20,7 @@ import { SearchIcon } from '@chakra-ui/icons'
 import { CiShare1 } from 'react-icons/ci'
 import { TokenInterface } from '../types/types'
 import { tokens, Token } from '../TokenData'
+import styles from './TokenSearchModal.module.css'
 
 type Props = {
   isOpen: any
@@ -48,16 +47,16 @@ function TokenSearchModal({ isOpen, onClose, setToken }: Props) {
     >
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Search a Token</ModalHeader>
-        <ModalCloseButton />
+        <ModalHeader className={styles.text} fontWeight={"semibold"}>Search a Token</ModalHeader>
+        <ModalCloseButton className={styles.close_button} />
         <ModalBody>
           <VStack
             spacing={4}
             align="stretch"
           >
-            <InputGroup>
+            <InputGroup className={styles.murInput}>
               <InputLeftElement pointerEvents="none">
-                <SearchIcon />
+                <SearchIcon className={styles.icon} />
               </InputLeftElement>
               <Input
                 type="text"
@@ -65,7 +64,12 @@ function TokenSearchModal({ isOpen, onClose, setToken }: Props) {
               />
             </InputGroup>
             <Flex>
-              <Text fontSize={'sm'}>Popular Tokens</Text>
+              <Text
+                fontSize={'sm'}
+                className={styles.text}
+              >
+                Popular Tokens
+              </Text>
             </Flex>
             <Flex
               alignItems="center"
@@ -90,7 +94,12 @@ function TokenSearchModal({ isOpen, onClose, setToken }: Props) {
                       width={24}
                       height={24}
                     />
-                    <Text px={1}>{token.tokenName}</Text>
+                    <Text
+                      px={1}
+                      className={styles.text}
+                    >
+                      {token.tokenName}
+                    </Text>
                   </Flex>
                 ))}
             </Flex>
@@ -98,11 +107,21 @@ function TokenSearchModal({ isOpen, onClose, setToken }: Props) {
             <Box
               w={'full'}
               h={0.5}
-              bgColor={'blue.100'}
+              bgColor={'#7d88cf'}
             />
             <Flex justifyContent={'space-between'}>
-              <Text fontSize={'xs'}>Token</Text>
-              <Text fontSize={'xs'}>Balance/Address</Text>
+              <Text
+                fontSize={'xs'}
+                className={styles.text}
+              >
+                Token
+              </Text>
+              <Text
+                fontSize={'xs'}
+                className={styles.text}
+              >
+                Balance/Address
+              </Text>
             </Flex>
             {Object.values(tokens).map((token, i) => (
               <Flex
@@ -137,7 +156,7 @@ function TokenSearchModal({ isOpen, onClose, setToken }: Props) {
               </Flex>
             ))}
             <Button
-              colorScheme="teal"
+              className={`${styles.murButton} ${styles.murButtonPrimary}`}
               onClick={onClose}
             >
               View Token List

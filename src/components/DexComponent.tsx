@@ -79,7 +79,7 @@ const DexComponent = () => {
               />
               {/* TODO move into Swap */}
               <HivePrice
-                coin={'Hive'}
+                coin={'HIVE'}
                 image={'hive.svg'}
               />
               <HivePrice
