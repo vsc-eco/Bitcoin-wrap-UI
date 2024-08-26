@@ -1,0 +1,13 @@
+.parent {
+  display: flex;
+  width: full;
+  min-height: 395px;
+  justify-content: center;
+}
+
+.container {
+  width: full;
+  justify-content: space-between;
+  align-items: center;
+
+}

@@ -1,5 +1,5 @@
 'use client'
-import React, { useRef, useState, useLayoutEffect, useEffect } from 'react'
+import React, { useRef, useState, useLayoutEffect, useEffect, useMemo } from 'react';
 import {
   Button,
   Table,
@@ -15,30 +15,27 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
-} from '@chakra-ui/react'
-import { HiDownload } from 'react-icons/hi'
-import { CiFilter } from 'react-icons/ci'
-import { ErrorPolicy, gql } from '@apollo/client'
-import axios from 'axios'
-import Moment from 'moment'
+  Skeleton,
+} from '@chakra-ui/react';
+import { HiDownload } from 'react-icons/hi';
+import { CiFilter } from 'react-icons/ci';
+import { gql, useQuery } from '@apollo/client';
+import axios from 'axios';
+import Moment from 'moment';
 
-import TransactionItem from './TransactionItem'
-import TransactionDetail from './TransactionDetail'
+import TransactionItem from './TransactionItem';
+import TransactionDetail from './TransactionDetail';
+import TransferModal from '../components/TransferModal';
+import RedeemModal from '../components/RedeemModal';
+import { useCreateTx } from '../hooks/VSC';
+import { useAuth } from '../hooks/auth';
+import FilterModal from './AddFilter/AddFilterModal';
+import { ChevronDownIcon } from '@chakra-ui/icons';
 
-//graphql code for the integration of api
-import { client } from '../apollo/client'
-import { useQuery } from '@apollo/client'
-import { ChevronDownIcon } from '@chakra-ui/icons'
-import TransferModal from '../components/TransferModal'
-import RedeemModal from '../components/RedeemModal'
-import { useCreateTx } from '../hooks/VSC'
-import { useAuth } from '../hooks/auth'
+const START_BLOCK = 88079516;
+const START_BLOCK_TIME = Moment('2024-08-16T02:46:48Z');
 
-const START_BLOCK = 88079516
-const START_BLOCK_TIME = Moment('2024-08-16T02:46:48Z')
-//fetching the details
-
-const BTC_TOKEN_CONTRACT = '59dfb8383291734049bfab403ced85a57cbcde6a'
+const BTC_TOKEN_CONTRACT = '59dfb8383291734049bfab403ced85a57cbcde6a';
 
 const query = gql`
   query MyQuery($userId: String!) {
@@ -56,114 +53,148 @@ const query = gql`
       }
     }
   }
-`
+`;
 
 function useBitcoinPrice() {
-  const [price, setPrice] = useState()
+  const [price, setPrice] = useState<number | undefined>();
 
   useLayoutEffect(() => {
-    void (async () => {
-      const { data } = await axios.get(`/api/bitcoin_price`)
-      setPrice(data.price)
-    })()
-  }, [])
+    const fetchPrice = async () => {
+      const { data } = await axios.get(`/api/bitcoin_price`);
+      setPrice(data.price);
+    };
 
-  return price
+    fetchPrice();
+  }, []);
+
+  return price;
 }
 
 type Props = {}
 
 const Transaction = (props: Props) => {
-  const { transfer } = useCreateTx()
-  let lastDate = useRef(null)
+  const { transfer } = useCreateTx();
+  const lastDateRef = useRef<string | null>(null);
 
-  //useState
-  const [isTransactionDetailOpen, setTransactionDetailOpen] = useState(false)
-  const [selectedTransaction, setSelectedTransaction] = useState(null)
+  const [isTransactionDetailOpen, setTransactionDetailOpen] = useState(false);
+  const [selectedTransaction, setSelectedTransaction] = useState<any | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const auth = useAuth()
+  const filterButtonRef = useRef<HTMLButtonElement | null>(null);
+  const [filterModalPosition, setFilterModalPosition] = useState({ top: 0, left: 0 });
 
-  const { data, refetch } = useQuery(query, {
-    variables: {
-      userId: auth.authenticated && auth.userId,
-    },
+  const auth = useAuth();
+
+  const { data, loading, refetch } = useQuery(query, {
+    variables: { userId: auth.authenticated ? auth.userId : '' },
     errorPolicy: 'ignore',
     skip: !auth.authenticated,
-  })
+  });
 
   useEffect(() => {
-    const id = setInterval(refetch, 3000)
-    return () => clearInterval(id)
-  }, [refetch])
+    const intervalId = setInterval(refetch, 3000);
+    return () => clearInterval(intervalId);
+  }, [refetch]);
 
-  //using the api
-  const bitcoinPrice = useBitcoinPrice()
-  // const items = data?.findLedgerTXs?.txs || [];
-  // console.log("items", items, data);
+  useEffect(() => {
+    if (filterButtonRef.current) {
+      const rect = filterButtonRef.current.getBoundingClientRect();
+      setFilterModalPosition({
+        top: rect.bottom,
+        left: rect.right,
+      });
+    }
+  }, [isModalOpen]);
 
-  //function for handling the state
-  const handleTransactionOpen = transaction => {
-    setTransactionDetailOpen(true)
-    setSelectedTransaction(transaction)
-  }
+  const bitcoinPrice = useBitcoinPrice();
 
-  //function for closing the modal again
+  const handleTransactionOpen = (transaction: any) => {
+    setTransactionDetailOpen(true);
+    setSelectedTransaction(transaction);
+  };
+
   const handleTransactionClose = () => {
-    setTransactionDetailOpen(false)
-  }
+    setTransactionDetailOpen(false);
+    setSelectedTransaction(null);
+  };
+
+  const transactions = useMemo(() => {
+    if (!data) return [];
+
+    const txs = data.findLedgerTXs?.txs || [];
+    let lastDate = '';
+
+    return txs.map((tx: any) => {
+      const dateStr = (
+        (tx.block_height - START_BLOCK) * 3 < 0
+          ? START_BLOCK_TIME.clone().subtract(-(tx.block_height - START_BLOCK) * 3, 'seconds')
+          : START_BLOCK_TIME.clone().add((tx.block_height - START_BLOCK) * 3, 'seconds')
+      ).format('D MMM');
+
+      const showDateProp = lastDate !== dateStr;
+      if (showDateProp) lastDate = dateStr;
+
+      return (
+        <TransactionItem
+          key={tx.id}
+          userId={auth.authenticated && auth.userId}
+          showDateProp={showDateProp}
+          transaction={tx}
+          handleTransactionOpen={() => handleTransactionOpen(tx)}
+          isTransactionDetailOpen={isTransactionDetailOpen}
+          selectedId={selectedTransaction ? selectedTransaction.id : null}
+          handleTransactionClose={handleTransactionClose}
+        />
+      );
+    });
+  }, [data, auth.authenticated, auth.userId, isTransactionDetailOpen, selectedTransaction]);
 
   return (
     <>
-      <Flex
-        justifyContent="center"
-        h="90vh"
-      >
+      <Flex justifyContent="center" h="90vh">
         <Flex
           direction="column"
           py={4}
-          textAlign={'center'}
-          bgColor={'white'}
+          textAlign="center"
+          bgColor="white"
           p={4}
           borderRadius={8}
           margin="auto"
           w="full"
           minH="60vh"
         >
-          <Text
-            fontSize="l"
-            fontWeight={'bolder'}
-          >
+          <Text fontSize="l" fontWeight="bolder">
             Transactions
           </Text>
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            my={2}
-          >
-            <Button alignItems="center">
+          <Box display="flex" justifyContent="space-between" my={2} position="relative">
+            <Button
+              alignItems="center"
+              onClick={() => setIsModalOpen(!isModalOpen)}
+              borderRadius="3xl"
+              ref={filterButtonRef}
+            >
               <CiFilter />
-              <Text
-                size="s"
-                fontSize="xs"
-              >
+              <Text size="s" fontSize="xs">
                 Add Filter
               </Text>
             </Button>
-            <Menu>
-              <MenuButton
-                as={Button}
-                rightIcon={<ChevronDownIcon />}
-                fontSize="xs"
+            {isModalOpen && (
+              <Box
+                position="absolute"
+                top={`${filterModalPosition.top}px`}
+                left={`${filterModalPosition.left}px`}
+                zIndex={1000}
               >
+                <FilterModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+              </Box>
+            )}
+            <Menu>
+              <MenuButton as={Button} rightIcon={<ChevronDownIcon />} fontSize="xs" borderRadius="3xl">
                 Actions
               </MenuButton>
-              <MenuList style={{ minWidth: '100%' }}>
+              <MenuList minWidth="100%">
                 <MenuItem>
-                  <TransferModal
-                    refetch={() => {
-                      console.log('TODO refetch?')
-                    }}
-                  />
+                  <TransferModal refetch={refetch} />
                 </MenuItem>
                 <MenuItem>
                   <RedeemModal />
@@ -172,86 +203,45 @@ const Transaction = (props: Props) => {
             </Menu>
           </Box>
           <Box overflowY="auto">
-            <TableContainer alignSelf="center" style={{
-              display: 'flex',
-            }}>
-              <Table
-                variant="simple"
-                size="sm"
-              >
+            <TableContainer alignSelf="center" style={{ display: 'flex' }}>
+              <Table variant="simple" size="sm">
                 <Thead>
                   <Tr>
-                    <Th
-                      w={32}
-                      display="flex"
-                      textTransform="capitalize"
-                    >
+                    <Th w={32} display="flex" textTransform="capitalize">
                       <Text px="1">Date</Text>
                       <Text fontSize="10px">(Local Time)</Text>
                     </Th>
                     <Th textTransform="capitalize">To/From</Th>
-                    <Th
-                      isNumeric
-                      textTransform="capitalize"
-                    >
+                    <Th isNumeric textTransform="capitalize">
                       Amount
                     </Th>
-                    {!isTransactionDetailOpen ? <Th
-                      textTransform="capitalize"
-                      display="flex"
-                      alignItems="center"
-                    >
-                      Payment Method
-                    </Th> : null}
+                    {!isTransactionDetailOpen && (
+                      <Th textTransform="capitalize" display="flex" alignItems="center">
+                        Payment Method
+                      </Th>
+                    )}
                   </Tr>
                 </Thead>
+
                 <Tbody>
-                  {
-                    (() => {
-                      const map:Array<any> = []
-                      let lastDate = ''
-
-                      for(let tx of data?.findLedgerTXs?.txs || []) {
-                        const dateStr = ((tx.block_height - START_BLOCK) * 3 < 0
-                        ? START_BLOCK_TIME.clone().subtract(
-                            -(tx.block_height - START_BLOCK) * 3,
-                            'seconds',
-                          )
-                        : START_BLOCK_TIME.clone().add(
-                            (tx.block_height - START_BLOCK) * 3,
-                            'seconds',
-                          )
-                      ).format('D MMM')
-                      let showDateProp;
-                      if(lastDate !== dateStr) { 
-                        showDateProp = true
-                        lastDate = dateStr
-                      } else {
-                        showDateProp = false
-                      }
-                        map.push(<TransactionItem
-                          userId={auth.authenticated && auth.userId}
-                          showDateProp={showDateProp}
-                          key={tx.id}
-                          transaction={tx}
-                          handleTransactionOpen={() => handleTransactionOpen(tx)}
-                          isTransactionDetailOpen={isTransactionDetailOpen}
-                          selectedId={selectedTransaction ? selectedTransaction.id : null}
-                          handleTransactionClose={handleTransactionClose}
-                        />)
-                      }
-
-                      return map
-                    })()
-                  }
-                  
+                  {loading ? (
+                    // Render skeletons while loading
+                    Array.from({ length: 1 }).map((_, index) => (
+                      <Tr key={index}>
+                        <Th><Skeleton height="40px"/></Th>
+                        <Th><Skeleton height="40px" width={"370px"}/></Th>
+                        <Th><Skeleton height="40px" /></Th>
+                        {!isTransactionDetailOpen && <Th><Skeleton height="40px" /></Th>}
+                      </Tr>
+                    ))
+                  ) : (
+                    transactions
+                  )}
                 </Tbody>
               </Table>
               <Box
-                className={`side-popup ${isTransactionDetailOpen} ? 'show-popup' : ''`}
-                style={{
-                  top: 0
-                }}
+                className={`side-popup ${isTransactionDetailOpen ? 'show-popup' : ''}`}
+                style={{ top: 0 }}
               >
                 {isTransactionDetailOpen && (
                   <TransactionDetail
@@ -266,7 +256,7 @@ const Transaction = (props: Props) => {
         </Flex>
       </Flex>
     </>
-  )
-}
+  );
+};
 
-export default Transaction
+export default Transaction;

@@ -13,7 +13,7 @@ import {
 import { BsArrowLeft, BsArrowRight } from 'react-icons/bs'
 import Moment from 'moment'
 import { readableUsername } from '../components/Sidebar/UserInfo'
-
+import { Skeleton } from '@chakra-ui/react'
 import styles from './TransactionItem.module.css'
 
 const START_BLOCK = 88079516
@@ -52,6 +52,7 @@ const TransactionItem = props => {
 
 
   console.log('transaction.id===selectedId',transaction.id, selectedId, isSelected)
+
 
   return (
     <Tr
