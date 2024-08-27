@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { Checkbox, CheckboxGroup } from '@chakra-ui/react'
 import { Flex, Box, Text, Input } from '@chakra-ui/react'
 import styles from './Currency.module.css'
@@ -7,18 +7,21 @@ import Image from 'next/image'
 type Props = {}
 
 const Currency = (props: Props) => {
-  const [selectedCheckbox, setSelectedCheckbox] = useState<string>("HIVE")
+  const [selectedCheckbox, setSelectedCheckbox] = useState<string>('HIVE')
 
   const handleCheckboxChange = (checkboxId: string) => {
-    setSelectedCheckbox(prev => (prev === checkboxId ? "HIVE" : checkboxId))
+    setSelectedCheckbox(prev => (prev === checkboxId ? 'HIVE' : checkboxId))
   }
 
   return (
-    <Box className={styles.parent} h="300px" alignItems={"center"} px={8}>
+    <Box
+      className={styles.parent}
+      h="300px"
+      alignItems={'center'}
+      px={8}
+    >
       <Box>
-        <Input 
-         value={selectedCheckbox}
-        />
+        <Input value={selectedCheckbox} />
 
         <Flex
           className={styles.cotainer}

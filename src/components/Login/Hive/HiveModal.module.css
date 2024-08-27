@@ -1,21 +1,20 @@
 .heading {
-    font-family: var(--font-arcadia), system-ui, sans-serif;
-    font-weight: 400;
-    line-height: 26px;
-    
+  font-family: var(--font-arcadia), system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 26px;
 }
 
 .text {
-    font-family: var(--font-arcadia), system-ui, sans-serif;
-    line-height: 28px;
+  font-family: var(--font-arcadia), system-ui, sans-serif;
+  line-height: 28px;
 }
 
 .secondaryButton {
-    color: #5266eb;
-    font-weight:450;
-    line-height: 26px;
-    background-color: rgb(247, 243, 243);
-    border-radius: 22px;
+  color: #5266eb;
+  font-weight: 450;
+  line-height: 26px;
+  background-color: rgb(247, 243, 243);
+  border-radius: 22px;
 }
 
 .close_button {
@@ -23,6 +22,6 @@
 }
 
 .close_button:hover {
-    background-color: #5266eb;
-    color: aliceblue;
+  background-color: #5266eb;
+  color: aliceblue;
 }

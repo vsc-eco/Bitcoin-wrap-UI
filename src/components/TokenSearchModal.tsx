@@ -47,7 +47,12 @@ function TokenSearchModal({ isOpen, onClose, setToken }: Props) {
     >
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader className={styles.text} fontWeight={"semibold"}>Search a Token</ModalHeader>
+        <ModalHeader
+          className={styles.text}
+          fontWeight={'semibold'}
+        >
+          Search a Token
+        </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <VStack

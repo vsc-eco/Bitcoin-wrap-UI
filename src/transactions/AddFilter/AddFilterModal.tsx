@@ -19,7 +19,7 @@ import {
   Icon,
 } from '@chakra-ui/react'
 import styles from './AddFilterModal.module.css'
-import CalendarComponent from "./CalendarComponent"
+import CalendarComponent from './CalendarComponent'
 import { FaCalendarAlt } from 'react-icons/fa'
 import { MdOutlineCurrencyExchange } from 'react-icons/md'
 import { CgOptions } from 'react-icons/cg'

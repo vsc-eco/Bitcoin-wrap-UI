@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "prepare": "husky",
-    "format": "prettier -w --ignore-unknown"
+    "format": "prettier -w --ignore-unknown ."
   },
   "dependencies": {
     "@aioha/aioha": "^1.4.0",

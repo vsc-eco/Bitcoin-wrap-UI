@@ -31,7 +31,7 @@ const Sidebar = () => {
     },
     {
       icon: <BsCoin />,
-      text: 'Dex',  
+      text: 'Dex',
       loc: '/dex',
       onClick: () => navigate('/dex'),
     },

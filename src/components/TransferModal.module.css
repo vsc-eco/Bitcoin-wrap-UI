@@ -36,16 +36,13 @@
 }
 
 .murInput {
-    border-radius: 16px;
-  }
-  
-  .murInput:focus {
-    box-shadow: 0px 1.5px 0px 0px #5266eb;
-  }
-  
-  .murInput input:focus {
-    box-shadow: none;
-  }
-  
-  
+  border-radius: 16px;
+}
 
+.murInput:focus {
+  box-shadow: 0px 1.5px 0px 0px #5266eb;
+}
+
+.murInput input:focus {
+  box-shadow: none;
+}

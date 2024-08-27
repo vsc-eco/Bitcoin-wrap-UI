@@ -32,7 +32,6 @@ const START_BLOCK = 88079516
 const START_BLOCK_TIME = Moment('2024-08-16T02:46:48Z')
 
 const TransactionDetail = ({ toggleClose, transaction, userId }: Props) => {
-
   const moneyIn = transaction.owner === userId
 
   return (
@@ -41,7 +40,7 @@ const TransactionDetail = ({ toggleClose, transaction, userId }: Props) => {
       display="float"
       h={580}
       style={{
-        float: "left"
+        float: 'left',
       }}
     >
       <CardHeader>
@@ -56,7 +55,9 @@ const TransactionDetail = ({ toggleClose, transaction, userId }: Props) => {
           />
         </Flex>
         <Flex>
-          <Text fontSize="32px">{moneyIn ? '' : '-' } {transaction.amount} {transaction.tk}</Text>
+          <Text fontSize="32px">
+            {moneyIn ? '' : '-'} {transaction.amount} {transaction.tk}
+          </Text>
         </Flex>
         <Flex
           direction="column"
@@ -68,7 +69,7 @@ const TransactionDetail = ({ toggleClose, transaction, userId }: Props) => {
                 as={BsFillCircleFill}
                 boxSize={['4px', '6px', '8px', '10px']}
                 style={{
-                  color: "#ededf3"
+                  color: '#ededf3',
                 }}
               />
               <Divider
@@ -116,7 +117,7 @@ const TransactionDetail = ({ toggleClose, transaction, userId }: Props) => {
               as={FaLocationPin}
               boxSize={['4px', '6px', '8px', '12px']}
               style={{
-                color: moneyIn ? "#036e43" : "#5266eb"
+                color: moneyIn ? '#036e43' : '#5266eb',
               }}
             />
             <Box mx={4}>

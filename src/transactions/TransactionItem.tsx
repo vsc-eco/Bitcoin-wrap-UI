@@ -20,7 +20,14 @@ const START_BLOCK = 88079516
 const START_BLOCK_TIME = Moment('2024-08-16T02:46:48Z')
 
 const TransactionItem = props => {
-  const { showDateProp, handleTransactionOpen, handleTransactionClose, transaction, userId, selectedId } = props
+  const {
+    showDateProp,
+    handleTransactionOpen,
+    handleTransactionClose,
+    transaction,
+    userId,
+    selectedId,
+  } = props
   const [showDate, setShowDate] = useState(showDateProp)
 
   function handleMouseEnter() {
@@ -48,11 +55,14 @@ const TransactionItem = props => {
 
   const moneyIn = userId === transaction.owner
 
-  const isSelected = transaction.id === selectedId;
+  const isSelected = transaction.id === selectedId
 
-
-  console.log('transaction.id===selectedId',transaction.id, selectedId, isSelected)
-
+  console.log(
+    'transaction.id===selectedId',
+    transaction.id,
+    selectedId,
+    isSelected,
+  )
 
   return (
     <Tr
@@ -115,63 +125,60 @@ const TransactionItem = props => {
         )}
       </Td>
       <Td isNumeric>
-        {
-          moneyIn ? '' : '-'
-        }
+        {moneyIn ? '' : '-'}
         <span
-        style={{
-          color: moneyIn ? 'green' : undefined
-        }}
-        > 
+          style={{
+            color: moneyIn ? 'green' : undefined,
+          }}
+        >
           {transaction.amount / 1_000}
           &nbsp;
           {transaction.tk}
-
         </span>
         {/* &nbsp; (${transaction.dollar}) */}
       </Td>
 
-      {!props.isTransactionDetailOpen ? <Td>
-        <Flex>
-          {/* {transaction.paymentMethod === "Transfer" &&
+      {!props.isTransactionDetailOpen ? (
+        <Td>
+          <Flex>
+            {/* {transaction.paymentMethod === "Transfer" &&
           transaction.TransferIn ? (
             <BsArrowLeft />
           ) : transaction.paymentMethod === "Transfer" &&
             !transaction.TransferIn ? (
             <BsArrowRight />
           ) : null} */}
-          {moneyIn ? <BsArrowLeft /> : <BsArrowRight />}
-          {'  '}
-          &nbsp;
-           <Text>{transaction.t}</Text> 
-        </Flex>
-      </Td>: (transaction.id === selectedId ?
-      <Td style={{
-        width: '100%',
-        backgroundColor: 'white'
-      }}
-      onClick={
-        (e) => {
-          e.stopPropagation()
-
-          if(props.handleTransactionClose) {
-            props.handleTransactionClose()
-          }
-        }
-      }
-      >
-        <button
+            {moneyIn ? <BsArrowLeft /> : <BsArrowRight />}
+            {'  '}
+            &nbsp;
+            <Text>{transaction.t}</Text>
+          </Flex>
+        </Td>
+      ) : transaction.id === selectedId ? (
+        <Td
           style={{
-            background: "url(https://cdn.mercury.com/builds/166851faa76e48b8184184d247eb053f891d60d9/icons/24/arrow-right.svg) 50%/24px 24px no-repeat",
-            width: '10px',
-            height: '20px'
+            width: '100%',
+            backgroundColor: 'white',
           }}
-        className={styles.murCancelItem}
-      >
-        
-      </button>
-      </Td> : null)
-      }
+          onClick={e => {
+            e.stopPropagation()
+
+            if (props.handleTransactionClose) {
+              props.handleTransactionClose()
+            }
+          }}
+        >
+          <button
+            style={{
+              background:
+                'url(https://cdn.mercury.com/builds/166851faa76e48b8184184d247eb053f891d60d9/icons/24/arrow-right.svg) 50%/24px 24px no-repeat',
+              width: '10px',
+              height: '20px',
+            }}
+            className={styles.murCancelItem}
+          ></button>
+        </Td>
+      ) : null}
     </Tr>
   )
 }

@@ -3,48 +3,44 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-
 }
 
 .year {
-    font-size: 12px;
+  font-size: 12px;
 }
 
 .calendar_container {
-    width: 310px;
-    display: flex;
-    align-items: "center";
+  width: 310px;
+  display: flex;
+  align-items: 'center';
 }
 
 .calendar_button {
-    background-color: aliceblue;
+  background-color: aliceblue;
 }
 
 .rightbar {
-    width: 65%;
-    display: flex;
-    justify-content: space-between;
-    padding-left: 8px;
+  width: 65%;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 8px;
 }
 
 .rightbar .heading {
-    font-size: 12px;
-    padding-top: 12px;
-    padding-left: 4px;
+  font-size: 12px;
+  padding-top: 12px;
+  padding-left: 4px;
 }
 
-
-.calendar_container  {
-    width: full;
+.calendar_container {
+  width: full;
 }
 
 .options_parent {
-    margin-left: 4px;
+  margin-left: 4px;
 }
 
-
-
 .rightbar_heading {
-    box-shadow: 0px 1px 0px #f0f1f4;
-    padding: 12px 2px;
+  box-shadow: 0px 1px 0px #f0f1f4;
+  padding: 12px 2px;
 }

@@ -29,7 +29,7 @@ import { AuthActions } from '../../../hooks/auth'
 import { useNavigate } from 'react-router-dom'
 import { LoginOptions } from './LoginOptionContainer'
 import { LOGIN_METHOD_FIELD, LoginOption } from './LoginOption'
-import styles from "./HiveModal.module.css"
+import styles from './HiveModal.module.css'
 
 const USERNAME_FIELD = 'username'
 

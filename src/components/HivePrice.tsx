@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react'
 import { Flex, Text, Box } from '@chakra-ui/react'
 import Image from 'next/image'
-import styles from "./HivePrice.module.css"
+import styles from './HivePrice.module.css'
 //importing the chart
 import { AreaChart, Area, Tooltip } from 'recharts'
 
@@ -48,7 +48,7 @@ const HivePrice = ({ coin, image }: Props) => {
               height={18}
             />
           </Text>
-          <Text color={"#5b7384"}>{coin}</Text>
+          <Text color={'#5b7384'}>{coin}</Text>
         </Flex>
         <Flex
           w={'60%'}
