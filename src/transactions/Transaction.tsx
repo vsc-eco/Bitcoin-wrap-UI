@@ -164,13 +164,7 @@ const Transaction = (props: Props) => {
         />
       )
     })
-  }, [
-    data,
-    auth.authenticated,
-    auth.userId,
-    isTransactionDetailOpen,
-    selectedTransaction,
-  ])
+  }, [data, auth, isTransactionDetailOpen, selectedTransaction])
 
   return (
     <>

@@ -25,7 +25,7 @@ import { readableUsername } from '../components/Sidebar/UserInfo'
 type Props = {
   toggleClose: () => void
   transaction: any
-  userId: string | undefined
+  userId: string | false
 }
 
 const START_BLOCK = 88079516
