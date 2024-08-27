@@ -109,10 +109,24 @@ const queryClient = new QueryClient()
 const Web3ModalThemeUpdater = ({ children }: PropsWithChildren<{}>) => {
   const { colorMode } = useColorMode()
   useEffect(() => {
-    if (colorMode === 'light') {
-      web3Modal.setThemeMode('light')
+    const { loading } = web3Modal.getState()
+    const updater = () => {
+      if (colorMode === 'light') {
+        web3Modal.setThemeMode('light')
+      } else {
+        web3Modal.setThemeMode('dark')
+      }
+    }
+    if (loading) {
+      const unsubscribe = web3Modal.subscribeState(({ loading }) => {
+        if (!loading) {
+          unsubscribe()
+          updater()
+        }
+      })
+      return unsubscribe
     } else {
-      web3Modal.setThemeMode('dark')
+      updater()
     }
   }, [colorMode])
 
