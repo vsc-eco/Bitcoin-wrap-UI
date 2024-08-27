@@ -20,27 +20,7 @@ import { multiConfig, projectId } from '../hooks/auth/wagmi-web3modal/config'
 import { PropsWithChildren, useEffect } from 'react'
 import { State } from '@wagmi/core'
 import { Hydrate } from 'wagmi'
-
-import { modalAnatomy } from '@chakra-ui/anatomy'
-import { createMultiStyleConfigHelpers } from '@chakra-ui/styled-system'
-
-const { definePartsStyle, defineMultiStyleConfig } =
-  createMultiStyleConfigHelpers(modalAnatomy.keys)
-
-const action = definePartsStyle({
-  header: {
-    fontWeight: 'hairline',
-    lineHeight: 10,
-    fontSize: 'xl',
-  },
-})
-
-export const modalTheme = defineMultiStyleConfig({
-  variants: { action },
-  defaultProps: {
-    variant: 'action',
-  },
-})
+import { theme } from '../theme'
 
 if (!projectId) {
   throw new Error('Project ID is not defined')
@@ -50,58 +30,6 @@ export const web3Modal = createWeb3Modal({
   wagmiConfig: multiConfig,
   allowUnsupportedChain: true,
   projectId,
-})
-
-export const theme = extendTheme({
-  colors: {
-    transparent: 'transparent',
-    black: '#000',
-    white: '#fff',
-    gray: {
-      50: '#f7fafc',
-      900: '#171923',
-    },
-    indigo: {
-      900: 'rgb(123, 138, 238)',
-      700: '#a6aff7',
-      500: '',
-    },
-  },
-  Button: {
-    baseStyle: {
-      fontWeight: 'regular',
-      bg: 'gray.100',
-    },
-    sizes: {
-      lg: {
-        width: '200px',
-        height: '50px',
-      },
-      md: {
-        width: '150px',
-        height: '45px',
-      },
-      sm: {
-        width: '100px',
-        height: '40px',
-        transparent: 'transparent',
-        black: '#000',
-        white: '#fff',
-        gray: {
-          50: '#f7fafc',
-          // ...
-          900: '#171923',
-        },
-      },
-    },
-  },
-  components: {
-    Modal: modalTheme,
-  },
-  fonts: {
-    heading: `var(--font-arcadia)`,
-    body: `var(--font-arcadia)`,
-  },
 })
 
 const queryClient = new QueryClient()
