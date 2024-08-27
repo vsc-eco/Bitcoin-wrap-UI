@@ -1,8 +1,4 @@
 'use client'
-import {
-  MagicLinkPopupActions,
-  useMagicLinkPopup,
-} from 'magic-link-popup-react'
 import { create } from 'zustand'
 import { hive } from './hive'
 import { Authenticator, AuthInfo } from './types'

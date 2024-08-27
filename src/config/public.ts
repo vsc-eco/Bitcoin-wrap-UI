@@ -1,4 +1,4 @@
-const publicEnvironmentVariables = ['MAGIC_PUBLISHABLE_KEY'] as const
+const publicEnvironmentVariables = [''] as const
 
 type PublicEnvironmentVariable = (typeof publicEnvironmentVariables)[number]
 type EnvironmentVariable = `NEXT_PUBLIC_${PublicEnvironmentVariable}`
