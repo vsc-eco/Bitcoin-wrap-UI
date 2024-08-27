@@ -1,6 +1,5 @@
 import React from 'react'
-import { Flex, Box, Text } from '@chakra-ui/react'
-import styles from './AccountData.module.css'
+import { Flex, Text } from '@chakra-ui/react'
 import Image from 'next/image'
 import { accountData } from '../../types/types'
 
@@ -10,12 +9,18 @@ type Props = {
 
 const AccountData = ({ item }: Props) => {
   return (
-    <Box
-      className={styles.parent_container}
-      key={item.id}
+    <Flex
+      w="full"
+      p={2}
+      justifyContent="space-between"
+      fontWeight="normal"
+      cursor="pointer"
+      _hover={{
+        backgroundColor: 'gray.100',
+      }}
     >
       <Flex
-        className={styles.mini_container}
+        align="center"
         gap={2}
       >
         <Image
@@ -24,16 +29,18 @@ const AccountData = ({ item }: Props) => {
           width={20}
           height={20}
         />
-        <Text className={styles.text_name}>{item.name}</Text>
+        <Text>{item.name}</Text>
       </Flex>
-      <Flex className={styles.price}>
-        <Text>$ {item.price}</Text>
-        <Flex className={styles.decimal}>
-          <span className={styles.decimal2}>.</span>
-          {item.decimalValue}
-        </Flex>
+      <Flex alignSelf="end">
+        <Text>${item.price}</Text>
+        <Text
+          fontSize="2xs"
+          lineHeight="none"
+        >
+          .{item.decimalValue}
+        </Text>
       </Flex>
-    </Box>
+    </Flex>
   )
 }
 
