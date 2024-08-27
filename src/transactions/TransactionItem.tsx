@@ -68,18 +68,17 @@ const TransactionItem = props => {
     <Tr
       _hover={{ bg: 'blue.100' }}
       cursor="pointer"
+      sx={{
+        td: {
+          h: '40px',
+        },
+      }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={handleTransactionClick}
       className={`${styles.murItem} ${isSelected ? styles.murItemActive : ''}`}
-      // style={{
-      //   backgroundColor: transaction.id === selectedId ? 'rgba(112,115,147,.058823529411764705)' : undefined
-      // }}
     >
-      <Td
-        w={22}
-        h={12}
-      >
+      <Td w={22}>
         {showDate
           ? ((transaction.block_height - START_BLOCK) * 3 < 0
               ? START_BLOCK_TIME.clone().subtract(
@@ -98,7 +97,6 @@ const TransactionItem = props => {
         display="flex"
         alignItems="center"
         w={!props.isTransactionDetailOpen ? 412 : 0}
-        h={12}
       >
         <WrapItem>
           <Avatar

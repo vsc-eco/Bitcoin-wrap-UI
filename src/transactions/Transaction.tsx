@@ -180,8 +180,8 @@ const Transaction = (props: Props) => {
           p={4}
           borderRadius={8}
           margin="auto"
-          w="full"
-          minH="60vh"
+          w="814px"
+          minH="full"
         >
           <Text
             fontSize="l"
@@ -241,10 +241,10 @@ const Transaction = (props: Props) => {
               </MenuList>
             </Menu>
           </Box>
-          <Box overflowY="auto">
+          <Flex overflowY="auto">
             <TableContainer
-              alignSelf="center"
-              style={{ display: 'flex' }}
+              display="flex"
+              alignItems="start"
             >
               <Table
                 variant="simple"
@@ -306,20 +306,20 @@ const Transaction = (props: Props) => {
                     : transactions}
                 </Tbody>
               </Table>
-              <Box
-                className={`side-popup ${isTransactionDetailOpen ? 'show-popup' : ''}`}
-                style={{ top: 0 }}
-              >
-                {isTransactionDetailOpen && (
-                  <TransactionDetail
-                    userId={auth.authenticated && auth.userId}
-                    toggleClose={handleTransactionClose}
-                    transaction={selectedTransaction}
-                  />
-                )}
-              </Box>
             </TableContainer>
-          </Box>
+            <Box
+              className={`side-popup ${isTransactionDetailOpen ? 'show-popup' : ''}`}
+              style={{ top: 0 }}
+            >
+              {isTransactionDetailOpen && (
+                <TransactionDetail
+                  userId={auth.authenticated && auth.userId}
+                  toggleClose={handleTransactionClose}
+                  transaction={selectedTransaction}
+                />
+              )}
+            </Box>
+          </Flex>
         </Flex>
       </Flex>
     </>
