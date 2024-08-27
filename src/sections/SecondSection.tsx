@@ -22,13 +22,13 @@ const SecondSection = () => {
           <Sidebar />
         </Flex>
         <Flex
-          className="parent"
           w="full"
           h="100vh"
           justifyContent={'center'}
         >
           <Flex
-            className="child"
+            justify="center"
+            align="center"
             m={0}
             p={0}
             maxW={'1100px'}
