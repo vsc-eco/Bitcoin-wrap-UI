@@ -1,4 +1,5 @@
 {
   "editor.fontFamily": "Cascadia Code",
-  "editor.fontSize": 13
+  "editor.fontSize": 13,
+  "typescript.tsdk": "node_modules/typescript/lib"
 }
