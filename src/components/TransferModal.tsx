@@ -49,17 +49,12 @@ const TransferModal = (props: Props) => {
   // })
 
   const queryAccount = useQuery({
-    queryKey: ['account_status', destination],
-    queryFn: async () => {
+    queryKey: ['account_status', destination] as const,
+    queryFn: async ctx => {
       try {
-        const [account] = await DHive.database.getAccounts([destination])
-        console.log(account)
-        if (account) {
-          const json = JSON.parse(account.posting_json_metadata)
-          if (json.did) {
-            return json.did
-          }
-        }
+        const [account] = await DHive.database.getAccounts([ctx.queryKey[1]])
+        console.log(ctx.queryKey, account)
+        return account
       } catch {}
       return null
     },
@@ -120,7 +115,9 @@ const TransferModal = (props: Props) => {
                 placeholder="Username"
                 isRequired
                 value={destination}
-                onChange={e => setDestination(e.target.value)}
+                onChange={e => {
+                  setDestination(e.target.value)
+                }}
               />
             </InputGroup>
             {/* {isValidDestination ? (
