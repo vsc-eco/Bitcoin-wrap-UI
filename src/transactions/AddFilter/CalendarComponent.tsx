@@ -12,7 +12,7 @@ import {
 import { FaArrowLeft } from 'react-icons/fa6'
 import styles from './CalendarComponent.module.css'
 import { GoDash } from 'react-icons/go'
-import { format } from 'date-fns'
+import { format, lastDayOfMonth } from 'date-fns'
 
 type Props = {}
 const CalendarComponent = (props: Props) => {
@@ -21,6 +21,7 @@ const CalendarComponent = (props: Props) => {
   )
   const [lastDate, setLastDate] = useState('Today')
   const [currentYear, setCurrentYear] = useState<number>(2024)
+  const [firstSelected, setFirstSelected] = useState(false)
 
   const months = [
     'Jan',
@@ -37,13 +38,23 @@ const CalendarComponent = (props: Props) => {
     'Dec',
   ]
 
-  const handleMonthSelect = (monthIndex: number, value: boolean) => {
-    if (value) {
-      setFirstDate(`${months[monthIndex]} 1, ${currentYear - 1}`)
-      setLastDate(`${months[monthIndex]} 30, ${currentYear - 1}`)
-    } else if (!value) {
-      setFirstDate(`${months[monthIndex]} 1, ${currentYear}`)
-      setLastDate(`${months[monthIndex]} 30, ${currentYear}`)
+  const handleMonthSelect = (monthIndex: number) => {
+    const currentYearValue = firstDate ? currentYear : currentYear - 1
+    const selectedDate = new Date(currentYearValue, monthIndex, 1)
+    const lastDateOfMonth = format(lastDayOfMonth(selectedDate), 'MMM d, yyyy')
+
+    if (!firstSelected) {
+      setFirstDate(format(selectedDate, 'MMM d, yyyy'))
+      setLastDate(lastDateOfMonth)
+      setFirstSelected(true)
+    } else {
+       const firstDateObj = new Date(firstDate);
+       if(selectedDate < firstDateObj){
+        setLastDate(format(firstDateObj, 'MMM d, yyyy'));
+        setFirstDate(format(selectedDate, 'MMM d, yyyy'));
+       } else {
+        setLastDate(lastDateOfMonth)
+      }
     }
   }
 
@@ -148,7 +159,7 @@ const CalendarComponent = (props: Props) => {
               {months.map((month, index) => (
                 <Button
                   key={month}
-                  onClick={() => handleMonthSelect(index, true)}
+                  onClick={() => handleMonthSelect(index)}
                   size={'xs'}
                   className={styles.calendar_button}
                 >
@@ -169,7 +180,7 @@ const CalendarComponent = (props: Props) => {
               {months.map((month, index) => (
                 <Button
                   key={month}
-                  onClick={() => handleMonthSelect(index, false)}
+                  onClick={() => handleMonthSelect(index)}
                   size={'xs'}
                   className={styles.calendar_button}
                 >
