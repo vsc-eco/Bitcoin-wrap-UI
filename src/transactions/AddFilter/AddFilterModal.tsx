@@ -17,6 +17,7 @@ import {
   Flex,
   Grid,
   Icon,
+  ResponsiveValue,
 } from '@chakra-ui/react'
 import styles from './AddFilterModal.module.css'
 import CalendarComponent from './CalendarComponent'
@@ -28,9 +29,40 @@ import Currency from './Currency'
 type FilterModalProps = {
   isOpen: boolean
   onClose: () => void
+  top:
+    | ResponsiveValue<
+        | number
+        | (string & {})
+        | '-moz-initial'
+        | 'inherit'
+        | 'initial'
+        | 'revert'
+        | 'revert-layer'
+        | 'unset'
+        | 'auto'
+      >
+    | undefined
+  left:
+    | ResponsiveValue<
+        | number
+        | (string & {})
+        | '-moz-initial'
+        | 'inherit'
+        | 'initial'
+        | 'revert'
+        | 'revert-layer'
+        | 'unset'
+        | 'auto'
+      >
+    | undefined
 }
 
-const FilterModal: React.FC<FilterModalProps> = ({ isOpen, onClose }) => {
+const FilterModal: React.FC<FilterModalProps> = ({
+  isOpen,
+  onClose,
+  top,
+  left,
+}) => {
   const filterOptions = [
     {
       id: 1,
@@ -52,7 +84,10 @@ const FilterModal: React.FC<FilterModalProps> = ({ isOpen, onClose }) => {
       onClose={onClose}
       size="lg"
     >
-      <ModalContent>
+      <ModalContent
+        top={top}
+        left={left}
+      >
         <ModalCloseButton />
         <Flex className={styles.parent_container}>
           <Box className={styles.leftbar}>

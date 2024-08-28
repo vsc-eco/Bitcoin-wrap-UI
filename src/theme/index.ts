@@ -1,3 +1,4 @@
+//TODO: feat: dark theme
 import { ChakraTheme, Theme, extendTheme } from '@chakra-ui/react'
 import { modalTheme } from './modal'
 import { buttonTheme } from './button'

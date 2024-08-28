@@ -10,45 +10,189 @@ import {
   Select,
 } from '@chakra-ui/react'
 import { FaArrowLeft } from 'react-icons/fa6'
-import styles from './CalendarComponent.module.css'
+// import styles from './CalendarComponent.module.css'
 import { GoDash } from 'react-icons/go'
 import { format } from 'date-fns'
 
+const styles = new Proxy({} as any, {
+  get() {
+    return ''
+  },
+})
+// styles.sldfj === ''
+
+type MonthDate = {
+  year: number
+  month: number
+  day: number
+}
+
+const months = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
+]
+
+const monthDateToString = (d: MonthDate) => {
+  return `${months[d.month]} ${d.day + 1}, ${d.year}`
+}
+
+const lastDayOfMonth = (month: number, year: number) =>
+  month === 1
+    ? year % 4 === 0 && year % 1000 !== 0
+      ? 29
+      : 28
+    : month % 2 === (month < 7 ? 0 : 1)
+      ? 31
+      : 30
+
+//TODO selecting the date range not happening
+//TODO: positioning not happening
+
 type Props = {}
 const CalendarComponent = (props: Props) => {
-  const [firstDate, setFirstDate] = useState(
-    `${format(new Date(), 'MMM d, yyyy')}`,
+  //default
+  const currentDate = new Date()
+  const [currentYear, setCurrentYear] = useState<number>(
+    currentDate.getFullYear(),
   )
-  const [lastDate, setLastDate] = useState('Today')
-  const [currentYear, setCurrentYear] = useState<number>(2024)
+  const [firstDate, setFirstDate] = useState<MonthDate>({
+    year: currentDate.getFullYear(),
+    month: currentDate.getMonth(),
+    day: 0,
+  })
+  const [lastDate, setLastDate] = useState<MonthDate>({
+    year: currentDate.getFullYear(),
+    month: currentDate.getMonth(),
+    day: lastDayOfMonth(firstDate.month, firstDate.year) - 1,
+  })
+  const [firstSelected, setFirstSelected] = useState(false)
+  const [secondSelected, setSecondSelected] = useState(false)
+  const [hoveredDate, setHoveredDate] = useState<MonthDate>()
 
-  const months = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec',
-  ]
+  // this is for the user to show
 
-  const handleMonthSelect = (monthIndex: number, value: boolean) => {
-    if (value) {
-      setFirstDate(`${months[monthIndex]} 1, ${currentYear - 1}`)
-      setLastDate(`${months[monthIndex]} 30, ${currentYear - 1}`)
-    } else if (!value) {
-      setFirstDate(`${months[monthIndex]} 1, ${currentYear}`)
-      setLastDate(`${months[monthIndex]} 30, ${currentYear}`)
+  //
+
+  const handleMonthSelect = (month: number, year: number) => {
+    if (!firstSelected || secondSelected) {
+      setFirstDate({
+        year,
+        month,
+        day: 0,
+      })
+      setLastDate({
+        year,
+        month,
+        day: lastDayOfMonth(month, year) - 1,
+      })
+      setFirstSelected(true)
+      setSecondSelected(false)
+    } else {
+      // first date is after the 2nd selected date
+      if (
+        firstDate.year > year ||
+        (firstDate.year === year && firstDate.month >= month)
+      ) {
+        setFirstDate({
+          year,
+          month,
+          day: 0,
+        })
+        setLastDate({
+          year,
+          month,
+          day: lastDayOfMonth(month, year) - 1,
+        })
+      } else {
+        setLastDate({
+          year,
+          month,
+          day: lastDayOfMonth(month, year) - 1,
+        })
+        setSecondSelected(true)
+      }
     }
   }
 
   const changingYear = () => {
     setCurrentYear(prev => prev - 1)
+  }
+
+  const getDateClass = (monthIndex: number) => {
+    return ''
+  }
+
+  function handleHoverDate(month: number, year: number): void {
+    setHoveredDate({ month, year, day: lastDayOfMonth(month, year) - 1 })
+  }
+
+  // firstDate: MonthDate, firstSelected: boolean, hoveredDate: MonthDate | undefined
+  function selectorButtonBackground(
+    month: number,
+    year: number,
+  ):
+    | import('@chakra-ui/styled-system').ResponsiveValue<
+        import('csstype').Property.Color
+      >
+    | undefined {
+    //edge case
+    if (firstSelected && month === firstDate.month && year === firstDate.year) {
+      // dark selected
+      return 'green'
+    }
+    // TODO second date might look weird
+    if (!hoveredDate) {
+      // default
+      return undefined
+    }
+
+    if (firstSelected) {
+      // firstDate is after this date
+      if (
+        firstDate.year > year ||
+        (firstDate.year === year && firstDate.month > month)
+      ) {
+        return undefined
+      } else if (secondSelected) {
+        if (
+          lastDate.year > year ||
+          (lastDate.year === year && lastDate.month > month)
+        ) {
+          return 'blue'
+        } else if (lastDate.year === year && lastDate.month === month) {
+          // dark selected
+          return 'red'
+        } else {
+          return undefined
+        }
+      } else if (
+        hoveredDate.year > year ||
+        (hoveredDate.year === year && hoveredDate.month > month)
+      ) {
+        return 'blue'
+      } else if (hoveredDate.year === year && hoveredDate.month === month) {
+        // dark selected
+        return 'red'
+      } else {
+        // light selected
+        return undefined
+      }
+    } else {
+      if (hoveredDate.year === year && hoveredDate.month === month) {
+        // light selected
+        return 'yellow'
+      }
+    }
   }
 
   return (
@@ -104,9 +248,8 @@ const CalendarComponent = (props: Props) => {
           </Flex>
           <Flex className={styles.calendar_container}>
             <Input
-              value={firstDate}
+              value={monthDateToString(firstDate)}
               mr={1}
-              defaultValue={'Feb 1, 2023'}
             />
             <Icon
               as={GoDash}
@@ -114,9 +257,8 @@ const CalendarComponent = (props: Props) => {
               mt={3}
             />
             <Input
-              value={lastDate}
+              value={monthDateToString(lastDate)}
               ml={1}
-              defaultValue={'Feb 28, 2023'}
             />
           </Flex>
         </Box>
@@ -134,7 +276,7 @@ const CalendarComponent = (props: Props) => {
                 as={FaArrowLeft}
                 fontSize={'12px'}
                 color={'#73737a'}
-                _hover={{ color: '#527ef0' }}
+                _hover={{ color: 'indigo.900' }}
                 cursor={'pointer'}
                 onClick={() => changingYear()}
               />
@@ -145,12 +287,21 @@ const CalendarComponent = (props: Props) => {
               gap={2}
               py={2}
             >
+              {/* 
+              :nth-child(n+X)     /* all children from the Xth position onward 
+              :nth-child(-n+x)    /* all children up to the Xth position       
+              */}
               {months.map((month, index) => (
                 <Button
                   key={month}
-                  onClick={() => handleMonthSelect(index, true)}
+                  onClick={() => handleMonthSelect(index, currentYear - 1)}
+                  onMouseOver={() => handleHoverDate(index, currentYear - 1)}
+                  bgColor={selectorButtonBackground(index, currentYear - 1)}
                   size={'xs'}
-                  className={styles.calendar_button}
+                  _hover={{
+                    bgColor: undefined,
+                  }}
+                  className={`${getDateClass(index)}`}
                 >
                   <Text className={styles.month}>{month}</Text>
                 </Button>
@@ -169,9 +320,13 @@ const CalendarComponent = (props: Props) => {
               {months.map((month, index) => (
                 <Button
                   key={month}
-                  onClick={() => handleMonthSelect(index, false)}
+                  onClick={() => handleMonthSelect(index, currentYear)}
+                  onMouseOver={() => handleHoverDate(index, currentYear)}
+                  bgColor={selectorButtonBackground(index, currentYear)}
                   size={'xs'}
-                  className={styles.calendar_button}
+                  _hover={{
+                    bgColor: undefined,
+                  }}
                 >
                   <Text className={styles.month}>{month}</Text>
                 </Button>

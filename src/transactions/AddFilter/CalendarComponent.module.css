@@ -44,3 +44,11 @@
   box-shadow: 0px 1px 0px #f0f1f4;
   padding: 12px 2px;
 }
+
+.dateHover {
+  background-color: #e0e0e0; /* Light gray background on hover */
+}
+
+.dateInRange {
+  background-color: #b0bec5; /* Different color for selected range */
+}

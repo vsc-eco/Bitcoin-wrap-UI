@@ -1,5 +1,5 @@
-yarn
-yarn format
-yarn lint
-yarn build
+corepack yarn
+corepack yarn format
+corepack yarn lint
+corepack yarn build
 git update-index --again
