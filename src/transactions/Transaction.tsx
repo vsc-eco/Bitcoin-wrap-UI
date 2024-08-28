@@ -195,6 +195,8 @@ const Transaction = (props: Props) => {
             </Button>
             {isModalOpen && (
               <FilterModal
+                top="74px"
+                left="-30px"
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
               />
