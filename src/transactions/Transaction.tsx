@@ -37,6 +37,7 @@ import { useCreateTx } from '../hooks/VSC'
 import { useAuth } from '../hooks/auth'
 import FilterModal from './AddFilter/AddFilterModal'
 import { ChevronDownIcon } from '@chakra-ui/icons'
+import BuyHiveModal from '../components/BuyHive'
 
 const START_BLOCK = 88079516
 const START_BLOCK_TIME = Moment('2024-08-16T02:46:48Z')
@@ -222,24 +223,28 @@ const Transaction = (props: Props) => {
                 />
               </Box>
             )}
-            <Menu>
-              <MenuButton
-                as={Button}
-                rightIcon={<ChevronDownIcon />}
-                fontSize="xs"
-                borderRadius="3xl"
-              >
-                Actions
-              </MenuButton>
-              <MenuList minWidth="100%">
-                <MenuItem>
-                  <TransferModal />
-                </MenuItem>
-                <MenuItem>
-                  <RedeemModal />
-                </MenuItem>
-              </MenuList>
-            </Menu>
+            <Box float="right">
+              <BuyHiveModal refetch={refetch} />
+              <Menu>
+                <MenuButton
+                  as={Button}
+                  rightIcon={<ChevronDownIcon />}
+                  fontSize="xs"
+                  borderRadius="3xl"
+                >
+                  Actions
+                </MenuButton>
+                <MenuList minWidth="100%">
+                  <MenuItem>
+                    <TransferModal />
+                  </MenuItem>
+
+                  <MenuItem>
+                    <RedeemModal />
+                  </MenuItem>
+                </MenuList>
+              </Menu>
+            </Box>
           </Box>
           <Flex overflowY="auto">
             <TableContainer

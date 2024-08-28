@@ -56,7 +56,7 @@ const TransactionDetail = ({ toggleClose, transaction, userId }: Props) => {
         </Flex>
         <Flex>
           <Text fontSize="32px">
-            {moneyIn ? '' : '-'} {transaction.amount} {transaction.tk}
+            {moneyIn ? '' : '-'} {transaction.amount / 1_000} {transaction.tk}
           </Text>
         </Flex>
         <Flex
@@ -80,7 +80,7 @@ const TransactionDetail = ({ toggleClose, transaction, userId }: Props) => {
               />
             </VStack>
             <Box mx={4}>
-              <Text>{readableUsername(transaction.from)}</Text>
+              <Text textAlign="left">{readableUsername(transaction.from)}</Text>
               <Box>
                 <Flex>
                   <Text pr={1}>
@@ -121,7 +121,9 @@ const TransactionDetail = ({ toggleClose, transaction, userId }: Props) => {
               }}
             />
             <Box mx={4}>
-              <Text>{readableUsername(transaction.owner)}</Text>
+              <Text textAlign="left">
+                {readableUsername(transaction.owner)}
+              </Text>
               <Box>
                 <Flex>
                   <Text pr={1}>
@@ -162,6 +164,7 @@ const TransactionDetail = ({ toggleClose, transaction, userId }: Props) => {
           <Text
             fontSize={['12px']}
             color="brand.50"
+            textAlign="left"
           >
             Notes
           </Text>
@@ -184,6 +187,7 @@ const TransactionDetail = ({ toggleClose, transaction, userId }: Props) => {
           <Text
             fontSize={['12px']}
             color="brand.50"
+            textAlign="left"
           >
             Raw Transaction:
           </Text>
@@ -194,9 +198,11 @@ const TransactionDetail = ({ toggleClose, transaction, userId }: Props) => {
             >
               <a
                 target="_blank"
-                href={`https://vsc.techcoderx.com/${
-                  transaction.id.startsWith('bafy') ? 'vsc-tx' : 'tx'
-                }/${transaction.id}`}
+                href={
+                  transaction.id.startsWith('bafy')
+                    ? `https://vsc.techcoderx.com/vsc-tx/${transaction.id}`
+                    : `https://hivehub.dev/tx/${transaction.id.split('-')[0]}`
+                }
               >
                 View on block explorer
               </a>

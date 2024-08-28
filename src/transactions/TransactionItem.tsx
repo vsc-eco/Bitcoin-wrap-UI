@@ -124,15 +124,11 @@ const TransactionItem = props => {
       </Td>
       <Td isNumeric>
         {moneyIn ? '' : '-'}
-        <span
-          style={{
-            color: moneyIn ? 'green' : undefined,
-          }}
-        >
+        <Text color={moneyIn ? 'green' : undefined}>
           {transaction.amount / 1_000}
           &nbsp;
           {transaction.tk}
-        </span>
+        </Text>
         {/* &nbsp; (${transaction.dollar}) */}
       </Td>
 
@@ -168,8 +164,7 @@ const TransactionItem = props => {
         >
           <button
             style={{
-              background:
-                'url(https://cdn.mercury.com/builds/166851faa76e48b8184184d247eb053f891d60d9/icons/24/arrow-right.svg) 50%/24px 24px no-repeat',
+              background: 'url(./arrow-right.svg) 50%/24px 24px no-repeat',
               width: '10px',
               height: '20px',
             }}
