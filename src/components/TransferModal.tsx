@@ -23,17 +23,16 @@ import { useQuery } from '@tanstack/react-query'
 import { DHive } from '../const'
 
 import styles from './TransferModal.module.css'
+import { BlockchainActions } from '../hooks/blockchain'
+import { Asset } from '../hooks/blockchain/assets'
 
-type Props = {
-  refetch: Function
-}
-
-const TransferModal = (props: Props) => {
+const TransferModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [destination, setDestination] = useState('')
-  const [amount, setAmount] = useState('')
+  const [amount, setAmount] = useState(0)
+  const [waitingForSig, setWaitingForSig] = useState(false)
 
-  const isAmountValid = amount.trim() !== '' && /^\d*\.?\d*$/.test(amount) // Check if amount is not empty or only whitespace
+  const isAmountValid = true //amount.trim() !== '' && /^\d*\.?\d*$/.test(amount) // Check if amount is not empty or only whitespace
   const { transfer } = useCreateTx()
 
   // const allowedAmount = useQuery({
@@ -62,22 +61,18 @@ const TransferModal = (props: Props) => {
 
   const isValidDestination = !!queryAccount.data
 
-  const isDisabled = !isValidDestination || true //amount > allowedAmount.data
+  const isDisabled = false //!isValidDestination || true //amount > allowedAmount.data
 
   const handleSend = async () => {
-    // Add your logic to handle the "Send" button click
-
-    // await transfer({
-    //   amount: Number(amount),
-    //   didAuth: myAuth,
-    //   did: myDid,
-    //   myHiveName,
-    //   dest: queryAccount.data,
-    //   destHive: destination
-    // })
-    if (props.refetch) {
-      props.refetch()
-    }
+    setWaitingForSig(true)
+    await BlockchainActions(
+      'transfer',
+      'hive',
+      destination,
+      amount,
+      Asset.VSC_HIVE,
+    ).catch(e => console.log('tx signing failed', e))
+    setWaitingForSig(false)
     onClose()
   }
 
@@ -98,112 +93,119 @@ const TransferModal = (props: Props) => {
         <ModalOverlay />
         <ModalContent className={styles.murPrompt}>
           <ModalHeader>Transfer</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <InputGroup
-              my={2}
-              className={styles.murInput}
-            >
-              <InputLeftElement
-                pointerEvents="none"
-                color="gray.300"
-                fontSize="1.1em"
-              >
-                @
-              </InputLeftElement>
-              <Input
-                placeholder="Username"
-                isRequired
-                value={destination}
-                onChange={e => {
-                  setDestination(e.target.value)
-                }}
-              />
-            </InputGroup>
-            {/* {isValidDestination ? (
+          {waitingForSig ? (
+            <>Please sign the transaction...</>
+          ) : (
+            <>
+              <ModalCloseButton />
+              <ModalBody>
+                <InputGroup
+                  my={2}
+                  className={styles.murInput}
+                >
+                  <InputLeftElement
+                    pointerEvents="none"
+                    color="gray.300"
+                    fontSize="1.1em"
+                  >
+                    @
+                  </InputLeftElement>
+                  <Input
+                    placeholder="Username"
+                    isRequired
+                    value={destination}
+                    onChange={e => {
+                      setDestination(e.target.value)
+                    }}
+                  />
+                </InputGroup>
+                {/* {isValidDestination ? (
               
             ) : (
               <Text color="tomato" fontSize="xs" px={2}>
                 Account must be registered on this web portal.
               </Text>
             )} */}
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-              }}
-            >
-              <InputGroup>
-                <InputLeftElement
-                  pointerEvents="none"
-                  color="gray.300"
-                  fontSize="1.1em"
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                  }}
                 >
-                  $
-                </InputLeftElement>
-                <Input
-                  placeholder="0.00"
-                  isRequired
-                  value={amount}
-                  onChange={e => setAmount(e.target.value)}
-                  isInvalid={!isAmountValid}
-                />
-              </InputGroup>
+                  <InputGroup>
+                    <InputLeftElement
+                      pointerEvents="none"
+                      color="gray.300"
+                      fontSize="1.1em"
+                    >
+                      $
+                    </InputLeftElement>
+                    <Input
+                      placeholder="0.00"
+                      min={0}
+                      type="number"
+                      isRequired
+                      value={amount}
+                      onChange={e => setAmount(e.target.valueAsNumber)}
+                    />
+                  </InputGroup>
 
-              <Select
-                marginLeft="2.5%"
-                placeholder="Select Asset"
-              >
-                <option value="option1">Hive</option>
-                <option value="option2">Hive Dollar</option>
-              </Select>
-            </div>
-            <Text
-              color="black"
-              fontSize={'medium'}
-            >
-              Available Balance: {'TODO'}
-            </Text>
-            {!isAmountValid && (
-              <Text
-                color="tomato"
-                fontSize={'smaller'}
-                px={2}
-              >
-                Please enter a valid amount
-              </Text>
-            )}
-            {false ? (
-              <Text
-                color="tomato"
-                fontSize={'smaller'}
-                px={2}
-              >
-                Too low balance!
-              </Text>
-            ) : null}
-          </ModalBody>
+                  <Select
+                    marginLeft="2.5%"
+                    placeholder="Select Asset"
+                  >
+                    <option value="option1">Hive</option>
+                    <option value="option2">Hive Dollar</option>
+                  </Select>
+                </div>
+                <Text
+                  color="black"
+                  fontSize={'medium'}
+                >
+                  Available Balance: {'TODO'}
+                </Text>
+                {!isAmountValid && (
+                  <Text
+                    color="tomato"
+                    fontSize={'smaller'}
+                    px={2}
+                  >
+                    Please enter a valid amount
+                  </Text>
+                )}
+                {false ? (
+                  <Text
+                    color="tomato"
+                    fontSize={'smaller'}
+                    px={2}
+                  >
+                    Too low balance!
+                  </Text>
+                ) : null}
+              </ModalBody>
 
-          <ModalFooter>
-            <Button
-              mr={3}
-              onClick={onClose}
-              className={`${styles.murButton} ${styles.murButtonSecondary}`}
-            >
-              Cancel
-            </Button>
-            <Button
-              isDisabled={isDisabled}
-              colorScheme="blue"
-              mr={3}
-              onClick={handleSend}
-              className={`${styles.murButton} ${styles.murButtonPrimary}`}
-            >
-              Send
-            </Button>
-          </ModalFooter>
+              <ModalFooter>
+                <Button
+                  mr={3}
+                  onClick={onClose}
+                  className={`${styles.murButton} ${styles.murButtonSecondary}`}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  isDisabled={isDisabled}
+                  colorScheme="blue"
+                  mr={3}
+                  onClick={handleSend}
+                  className={`${styles.murButton} ${styles.murButtonPrimary}`}
+                >
+                  Send
+                </Button>
+              </ModalFooter>
+            </>
+          )}
         </ModalContent>
       </Modal>
     </>

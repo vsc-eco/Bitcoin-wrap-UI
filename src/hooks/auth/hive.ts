@@ -1,7 +1,7 @@
 import { Aioha, initAioha, KeyTypes, Providers } from '@aioha/aioha'
 import { Authenticator, AuthInfo } from './types'
 
-const aioha =
+export const aioha =
   typeof window === 'undefined'
     ? new Aioha()
     : initAioha({

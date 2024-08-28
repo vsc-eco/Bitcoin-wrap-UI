@@ -233,7 +233,7 @@ const Transaction = (props: Props) => {
               </MenuButton>
               <MenuList minWidth="100%">
                 <MenuItem>
-                  <TransferModal refetch={refetch} />
+                  <TransferModal />
                 </MenuItem>
                 <MenuItem>
                   <RedeemModal />
