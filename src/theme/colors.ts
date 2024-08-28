@@ -12,7 +12,7 @@ export const colors: Colors = {
     1000: 'rgb(30, 30, 42)',
   },
   indigo: {
-    900: 'rgb(123, 138, 238)',
+    900: '#5266eb',
     700: '#a6aff7',
     500: '',
   },
