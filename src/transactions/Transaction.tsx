@@ -22,6 +22,7 @@ import {
   MenuItem,
   MenuList,
   Skeleton,
+  Td,
 } from '@chakra-ui/react'
 import { HiDownload } from 'react-icons/hi'
 import { CiFilter } from 'react-icons/ci'
@@ -88,12 +89,6 @@ const Transaction = (props: Props) => {
   )
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  const filterButtonRef = useRef<HTMLButtonElement | null>(null)
-  const [filterModalPosition, setFilterModalPosition] = useState({
-    top: 0,
-    left: 0,
-  })
-
   const auth = useAuth()
 
   const { data, loading, refetch } = useQuery(query, {
@@ -106,16 +101,6 @@ const Transaction = (props: Props) => {
     const intervalId = setInterval(refetch, 3000)
     return () => clearInterval(intervalId)
   }, [refetch])
-
-  useEffect(() => {
-    if (filterButtonRef.current) {
-      const rect = filterButtonRef.current.getBoundingClientRect()
-      setFilterModalPosition({
-        top: rect.bottom,
-        left: rect.right,
-      })
-    }
-  }, [isModalOpen])
 
   const bitcoinPrice = useBitcoinPrice()
 
@@ -199,7 +184,6 @@ const Transaction = (props: Props) => {
               alignItems="center"
               onClick={() => setIsModalOpen(!isModalOpen)}
               borderRadius="3xl"
-              ref={filterButtonRef}
             >
               <CiFilter />
               <Text
@@ -210,17 +194,10 @@ const Transaction = (props: Props) => {
               </Text>
             </Button>
             {isModalOpen && (
-              <Box
-                position="absolute"
-                top={`${filterModalPosition.top}px`}
-                left={`${filterModalPosition.left}px`}
-                zIndex={1000}
-              >
-                <FilterModal
-                  isOpen={isModalOpen}
-                  onClose={() => setIsModalOpen(false)}
-                />
-              </Box>
+              <FilterModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+              />
             )}
             <Menu>
               <MenuButton
@@ -241,72 +218,69 @@ const Transaction = (props: Props) => {
               </MenuList>
             </Menu>
           </Box>
-          <Flex overflowY="auto">
-            <TableContainer
-              display="flex"
-              alignItems="start"
+          <Flex
+            overflowY="auto"
+            w="full"
+          >
+            <Flex
+              direction="column"
+              w="full"
             >
-              <Table
-                variant="simple"
-                size="sm"
+              <TableContainer
+                display="flex"
+                alignItems="start"
               >
-                <Thead>
-                  <Tr>
-                    <Th
-                      w={32}
-                      display="flex"
-                      textTransform="capitalize"
-                    >
-                      <Text px="1">Date</Text>
-                      <Text fontSize="10px">(Local Time)</Text>
-                    </Th>
-                    <Th textTransform="capitalize">To/From</Th>
-                    <Th
-                      isNumeric
-                      textTransform="capitalize"
-                    >
-                      Amount
-                    </Th>
-                    {!isTransactionDetailOpen && (
+                <Table
+                  variant="simple"
+                  size="sm"
+                >
+                  <Thead>
+                    <Tr>
+                      <Th
+                        w={32}
+                        display="flex"
+                        textTransform="capitalize"
+                      >
+                        <Text px="1">Date</Text>
+                        <Text fontSize="10px">(Local Time)</Text>
+                      </Th>
                       <Th
                         textTransform="capitalize"
-                        display="flex"
-                        alignItems="center"
+                        w={!isTransactionDetailOpen ? 412 : 0}
                       >
-                        Payment Method
+                        To/From
                       </Th>
-                    )}
-                  </Tr>
-                </Thead>
+                      <Th
+                        isNumeric
+                        textTransform="capitalize"
+                      >
+                        Amount
+                      </Th>
+                      {!isTransactionDetailOpen && (
+                        <Th
+                          textTransform="capitalize"
+                          alignItems="center"
+                        >
+                          Payment Method
+                        </Th>
+                      )}
+                    </Tr>
+                  </Thead>
 
-                <Tbody>
-                  {loading
-                    ? // Render skeletons while loading
-                      Array.from({ length: 1 }).map((_, index) => (
-                        <Tr key={index}>
-                          <Th>
-                            <Skeleton height="40px" />
-                          </Th>
-                          <Th>
-                            <Skeleton
-                              height="40px"
-                              width={'370px'}
-                            />
-                          </Th>
-                          <Th>
-                            <Skeleton height="40px" />
-                          </Th>
-                          {!isTransactionDetailOpen && (
-                            <Th>
-                              <Skeleton height="40px" />
-                            </Th>
-                          )}
-                        </Tr>
-                      ))
-                    : transactions}
-                </Tbody>
-              </Table>
-            </TableContainer>
+                  {!loading && <Tbody>{transactions} </Tbody>}
+                </Table>
+              </TableContainer>
+              {loading &&
+                // Render skeletons while loading
+                Array.from({ length: 5 }).map((_, index) => (
+                  <Skeleton
+                    key={index}
+                    height="39px"
+                    width="full"
+                    my={0.5}
+                  />
+                ))}
+            </Flex>
             <Box
               className={`side-popup ${isTransactionDetailOpen ? 'show-popup' : ''}`}
               style={{ top: 0 }}
