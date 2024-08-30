@@ -25,6 +25,8 @@ import { DHive } from '../const'
 import styles from './TransferModal.module.css'
 import { BlockchainActions } from '../hooks/blockchain'
 import { Asset } from '../hooks/blockchain/assets'
+import { useAuth } from '../hooks/auth'
+import { HIVE_PREFIX } from '../hooks/auth/hive'
 
 const TransferModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -64,10 +66,15 @@ const TransferModal = () => {
   const isDisabled = false //!isValidDestination || true //amount > allowedAmount.data
 
   const handleSend = async () => {
+    const auth = useAuth.getState()
+    if (!auth.authenticated) {
+      throw new Error('not logged in')
+    }
+    const method = auth.userId.startsWith(HIVE_PREFIX) ? 'hive' : 'eth'
     setWaitingForSig(true)
     await BlockchainActions(
       'transfer',
-      'hive',
+      method,
       destination,
       amount,
       Asset.VSC_HIVE,

@@ -62,7 +62,7 @@ export const useBlockchain = BlockchainStore
 
 const blockchains = {
   hive,
-  // eth,
+  eth,
 } satisfies Record<string, Blockchain>
 
 export type BlockchainMethod = keyof typeof blockchains
