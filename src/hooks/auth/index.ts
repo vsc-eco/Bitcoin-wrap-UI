@@ -115,4 +115,11 @@ export const AuthActions = {
     }
     AuthStore.setState({ authenticated: false }, true)
   },
+  fakeLogin(userId: string) {
+    return requestLogin({ userId })
+  },
 } as const
+
+if (typeof window !== 'undefined') {
+  ;(globalThis as any).AuthActions = AuthActions
+}
