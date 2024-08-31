@@ -2,7 +2,7 @@
 
 'use client'
 import React, { useLayoutEffect, useReducer, useState } from 'react'
-import { Card, Flex, Text } from '@chakra-ui/react'
+import { Box, Card, Flex, Text } from '@chakra-ui/react'
 import Sidebar from '../components/Sidebar/Sidebar'
 import Transaction from '../transactions/Transaction'
 import ThirdSection from './ThirdSection'
@@ -18,13 +18,20 @@ const SecondSection = () => {
         w="full"
         h={'full'}
       >
-        <Flex w="12%">
-          <Sidebar />
-        </Flex>
+        <Box>
+          <Flex
+            w="12%"
+            height="100vh"
+          >
+            <Sidebar />
+          </Flex>
+        </Box>
+
         <Flex
           w="full"
           h="100vh"
           justifyContent={'center'}
+          display="flex"
         >
           <Flex
             justify="center"
@@ -33,6 +40,8 @@ const SecondSection = () => {
             p={0}
             maxW={'1100px'}
             my={8}
+            position="relative"
+            width="100%"
           >
             <Routes>
               <Route
