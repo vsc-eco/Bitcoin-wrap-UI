@@ -4,11 +4,12 @@ import { Flex, Box, Text, Input } from '@chakra-ui/react'
 import styles from './Currency.module.css'
 import Image from 'next/image'
 
+//TODO: Pictures are not getting rendered
+
 type Props = {}
 
 const Currency = (props: Props) => {
   const [selectedCheckbox, setSelectedCheckbox] = useState<string>('HIVE')
-
   const handleCheckboxChange = (checkboxId: string) => {
     setSelectedCheckbox(prev => (prev === checkboxId ? 'HIVE' : checkboxId))
   }

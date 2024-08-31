@@ -9,17 +9,8 @@ import {
   Icon,
   Select,
 } from '@chakra-ui/react'
-import { FaArrowLeft } from 'react-icons/fa6'
-// import styles from './CalendarComponent.module.css'
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa6'
 import { GoDash } from 'react-icons/go'
-import { format } from 'date-fns'
-
-const styles = new Proxy({} as any, {
-  get() {
-    return ''
-  },
-})
-// styles.sldfj === ''
 
 type MonthDate = {
   year: number
@@ -55,9 +46,6 @@ const lastDayOfMonth = (month: number, year: number) =>
       ? 31
       : 30
 
-//TODO selecting the date range not happening
-//TODO: positioning not happening
-
 type Props = {}
 const CalendarComponent = (props: Props) => {
   //default
@@ -78,10 +66,6 @@ const CalendarComponent = (props: Props) => {
   const [firstSelected, setFirstSelected] = useState(false)
   const [secondSelected, setSecondSelected] = useState(false)
   const [hoveredDate, setHoveredDate] = useState<MonthDate>()
-
-  // this is for the user to show
-
-  //
 
   const handleMonthSelect = (month: number, year: number) => {
     if (!firstSelected || secondSelected) {
@@ -124,10 +108,6 @@ const CalendarComponent = (props: Props) => {
     }
   }
 
-  const changingYear = () => {
-    setCurrentYear(prev => prev - 1)
-  }
-
   const getDateClass = (monthIndex: number) => {
     return ''
   }
@@ -148,7 +128,7 @@ const CalendarComponent = (props: Props) => {
     //edge case
     if (firstSelected && month === firstDate.month && year === firstDate.year) {
       // dark selected
-      return 'green'
+      return '#e3e6fc'
     }
     // TODO second date might look weird
     if (!hoveredDate) {
@@ -168,10 +148,10 @@ const CalendarComponent = (props: Props) => {
           lastDate.year > year ||
           (lastDate.year === year && lastDate.month > month)
         ) {
-          return 'blue'
+          return '#e3e6fc'
         } else if (lastDate.year === year && lastDate.month === month) {
           // dark selected
-          return 'red'
+          return '#e3e6fc'
         } else {
           return undefined
         }
@@ -179,10 +159,10 @@ const CalendarComponent = (props: Props) => {
         hoveredDate.year > year ||
         (hoveredDate.year === year && hoveredDate.month > month)
       ) {
-        return 'blue'
+        return '#e3e6fc'
       } else if (hoveredDate.year === year && hoveredDate.month === month) {
         // dark selected
-        return 'red'
+        return ''
       } else {
         // light selected
         return undefined
@@ -190,7 +170,7 @@ const CalendarComponent = (props: Props) => {
     } else {
       if (hoveredDate.year === year && hoveredDate.month === month) {
         // light selected
-        return 'yellow'
+        return 'gray.400'
       }
     }
   }
@@ -198,35 +178,33 @@ const CalendarComponent = (props: Props) => {
   return (
     <>
       <Flex
-        className={styles.rightbar}
         direction="column"
+        width={'65%'}
+        justifyContent={'center'}
+        paddingLeft={'8px'}
       >
         <Box
-          alignItems={'center'}
-          className={styles.rightbar_heading}
+          boxShadow={'0px 1px 0px #f0f1f4'}
+          paddingX={'2px'}
+          paddingY={'12px'}
         >
-          <Text className={styles.heading}>Show transactions for</Text>
+          <Text
+            fontSize={'12px'}
+            paddingTop={'12px'}
+            paddingLeft={'4px'}
+          >
+            Show transactions for
+          </Text>
           <Select
             placeholder="Custom"
             w="300px"
-            className={styles.options_parent}
             variant={'filled'}
           >
-            <option
-              value="this-month"
-              className={styles.options_item}
-            >
-              This month
-            </option>
-            <option
-              value="last-month"
-              className={styles.options_item}
-            >
-              Last month
-            </option>
+            <option value="this-month">This month</option>
+            <option value="last-month">Last month</option>
           </Select>
         </Box>
-        <Box className={styles.parent}>
+        <Box>
           <Flex
             gap={36}
             pt={4}
@@ -234,19 +212,20 @@ const CalendarComponent = (props: Props) => {
             <Text
               mb={2}
               fontSize={'sm'}
-              className={styles.from}
             >
               From
             </Text>
             <Text
               mb={2}
               fontSize={'sm'}
-              className={styles.To}
             >
               To
             </Text>
           </Flex>
-          <Flex className={styles.calendar_container}>
+          <Flex
+            width={'310px'}
+            alignItems={'center'}
+          >
             <Input
               value={monthDateToString(firstDate)}
               mr={1}
@@ -254,7 +233,6 @@ const CalendarComponent = (props: Props) => {
             <Icon
               as={GoDash}
               size={'xs'}
-              mt={3}
             />
             <Input
               value={monthDateToString(lastDate)}
@@ -266,11 +244,12 @@ const CalendarComponent = (props: Props) => {
           gap={6}
           pt={12}
           pb={4}
+          pr={2}
         >
           <Box>
             <Flex
               alignItems={'center'}
-              gap={10}
+              gap={12}
             >
               <Icon
                 as={FaArrowLeft}
@@ -278,19 +257,15 @@ const CalendarComponent = (props: Props) => {
                 color={'#73737a'}
                 _hover={{ color: 'indigo.900' }}
                 cursor={'pointer'}
-                onClick={() => changingYear()}
+                onClick={() => setCurrentYear(prev => prev - 1)}
               />
-              <Text className={styles.year}>{currentYear - 1}</Text>
+              <Text fontSize={'12px'}>{currentYear - 1}</Text>
             </Flex>
             <Grid
               templateColumns="repeat(3, 1fr)"
               gap={2}
               py={2}
             >
-              {/* 
-              :nth-child(n+X)     /* all children from the Xth position onward 
-              :nth-child(-n+x)    /* all children up to the Xth position       
-              */}
               {months.map((month, index) => (
                 <Button
                   key={month}
@@ -303,14 +278,36 @@ const CalendarComponent = (props: Props) => {
                   }}
                   className={`${getDateClass(index)}`}
                 >
-                  <Text className={styles.month}>{month}</Text>
+                  <Text
+                    color={'rgb(54, 54, 68)'}
+                    fontWeight={400}
+                    fontSize={'14px'}
+                    lineHeight={'20px'}
+                  >
+                    {month}
+                  </Text>
                 </Button>
               ))}
             </Grid>
           </Box>
           <Box>
-            <Flex justify="center">
-              <Text className={styles.year}>{currentYear}</Text>
+            <Flex
+              justify={
+                currentYear < currentDate.getFullYear() ? 'end' : 'center'
+              }
+              gap={12}
+            >
+              <Text fontSize={'12px'}>{currentYear}</Text>
+              {currentYear < currentDate.getFullYear() && (
+                <Icon
+                  as={FaArrowRight}
+                  fontSize={'12px'}
+                  color={'#73737a'}
+                  _hover={{ color: 'indigo.900' }}
+                  cursor={'pointer'}
+                  onClick={() => setCurrentYear(prev => prev + 1)}
+                />
+              )}
             </Flex>
             <Grid
               templateColumns="repeat(3, 1fr)"
@@ -328,7 +325,14 @@ const CalendarComponent = (props: Props) => {
                     bgColor: undefined,
                   }}
                 >
-                  <Text className={styles.month}>{month}</Text>
+                  <Text
+                    color={'rgb(54, 54, 68)'}
+                    fontWeight={400}
+                    fontSize={'14px'}
+                    lineHeight={'20px'}
+                  >
+                    {month}
+                  </Text>
                 </Button>
               ))}
             </Grid>
