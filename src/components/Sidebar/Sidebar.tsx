@@ -9,6 +9,7 @@ import LogoComponent from '../Logo/LogoComponent'
 import { useAuth } from '../../hooks/auth'
 import { UserInfo } from './UserInfo'
 import { useNavigate, useLocation } from 'react-router-dom'
+import { ToggleDarkModeButton } from '../ToggleDarkModeButton'
 
 const Sidebar = () => {
   const auth = useAuth()
@@ -90,6 +91,9 @@ const Sidebar = () => {
             </Flex>
           </Flex>
         ))}
+        <Flex>
+          <ToggleDarkModeButton />
+        </Flex>
         <Flex
           alignItems="center"
           justifyContent="space-between"
