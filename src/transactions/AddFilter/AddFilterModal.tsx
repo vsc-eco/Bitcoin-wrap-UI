@@ -24,7 +24,9 @@ import CalendarComponent from './CalendarComponent'
 import { FaCalendarAlt } from 'react-icons/fa'
 import { MdOutlineCurrencyExchange } from 'react-icons/md'
 import { CgOptions } from 'react-icons/cg'
+import { HiStatusOnline } from 'react-icons/hi'
 import Currency from './Currency'
+import StatusOption from './StatusOption'
 
 type FilterModalProps = {
   isOpen: boolean
@@ -74,6 +76,11 @@ const FilterModal: React.FC<FilterModalProps> = ({
       name: 'Currency',
       icon: MdOutlineCurrencyExchange,
     },
+    {
+      id: 3,
+      name: 'Status',
+      icon: HiStatusOnline,
+    },
   ]
 
   //by default the first item is selected
@@ -87,17 +94,19 @@ const FilterModal: React.FC<FilterModalProps> = ({
       <ModalContent
         top={top}
         left={left}
+        style={{ height: '400px', maxHeight: '100vh' }}
       >
         <ModalCloseButton />
         <Flex className={styles.parent_container}>
           <Box className={styles.leftbar}>
             <Flex
               w="full"
-              justifyContent={'space-between'}
+              justifyContent={'center'}
               alignItems={'center'}
               className={styles.heading}
+              gap={2}
             >
-              <Text>My transactions</Text>
+              <Text size={'sm'}>My transactions</Text>
               <Switch size={'sm'} />
             </Flex>
             {filterOptions.map(option => (
@@ -116,7 +125,9 @@ const FilterModal: React.FC<FilterModalProps> = ({
               </Flex>
             ))}
           </Box>
-          {selectedItem == 2 ? <Currency /> : <CalendarComponent />}
+          {selectedItem == 1 && <CalendarComponent />}
+          {selectedItem == 2 && <Currency />}
+          {selectedItem == 3 && <StatusOption />}
         </Flex>
       </ModalContent>
     </Modal>

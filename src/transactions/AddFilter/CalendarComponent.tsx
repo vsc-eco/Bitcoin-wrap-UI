@@ -175,6 +175,16 @@ const CalendarComponent = (props: Props) => {
     }
   }
 
+  //function for handling the first date
+  // const handleFirstDateChange = (event) => {
+  //     const newDate = monthDateToString(event.target.value);
+  //     setFirstDate(newDate)
+  // }
+
+  // const handleLastDateChange = (event) => {
+  //     const newDate = monthDateToString(event.target.value);
+  //     setLastDate(newDate)
+  // }
   return (
     <>
       <Flex
@@ -270,13 +280,13 @@ const CalendarComponent = (props: Props) => {
                 <Button
                   key={month}
                   onClick={() => handleMonthSelect(index, currentYear - 1)}
+                  className={`${getDateClass(index)}`}
                   onMouseOver={() => handleHoverDate(index, currentYear - 1)}
                   bgColor={selectorButtonBackground(index, currentYear - 1)}
                   size={'xs'}
                   _hover={{
                     bgColor: undefined,
                   }}
-                  className={`${getDateClass(index)}`}
                 >
                   <Text
                     color={'rgb(54, 54, 68)'}
