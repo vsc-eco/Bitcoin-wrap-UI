@@ -267,18 +267,34 @@ const Transaction = (props: Props) => {
                   </Thead>
 
                   {!loading && <Tbody>{transactions} </Tbody>}
+                  <Tbody>
+                    {loading
+                      ? // Render skeletons while loading
+                        Array.from({ length: 1 }).map((_, index) => (
+                          <Tr key={index}>
+                            <Th>
+                              <Skeleton height="40px" />
+                            </Th>
+                            <Th>
+                              <Skeleton
+                                height="40px"
+                                width={'370px'}
+                              />
+                            </Th>
+                            <Th>
+                              <Skeleton height="40px" />
+                            </Th>
+                            {!isTransactionDetailOpen && (
+                              <Th>
+                                <Skeleton height="40px" />
+                              </Th>
+                            )}
+                          </Tr>
+                        ))
+                      : transactions}
+                  </Tbody>
                 </Table>
               </TableContainer>
-              {loading &&
-                // Render skeletons while loading
-                Array.from({ length: 5 }).map((_, index) => (
-                  <Skeleton
-                    key={index}
-                    height="39px"
-                    width="full"
-                    my={0.5}
-                  />
-                ))}
             </Flex>
             <Box
               className={`side-popup ${isTransactionDetailOpen ? 'show-popup' : ''}`}

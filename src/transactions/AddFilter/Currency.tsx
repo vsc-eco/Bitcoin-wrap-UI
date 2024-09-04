@@ -1,30 +1,51 @@
 import React, { useState } from 'react'
-import { Checkbox, CheckboxGroup } from '@chakra-ui/react'
+import { Checkbox, CheckboxGroup, Icon } from '@chakra-ui/react'
 import { Flex, Box, Text, Input } from '@chakra-ui/react'
 import styles from './Currency.module.css'
 import Image from 'next/image'
+import { CiSearch } from 'react-icons/ci'
 
 //TODO: Pictures are not getting rendered
+//TODO: Add the logic for search filter and underline the word according to the input
 
 type Props = {}
 
 const Currency = (props: Props) => {
-  const [selectedCheckbox, setSelectedCheckbox] = useState<string>('HIVE')
+  const [currency, setCurrency] = useState<string>('')
   const handleCheckboxChange = (checkboxId: string) => {
-    setSelectedCheckbox(prev => (prev === checkboxId ? 'HIVE' : checkboxId))
+    setCurrency(prev => (prev === checkboxId ? 'HIVE' : checkboxId))
   }
 
+  const handleSearch = (event: any) => {
+    setCurrency(event.target.value)
+  }
   return (
     <Box
       className={styles.parent}
       h="300px"
-      alignItems={'center'}
-      px={8}
+      px={4}
+      py={12}
     >
       <Box>
-        <Input value={selectedCheckbox} />
-
         <Flex
+          gap={4}
+          alignItems={'center'}
+          position={'relative'}
+        >
+          <Icon
+            as={CiSearch}
+            position={'absolute'}
+            left={1}
+            size={'lg'}
+          />
+          <Input
+            value={currency}
+            px={8}
+            onChange={handleSearch}
+            defaultValue={'Search Currency'}
+          />
+        </Flex>
+        <Box
           className={styles.cotainer}
           gap={6}
           justifyContent={'center'}
@@ -35,7 +56,7 @@ const Currency = (props: Props) => {
               py={4}
             >
               <Checkbox
-                isChecked={selectedCheckbox === 'HIVE'}
+                isChecked={currency === 'HIVE'}
                 onChange={() => handleCheckboxChange('HIVE')}
               >
                 <Flex gap={1}>
@@ -51,7 +72,7 @@ const Currency = (props: Props) => {
             </Flex>
             <Flex gap={4}>
               <Checkbox
-                isChecked={selectedCheckbox === 'HBD'}
+                isChecked={currency === 'HBD'}
                 onChange={() => handleCheckboxChange('HBD')}
               >
                 <Flex gap={1}>
@@ -66,7 +87,7 @@ const Currency = (props: Props) => {
               </Checkbox>
             </Flex>
           </CheckboxGroup>
-        </Flex>
+        </Box>
       </Box>
     </Box>
   )

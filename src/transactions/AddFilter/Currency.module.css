@@ -1,8 +1,6 @@
 .parent {
   display: flex;
   width: full;
-  min-height: 395px;
-  justify-content: center;
 }
 
 .container {

@@ -10,7 +10,9 @@ import { useAuth } from '../../hooks/auth'
 import { UserInfo } from './UserInfo'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { ToggleDarkModeButton } from '../ToggleDarkModeButton'
+import { useColorMode } from '@chakra-ui/react'
 
+//TODO: to all the
 const Sidebar = () => {
   const auth = useAuth()
 
@@ -52,6 +54,7 @@ const Sidebar = () => {
       paddingY="10px"
       paddingX={'20px'}
       position="relative"
+      //  bgColor={useColorMode}
     >
       <LogoComponent />
       <VStack
@@ -91,17 +94,15 @@ const Sidebar = () => {
             </Flex>
           </Flex>
         ))}
-        <Flex>
-          <ToggleDarkModeButton />
-        </Flex>
-        <Flex
-          alignItems="center"
-          justifyContent="space-between"
+        <Box
           marginX="10px"
           position={'absolute'}
           bottom={'12px'}
           width={'100%'}
         >
+          <Flex px={6}>
+            <ToggleDarkModeButton />
+          </Flex>
           {auth.authenticated ? (
             <UserInfo userId={auth.userId} />
           ) : (
@@ -129,7 +130,7 @@ const Sidebar = () => {
               </Text>
             </Flex>
           )}
-        </Flex>
+        </Box>
       </VStack>
     </Flex>
   )
