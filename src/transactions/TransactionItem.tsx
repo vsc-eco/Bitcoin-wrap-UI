@@ -15,6 +15,7 @@ import Moment from 'moment'
 import { readableUsername } from '../components/Sidebar/UserInfo'
 import { Skeleton } from '@chakra-ui/react'
 import styles from './TransactionItem.module.css'
+import { TransactionStatus } from './TransactionStatus'
 
 const START_BLOCK = 88079516
 const START_BLOCK_TIME = Moment('2024-08-16T02:46:48Z')
@@ -111,15 +112,19 @@ const TransactionItem = props => {
         >
           {readableOtherAccount}
         </Text>
-        {transaction.status !== 'CONFIRMED' && (
-          <Button
-            variant="outline"
-            size="xs"
-            fontWeight="normal"
-            fontSize={['12', '6', '8', '10']}
-          >
-            Pending
-          </Button>
+        {transaction.status !== 'CONFIRMED' &&
+          transaction.status !== 'FAILED' && (
+            <TransactionStatus
+              borderColor="gray.200"
+              text="Pending"
+            />
+          )}
+        {transaction.status === 'FAILED' && (
+          <TransactionStatus
+            textColor="#b0175f"
+            borderColor="#b0175f29"
+            text="Failed"
+          />
         )}
       </Td>
       <Td isNumeric>
