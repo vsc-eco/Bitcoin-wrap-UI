@@ -114,10 +114,14 @@ const TransferModal = () => {
                     pointerEvents="none"
                     color="gray.300"
                     fontSize="1.1em"
+                    top="-2px"
                   >
                     @
                   </InputLeftElement>
                   <Input
+                    _placeholder={{
+                      color: 'gray.300',
+                    }}
                     placeholder="Username"
                     isRequired
                     value={destination}
@@ -146,6 +150,7 @@ const TransferModal = () => {
                       pointerEvents="none"
                       color="gray.300"
                       fontSize="1.1em"
+                      top="-1px"
                     >
                       $
                     </InputLeftElement>
@@ -167,12 +172,12 @@ const TransferModal = () => {
                     <option value="option2">Hive Dollar</option>
                   </Select>
                 </div>
-                <Text
+                {/* <Text
                   color="black"
                   fontSize={'medium'}
                 >
                   Available Balance: {'TODO'}
-                </Text>
+                </Text> */}
                 {!isAmountValid && (
                   <Text
                     color="tomato"
