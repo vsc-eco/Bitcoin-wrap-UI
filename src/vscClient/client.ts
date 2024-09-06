@@ -7,6 +7,7 @@ type Client = {
   api: string
   userId: string
   nonce: number | null
+  netId: 'testnet/0bf2e474-6b9e-4165-ad4e-a0d78968d20c'
 }
 
 export type CallContractTransaction = {
@@ -44,7 +45,7 @@ export type Transaction =
   | TransferTransaction
 
 export type Signer<ExtraArgs extends any[] = []> = (
-  tx: TransactionContainerV2,
+  tx: OffchainTransactionContainerV2,
   client: Client,
   ...signerArgs: ExtraArgs
 ) => SignedTransaction | Promise<SignedTransaction>
@@ -90,7 +91,7 @@ export interface SignatureContainer {
 /**
  * Offchain transaction format
  */
-export interface TransactionContainerV2 {
+export interface OffchainTransactionContainerV2 {
   __t: 'vsc-tx'
   __v: '0.2'
   headers: {
@@ -106,11 +107,30 @@ export interface TransactionContainerV2 {
   tx: Transaction
 }
 
+/**
+ * Onchain transaction format
+ */
+export interface OnchainTransactionContainerV2 {
+  __t: 'vsc-tx'
+  __v: '0.2'
+  net_id: 'testnet/0bf2e474-6b9e-4165-ad4e-a0d78968d20c'
+  headers: {
+    // payer?: string
+    // lock_block?: number
+    // expire_block?: number
+    //Tuple of transaction intent enum and arguments as querystring
+    intents: [TransactionIntent, string][]
+    type: TransactionDbType
+  }
+  tx: Transaction
+}
+
 export function createClient(userId: string, api?: string): Client {
   return {
     api: api ?? 'https://api.vsc.eco',
     userId,
     nonce: null,
+    netId: 'testnet/0bf2e474-6b9e-4165-ad4e-a0d78968d20c',
   }
 }
 
@@ -135,7 +155,7 @@ export async function signAndBrodcastTransaction<
     client.nonce = await getNonce(client.userId, `${client.api}/api/v1/graphql`)
   }
 
-  const txData: TransactionContainerV2 = {
+  const txData: OffchainTransactionContainerV2 = {
     __t: 'vsc-tx',
     __v: '0.2',
     headers: {
@@ -186,4 +206,90 @@ export async function signAndBrodcastTransaction<
   }
 
   throw new Error(`vsc transaction failed: ${data.error}`)
+}
+
+export type OnchainTransaction = DepositTransaction | Transaction
+
+export type DepositTransaction = {
+  op: 'deposit'
+  payload: {
+    tk: 'HIVE' | 'HBD'
+    to: string
+    from: string
+    memo?: string
+    amount: number
+  }
+}
+
+export type SubmittedTransaction = {
+  id: string
+}
+
+export type HiveSigner<
+  ExtraJsonArgs extends any[] = [],
+  ExtraTransferArgs extends any[] = ExtraJsonArgs,
+> = {
+  json(
+    auth: 'active' | 'posting',
+    id: 'vsc.tx',
+    tx: OnchainTransactionContainerV2,
+    ...signerArgs: ExtraJsonArgs
+  ): SubmittedTransaction | Promise<SubmittedTransaction>
+  transfer(
+    tx: DepositTransaction,
+    ...signerArgs: ExtraTransferArgs
+  ): SubmittedTransaction | Promise<SubmittedTransaction>
+}
+
+export async function signAndBrodcastTransactionToHive<
+  HiveSignerInstance extends HiveSigner<
+    ExtraJsonSignerArgs,
+    ExtraTransferSignerArgs
+  >,
+  ExtraJsonSignerArgs extends any[],
+  ExtraTransferSignerArgs extends any[],
+  Tx extends OnchainTransaction,
+>(
+  tx: Tx,
+  signer: HiveSignerInstance,
+  auth: 'active' | 'posting',
+  client: Client,
+  ...signerArgs: TupleRemoveFirstTwoValues<
+    Parameters<
+      HiveSignerInstance[Tx['op'] extends 'deposit' ? 'transfer' : 'json']
+    >
+  >
+): Promise<TransactionResult> {
+  if (tx.op === 'deposit') {
+    const res = await signer.transfer(
+      tx,
+      // @ts-ignore
+      ...signerArgs,
+    )
+    return res
+  }
+
+  const txData: OnchainTransactionContainerV2 = {
+    __t: 'vsc-tx',
+    __v: '0.2',
+    net_id: client.netId,
+    headers: {
+      // payer?: string
+      // lock_block?: number
+      // expire_block?: number
+      //Tuple of transaction intent enum and arguments as querystring
+      intents: [],
+      type: TransactionDbType.input,
+    },
+    tx,
+  }
+
+  const res = await signer.json(
+    auth,
+    'vsc.tx',
+    txData,
+    // @ts-ignore
+    ...signerArgs,
+  )
+  return res
 }
