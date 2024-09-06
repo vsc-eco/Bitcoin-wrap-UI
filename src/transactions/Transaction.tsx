@@ -51,6 +51,7 @@ const query = gql`
       txs {
         amount
         block_height
+        idx
         from
         id
         memo
@@ -59,6 +60,7 @@ const query = gql`
         tk
         status
       }
+      nums
     }
   }
 `
@@ -166,7 +168,7 @@ const Transaction = (props: Props) => {
           p={4}
           borderRadius={8}
           margin="auto"
-          w="814px"
+          w="964px"
           minH="full"
         >
           <Text
@@ -217,10 +219,6 @@ const Transaction = (props: Props) => {
                   <MenuItem>
                     <TransferModal />
                   </MenuItem>
-
-                  <MenuItem>
-                    <RedeemModal />
-                  </MenuItem>
                 </MenuList>
               </Menu>
             </Box>
@@ -243,19 +241,14 @@ const Transaction = (props: Props) => {
                 >
                   <Thead>
                     <Tr>
-                      <Th
-                        w={32}
-                        display="flex"
-                        textTransform="capitalize"
-                      >
-                        <Text px="1">Date</Text>
-                        <Text fontSize="10px">(Local Time)</Text>
+                      <Th textTransform="capitalize">
+                        <Box w={12}>
+                          <Text>Date</Text>
+                          <Text fontSize="9px">(Local Time)</Text>
+                        </Box>
                       </Th>
-                      <Th
-                        textTransform="capitalize"
-                        w={!isTransactionDetailOpen ? 412 : 0}
-                      >
-                        To/From
+                      <Th textTransform="capitalize">
+                        <Box w={287}>To/From</Box>
                       </Th>
                       <Th
                         isNumeric
@@ -290,7 +283,7 @@ const Transaction = (props: Props) => {
             </Flex>
             <Box
               className={`side-popup ${isTransactionDetailOpen ? 'show-popup' : ''}`}
-              style={{ top: 0 }}
+              pr="1px"
             >
               {isTransactionDetailOpen && (
                 <TransactionDetail

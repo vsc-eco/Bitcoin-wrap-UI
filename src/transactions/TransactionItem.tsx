@@ -123,8 +123,8 @@ const TransactionItem = props => {
         )}
       </Td>
       <Td isNumeric>
-        {moneyIn ? '' : '-'}
         <Text color={moneyIn ? 'green' : undefined}>
+          {moneyIn ? '' : '-'}
           {transaction.amount / 1_000}
           &nbsp;
           {transaction.tk}
