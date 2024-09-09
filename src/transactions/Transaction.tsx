@@ -60,7 +60,6 @@ const query = gql`
         tk
         status
       }
-      nums
     }
   }
 `
