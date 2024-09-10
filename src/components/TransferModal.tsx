@@ -28,11 +28,31 @@ import { Asset } from '../hooks/blockchain/assets'
 import { useAuth } from '../hooks/auth'
 import { HIVE_PREFIX } from '../hooks/auth/hive'
 
+const assets = [
+  {
+    name: 'HIVE on VSC',
+    asset: 'VSC_HIVE',
+  },
+  {
+    name: 'HIVE on Hive',
+    asset: 'HIVE_HIVE',
+  },
+  {
+    name: 'HBD on VSC',
+    asset: 'VSC_HBD',
+  },
+  {
+    name: 'HBD on Hive',
+    asset: 'HIVE_HBD',
+  },
+] satisfies { name: string; asset: keyof typeof Asset }[]
+
 const TransferModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [destination, setDestination] = useState('')
   const [amount, setAmount] = useState(0)
   const [waitingForSig, setWaitingForSig] = useState(false)
+  const [asset, setAsset] = useState<keyof typeof Asset>(assets[0].asset)
 
   const isAmountValid = true //amount.trim() !== '' && /^\d*\.?\d*$/.test(amount) // Check if amount is not empty or only whitespace
   const { transfer } = useCreateTx()
@@ -77,7 +97,7 @@ const TransferModal = () => {
       method,
       destination,
       amount,
-      Asset.VSC_HIVE,
+      Asset[asset],
     ).catch(e => console.log('tx signing failed', e))
     setWaitingForSig(false)
     onClose()
@@ -166,10 +186,17 @@ const TransferModal = () => {
 
                   <Select
                     marginLeft="2.5%"
-                    placeholder="Select Asset"
+                    onChange={e => setAsset(e.currentTarget.value as any)}
+                    defaultValue={asset}
                   >
-                    <option value="option1">Hive</option>
-                    <option value="option2">Hive Dollar</option>
+                    {assets.map(({ name, asset }, index) => (
+                      <option
+                        key={asset}
+                        value={asset}
+                      >
+                        {name}
+                      </option>
+                    ))}
                   </Select>
                 </div>
                 {/* <Text
