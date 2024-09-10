@@ -27,6 +27,7 @@ import { BlockchainActions } from '../hooks/blockchain'
 import { Asset } from '../hooks/blockchain/assets'
 import { useAuth } from '../hooks/auth'
 import { HIVE_PREFIX } from '../hooks/auth/hive'
+import { ETH_PREFIX } from '../hooks/auth/wagmi-web3modal'
 
 const assets = [
   {
@@ -47,6 +48,11 @@ const assets = [
   },
 ] satisfies { name: string; asset: keyof typeof Asset }[]
 
+const ethReg = new RegExp('^(0x)?[0-9a-fA-F]{40}$')
+const hiveReg = new RegExp(
+  '^(?=.{3,16}$)[a-z][0-9a-z-]{1,}[0-9a-z]([.][a-z][0-9a-z-]{1,}[0-9a-z]){0,}$',
+)
+
 const TransferModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [destination, setDestination] = useState('')
@@ -54,7 +60,22 @@ const TransferModal = () => {
   const [waitingForSig, setWaitingForSig] = useState(false)
   const [asset, setAsset] = useState<keyof typeof Asset>(assets[0].asset)
 
-  const isAmountValid = true //amount.trim() !== '' && /^\d*\.?\d*$/.test(amount) // Check if amount is not empty or only whitespace
+  const [isRecipientValid, parsedDestination] = (ethReg.test(destination) && [
+    true,
+    ETH_PREFIX + destination,
+  ]) ||
+    (hiveReg.test(destination) && [true, HIVE_PREFIX + destination]) ||
+    (destination.startsWith(HIVE_PREFIX)
+      ? hiveReg.test(destination.substring(HIVE_PREFIX.length)) && [
+          true,
+          destination,
+        ]
+      : ethReg.test(destination.substring(ETH_PREFIX.length)) && [
+          true,
+          destination,
+        ]) || [false, '']
+
+  const isAmountValid = /^\d*\.?\d{0,3}$/.test(amount.toString()) // Check if amount is not empty or only whitespace
   const { transfer } = useCreateTx()
 
   // const allowedAmount = useQuery({
@@ -70,12 +91,12 @@ const TransferModal = () => {
   // })
 
   const queryAccount = useQuery({
-    queryKey: ['account_status', destination] as const,
+    queryKey: ['account_status', parsedDestination] as const,
     queryFn: async ctx => {
       try {
         const [account] = await DHive.database.getAccounts([ctx.queryKey[1]])
         console.log(ctx.queryKey, account)
-        return account
+        return account || null
       } catch {}
       return null
     },
@@ -95,7 +116,7 @@ const TransferModal = () => {
     await BlockchainActions(
       'transfer',
       method,
-      destination,
+      parsedDestination,
       amount,
       Asset[asset],
     ).catch(e => console.log('tx signing failed', e))
@@ -212,6 +233,15 @@ const TransferModal = () => {
                     px={2}
                   >
                     Please enter a valid amount
+                  </Text>
+                )}
+                {!isRecipientValid && (
+                  <Text
+                    color="tomato"
+                    fontSize={'smaller'}
+                    px={2}
+                  >
+                    Recipient must be a Hive username or an Ethereum wallet
                   </Text>
                 )}
                 {false ? (
