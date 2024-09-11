@@ -4,18 +4,11 @@ import React, { useState } from 'react'
 import {
   Modal,
   ModalContent,
-  ModalBody,
   ModalCloseButton,
-  Button,
-  VStack,
-  HStack,
   Text,
   Switch,
-  Input,
-  Select,
   Box,
   Flex,
-  Grid,
   Icon,
   ResponsiveValue,
 } from '@chakra-ui/react'
@@ -23,10 +16,10 @@ import styles from './AddFilterModal.module.css'
 import CalendarComponent from './CalendarComponent'
 import { FaCalendarAlt } from 'react-icons/fa'
 import { MdOutlineCurrencyExchange } from 'react-icons/md'
-import { CgOptions } from 'react-icons/cg'
 import { HiStatusOnline } from 'react-icons/hi'
 import Currency from './Currency'
 import StatusOption from './StatusOption'
+import Leftbar from './Leftbar'
 
 type FilterModalProps = {
   isOpen: boolean
@@ -85,46 +78,30 @@ const FilterModal: React.FC<FilterModalProps> = ({
 
   //by default the first item is selected
   const [selectedItem, setSelectedItem] = useState(filterOptions[0].id)
+
   return (
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      size="lg"
+      size="xl"
     >
       <ModalContent
         top={top}
         left={left}
-        style={{ height: '400px', maxHeight: '100vh' }}
+        style={{ height: '500px', maxHeight: '100vh' }}
       >
         <ModalCloseButton />
+
+        {/* TODO: This is the leftbar make it a separate component */}
+
+        {/* TODO: make the styles inline and use theme where possible*/}
+
         <Flex className={styles.parent_container}>
-          <Box className={styles.leftbar}>
-            <Flex
-              w="full"
-              justifyContent={'center'}
-              alignItems={'center'}
-              className={styles.heading}
-              gap={2}
-            >
-              <Text size={'sm'}>My transactions</Text>
-              <Switch size={'sm'} />
-            </Flex>
-            {filterOptions.map(option => (
-              <Flex
-                key={option.id}
-                w="full"
-                bgColor={selectedItem === option.id ? '#f3f4f7' : 'transparent'}
-                className={styles.leftItem}
-                onClick={() => setSelectedItem(option.id)}
-              >
-                <Icon
-                  as={option.icon}
-                  className={styles.icon}
-                />
-                <Text className={styles.option}>{option.name}</Text>
-              </Flex>
-            ))}
-          </Box>
+          <Leftbar
+            filterOptions={filterOptions}
+            selectedItem={selectedItem}
+            setSelectedItem={setSelectedItem}
+          />
           {selectedItem == 1 && <CalendarComponent />}
           {selectedItem == 2 && <Currency />}
           {selectedItem == 3 && <StatusOption />}
