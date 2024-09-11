@@ -3,28 +3,6 @@
   display: flex;
   padding: 2px;
 }
-.leftbar {
-  display: flex;
-  flex-direction: column;
-  width: 38%;
-  background-color: #fbfcfd;
-  box-shadow: 1px 0px 0px #f0f1f4;
-}
-.leftbar .heading {
-  padding: 16px 4px;
-  box-shadow: 0px 1px 0px #f0f1f4;
-  font-size: 16px;
-  color: #535461;
-}
-
-.leftItem {
-  margin-top: 2px;
-  padding: 2px 12px;
-  border-radius: 12px;
-  margin-right: 2px;
-  cursor: pointer;
-  align-items: center;
-}
 
 .leftbar .leftItem:hover {
   background-color: #f3f4f7;
