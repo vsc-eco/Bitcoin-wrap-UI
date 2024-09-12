@@ -15,7 +15,6 @@ import { useColorMode } from '@chakra-ui/react'
 //TODO: to all the
 const Sidebar = () => {
   const auth = useAuth()
-
   const navigate = useNavigate()
   const loc = useLocation()
 

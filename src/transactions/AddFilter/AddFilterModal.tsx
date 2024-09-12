@@ -20,6 +20,8 @@ import { HiStatusOnline } from 'react-icons/hi'
 import Currency from './Currency'
 import StatusOption from './StatusOption'
 import Leftbar from './Leftbar'
+import MethodSection from './MethodSection'
+import { TbCoinFilled } from 'react-icons/tb'
 
 type FilterModalProps = {
   isOpen: boolean
@@ -74,6 +76,11 @@ const FilterModal: React.FC<FilterModalProps> = ({
       name: 'Status',
       icon: HiStatusOnline,
     },
+    {
+      id: 4,
+      name: 'Method',
+      icon: TbCoinFilled,
+    },
   ]
 
   //by default the first item is selected
@@ -92,11 +99,15 @@ const FilterModal: React.FC<FilterModalProps> = ({
       >
         <ModalCloseButton />
 
-        {/* TODO: This is the leftbar make it a separate component */}
-
         {/* TODO: make the styles inline and use theme where possible*/}
-
-        <Flex className={styles.parent_container}>
+        <Flex
+          h={700}
+          color="#535461"
+          cursor="pointer"
+          fontSize="15px"
+          fontWeight={400}
+          lineHeight="24px"
+        >
           <Leftbar
             filterOptions={filterOptions}
             selectedItem={selectedItem}
@@ -105,6 +116,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
           {selectedItem == 1 && <CalendarComponent />}
           {selectedItem == 2 && <Currency />}
           {selectedItem == 3 && <StatusOption />}
+          {selectedItem == 4 && <MethodSection />}
         </Flex>
       </ModalContent>
     </Modal>
