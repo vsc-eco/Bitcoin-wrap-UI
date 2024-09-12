@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa6'
 import { GoDash } from 'react-icons/go'
+import TimeFilter from './TimeFilter'
 
 type MonthDate = {
   year: number
@@ -120,15 +121,21 @@ const CalendarComponent = (props: Props) => {
   function selectorButtonBackground(
     month: number,
     year: number,
+    isExternal: boolean = false,
   ):
     | import('@chakra-ui/styled-system').ResponsiveValue<
         import('csstype').Property.Color
       >
     | undefined {
     //edge case
-    if (firstSelected && month === firstDate.month && year === firstDate.year) {
+    if (
+      !isExternal &&
+      firstSelected &&
+      month === firstDate.month &&
+      year === firstDate.year
+    ) {
       // dark selected
-      return '#e3e6fc'
+      return '#c5caf0'
     }
     // TODO second date might look weird
     if (!hoveredDate) {
@@ -150,8 +157,11 @@ const CalendarComponent = (props: Props) => {
         ) {
           return '#e3e6fc'
         } else if (lastDate.year === year && lastDate.month === month) {
+          if (isExternal) {
+            return '#e3e6fc'
+          }
           // dark selected
-          return '#e3e6fc'
+          return '#c5caf0'
         } else {
           return undefined
         }
@@ -160,7 +170,11 @@ const CalendarComponent = (props: Props) => {
         (hoveredDate.year === year && hoveredDate.month > month)
       ) {
         return '#e3e6fc'
-      } else if (hoveredDate.year === year && hoveredDate.month === month) {
+      } else if (
+        !isExternal &&
+        hoveredDate.year === year &&
+        hoveredDate.month === month
+      ) {
         // dark selected
         return ''
       } else {
@@ -175,16 +189,25 @@ const CalendarComponent = (props: Props) => {
     }
   }
 
-  //function for handling the first date
-  // const handleFirstDateChange = (event) => {
-  //     const newDate = monthDateToString(event.target.value);
-  //     setFirstDate(newDate)
-  // }
+  function selectorButtonStartBorderRadius(month: number, year: number) {
+    if (firstSelected && month === firstDate.month && year === firstDate.year) {
+      // dark selected
+      return '8px'
+    }
+    return undefined
+  }
 
-  // const handleLastDateChange = (event) => {
-  //     const newDate = monthDateToString(event.target.value);
-  //     setLastDate(newDate)
-  // }
+  function selectorButtonEndBorderRadius(month: number, year: number) {
+    if (
+      firstSelected &&
+      secondSelected &&
+      lastDate.year === year &&
+      lastDate.month === month
+    ) {
+      return '8px'
+    }
+    return undefined
+  }
   return (
     <>
       <Flex
@@ -250,9 +273,10 @@ const CalendarComponent = (props: Props) => {
             />
           </Flex>
         </Box>
+        <TimeFilter />
         <Flex
           gap={6}
-          pt={12}
+          pt={6}
           pb={4}
           pr={2}
         >
@@ -273,30 +297,66 @@ const CalendarComponent = (props: Props) => {
             </Flex>
             <Grid
               templateColumns="repeat(3, 1fr)"
-              gap={2}
               py={2}
             >
               {months.map((month, index) => (
-                <Button
+                <Box
                   key={month}
-                  onClick={() => handleMonthSelect(index, currentYear - 1)}
-                  className={`${getDateClass(index)}`}
-                  onMouseOver={() => handleHoverDate(index, currentYear - 1)}
-                  bgColor={selectorButtonBackground(index, currentYear - 1)}
-                  size={'xs'}
-                  _hover={{
-                    bgColor: undefined,
-                  }}
+                  my="3px"
+                  bgColor={selectorButtonBackground(
+                    index,
+                    currentYear - 1,
+                    true,
+                  )}
+                  borderLeftRadius={selectorButtonStartBorderRadius(
+                    index,
+                    currentYear - 1,
+                  )}
+                  borderRightRadius={selectorButtonEndBorderRadius(
+                    index,
+                    currentYear - 1,
+                  )}
                 >
-                  <Text
-                    color={'rgb(54, 54, 68)'}
-                    fontWeight={400}
-                    fontSize={'14px'}
-                    lineHeight={'20px'}
+                  <Box
+                    w="full"
+                    h="full"
+                    bgColor={selectorButtonBackground(index, currentYear - 1)}
+                    borderRadius={
+                      selectorButtonStartBorderRadius(index, currentYear - 1) ||
+                      selectorButtonEndBorderRadius(index, currentYear - 1)
+                    }
                   >
-                    {month}
-                  </Text>
-                </Button>
+                    <Button
+                      onClick={() => handleMonthSelect(index, currentYear - 1)}
+                      className={`${getDateClass(index)}`}
+                      onMouseOver={() =>
+                        handleHoverDate(index, currentYear - 1)
+                      }
+                      colorScheme="transparent"
+                      px="12px"
+                      py="6px"
+                      w="full"
+                      height="full"
+                      size={'xs'}
+                      _hover={{
+                        //   colorScheme:'gray'
+                        px: '8px',
+                        py: '1px',
+                        border: '2px solid white',
+                        bgColor: '#edf2f7',
+                      }}
+                    >
+                      <Text
+                        color={'rgb(54, 54, 68)'}
+                        fontWeight={400}
+                        fontSize={'14px'}
+                        lineHeight={'20px'}
+                      >
+                        {month}
+                      </Text>
+                    </Button>
+                  </Box>
+                </Box>
               ))}
             </Grid>
           </Box>
@@ -325,25 +385,51 @@ const CalendarComponent = (props: Props) => {
               py={2}
             >
               {months.map((month, index) => (
-                <Button
+                <Box
                   key={month}
-                  onClick={() => handleMonthSelect(index, currentYear)}
-                  onMouseOver={() => handleHoverDate(index, currentYear)}
-                  bgColor={selectorButtonBackground(index, currentYear)}
-                  size={'xs'}
-                  _hover={{
-                    bgColor: undefined,
-                  }}
+                  my="3px"
+                  bgColor={selectorButtonBackground(
+                    index,
+                    currentYear - 1,
+                    true,
+                  )}
+                  borderLeftRadius={selectorButtonStartBorderRadius(
+                    index,
+                    currentYear - 1,
+                  )}
+                  borderRightRadius={selectorButtonEndBorderRadius(
+                    index,
+                    currentYear - 1,
+                  )}
                 >
-                  <Text
-                    color={'rgb(54, 54, 68)'}
-                    fontWeight={400}
-                    fontSize={'14px'}
-                    lineHeight={'20px'}
+                  <Box
+                    w="full"
+                    h="full"
+                    bgColor={selectorButtonBackground(index, currentYear - 1)}
+                    borderRadius={
+                      selectorButtonStartBorderRadius(index, currentYear - 1) ||
+                      selectorButtonEndBorderRadius(index, currentYear - 1)
+                    }
                   >
-                    {month}
-                  </Text>
-                </Button>
+                    <Button
+                      key={month}
+                      onClick={() => handleMonthSelect(index, currentYear)}
+                      onMouseOver={() => handleHoverDate(index, currentYear)}
+                      bgColor={selectorButtonBackground(index, currentYear)}
+                      size={'xs'}
+                      _hover={{ bgColor: undefined }}
+                    >
+                      <Text
+                        color={'rgb(54, 54, 68)'}
+                        fontWeight={400}
+                        fontSize={'14px'}
+                        lineHeight={'20px'}
+                      >
+                        {month}
+                      </Text>
+                    </Button>
+                  </Box>
+                </Box>
               ))}
             </Grid>
           </Box>

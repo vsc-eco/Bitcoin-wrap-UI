@@ -1,25 +1,56 @@
-import React from 'react'
-import { Flex, Box, Input, CheckboxGroup, Checkbox } from '@chakra-ui/react'
+import React, { useState } from 'react'
+import { Flex, Box, Radio, RadioGroup } from '@chakra-ui/react'
+
 type Props = {}
 
 const StatusOption = (props: Props) => {
+  const [value, setValue] = useState<string>(' ')
+
+  const options = [
+    {
+      id: 1,
+      name: 'Confirmed',
+    },
+    {
+      id: 2,
+      name: 'Pending',
+    },
+    {
+      id: 3,
+      name: 'Failed',
+    },
+  ]
+
   return (
-    <Flex>
+    <Flex
+      width={'65%'}
+      pt={12}
+      paddingLeft={'8px'}
+    >
       <Box>
-        <CheckboxGroup>
-          <Box>
-            <Checkbox color={'green'}>Confirmed</Checkbox>
-          </Box>
-          <Box>
-            <Checkbox color={'yellow'}>Pending</Checkbox>
-          </Box>
-          <Box>
-            <Checkbox color={'red'}>Failed</Checkbox>
-          </Box>
-        </CheckboxGroup>
+        <RadioGroup
+          onChange={setValue}
+          value={value}
+        >
+          {options.map(item => (
+            <Box key={item.id}>
+              <Radio
+                colorScheme={
+                  item.name === 'pending'
+                    ? 'yellow'
+                    : 'confirmed'
+                      ? 'green'
+                      : 'red'
+                }
+                value={item.name}
+              >
+                {item.name}
+              </Radio>
+            </Box>
+          ))}
+        </RadioGroup>
       </Box>
     </Flex>
   )
 }
-
 export default StatusOption

@@ -1,5 +1,11 @@
 import { defineStyle, defineStyleConfig } from '@chakra-ui/react'
 
+const baseStyle = defineStyle({
+  _dark: {
+    backgroundColor: '', // color,
+  },
+})
+
 const circle = defineStyle({
   backgroundColor: 'gray.500',
   borderRadius: '50%',
@@ -10,5 +16,6 @@ const circle = defineStyle({
 })
 
 export const buttonTheme = defineStyleConfig({
+  baseStyle,
   variants: { circle },
 })

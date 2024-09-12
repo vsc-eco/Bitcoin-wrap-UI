@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Checkbox, CheckboxGroup, Icon } from '@chakra-ui/react'
 import { Flex, Box, Text, Input } from '@chakra-ui/react'
-import styles from './Currency.module.css'
 import Image from 'next/image'
 import { CiSearch } from 'react-icons/ci'
 
@@ -19,18 +18,18 @@ const Currency = (props: Props) => {
   const handleSearch = (event: any) => {
     setCurrency(event.target.value)
   }
+
   return (
-    <Box
-      className={styles.parent}
-      h="300px"
-      px={4}
-      py={12}
+    <Flex
+      width={'65%'}
+      justifyContent={'center'}
+      paddingLeft={'8px'}
     >
       <Box>
         <Flex
           gap={4}
-          alignItems={'center'}
           position={'relative'}
+          alignItems={'center'}
         >
           <Icon
             as={CiSearch}
@@ -46,7 +45,6 @@ const Currency = (props: Props) => {
           />
         </Flex>
         <Box
-          className={styles.cotainer}
           gap={6}
           justifyContent={'center'}
         >
@@ -61,7 +59,7 @@ const Currency = (props: Props) => {
               >
                 <Flex gap={1}>
                   <Image
-                    src={'./Hive.svg'}
+                    src={'./hive.svg'}
                     alt={'Hive coin'}
                     height={20}
                     width={20}
@@ -77,7 +75,7 @@ const Currency = (props: Props) => {
               >
                 <Flex gap={1}>
                   <Image
-                    src={'./HBD_green.svg'}
+                    src={'./hbd_green.svg'}
                     alt={'HBD coin'}
                     height={20}
                     width={20}
@@ -89,7 +87,7 @@ const Currency = (props: Props) => {
           </CheckboxGroup>
         </Box>
       </Box>
-    </Box>
+    </Flex>
   )
 }
 

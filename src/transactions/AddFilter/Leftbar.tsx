@@ -1,7 +1,9 @@
+//TODO: leftbar needs to be of full height
 import { Box, Flex, Text, Icon, Switch } from '@chakra-ui/react'
 import React, { SetStateAction } from 'react'
 import { IconType } from 'react-icons/lib'
 import { FaChevronRight } from 'react-icons/fa'
+
 type Props = {
   filterOptions: {
     id: number
