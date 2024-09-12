@@ -1,7 +1,7 @@
 import { Box, Flex, Text, Icon, Switch } from '@chakra-ui/react'
 import React, { SetStateAction } from 'react'
 import { IconType } from 'react-icons/lib'
-import { BiSolidRightArrow } from "react-icons/bi";
+import { FaChevronRight } from 'react-icons/fa'
 type Props = {
   filterOptions: {
     id: number
@@ -38,6 +38,7 @@ const Leftbar = ({ filterOptions, selectedItem, setSelectedItem }: Props) => {
           key={option.id}
           w="full"
           bgColor={selectedItem === option.id ? '#f3f4f7' : 'transparent'}
+          justifyContent={'space-between'}
           alignItems="center"
           marginTop={'2px'}
           paddingY={'2px'}
@@ -47,21 +48,30 @@ const Leftbar = ({ filterOptions, selectedItem, setSelectedItem }: Props) => {
           cursor="pointer"
           onClick={() => setSelectedItem(option.id)}
         >
-          <Icon
-            as={option.icon}
-            color="#535461"
-            fontSize={'small'}
-            marginRight={'12px'}
-          />
-          <Text
-            color={'#535461'}
-            cursor={'pointer'}
-            fontWeight={400}
-            lineHeight={'24px'}
-            fontSize={'15px'}
-          >
-            {option.name}
-          </Text>
+          <Flex alignItems={'center'}>
+            <Icon
+              as={option.icon}
+              color="#535461"
+              fontSize={'small'}
+              marginRight={'12px'}
+            />
+            <Text
+              color={'#535461'}
+              cursor={'pointer'}
+              fontWeight={400}
+              lineHeight={'24px'}
+              fontSize={'15px'}
+            >
+              {option.name}
+            </Text>
+          </Flex>
+          <Flex display={selectedItem === option.id ? 'flex' : 'none'}>
+            <Icon
+              as={FaChevronRight}
+              size="xs"
+              color={'#54545e'}
+            />
+          </Flex>
         </Flex>
       ))}
     </Flex>
