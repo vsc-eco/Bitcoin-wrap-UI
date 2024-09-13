@@ -60,7 +60,7 @@ const options2: optionsType = [
 
 //TODO: darker the color of the dollar sign icon when its focused the input and cursor is there
 
-const MethodSection = (props: Props) => {
+const AmountSection = (props: Props) => {
   const [value, setValue] = useState<string>('')
 
   return (
@@ -126,4 +126,4 @@ const MethodSection = (props: Props) => {
   )
 }
 
-export default MethodSection
+export default AmountSection

@@ -45,7 +45,6 @@ const Leftbar = ({ filterOptions, selectedItem, setSelectedItem }: Props) => {
           marginTop={'2px'}
           paddingY={'2px'}
           paddingX="12px"
-          borderRadius={'12px'}
           marginRight="2px"
           cursor="pointer"
           onClick={() => setSelectedItem(option.id)}
