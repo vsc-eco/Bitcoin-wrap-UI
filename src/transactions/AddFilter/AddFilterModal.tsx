@@ -1,5 +1,3 @@
-//TODO: rectify the positioning
-
 import React, { useState } from 'react'
 import {
   Modal,
@@ -20,8 +18,12 @@ import { HiStatusOnline } from 'react-icons/hi'
 import Currency from './Currency'
 import StatusOption from './StatusOption'
 import Leftbar from './Leftbar'
-import MethodSection from './MethodSection'
+import MethodSection from './AmountSection'
 import { TbCoinFilled } from 'react-icons/tb'
+import {
+  LiaGreaterThanEqualSolid,
+  LiaLessThanEqualSolid,
+} from 'react-icons/lia'
 
 type FilterModalProps = {
   isOpen: boolean
@@ -78,6 +80,11 @@ const FilterModal: React.FC<FilterModalProps> = ({
     },
     {
       id: 4,
+      name: 'Amount',
+      icon: LiaGreaterThanEqualSolid,
+    },
+    {
+      id: 5,
       name: 'Method',
       icon: TbCoinFilled,
     },
@@ -113,10 +120,12 @@ const FilterModal: React.FC<FilterModalProps> = ({
             selectedItem={selectedItem}
             setSelectedItem={setSelectedItem}
           />
-          {selectedItem == 1 && <CalendarComponent />}
-          {selectedItem == 2 && <Currency />}
-          {selectedItem == 3 && <StatusOption />}
-          {selectedItem == 4 && <MethodSection />}
+          <Box width={'65%'}>
+            {selectedItem == 1 && <CalendarComponent />}
+            {selectedItem == 2 && <Currency />}
+            {selectedItem == 3 && <StatusOption />}
+            {selectedItem == 4 && <MethodSection />}
+          </Box>
         </Flex>
       </ModalContent>
     </Modal>

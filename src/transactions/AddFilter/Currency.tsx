@@ -21,7 +21,6 @@ const Currency = (props: Props) => {
 
   return (
     <Flex
-      width={'65%'}
       justifyContent={'center'}
       paddingLeft={'8px'}
     >
