@@ -23,6 +23,7 @@ const Currency = (props: Props) => {
     <Flex
       justifyContent={'center'}
       paddingLeft={'8px'}
+      height={500}
     >
       <Box>
         <Flex

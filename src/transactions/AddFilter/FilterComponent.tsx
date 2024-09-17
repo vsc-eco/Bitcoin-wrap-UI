@@ -1,14 +1,15 @@
-import React, { useState } from 'react'
-import { Icon, Flex, Box, Input, Text } from '@chakra-ui/react'
-import { FaRegClock } from 'react-icons/fa'
+import React from 'react'
+import { Box, Flex, Input, Text, Icon } from '@chakra-ui/react'
 import { GoDash } from 'react-icons/go'
+import { MonthDate } from './CalendarComponent'
 
-type Props = {}
+type Props = {
+  firstDate: MonthDate
+  lastDate: MonthDate
+  monthDateToString: (D: MonthDate) => string
+}
 
-const TimeFilter = (props: Props) => {
-  const [fromTime, setFromTime] = useState<string>('')
-  const [toTime, setToTime] = useState<string>('')
-
+const FilterComponent = ({ firstDate, lastDate, monthDateToString }: Props) => {
   return (
     <Box>
       <Flex
@@ -33,9 +34,7 @@ const TimeFilter = (props: Props) => {
         alignItems={'center'}
       >
         <Input
-          type="time"
-          value={fromTime}
-          onChange={e => setFromTime(e.target.value)}
+          value={monthDateToString(firstDate)}
           mr={1}
         />
         <Icon
@@ -43,9 +42,7 @@ const TimeFilter = (props: Props) => {
           size={'xs'}
         />
         <Input
-          type="time"
-          value={toTime}
-          onChange={e => setToTime(e.target.value)}
+          value={monthDateToString(lastDate)}
           ml={1}
         />
       </Flex>
@@ -53,4 +50,4 @@ const TimeFilter = (props: Props) => {
   )
 }
 
-export default TimeFilter
+export default FilterComponent

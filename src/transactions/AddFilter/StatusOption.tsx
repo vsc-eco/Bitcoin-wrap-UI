@@ -24,6 +24,7 @@ const StatusOption = (props: Props) => {
   return (
     <Flex
       width={'65%'}
+      height={500}
       pt={12}
       paddingLeft={'8px'}
     >
