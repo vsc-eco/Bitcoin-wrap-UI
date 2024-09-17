@@ -1,3 +1,5 @@
+//TODO: breakdown calendar component into multiple components
+
 import React, { useState } from 'react'
 import {
   Box,
@@ -12,8 +14,9 @@ import {
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa6'
 import { GoDash } from 'react-icons/go'
 import TimeFilter from './TimeFilter'
+import FilterComponent from './FilterComponent'
 
-type MonthDate = {
+export type MonthDate = {
   year: number
   month: number
   day: number
@@ -212,11 +215,12 @@ const CalendarComponent = (props: Props) => {
     <>
       <Flex
         direction="column"
-        width={'65%'}
+        height={500}
         justifyContent={'center'}
         paddingLeft={'8px'}
       >
         <Box
+          w="full"
           boxShadow={'0px 1px 0px #f0f1f4'}
           paddingX={'2px'}
           paddingY={'12px'}
@@ -237,43 +241,17 @@ const CalendarComponent = (props: Props) => {
             <option value="last-month">Last month</option>
           </Select>
         </Box>
-        <Box>
-          <Flex
-            gap={36}
-            pt={4}
-          >
-            <Text
-              mb={2}
-              fontSize={'sm'}
-            >
-              From
-            </Text>
-            <Text
-              mb={2}
-              fontSize={'sm'}
-            >
-              To
-            </Text>
-          </Flex>
-          <Flex
-            width={'310px'}
-            alignItems={'center'}
-          >
-            <Input
-              value={monthDateToString(firstDate)}
-              mr={1}
-            />
-            <Icon
-              as={GoDash}
-              size={'xs'}
-            />
-            <Input
-              value={monthDateToString(lastDate)}
-              ml={1}
-            />
-          </Flex>
+        <Box pl={2}>
+          {/* first filter component  */}
+          <FilterComponent
+            firstDate={firstDate}
+            lastDate={lastDate}
+            monthDateToString={monthDateToString}
+          />
+
+          {/* second filter component  */}
+          <TimeFilter />
         </Box>
-        <TimeFilter />
         <Flex
           gap={6}
           pt={6}
@@ -379,45 +357,51 @@ const CalendarComponent = (props: Props) => {
                 />
               )}
             </Flex>
+            {/* TODO: To fix this  */}
             <Grid
               templateColumns="repeat(3, 1fr)"
-              gap={2}
               py={2}
             >
               {months.map((month, index) => (
                 <Box
                   key={month}
                   my="3px"
-                  bgColor={selectorButtonBackground(
-                    index,
-                    currentYear - 1,
-                    true,
-                  )}
+                  bgColor={selectorButtonBackground(index, currentYear, true)}
                   borderLeftRadius={selectorButtonStartBorderRadius(
                     index,
-                    currentYear - 1,
+                    currentYear,
                   )}
                   borderRightRadius={selectorButtonEndBorderRadius(
                     index,
-                    currentYear - 1,
+                    currentYear,
                   )}
                 >
                   <Box
                     w="full"
                     h="full"
-                    bgColor={selectorButtonBackground(index, currentYear - 1)}
+                    bgColor={selectorButtonBackground(index, currentYear)}
                     borderRadius={
-                      selectorButtonStartBorderRadius(index, currentYear - 1) ||
-                      selectorButtonEndBorderRadius(index, currentYear - 1)
+                      selectorButtonStartBorderRadius(index, currentYear) ||
+                      selectorButtonEndBorderRadius(index, currentYear)
                     }
                   >
                     <Button
-                      key={month}
                       onClick={() => handleMonthSelect(index, currentYear)}
+                      className={`${getDateClass(index)}`}
                       onMouseOver={() => handleHoverDate(index, currentYear)}
-                      bgColor={selectorButtonBackground(index, currentYear)}
+                      colorScheme="transparent"
+                      px="12px"
+                      py="6px"
+                      w="full"
+                      height="full"
                       size={'xs'}
-                      _hover={{ bgColor: undefined }}
+                      _hover={{
+                        //   colorScheme:'gray'
+                        px: '8px',
+                        py: '1px',
+                        border: '2px solid white',
+                        bgColor: '#edf2f7',
+                      }}
                     >
                       <Text
                         color={'rgb(54, 54, 68)'}

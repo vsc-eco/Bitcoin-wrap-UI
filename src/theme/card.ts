@@ -1,6 +1,7 @@
 import { cardAnatomy } from '@chakra-ui/anatomy'
 import { createMultiStyleConfigHelpers } from '@chakra-ui/react'
 
+//TODO: dark theme
 const { definePartsStyle, defineMultiStyleConfig } =
   createMultiStyleConfigHelpers(cardAnatomy.keys)
 

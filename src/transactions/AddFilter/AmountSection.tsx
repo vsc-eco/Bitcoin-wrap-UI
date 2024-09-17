@@ -69,6 +69,7 @@ const AmountSection = (props: Props) => {
       px={2}
       py={2}
       gap={4}
+      height={500}
     >
       <Box>
         <Text>Direction</Text>

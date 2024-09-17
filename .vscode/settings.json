@@ -1,5 +1,7 @@
 {
   "editor.fontFamily": "Cascadia Code",
   "editor.fontSize": 13,
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "terminal.integrated.fontFamily": "monospace",
+  "terminal.integrated.fontSize": 13
 }
