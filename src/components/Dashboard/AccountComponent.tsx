@@ -30,7 +30,6 @@ const AccountsData = [
 const AccountComponent = ({ username }: Props) => {
   return (
     <Card
-      bg="white"
       mx={['0', '0', '1', '3']}
       w={391}
       h={481}

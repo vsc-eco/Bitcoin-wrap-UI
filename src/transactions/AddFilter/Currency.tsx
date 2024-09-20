@@ -22,6 +22,7 @@ const Currency = (props: Props) => {
   return (
     <Flex
       justifyContent={'center'}
+      paddingTop={'36px'}
       paddingLeft={'8px'}
       height={500}
     >

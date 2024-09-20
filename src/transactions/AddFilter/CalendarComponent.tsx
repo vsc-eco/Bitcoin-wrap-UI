@@ -1,4 +1,4 @@
-//TODO: breakdown calendar component into multiple components
+//TODO: add user input validation
 
 import React, { useState } from 'react'
 import {

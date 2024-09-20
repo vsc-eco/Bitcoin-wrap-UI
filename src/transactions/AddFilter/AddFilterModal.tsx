@@ -18,12 +18,13 @@ import { HiStatusOnline } from 'react-icons/hi'
 import Currency from './Currency'
 import StatusOption from './StatusOption'
 import Leftbar from './Leftbar'
-import MethodSection from './AmountSection'
+import MethodSection from './MethodSection'
 import { TbCoinFilled } from 'react-icons/tb'
 import {
   LiaGreaterThanEqualSolid,
   LiaLessThanEqualSolid,
 } from 'react-icons/lia'
+import AmountSection from './AmountSection'
 
 type FilterModalProps = {
   isOpen: boolean
@@ -124,7 +125,8 @@ const FilterModal: React.FC<FilterModalProps> = ({
             {selectedItem == 1 && <CalendarComponent />}
             {selectedItem == 2 && <Currency />}
             {selectedItem == 3 && <StatusOption />}
-            {selectedItem == 4 && <MethodSection />}
+            {selectedItem == 4 && <AmountSection />}
+            {selectedItem == 5 && <MethodSection />}
           </Box>
         </Flex>
       </ModalContent>
