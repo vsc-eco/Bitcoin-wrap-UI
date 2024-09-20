@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Flex, Box, Radio, RadioGroup } from '@chakra-ui/react'
+import { Flex, Box, Radio, RadioGroup, Button } from '@chakra-ui/react'
 
 type Props = {}
 
@@ -25,7 +25,8 @@ const StatusOption = (props: Props) => {
     <Flex
       width={'65%'}
       height={500}
-      pt={12}
+      pt={'36px'}
+      justifyContent={'center'}
       paddingLeft={'8px'}
     >
       <Box>
@@ -34,19 +35,30 @@ const StatusOption = (props: Props) => {
           value={value}
         >
           {options.map(item => (
-            <Box key={item.id}>
-              <Radio
-                colorScheme={
-                  item.name === 'pending'
-                    ? 'yellow'
-                    : 'confirmed'
-                      ? 'green'
-                      : 'red'
-                }
-                value={item.name}
+            <Box
+              key={item.id}
+              my={2}
+              mx={4}
+            >
+              <Button
+                size={'sm'}
+                w="full"
+                textAlign={'left'}
+                justifyContent={'start'}
               >
-                {item.name}
-              </Radio>
+                <Radio
+                  colorScheme={
+                    item.name === 'pending'
+                      ? 'yellow'
+                      : 'confirmed'
+                        ? 'green'
+                        : 'red'
+                  }
+                  value={item.name}
+                >
+                  {item.name}
+                </Radio>
+              </Button>
             </Box>
           ))}
         </RadioGroup>

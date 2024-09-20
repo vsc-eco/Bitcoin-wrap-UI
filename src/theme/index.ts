@@ -11,6 +11,7 @@ import { buttonTheme } from './button'
 import { cardTheme } from './card'
 import { fonts } from './fonts'
 import { colors } from './colors'
+import { flexTheme } from './flex'
 
 const config: ThemeConfig = {
   initialColorMode: 'system',
@@ -22,6 +23,7 @@ export const theme = extendTheme({
     Modal: modalTheme,
     Button: buttonTheme,
     Card: cardTheme,
+    Flex: flexTheme,
   },
   fonts,
   config,

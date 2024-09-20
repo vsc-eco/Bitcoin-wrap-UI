@@ -12,11 +12,12 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { ToggleDarkModeButton } from '../ToggleDarkModeButton'
 import { useColorMode } from '@chakra-ui/react'
 
-//TODO: to all the
 const Sidebar = () => {
   const auth = useAuth()
   const navigate = useNavigate()
   const loc = useLocation()
+
+  const { colorMode } = useColorMode()
 
   const menuItems = [
     {
@@ -67,17 +68,22 @@ const Sidebar = () => {
             justifyContent={'center'}
             onClick={item.onClick}
           >
+            {/* TODO: to make changes here for the dark mode ` */}
             <Flex
               alignItems={'center'}
               gap={1}
               w={36}
-              _hover={{ bgColor: '#f3f4f7' }}
+              _hover={{
+                bgColor: colorMode === 'light' ? '#f3f4f7' : 'gray.500',
+              }}
               paddingX={2}
               paddingY={1}
               borderRadius={'sm'}
-              color={loc.pathname === item.loc ? 'black' : '#75757d'}
+              //   color={loc.pathname === item.loc ? 'black' : '#75757d'}
+              color={colorMode === 'dark' ? 'whitesmoke' : '#    75757d'}
+              //   bgColor={loc.pathname === item.loc ? '#75757d' : 'white'}
+              bgColor={colorMode === 'dark' ? 'gray.700' : '#f3f4f7'}
               fontWeight={loc.pathname === item.loc ? 480 : undefined}
-              bgColor={loc.pathname === item.loc ? '#f3f4f7' : 'white'}
               cursor={'pointer'}
             >
               <Text color={loc.pathname === item.loc ? '#7b8aee' : '#75757d'}>
@@ -107,7 +113,11 @@ const Sidebar = () => {
           ) : (
             <Flex
               alignItems="center"
-              _hover={{ bgColor: '#f3f4f7', color: 'black' }}
+              _hover={
+                {
+                  // bgColor: colorMode === 'light' ? '#f3f4f7' : 'gray.900',
+                }
+              }
               w={36}
               px={2}
               py={1}
@@ -123,7 +133,9 @@ const Sidebar = () => {
                 onClick={() => navigate('/signup')}
                 cursor={'pointer'}
                 color={'#75757d'}
-                _hover={{ color: 'black' }}
+                _hover={{
+                  color: colorMode === 'light' ? 'black' : 'whitesmoke',
+                }}
               >
                 Sign in
               </Text>
