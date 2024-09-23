@@ -14,6 +14,8 @@ import { BiMoneyWithdraw } from 'react-icons/bi'
 
 type Props = {}
 
+//TODO: remove the icons and bg shade
+
 const MethodSection = (props: Props) => {
   const options = [
     {
@@ -44,22 +46,21 @@ const MethodSection = (props: Props) => {
         <Box>
           <CheckboxGroup>
             {options.map(item => (
-              <Box key={item.id}>
-                <Button
-                  w={'full'}
-                  justifyContent={'start'}
-                  my={2}
-                >
-                  <Checkbox>
-                    <Flex
-                      gap={2}
-                      alignItems={'center'}
-                    >
-                      <Icon as={item.icon} />
-                      <Text>{item.title}</Text>
-                    </Flex>
-                  </Checkbox>
-                </Button>
+              <Box
+                key={item.id}
+                my={2}
+              >
+                <Checkbox>
+                  <Flex
+                    gap={2}
+                    alignItems={'center'}
+                  >
+                    <Icon as={item.icon} />
+                    <Text fontFamily={'font-arcadia, system-ui, sans-serif'}>
+                      {item.title}
+                    </Text>
+                  </Flex>
+                </Checkbox>
               </Box>
             ))}
           </CheckboxGroup>

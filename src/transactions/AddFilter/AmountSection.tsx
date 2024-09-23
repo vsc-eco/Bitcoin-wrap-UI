@@ -98,7 +98,8 @@ const AmountSection = (props: Props) => {
             <Box position={'relative'}>
               <Input
                 type="text"
-                px={12}
+                color={'gray.600'}
+                px={14}
                 placeholder="0.00"
               />
               <Box
@@ -114,7 +115,7 @@ const AmountSection = (props: Props) => {
                   <Icon as={item.icon} />
                   <Icon
                     as={FiDollarSign}
-                    color={'#dadade'}
+                    color={'#9a9a9a'}
                     _focusWithin={{ color: 'black' }}
                   />
                 </Flex>
