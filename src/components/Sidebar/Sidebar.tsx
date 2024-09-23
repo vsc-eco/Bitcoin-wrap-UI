@@ -54,7 +54,6 @@ const Sidebar = () => {
       paddingY="10px"
       paddingX={'20px'}
       position="relative"
-      //  bgColor={useColorMode}
     >
       <LogoComponent />
       <VStack
@@ -80,9 +79,9 @@ const Sidebar = () => {
               paddingY={1}
               borderRadius={'sm'}
               //   color={loc.pathname === item.loc ? 'black' : '#75757d'}
-              color={colorMode === 'dark' ? 'whitesmoke' : '#    75757d'}
+              color={colorMode === 'dark' ? 'whitesmoke' : '#75757d'}
               //   bgColor={loc.pathname === item.loc ? '#75757d' : 'white'}
-              bgColor={colorMode === 'dark' ? 'gray.700' : '#f3f4f7'}
+              bgColor={colorMode === 'dark' ? 'gray.700' : 'white'}
               fontWeight={loc.pathname === item.loc ? 480 : undefined}
               cursor={'pointer'}
             >
