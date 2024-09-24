@@ -1,15 +1,14 @@
 import React from 'react'
 import { Box, Flex, Input, Text, Icon } from '@chakra-ui/react'
 import { GoDash } from 'react-icons/go'
-import { MonthDate } from './CalendarComponent'
+import { monthDateToString, MonthDate } from './CalendarComponent'
 
 type Props = {
   firstDate: MonthDate
   lastDate: MonthDate
-  monthDateToString: (D: MonthDate) => string
 }
 
-const FilterComponent = ({ firstDate, lastDate, monthDateToString }: Props) => {
+const FilterComponent = ({ firstDate, lastDate }: Props) => {
   return (
     <Box>
       <Flex

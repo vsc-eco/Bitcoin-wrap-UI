@@ -3,23 +3,19 @@ import { Flex, Box, Radio, RadioGroup, Button } from '@chakra-ui/react'
 
 type Props = {}
 
+const options = [
+  {
+    name: 'Confirmed',
+  },
+  {
+    name: 'Pending',
+  },
+  {
+    name: 'Failed',
+  },
+] as const
 const StatusOption = (props: Props) => {
   const [value, setValue] = useState<string>(' ')
-
-  const options = [
-    {
-      id: 1,
-      name: 'Confirmed',
-    },
-    {
-      id: 2,
-      name: 'Pending',
-    },
-    {
-      id: 3,
-      name: 'Failed',
-    },
-  ]
 
   return (
     <Flex
@@ -34,9 +30,9 @@ const StatusOption = (props: Props) => {
           onChange={setValue}
           value={value}
         >
-          {options.map(item => (
+          {options.map((item, index) => (
             <Box
-              key={item.id}
+              key={index}
               my={2}
               mx={4}
             >
@@ -48,9 +44,9 @@ const StatusOption = (props: Props) => {
               >
                 <Radio
                   colorScheme={
-                    item.name === 'pending'
+                    item.name === 'Pending'
                       ? 'yellow'
-                      : 'confirmed'
+                      : item.name === 'Confirmed'
                         ? 'green'
                         : 'red'
                   }

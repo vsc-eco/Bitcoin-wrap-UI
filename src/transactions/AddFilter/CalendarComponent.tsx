@@ -37,7 +37,7 @@ const months = [
   'Dec',
 ]
 
-const monthDateToString = (d: MonthDate) => {
+export const monthDateToString = (d: MonthDate) => {
   return `${months[d.month]} ${d.day + 1}, ${d.year}`
 }
 
@@ -246,7 +246,6 @@ const CalendarComponent = (props: Props) => {
           <FilterComponent
             firstDate={firstDate}
             lastDate={lastDate}
-            monthDateToString={monthDateToString}
           />
 
           {/* second filter component  */}
@@ -357,7 +356,8 @@ const CalendarComponent = (props: Props) => {
                 />
               )}
             </Flex>
-            {/* TODO: To fix this  */}
+            {/* TODO: To fix the initial hover behaviour */}
+            {/* TODO: Layout shift when hovering on May  */}
             <Grid
               templateColumns="repeat(3, 1fr)"
               py={2}

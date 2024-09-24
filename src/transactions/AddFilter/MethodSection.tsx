@@ -16,24 +16,21 @@ type Props = {}
 
 //TODO: remove the icons and bg shade
 
+const options = [
+  {
+    title: 'Deposit',
+    icon: RiLuggageDepositLine,
+  },
+  {
+    title: 'Transfer',
+    icon: BiTransferAlt,
+  },
+  {
+    title: 'Withdrawl',
+    icon: BiMoneyWithdraw,
+  },
+] as const
 const MethodSection = (props: Props) => {
-  const options = [
-    {
-      id: 1,
-      title: 'Deposit',
-      icon: RiLuggageDepositLine,
-    },
-    {
-      id: 2,
-      title: 'Transfer',
-      icon: BiTransferAlt,
-    },
-    {
-      id: 3,
-      title: 'Withdrawl',
-      icon: BiMoneyWithdraw,
-    },
-  ]
   return (
     <Flex
       justifyContent={'center'}
@@ -45,9 +42,9 @@ const MethodSection = (props: Props) => {
         <Text>This is the method section</Text>
         <Box>
           <CheckboxGroup>
-            {options.map(item => (
+            {options.map((item, index) => (
               <Box
-                key={item.id}
+                key={index}
                 my={2}
               >
                 <Checkbox>

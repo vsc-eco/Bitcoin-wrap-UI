@@ -3,6 +3,8 @@ import React, { SetStateAction } from 'react'
 import { IconType } from 'react-icons/lib'
 import { FaChevronRight } from 'react-icons/fa'
 
+//TODO: remove the hardcoded color and replace it with theme scheme
+
 type Props = {
   filterOptions: {
     id: number
