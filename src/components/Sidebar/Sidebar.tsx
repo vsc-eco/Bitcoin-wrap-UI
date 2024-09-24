@@ -1,3 +1,5 @@
+//TODO: remove the color mode conditions stylings
+
 import React, { useState } from 'react'
 import { Box, VStack, Text, Flex, Button } from '@chakra-ui/react'
 import { LiaExchangeAltSolid } from 'react-icons/lia'
@@ -16,8 +18,6 @@ const Sidebar = () => {
   const auth = useAuth()
   const navigate = useNavigate()
   const loc = useLocation()
-
-  const { colorMode } = useColorMode()
 
   const menuItems = [
     {
@@ -54,6 +54,9 @@ const Sidebar = () => {
       paddingY="10px"
       paddingX={'20px'}
       position="relative"
+      _dark={{
+        boxShadow: '0px 1px 3px 0px #2D3748',
+      }}
     >
       <LogoComponent />
       <VStack
@@ -72,16 +75,16 @@ const Sidebar = () => {
               alignItems={'center'}
               gap={1}
               w={36}
-              _hover={{
-                bgColor: colorMode === 'light' ? '#f3f4f7' : 'gray.500',
-              }}
+              //   _hover={{
+              //     bgColor: colorMode === 'light' ? '#f3f4f7' : 'gray.500',
+              //   }}
               paddingX={2}
               paddingY={1}
               borderRadius={'sm'}
               //   color={loc.pathname === item.loc ? 'black' : '#75757d'}
-              color={colorMode === 'dark' ? 'whitesmoke' : '#75757d'}
-              //   bgColor={loc.pathname === item.loc ? '#75757d' : 'white'}
-              bgColor={colorMode === 'dark' ? 'gray.700' : 'white'}
+              //   color={colorMode === 'dark' ? 'whitesmoke' : '#75757d'}
+              //   //   bgColor={loc.pathname === item.loc ? '#75757d' : 'white'}
+              //   bgColor={colorMode === 'dark' ? 'gray.700' : 'white'}
               fontWeight={loc.pathname === item.loc ? 480 : undefined}
               cursor={'pointer'}
             >
@@ -112,11 +115,11 @@ const Sidebar = () => {
           ) : (
             <Flex
               alignItems="center"
-              _hover={
-                {
-                  // bgColor: colorMode === 'light' ? '#f3f4f7' : 'gray.900',
-                }
-              }
+              _dark={{
+                _hover: {
+                  backgroundColor: '',
+                },
+              }}
               w={36}
               px={2}
               py={1}
@@ -132,9 +135,9 @@ const Sidebar = () => {
                 onClick={() => navigate('/signup')}
                 cursor={'pointer'}
                 color={'#75757d'}
-                _hover={{
-                  color: colorMode === 'light' ? 'black' : 'whitesmoke',
-                }}
+                // _hover={{
+                //   color: colorMode === 'light' ? 'black' : 'whitesmoke',
+                // }}
               >
                 Sign in
               </Text>

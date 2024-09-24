@@ -2,7 +2,7 @@ import { defineStyle, defineStyleConfig } from '@chakra-ui/react'
 
 const baseStyle = defineStyle({
   _dark: {
-    backgroundColor: 'gray.600',
+    backgroundColor: '',
   },
   backgroundColor: '',
   padding: '4',

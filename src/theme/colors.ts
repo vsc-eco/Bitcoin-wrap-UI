@@ -4,6 +4,9 @@ export const colors: Colors = {
   transparent: 'transparent',
   black: '#000',
   white: '#fff',
+  //TODO: make these proper shades darker than the previous one
+  //TODO: make the shades separate for dark mode and the light mode
+
   gray: {
     50: '#f7fafc',
     500: 'rgba(112, 115, 147, 0.06)',
@@ -17,3 +20,5 @@ export const colors: Colors = {
     500: '',
   },
 }
+
+// should be as dark mode background shade

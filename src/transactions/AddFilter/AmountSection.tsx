@@ -19,44 +19,32 @@ import { iteratorStream } from '@hiveio/dhive/lib/utils'
 
 type Props = {}
 
-type optionsType = {
-  id: number
-  title: string
-  icon: IconType
-}[]
-
 const options = [
   {
-    id: 1,
     heading: 'Any',
   },
   {
-    id: 2,
     heading: 'In (e.g. deposits, refunds)',
   },
   {
-    id: 3,
     heading: 'Out (e.g. purchase, charges)',
   },
-]
+] as const
 
-const options2: optionsType = [
+const amountOptions = [
   {
-    id: 1,
     title: 'Specific amount',
     icon: TiEquals,
   },
   {
-    id: 2,
     title: 'At least...',
     icon: LiaGreaterThanEqualSolid,
   },
   {
-    id: 3,
     title: 'No more than...',
     icon: LiaLessThanEqualSolid,
   },
-]
+] as const
 
 //TODO: darker the color of the dollar sign icon when its focused the input and cursor is there
 
@@ -77,8 +65,8 @@ const AmountSection = (props: Props) => {
           value={value}
           onChange={setValue}
         >
-          {options.map(item => (
-            <Box key={item.id}>
+          {options.map((item, index) => (
+            <Box key={index}>
               <Radio value={item.heading}>
                 <Text>{item.heading}</Text>
               </Radio>
@@ -92,8 +80,8 @@ const AmountSection = (props: Props) => {
         gap={4}
         py={2}
       >
-        {options2.map(item => (
-          <Box key={item.id}>
+        {amountOptions.map((item, index) => (
+          <Box key={index}>
             <Text>{item.title}</Text>
             <Box position={'relative'}>
               <Input
