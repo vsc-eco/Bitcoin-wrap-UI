@@ -5,9 +5,10 @@ import { GoDash } from 'react-icons/go'
 
 type Props = {}
 
+//TODO: Default time set
 const TimeFilter = (props: Props) => {
-  const [fromTime, setFromTime] = useState<string>('')
-  const [toTime, setToTime] = useState<string>('')
+  const [fromTime, setFromTime] = useState<string>('01:00')
+  const [toTime, setToTime] = useState<string>('12:59')
 
   return (
     <Box>
@@ -36,6 +37,7 @@ const TimeFilter = (props: Props) => {
           type="time"
           value={fromTime}
           onChange={e => setFromTime(e.target.value)}
+          step="60"
           mr={1}
         />
         <Icon
@@ -46,6 +48,7 @@ const TimeFilter = (props: Props) => {
           type="time"
           value={toTime}
           onChange={e => setToTime(e.target.value)}
+          step="60"
           ml={1}
         />
       </Flex>
