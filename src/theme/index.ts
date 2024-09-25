@@ -1,22 +1,17 @@
-//TODO: feat: dark theme
-
-import {
-  ChakraTheme,
-  Theme,
-  extendTheme,
-  type ThemeConfig,
-} from '@chakra-ui/react'
+import { ChakraTheme, extendTheme, type ThemeConfig } from '@chakra-ui/react'
 import { modalTheme } from './modal'
 import { buttonTheme } from './button'
 import { cardTheme } from './card'
 import { fonts } from './fonts'
 import { colors } from './colors'
 import { flexTheme } from './flex'
+import { switchTheme } from './switch'
 
 const config: ThemeConfig = {
   initialColorMode: 'system',
   useSystemColorMode: true,
 }
+
 export const theme = extendTheme({
   colors,
   components: {
@@ -24,6 +19,7 @@ export const theme = extendTheme({
     Button: buttonTheme,
     Card: cardTheme,
     Flex: flexTheme,
+    Switch: switchTheme,
   },
   fonts,
   config,
