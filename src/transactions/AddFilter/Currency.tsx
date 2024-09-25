@@ -81,7 +81,7 @@ const Currency = (props: Props) => {
                     height={20}
                     width={20}
                   />
-                  HBD
+                  Hive Dollar
                 </Flex>
               </Checkbox>
             </Flex>
