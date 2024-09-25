@@ -4,7 +4,6 @@ import { buttonTheme } from './button'
 import { cardTheme } from './card'
 import { fonts } from './fonts'
 import { colors } from './colors'
-import { flexTheme } from './flex'
 import { switchTheme } from './switch'
 
 const config: ThemeConfig = {
@@ -18,7 +17,6 @@ export const theme = extendTheme({
     Modal: modalTheme,
     Button: buttonTheme,
     Card: cardTheme,
-    Flex: flexTheme,
     Switch: switchTheme,
   },
   fonts,
