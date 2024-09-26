@@ -4,7 +4,7 @@ const baseStyle = defineStyle({
   fontSize: '15px',
   fontWeight: 400,
   lineHeight: '24px',
-  fontcolor: 'gray.800',
+  color: 'gray.850',
 })
 
 const circle = defineStyle({
