@@ -110,7 +110,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
         {/* TODO: make the styles inline and use theme where possible*/}
         <Flex
           h={700}
-          color="#535461"
+          color="gray.850"
           cursor="pointer"
           fontSize="15px"
           fontWeight={400}
