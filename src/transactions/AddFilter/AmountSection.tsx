@@ -97,13 +97,13 @@ const AmountSection = (props: Props) => {
               >
                 <Flex
                   gap={3}
-                  color={'#dadade'}
+                  color={'cream.100'}
                   alignItems={'center'}
                 >
                   <Icon as={item.icon} />
                   <Icon
                     as={FiDollarSign}
-                    color={'#9a9a9a'}
+                    color={'gray.650'}
                     _focusWithin={{ color: 'black' }}
                   />
                 </Flex>
