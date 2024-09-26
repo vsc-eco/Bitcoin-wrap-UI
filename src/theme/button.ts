@@ -1,21 +1,18 @@
 import { defineStyle, defineStyleConfig } from '@chakra-ui/react'
 
 const baseStyle = defineStyle({
-  _dark: {
-    backgroundColor: '', // color,
-  },
   fontSize: '15px',
   fontWeight: 400,
   lineHeight: '24px',
-  fontcolor: '#4F4F58',
+  fontcolor: 'gray.800',
 })
 
 const circle = defineStyle({
-  backgroundColor: 'gray.500',
+  backgroundColor: 'red',
   borderRadius: '50%',
   padding: '1',
   _hover: {
-    backgroundColor: 'gray.200',
+    backgroundColor: 'red',
   },
 })
 
