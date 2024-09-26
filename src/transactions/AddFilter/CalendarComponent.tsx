@@ -137,7 +137,7 @@ const CalendarComponent = (props: Props) => {
       year === firstDate.year
     ) {
       // dark selected
-      return '#c5caf0'
+      return 'cream.200'
     }
     // TODO second date might look weird
     if (!hoveredDate) {
@@ -157,13 +157,13 @@ const CalendarComponent = (props: Props) => {
           lastDate.year > year ||
           (lastDate.year === year && lastDate.month > month)
         ) {
-          return '#e3e6fc'
+          return ''
         } else if (lastDate.year === year && lastDate.month === month) {
           if (isExternal) {
-            return '#e3e6fc'
+            return 'cream.150'
           }
           // dark selected
-          return '#c5caf0'
+          return 'cream.200'
         } else {
           return undefined
         }
@@ -171,7 +171,7 @@ const CalendarComponent = (props: Props) => {
         hoveredDate.year > year ||
         (hoveredDate.year === year && hoveredDate.month > month)
       ) {
-        return '#e3e6fc'
+        return 'cream.150'
       } else if (
         !isExternal &&
         hoveredDate.year === year &&
@@ -220,7 +220,7 @@ const CalendarComponent = (props: Props) => {
       >
         <Box
           w="full"
-          boxShadow={'0px 1px 0px #f0f1f4'}
+          boxShadow={'0px 1px 0px cream.100'}
           paddingX={'2px'}
           paddingY={'12px'}
         >
@@ -250,6 +250,8 @@ const CalendarComponent = (props: Props) => {
             <option value="last-month">2 Quarters ago (Q1, 2023)</option>
             <option value="last-month">3 Quarters ago (Q4, 2023)</option>
             <option value="last-month">Last 6 months</option>
+            <option value="last-month">This year</option>
+            <option value="last-month">Last year</option>
           </Select>
         </Box>
         <Box pl={2}>
@@ -276,7 +278,7 @@ const CalendarComponent = (props: Props) => {
               <Icon
                 as={FaArrowLeft}
                 fontSize={'12px'}
-                color={'#73737a'}
+                color={'gray.700'}
                 _hover={{ color: 'indigo.900' }}
                 cursor={'pointer'}
                 onClick={() => setCurrentYear(prev => prev - 1)}
@@ -331,11 +333,11 @@ const CalendarComponent = (props: Props) => {
                         px: '8px',
                         py: '1px',
                         border: '2px solid white',
-                        bgColor: '#edf2f7',
+                        bgColor: 'cream.50',
                       }}
                     >
                       <Text
-                        color={'rgb(54, 54, 68)'}
+                        color={'gray.500'}
                         fontWeight={400}
                         fontSize={'14px'}
                         lineHeight={'20px'}
@@ -360,15 +362,13 @@ const CalendarComponent = (props: Props) => {
                 <Icon
                   as={FaArrowRight}
                   fontSize={'12px'}
-                  color={'#73737a'}
+                  color={'gray.700'}
                   _hover={{ color: 'indigo.900' }}
                   cursor={'pointer'}
                   onClick={() => setCurrentYear(prev => prev + 1)}
                 />
               )}
             </Flex>
-            {/* TODO: To fix the initial hover behaviour */}
-            {/* TODO: Layout shift when hovering on May  */}
             <Grid
               templateColumns="repeat(3, 1fr)"
               py={2}
@@ -411,11 +411,11 @@ const CalendarComponent = (props: Props) => {
                         px: '8px',
                         py: '1px',
                         border: '2px solid white',
-                        bgColor: '#edf2f7',
+                        bgColor: 'cream.50',
                       }}
                     >
                       <Text
-                        color={'rgb(54, 54, 68)'}
+                        color={'gray.500'}
                         fontWeight={400}
                         fontSize={'14px'}
                         lineHeight={'20px'}
