@@ -20,8 +20,8 @@ const Leftbar = ({ filterOptions, selectedItem, setSelectedItem }: Props) => {
     <Flex
       flexDirection={'column'}
       width={'38%'}
-      backgroundColor={'#fbfcfd'}
-      boxShadow={'1px 0px 0px #f0f1f4'}
+      backgroundColor={'cream.50'}
+      boxShadow={'1px 0px 0px cream.100'}
     >
       <Flex
         w="full"
@@ -30,7 +30,7 @@ const Leftbar = ({ filterOptions, selectedItem, setSelectedItem }: Props) => {
         paddingX={'4px'}
         paddingY={'16px'}
         fontSize={'16px'}
-        color={'#535461'}
+        color={'gray.850'}
         gap={2}
       >
         <Text size={'sm'}>My transactions</Text>
@@ -40,7 +40,10 @@ const Leftbar = ({ filterOptions, selectedItem, setSelectedItem }: Props) => {
         <Flex
           key={option.id}
           w="full"
-          bgColor={selectedItem === option.id ? '#f3f4f7' : 'transparent'}
+          bgColor={selectedItem === option.id ? 'cream.100' : 'transparent'}
+          borderBottom={
+            selectedItem === option.id ? '2px 1px 3px indigo.700' : 'none'
+          }
           justifyContent={'space-between'}
           alignItems="center"
           marginTop={'2px'}
@@ -53,12 +56,12 @@ const Leftbar = ({ filterOptions, selectedItem, setSelectedItem }: Props) => {
           <Flex alignItems={'center'}>
             <Icon
               as={option.icon}
-              color="#535461"
+              color="gray.850"
               fontSize={'small'}
               marginRight={'12px'}
             />
             <Text
-              color={'#535461'}
+              color={'gray.850'}
               cursor={'pointer'}
               fontWeight={400}
               lineHeight={'24px'}
@@ -71,7 +74,7 @@ const Leftbar = ({ filterOptions, selectedItem, setSelectedItem }: Props) => {
             <Icon
               as={FaChevronRight}
               size="xs"
-              color={'#54545e'}
+              color={'gray.850'}
             />
           </Flex>
         </Flex>
