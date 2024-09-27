@@ -18,10 +18,8 @@ const options = [
 const StatusOption = (props: Props) => {
   return (
     <Flex
-      width={'65%'}
-      height={500}
       pt={'36px'}
-      justifyContent={'center'}
+      height={500}
       paddingLeft={'8px'}
     >
       <Box>
@@ -30,7 +28,6 @@ const StatusOption = (props: Props) => {
             <Box
               key={index}
               my={2}
-              mx={4}
             >
               <Checkbox value={item.name}>{item.name}</Checkbox>
             </Box>
