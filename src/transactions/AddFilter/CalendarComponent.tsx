@@ -157,7 +157,7 @@ const CalendarComponent = (props: Props) => {
           lastDate.year > year ||
           (lastDate.year === year && lastDate.month > month)
         ) {
-          return ''
+          return 'cream.150'
         } else if (lastDate.year === year && lastDate.month === month) {
           if (isExternal) {
             return 'cream.150'
@@ -186,7 +186,7 @@ const CalendarComponent = (props: Props) => {
     } else {
       if (hoveredDate.year === year && hoveredDate.month === month) {
         // light selected
-        return 'gray.400'
+        return 'gray.50'
       }
     }
   }
@@ -329,7 +329,6 @@ const CalendarComponent = (props: Props) => {
                       height="full"
                       size={'xs'}
                       _hover={{
-                        //   colorScheme:'gray'
                         px: '8px',
                         py: '1px',
                         border: '2px solid white',
@@ -337,7 +336,7 @@ const CalendarComponent = (props: Props) => {
                       }}
                     >
                       <Text
-                        color={'gray.500'}
+                        color={'gray.850'}
                         fontWeight={400}
                         fontSize={'14px'}
                         lineHeight={'20px'}
@@ -407,7 +406,6 @@ const CalendarComponent = (props: Props) => {
                       height="full"
                       size={'xs'}
                       _hover={{
-                        //   colorScheme:'gray'
                         px: '8px',
                         py: '1px',
                         border: '2px solid white',
@@ -415,7 +413,7 @@ const CalendarComponent = (props: Props) => {
                       }}
                     >
                       <Text
-                        color={'gray.500'}
+                        color={'gray.850'}
                         fontWeight={400}
                         fontSize={'14px'}
                         lineHeight={'20px'}
