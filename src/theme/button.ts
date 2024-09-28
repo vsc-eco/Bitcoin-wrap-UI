@@ -1,26 +1,37 @@
 import { defineStyle, defineStyleConfig } from '@chakra-ui/react'
 
-const baseStyle = defineStyle({
-  fontSize: '15px',
-  fontWeight: 400,
-  lineHeight: '24px',
-  color: 'gray.850',
-  _focus: {
-    boxShadow: '0 0 0 3px rgba(99, 102, 241, 0.6)', // Indigo ring
-    outline: 'none',
+const outline = defineStyle({
+  _active: {
+    backgroundColor: 'indigo.900',
+    border: '1px solid',
+    borderColor: 'indigo.900',
+    color: 'white',
   },
+  _hover: {
+    backgroundColor: 'indigo.900',
+    color: 'white',
+  },
+  borderRadius: 24,
+  fontWeight: 'bold',
+  backgroundColor: 'gray.70',
+  color: 'gray.850',
 })
 
 const circle = defineStyle({
-  backgroundColor: 'red',
+  backgroundColor: 'gray.70',
+  color: 'gray.850',
   borderRadius: '50%',
   padding: '1',
   _hover: {
-    backgroundColor: 'red',
+    backgroundColor: 'indigo.900',
+    color: 'white',
   },
 })
 
 export const buttonTheme = defineStyleConfig({
-  baseStyle,
-  variants: { circle },
+  baseStyle: defineStyle({
+    backgroundColor: 'red',
+    color: 'white',
+  }),
+  variants: { outline, circle },
 })

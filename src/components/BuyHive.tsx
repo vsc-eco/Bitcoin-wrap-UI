@@ -106,9 +106,11 @@ const BuyModal = (props: Props) => {
   return (
     <>
       <Button
+        variant="outline"
         onClick={onOpen}
         fontSize="xs"
         borderRadius="3xl"
+        mx={2}
       >
         Buy
       </Button>

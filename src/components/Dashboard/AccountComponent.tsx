@@ -1,6 +1,6 @@
 //TODO: add a functionality here to hover the component and show the copy to clopboard button
 
-import { Card, Flex, Text, IconButton } from '@chakra-ui/react'
+import { Card, Flex, Text, IconButton, Button } from '@chakra-ui/react'
 import React from 'react'
 import { BiTransferAlt } from 'react-icons/bi'
 import AccountData from './AccountData'
@@ -41,11 +41,12 @@ const AccountComponent = ({ username }: Props) => {
         justify="space-between"
       >
         <Text fontWeight="bolder">Accounts</Text>
-        <IconButton
+        <Button
           aria-label={'Transfer'}
-          isRound
-          icon={<BiTransferAlt />}
-        />
+          variant={'circle'}
+        >
+          <BiTransferAlt />
+        </Button>
       </Flex>
       {AccountsData.map((item: accountData) => (
         <AccountData

@@ -27,11 +27,12 @@ const Leftbar = ({ filterOptions, selectedItem, setSelectedItem }: Props) => {
         w="full"
         justifyContent={'center'}
         alignItems={'center'}
-        paddingX={'4px'}
+        paddingX={'2px'}
         paddingY={'16px'}
         fontSize={'16px'}
         color={'gray.850'}
-        gap={2}
+        gap={4}
+        boxShadow={'0px 1px 0px  #d1d5db'}
       >
         <Text size={'sm'}>My transactions</Text>
         <Switch size={'sm'} />

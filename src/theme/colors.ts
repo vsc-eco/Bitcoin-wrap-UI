@@ -14,6 +14,7 @@ export const colors: Colors = {
 
   gray: {
     50: '#f7fafc',
+    70: '#F3F4F7',
     100: '#d1d5db',
     500: '#A0AEC0', // Light gray
     600: '#718096', // Darker gray for light mode

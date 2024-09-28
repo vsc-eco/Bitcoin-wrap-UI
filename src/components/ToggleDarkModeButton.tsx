@@ -8,6 +8,7 @@ export function ToggleDarkModeButton() {
   return (
     <header>
       <Button
+        variant="outline"
         onClick={toggleColorMode}
         size={'sm'}
         fontWeight={400}

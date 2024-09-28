@@ -10,7 +10,6 @@ import { useAuth } from '../../hooks/auth'
 import { UserInfo } from './UserInfo'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { ToggleDarkModeButton } from '../ToggleDarkModeButton'
-import { useColorMode } from '@chakra-ui/react'
 
 const Sidebar = () => {
   const auth = useAuth()
@@ -50,14 +49,24 @@ const Sidebar = () => {
       gap={5}
       boxShadow="base"
       paddingY="10px"
-      paddingX={'20px'}
       position="relative"
       _dark={{
         boxShadow: '0px 1px 3px 0px gray.600',
       }}
     >
-      <LogoComponent />
+      <Flex
+        bg="gray.50"
+        px={2}
+        py={2}
+        boxShadow="0px 1px 0px #ECEEF2"
+        _hover={{
+          backgroundColor: 'gray.70',
+        }}
+      >
+        <LogoComponent />
+      </Flex>
       <VStack
+        paddingX={'20px'}
         align="start"
         w="auto"
       >
