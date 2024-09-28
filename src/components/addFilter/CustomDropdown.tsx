@@ -19,6 +19,12 @@ const options = [
 
 const CustomDropdown = (props: Props) => {
   const [isOpen, setIsOpen] = useState(false)
+  const [selectItem, setSelectedItem] = useState('Custom')
+
+  function handleOptionClick(option: string) {
+    setSelectedItem(option)
+    setIsOpen(false)
+  }
 
   return (
     <Box
@@ -35,7 +41,7 @@ const CustomDropdown = (props: Props) => {
         borderColor="gray.100"
         justifyContent="space-between"
       >
-        <span>Custom</span>
+        <span>{selectItem}</span>
         <Icon as={IoIosArrowDown} />
       </Button>
 
@@ -60,6 +66,7 @@ const CustomDropdown = (props: Props) => {
                 bg: 'indigo.900',
                 color: 'white',
               }}
+              onClick={() => handleOptionClick(item)}
             >
               {item}
             </Box>

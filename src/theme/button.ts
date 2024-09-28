@@ -5,6 +5,10 @@ const baseStyle = defineStyle({
   fontWeight: 400,
   lineHeight: '24px',
   color: 'gray.850',
+  _focus: {
+    boxShadow: '0 0 0 3px rgba(99, 102, 241, 0.6)', // Indigo ring
+    outline: 'none',
+  },
 })
 
 const circle = defineStyle({

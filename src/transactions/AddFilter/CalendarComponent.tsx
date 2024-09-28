@@ -14,6 +14,7 @@ import {
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa6'
 import TimeFilter from './TimeFilter'
 import FilterComponent from './FilterComponent'
+import CustomDropdown from '../../components/addFilter/CustomDropdown'
 
 export type MonthDate = {
   year: number
@@ -232,15 +233,10 @@ const CalendarComponent = (props: Props) => {
             Show transactions for
           </Text>
           {/* TODO: make a custom component and add it here in place of options  */}
-          <Select
+          {/* <Select
             placeholder="Custom"
             w="300px"
             variant={'filled'}
-            sx={{
-              '& > option:hover': {
-                backgroundColor: 'indigo.900',
-              },
-            }}
           >
             <option value="last-month">Last 30 days</option>
             <option value="last-month">This month</option>
@@ -252,7 +248,9 @@ const CalendarComponent = (props: Props) => {
             <option value="last-month">Last 6 months</option>
             <option value="last-month">This year</option>
             <option value="last-month">Last year</option>
-          </Select>
+          </Select> */}
+
+          <CustomDropdown />
         </Box>
         <Box pl={2}>
           {/* first filter component  */}
