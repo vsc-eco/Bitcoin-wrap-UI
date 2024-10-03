@@ -4,6 +4,7 @@ import Dashboard from './Dashboard'
 import AccountComponent from './AccountComponent'
 import { useAuth } from '../../hooks/auth'
 import { readableUsername } from '../Sidebar/UserInfo'
+import CompanyProfile from '../settings/companyProfile'
 
 type Props = {}
 

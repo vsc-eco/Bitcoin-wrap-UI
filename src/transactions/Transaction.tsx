@@ -183,6 +183,7 @@ const Transaction = (props: Props) => {
             position="relative"
           >
             <Button
+              variant="outline"
               alignItems="center"
               onClick={() => setIsModalOpen(!isModalOpen)}
               borderRadius="3xl"
@@ -211,6 +212,7 @@ const Transaction = (props: Props) => {
                   rightIcon={<ChevronDownIcon />}
                   fontSize="xs"
                   borderRadius="3xl"
+                  variant="outline"
                 >
                   Actions
                 </MenuButton>
@@ -247,7 +249,7 @@ const Transaction = (props: Props) => {
                         </Box>
                       </Th>
                       <Th textTransform="capitalize">
-                        <Box w={287}>To/From</Box>
+                        <Box w={200}>To/From</Box>
                       </Th>
                       <Th
                         isNumeric
@@ -266,19 +268,19 @@ const Transaction = (props: Props) => {
                     </Tr>
                   </Thead>
 
-                  {!loading && <Tbody>{transactions} </Tbody>}
+                  {loading && <Tbody>{transactions} </Tbody>}
                   <Tbody>
-                    {loading
+                    {!loading
                       ? // Render skeletons while loading
                         Array.from({ length: 1 }).map((_, index) => (
                           <Tr key={index}>
                             <Th>
                               <Skeleton height="40px" />
                             </Th>
-                            <Th>
+                            <Th w={620}>
                               <Skeleton
                                 height="40px"
-                                width={'370px'}
+                                width={'570px'}
                               />
                             </Th>
                             <Th>

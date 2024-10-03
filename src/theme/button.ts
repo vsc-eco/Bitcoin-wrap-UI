@@ -30,8 +30,8 @@ const circle = defineStyle({
 
 export const buttonTheme = defineStyleConfig({
   baseStyle: defineStyle({
-    backgroundColor: 'red',
-    color: 'white',
+    backgroundColor: 'transparent',
+    color: 'gray.900',
   }),
   variants: { outline, circle },
 })

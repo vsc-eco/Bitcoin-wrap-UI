@@ -97,7 +97,7 @@ const TransactionItem = props => {
       <Td
         display="flex"
         alignItems="center"
-        w={!props.isTransactionDetailOpen ? 412 : 0}
+        w={!props.isTransactionDetailOpen ? 621 : 0}
       >
         <WrapItem>
           <Avatar
@@ -127,7 +127,10 @@ const TransactionItem = props => {
           />
         )}
       </Td>
-      <Td isNumeric>
+      <Td
+        isNumeric
+        w={22}
+      >
         <Text color={moneyIn ? 'green' : undefined}>
           {moneyIn ? '' : '-'}
           {transaction.amount / 1_000}

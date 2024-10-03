@@ -9,7 +9,8 @@ import ThirdSection from './ThirdSection'
 import DexComponent from '../components/DexComponent'
 import SignUpComponent from '../components/Login/SignUpComponent'
 import Home from '../components/Dashboard/Home'
-import { MemoryRouter, Route, Routes } from 'react-router-dom'
+import { MemoryRouter, Route, Routes, Navigate } from 'react-router-dom'
+import CompanyProfile from '../components/settings/companyProfile'
 
 const SecondSection = () => {
   return (
@@ -64,6 +65,17 @@ const SecondSection = () => {
                 path="/transaction"
                 element={<Transaction />}
               />
+              <Route path="/settings">
+                <Route
+                  path=""
+                  index
+                  element={<Navigate to="/settings/account-profile" />}
+                />
+                <Route
+                  path="/settings/account-profile"
+                  element={<CompanyProfile />}
+                />
+              </Route>
             </Routes>
           </Flex>
         </Flex>
