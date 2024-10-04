@@ -268,9 +268,9 @@ const Transaction = (props: Props) => {
                     </Tr>
                   </Thead>
 
-                  {loading && <Tbody>{transactions} </Tbody>}
+                  {!loading && <Tbody>{transactions} </Tbody>}
                   <Tbody>
-                    {!loading
+                    {loading
                       ? // Render skeletons while loading
                         Array.from({ length: 1 }).map((_, index) => (
                           <Tr key={index}>

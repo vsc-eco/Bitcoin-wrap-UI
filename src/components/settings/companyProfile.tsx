@@ -207,7 +207,6 @@ const CompanyProfile: React.FC<Props> = () => {
           <ModalCloseButton />
           <ModalBody mt={10}>
             {editField === 'Profile Picture' ? (
-              //    rest of the modal code for logo change would be here
               <>
                 <Text
                   size={'xl'}
@@ -223,7 +222,10 @@ const CompanyProfile: React.FC<Props> = () => {
                     justifyContent={'space-evenly'}
                   >
                     <Box>
-                      <Icon as={RxAvatar} />
+                      <Icon
+                        as={RxAvatar}
+                        boxSize={'32px'}
+                      />
                     </Box>
                     <Text>logo name</Text>
                     <Button
@@ -245,7 +247,7 @@ const CompanyProfile: React.FC<Props> = () => {
                     >
                       <Icon
                         as={RxAvatar}
-                        boxSize={'32px'}
+                        boxSize={'48px'}
                       />
                       <Text>logo name</Text>
                     </Flex>
@@ -260,7 +262,8 @@ const CompanyProfile: React.FC<Props> = () => {
                 )}
                 <Text>Upload a new logo</Text>
                 <Flex
-                  border={'2px solid'}
+                  border={'1px solid'}
+                  borderRadius={'12px'}
                   height={200}
                   width={400}
                   position={'relative'}
@@ -270,6 +273,7 @@ const CompanyProfile: React.FC<Props> = () => {
                   <Flex
                     justifyContent={'center'}
                     gap={2}
+                    alignItems={'center'}
                   >
                     <Icon
                       as={FaUpload}
@@ -287,9 +291,9 @@ const CompanyProfile: React.FC<Props> = () => {
                     type="file"
                     accept="image/png, image/jpeg"
                     onChange={handleFileChange}
-                    ref={fileInputRef} // File input reference
-                    opacity={0} // Make it invisible but still clickable
-                    cursor={'pointer'} // Show pointer cursor to indicate clickability
+                    ref={fileInputRef}
+                    opacity={0}
+                    cursor={'pointer'}
                   />
                 </Flex>
               </>
