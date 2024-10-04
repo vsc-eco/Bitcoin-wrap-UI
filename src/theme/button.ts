@@ -17,6 +17,23 @@ const outline = defineStyle({
   color: 'gray.850',
 })
 
+const inline = defineStyle({
+  _active: {
+    backgroundColor: 'indigo.900',
+    border: '1px solid',
+    borderColor: 'indigo.900',
+    color: 'white',
+  },
+  _hover: {
+    backgroundColor: 'gray.70',
+    color: 'indigo.900',
+  },
+  borderRadius: 24,
+  fontWeight: 'bold',
+  backgroundColor: 'indigo.900',
+  color: 'white',
+})
+
 const circle = defineStyle({
   backgroundColor: 'gray.70',
   color: 'gray.850',
@@ -33,5 +50,5 @@ export const buttonTheme = defineStyleConfig({
     backgroundColor: 'transparent',
     color: 'gray.900',
   }),
-  variants: { outline, circle },
+  variants: { outline, circle, inline },
 })

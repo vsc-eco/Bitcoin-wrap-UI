@@ -7,8 +7,8 @@ import { colors } from './colors'
 import { switchTheme } from './switch'
 
 const config: ThemeConfig = {
-  initialColorMode: 'system',
-  useSystemColorMode: true,
+  initialColorMode: 'light',
+  useSystemColorMode: false,
 }
 
 export const theme = extendTheme({

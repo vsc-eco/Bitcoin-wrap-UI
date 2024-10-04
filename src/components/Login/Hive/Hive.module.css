@@ -36,7 +36,7 @@
   position: absolute;
   font-size: 16px;
   right: -6px;
-  bottom: -6px;
+  top: -6px;
   display: block;
   color: rgb(29, 170, 29);
 }
