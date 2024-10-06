@@ -35,7 +35,7 @@ const CompanyProfile: React.FC<Props> = () => {
 
   const [profileData, setProfileData] = useState({
     profileName: 'VSC Project',
-    profilePicture: '',
+    profilePicture: null,
     about: 'VSC Defi, Incorporated',
     website: 'https://vsc.eco',
     location: 'SF, California, USA',
@@ -102,11 +102,19 @@ const CompanyProfile: React.FC<Props> = () => {
           label="Profile Picture"
           value={
             <Box borderRadius="md">
-              <Icon
-                as={RxAvatar}
-                width={70}
-                height={70}
-              />
+              {logo ? (
+                <Image
+                  src={URL.createObjectURL(logo)}
+                  alt="profile picture"
+                  width={100}
+                  height={100}
+                />
+              ) : (
+                <Icon
+                  as={RxAvatar}
+                  boxSize={'32px'}
+                />
+              )}
             </Box>
           }
           subtext="This will appear on VSC next to your company name."

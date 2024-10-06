@@ -10,12 +10,14 @@ import {
   Input,
   Text,
   Box,
+  Image,
   Icon,
   Flex,
 } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { FaUpload } from 'react-icons/fa6'
 import { RxAvatar } from 'react-icons/rx'
+import { CgProfile } from 'react-icons/cg'
 
 type Props = {
   isModalOpen: boolean
@@ -27,7 +29,7 @@ type Props = {
   fileInputRef: React.RefObject<HTMLInputElement>
   profileData: {
     profileName: string
-    profilePicture: string
+    profilePicture: File | null
     about: string
     website: string
     location: string
@@ -35,7 +37,7 @@ type Props = {
   setProfileData: React.Dispatch<
     React.SetStateAction<{
       profileName: string
-      profilePicture: string
+      profilePicture: File | null
       about: string
       website: string
       location: string
@@ -55,6 +57,7 @@ const EditModal = ({
   setProfileData,
 }: Props) => {
   const [tempData, setTempData] = useState<string>('')
+  const [profilePic, setProfilePic] = useState<File | null>(null)
 
   // Close the modal after editing
   const handleModalClose = () => {
@@ -94,6 +97,10 @@ const EditModal = ({
 
   //function for saving the data
   const handleSave = () => {
+    if (editField === 'profilePicture') {
+      setProfileData({ ...profileData, [editField]: logo })
+      handleModalClose()
+    }
     setProfileData({ ...profileData, [editField]: tempData })
     handleModalClose()
   }
@@ -107,7 +114,7 @@ const EditModal = ({
       <ModalContent>
         <ModalCloseButton />
         <ModalBody mt={10}>
-          {editField === 'Profile Picture' ? (
+          {editField === 'profilePicture' ? (
             <>
               <Text
                 size={'xl'}
@@ -116,52 +123,37 @@ const EditModal = ({
               >
                 Edit Logo
               </Text>
-              {logo ? (
+              <Flex
+                alignItems={'center'}
+                justifyContent={'space-between'}
+                py={4}
+              >
                 <Flex
-                  gap={2}
                   alignItems={'center'}
-                  justifyContent={'space-evenly'}
+                  gap={1}
                 >
-                  <Box>
+                  {logo ? (
                     <Icon
-                      as={RxAvatar}
-                      boxSize={'32px'}
+                      as={CgProfile}
+                      boxSize={'48px'}
                     />
-                  </Box>
-                  <Text>logo name</Text>
-                  <Button
-                    variant={'outline'}
-                    onClick={handleRemove}
-                  >
-                    Remove
-                  </Button>
-                </Flex>
-              ) : (
-                <Flex
-                  alignItems={'center'}
-                  justifyContent={'space-between'}
-                  py={4}
-                >
-                  <Flex
-                    alignItems={'center'}
-                    gap={1}
-                  >
+                  ) : (
                     <Icon
                       as={RxAvatar}
                       boxSize={'48px'}
                     />
-                    <Text>logo name</Text>
-                  </Flex>
-                  <Button
-                    variant={'outline'}
-                    size={'xs'}
-                    onClick={handleRemove}
-                  >
-                    Remove
-                  </Button>
+                  )}
+                  <Text>logo name</Text>
                 </Flex>
-              )}
-              <Text>Upload a new logo</Text>
+                <Button
+                  variant={'outline'}
+                  size={'xs'}
+                  onClick={handleRemove}
+                >
+                  Remove
+                </Button>
+              </Flex>
+              <Text>{logo ? logo.name : 'Upload a new Image'}</Text>
               <Flex
                 border={'1px solid'}
                 borderRadius={'12px'}
@@ -170,32 +162,48 @@ const EditModal = ({
                 position={'relative'}
                 justifyContent={'center'}
                 alignItems={'center'}
+                onDrop={handleDrop}
+                onDragOver={handleDragOver}
               >
-                <Flex
-                  justifyContent={'center'}
-                  gap={2}
-                  alignItems={'center'}
-                >
-                  <Icon
-                    as={FaUpload}
-                    height={50}
-                    width={70}
-                  />
-                  <Text>Click Here to Upload</Text>
-                </Flex>
-                <Input
-                  position={'absolute'}
-                  top={0}
-                  left={0}
-                  height={'full'}
-                  width={'full'}
-                  type="file"
-                  accept="image/png, image/jpeg"
-                  onChange={handleFileChange}
-                  ref={fileInputRef}
-                  opacity={0}
-                  cursor={'pointer'}
-                />
+                {logo ? (
+                  <>
+                    <Image
+                      src={URL.createObjectURL(logo)}
+                      width={'full'}
+                      height={'full'}
+                      borderRadius={'12px'}
+                      alt="Uploaded Image"
+                    />
+                  </>
+                ) : (
+                  <Flex>
+                    <Flex
+                      justifyContent={'center'}
+                      gap={2}
+                      alignItems={'center'}
+                    >
+                      <Icon
+                        as={FaUpload}
+                        height={50}
+                        width={70}
+                      />
+                      <Text>Click Here to Upload</Text>
+                    </Flex>
+                    <Input
+                      position={'absolute'}
+                      top={0}
+                      left={0}
+                      height={'full'}
+                      width={'full'}
+                      type="file"
+                      accept="image/png, image/jpeg"
+                      onChange={handleFileChange}
+                      ref={fileInputRef}
+                      opacity={0}
+                      cursor="pointer"
+                    />
+                  </Flex>
+                )}
               </Flex>
             </>
           ) : (
@@ -225,7 +233,12 @@ const EditModal = ({
           </Button>
           <Button
             variant={'inline'}
-            onClick={handleModalClose}
+            onClick={() => {
+              if (editField === 'profilePicture') {
+                handleRemove()
+              }
+              handleModalClose()
+            }}
           >
             Cancel
           </Button>
