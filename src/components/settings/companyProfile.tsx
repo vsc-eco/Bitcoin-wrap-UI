@@ -1,5 +1,5 @@
+//TODO: replace the icon logo
 import React, { useRef, useState } from 'react'
-import Image from 'next/image'
 import {
   Box,
   VStack,
@@ -10,6 +10,8 @@ import {
   Badge,
   Icon,
   Flex,
+  Image,
+  PopoverContent,
 } from '@chakra-ui/react'
 import { InfoIcon } from '@chakra-ui/icons'
 import { IoIosArrowForward } from 'react-icons/io'
@@ -18,7 +20,7 @@ import { FaCopy } from 'react-icons/fa'
 import { FaCheckSquare } from 'react-icons/fa'
 import { useAuth } from '../../hooks/auth'
 import { Popover } from '@chakra-ui/react'
-import { FaUpload } from 'react-icons/fa6'
+import { FaCheck, FaUpload } from 'react-icons/fa6'
 import LogoComponent from '../Logo/LogoComponent'
 import EditModal from './EditModal'
 
@@ -74,8 +76,8 @@ const CompanyProfile: React.FC<Props> = () => {
           <Image
             src={'/VSC-Logo.png'}
             alt="Mercury Demo Logo"
-            width={80}
-            height={80}
+            width={20}
+            height={20}
           />
         </Box>
         <Text
@@ -101,13 +103,14 @@ const CompanyProfile: React.FC<Props> = () => {
         <InfoRow
           label="Profile Picture"
           value={
-            <Box borderRadius="md">
+            <Box>
               {logo ? (
                 <Image
                   src={URL.createObjectURL(logo)}
                   alt="profile picture"
                   width={100}
                   height={100}
+                  borderRadius="50%"
                 />
               ) : (
                 <Icon
@@ -145,17 +148,19 @@ const CompanyProfile: React.FC<Props> = () => {
         />
         <InfoRow
           label="User ID"
-          value={auth.authenticated ? auth.userId : ''}
+          value={auth.authenticated ? auth.userId.replace('hive:', '@') : ''}
           icon={
             !copied ? (
               <FaCopy
                 cursor={'pointer'}
                 onClick={() =>
-                  handleCopy(auth.authenticated ? auth.userId : '')
+                  handleCopy(
+                    auth.authenticated ? auth.userId.replace('hive:', '@') : '',
+                  )
                 }
               />
             ) : (
-              <FaCheckSquare />
+              <FaCheck color="green" />
             )
           }
           editable={false}
@@ -210,9 +215,34 @@ const InfoRow: React.FC<InfoRowProps> = ({
         align="flex-end"
         spacing={1}
       >
-        <HStack>
-          {typeof value === 'string' ? <Text>{value}</Text> : value}
+        <HStack position={'relative'}>
+          {typeof value === 'string' ? (
+            <Flex
+              gap={1}
+              alignItems={'center'}
+            >
+              <Text>{value}</Text>
+              <Text>
+                {label === 'User ID' ? (
+                  <Image
+                    src="./eth.svg"
+                    alt="hiveLogo"
+                    boxSize={'18px'}
+                  />
+                ) : null}
+              </Text>
+            </Flex>
+          ) : (
+            value
+          )}
           {icon}
+          {/* {copied ? (
+            <Box position={'absolute'}>
+              <Popover>
+                <PopoverContent>Copied!</PopoverContent>
+              </Popover>
+            </Box>
+          ) : null} */}
         </HStack>
         {editable && (
           <Link
@@ -223,6 +253,8 @@ const InfoRow: React.FC<InfoRowProps> = ({
               gap={1}
               alignItems={'center'}
               onClick={onEdit}
+              color={'indigo.900'}
+              textDecoration={'none'}
             >
               <Text>Edit</Text>
               <Icon as={IoIosArrowForward} />

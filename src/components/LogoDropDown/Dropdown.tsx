@@ -38,7 +38,14 @@ const Dropdown = ({ isOpen, setIsOpen }: Props) => {
             }}
             onClick={() => setIsOpen(!isOpen)}
           >
-            <Link to={item.link}>{item.title}</Link>
+            <Link to={item.link}>
+              <Text
+                fontWeight={400}
+                color={'gray.850'}
+              >
+                {item.title}
+              </Text>
+            </Link>
           </Box>
         ))}
 
@@ -47,6 +54,7 @@ const Dropdown = ({ isOpen, setIsOpen }: Props) => {
             fontSize={'12px'}
             px={2}
             pt={4}
+            color={'gray.850'}
           >
             Switch accounts
           </Text>
@@ -66,8 +74,9 @@ const Dropdown = ({ isOpen, setIsOpen }: Props) => {
             src={'/VSC-Logo.png'}
             width={30}
             height={10}
+            color="gray.850"
           />
-          <Text>Wallet address ...</Text>
+          <Text color={'gray.850'}>Wallet address ...</Text>
         </Flex>
 
         <Flex
@@ -85,7 +94,7 @@ const Dropdown = ({ isOpen, setIsOpen }: Props) => {
             width={30}
             height={10}
           />
-          <Text>Wallet address ...</Text>
+          <Text color={'gray.850'}>Wallet address ...</Text>
         </Flex>
       </Box>
       <Box
@@ -101,6 +110,7 @@ const Dropdown = ({ isOpen, setIsOpen }: Props) => {
           <Text
             px={2}
             fontSize={'sm'}
+            color={'gray.850'}
           >
             Create an account
           </Text>
@@ -114,6 +124,7 @@ const Dropdown = ({ isOpen, setIsOpen }: Props) => {
           <Text
             px={2}
             fontSize={'sm'}
+            color={'gray.850'}
           >
             Link new account
           </Text>

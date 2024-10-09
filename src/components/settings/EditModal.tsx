@@ -133,17 +133,24 @@ const EditModal = ({
                   gap={1}
                 >
                   {logo ? (
-                    <Icon
-                      as={CgProfile}
-                      boxSize={'48px'}
-                    />
+                    <>
+                      <Image
+                        src={URL.createObjectURL(logo)}
+                        alt="profilePicture"
+                        boxSize={'24px'}
+                        borderRadius={'2xl'}
+                      />
+                      <Text>{logo.name}</Text>
+                    </>
                   ) : (
-                    <Icon
-                      as={RxAvatar}
-                      boxSize={'48px'}
-                    />
+                    <>
+                      <Icon
+                        as={RxAvatar}
+                        boxSize={'48px'}
+                      />
+                      <Text>Logo name</Text>
+                    </>
                   )}
-                  <Text>logo name</Text>
                 </Flex>
                 <Button
                   variant={'outline'}
