@@ -21,6 +21,8 @@ import { CgProfile } from 'react-icons/cg'
 
 type Props = {
   isModalOpen: boolean
+  saveForm: boolean
+  setSaveForm: React.Dispatch<React.SetStateAction<boolean>>
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>
   setEditField: React.Dispatch<React.SetStateAction<string>>
   setLogo: React.Dispatch<React.SetStateAction<File | null>>
@@ -55,6 +57,7 @@ const EditModal = ({
   fileInputRef,
   profileData,
   setProfileData,
+  setSaveForm,
 }: Props) => {
   const [tempData, setTempData] = useState<string>('')
   const [profilePic, setProfilePic] = useState<File | null>(null)
@@ -99,9 +102,11 @@ const EditModal = ({
   const handleSave = () => {
     if (editField === 'profilePicture') {
       setProfileData({ ...profileData, [editField]: logo })
+      setSaveForm(true)
       handleModalClose()
     }
     setProfileData({ ...profileData, [editField]: tempData })
+    setSaveForm(true)
     handleModalClose()
   }
 
@@ -232,13 +237,6 @@ const EditModal = ({
 
         <ModalFooter>
           <Button
-            mr={3}
-            variant={'outline'}
-            onClick={handleSave}
-          >
-            Save
-          </Button>
-          <Button
             variant={'inline'}
             onClick={() => {
               if (editField === 'profilePicture') {
@@ -248,6 +246,13 @@ const EditModal = ({
             }}
           >
             Cancel
+          </Button>
+          <Button
+            mr={3}
+            variant={'outline'}
+            onClick={handleSave}
+          >
+            Save
           </Button>
         </ModalFooter>
       </ModalContent>

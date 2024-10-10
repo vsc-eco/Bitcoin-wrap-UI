@@ -12,6 +12,7 @@ import {
   Flex,
   Image,
   PopoverContent,
+  Button,
 } from '@chakra-ui/react'
 import { InfoIcon } from '@chakra-ui/icons'
 import { IoIosArrowForward } from 'react-icons/io'
@@ -30,6 +31,7 @@ const CompanyProfile: React.FC<Props> = () => {
   const [copied, setCopy] = useState(false)
   const [isModalOpen, setModalOpen] = useState(false)
   const [editField, setEditField] = useState<string>('')
+  const [saveForm, setSaveForm] = useState(false)
 
   //for file upload
   const [logo, setLogo] = useState<File | null>(null)
@@ -148,7 +150,32 @@ const CompanyProfile: React.FC<Props> = () => {
         />
         <InfoRow
           label="User ID"
-          value={auth.authenticated ? auth.userId.replace('hive:', '@') : ''}
+          value={
+            <Flex alignItems="center">
+              {auth.authenticated
+                ? auth.userId.startsWith('hive:')
+                  ? auth.userId.replace('hive:', '@')
+                  : auth.userId.replace('did:pkh:eip155:1:', '')
+                : ''}
+              {auth.authenticated && auth.userId.startsWith('hive:') && (
+                <Image
+                  src="./hive.svg"
+                  alt="Hive Logo"
+                  boxSize={'18px'}
+                  marginLeft="8px"
+                />
+              )}
+              {auth.authenticated &&
+                auth.userId.startsWith('did:pkh:eip155:1:') && (
+                  <Image
+                    src="./eth.svg"
+                    alt="Ethereum Logo"
+                    boxSize={'18px'}
+                    marginLeft="8px"
+                  />
+                )}
+            </Flex>
+          }
           icon={
             !copied ? (
               <FaCopy
@@ -165,6 +192,14 @@ const CompanyProfile: React.FC<Props> = () => {
           }
           editable={false}
         />
+
+        <Button
+          mr={3}
+          variant={'outline'}
+          isDisabled={!saveForm}
+        >
+          Save
+        </Button>
       </VStack>
 
       <EditModal
@@ -172,6 +207,8 @@ const CompanyProfile: React.FC<Props> = () => {
         setModalOpen={setModalOpen}
         setEditField={setEditField}
         setLogo={setLogo}
+        saveForm={saveForm}
+        setSaveForm={setSaveForm}
         editField={editField}
         logo={logo}
         fileInputRef={fileInputRef}
@@ -189,6 +226,7 @@ interface InfoRowProps {
   icon?: React.ReactNode
   editable?: boolean
   onEdit?: () => void
+  logo?: React.ReactNode
 }
 
 const InfoRow: React.FC<InfoRowProps> = ({
@@ -198,6 +236,7 @@ const InfoRow: React.FC<InfoRowProps> = ({
   icon,
   editable,
   onEdit,
+  logo,
 }) => (
   <Box>
     <HStack
@@ -222,15 +261,7 @@ const InfoRow: React.FC<InfoRowProps> = ({
               alignItems={'center'}
             >
               <Text>{value}</Text>
-              <Text>
-                {label === 'User ID' ? (
-                  <Image
-                    src="./eth.svg"
-                    alt="hiveLogo"
-                    boxSize={'18px'}
-                  />
-                ) : null}
-              </Text>
+              <Text>{label === 'User ID' && logo}</Text>
             </Flex>
           ) : (
             value
