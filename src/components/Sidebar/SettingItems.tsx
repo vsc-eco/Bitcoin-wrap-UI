@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Flex, Box, Text, Icon } from '@chakra-ui/react'
+import { Flex, Box, Text, Icon, Collapse } from '@chakra-ui/react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { CgProfile } from 'react-icons/cg'
 import { BsArrowLeft } from 'react-icons/bs'
@@ -17,7 +17,7 @@ import {
 
 type Props = {}
 
-const SettingItems = (prop: Props) => {
+const SettingItems: React.FC<Props> = () => {
   const loc = useLocation()
   const navigate = useNavigate()
 
@@ -39,19 +39,19 @@ const SettingItems = (prop: Props) => {
 
   const settingItems = [
     {
-      icon: <CgProfile />,
+      icon: CgProfile,
       text: 'Account Profile',
       loc: '/settings/account-profile',
       onClick: () => navigate('/settings/account-profile'),
     },
     {
-      icon: <MdCurrencyExchange />,
+      icon: MdCurrencyExchange,
       text: 'Local Currency',
       loc: '/settings/localCurrency',
       onClick: () => navigate('/settings/localCurrency'),
     },
     {
-      icon: <RiTimeLine />,
+      icon: RiTimeLine,
       text: 'Timezone',
       loc: '/settings/timezone',
       onClick: () => navigate('/settings/timezone'),
@@ -66,6 +66,7 @@ const SettingItems = (prop: Props) => {
         gap={2}
         onClick={() => navigate('/')}
         cursor={'pointer'}
+        mb={4} // Added margin bottom for spacing
       >
         <Icon
           as={BsArrowLeft}
@@ -76,80 +77,95 @@ const SettingItems = (prop: Props) => {
       </Flex>
 
       {settingItems.map(item => (
-        <Flex
+        <Box
           key={item.text}
-          alignItems="center"
-          justifyContent={'center'}
-          pt={2}
+          width="100%"
         >
           <Flex
+            alignItems="center"
             justifyContent={'space-between'}
-            alignItems={'center'}
-            gap={1}
-            w={36}
-            paddingX={2}
-            paddingY={1}
-            borderRadius={'sm'}
-            color={loc.pathname === item.loc ? 'black' : 'gray.900'}
-            bgColor={loc.pathname === item.loc ? 'gray.50' : 'white'}
-            fontWeight={loc.pathname === item.loc ? 480 : undefined}
+            pt={2}
+            onClick={item.onClick}
             cursor={'pointer'}
           >
-            <Flex onClick={item.onClick}>
-              <Text
-                color={loc.pathname === item.loc ? 'indigo.900' : 'gray.800'}
-              >
-                {item.icon}
-              </Text>
-              <Text
-                ml={1}
-                fontSize="xs"
-                cursor={'pointer'}
-              >
-                {item.text}
-              </Text>
+            <Flex
+              justifyContent={'space-between'}
+              alignItems={'center'}
+              w="100%"
+              px={2}
+              py={2}
+              borderRadius={'sm'}
+              bgColor={loc.pathname === item.loc ? 'gray.50' : 'white'}
+              fontWeight={loc.pathname === item.loc ? 480 : undefined}
+            >
+              <Flex alignItems="center">
+                <Icon as={item.icon} />
+                <Text
+                  ml={2}
+                  fontSize="sm"
+                  color="gray.800"
+                >
+                  {item.text}
+                </Text>
+              </Flex>
+              {item.text !== 'Account Profile' && (
+                <Icon
+                  as={MdOutlineExpandMore}
+                  boxSize={'18px'}
+                  onClick={e => {
+                    e.stopPropagation() // Prevent navigation on toggle click
+                    if (item.text === 'Local Currency') {
+                      setShowCurrency(!showCurrency)
+                      setShowTimeZone(false) // Close timezone dropdown if open
+                    } else if (item.text === 'Timezone') {
+                      setShowTimeZone(!showTimeZone)
+                      setShowCurrency(false) // Close currency dropdown if open
+                    }
+                  }}
+                />
+              )}
             </Flex>
-
-            {item.text !== 'Account Profile' && (
-              <Icon
-                as={MdOutlineExpandMore}
-                boxSize={'12px'}
-                onClick={() => {
-                  if (item.text === 'Local Currency') {
-                    setShowCurrency(!showCurrency)
-                    setShowTimeZone(false) // Close timezone dropdown if open
-                  } else if (item.text === 'Timezone') {
-                    setShowTimeZone(!showTimeZone)
-                    setShowCurrency(false) // Close currency dropdown if open
-                  }
-                }}
-              />
-            )}
           </Flex>
 
-          {showCurrency && item.text === 'Local Currency' && (
-            <Box pt={2}>
+          {/* Currency Dropdown */}
+          <Collapse in={showCurrency && item.text === 'Local Currency'}>
+            <Box
+              pl={6}
+              pt={2}
+            >
               {currencies.map((option, index) => (
                 <Flex
                   key={index}
                   alignItems="center"
-                  gap={1}
+                  py={1}
                 >
-                  <Icon as={option.symbol} />
+                  <Icon
+                    as={option.symbol}
+                    mr={2}
+                  />
                   <Text>{option.name}</Text>
                 </Flex>
               ))}
             </Box>
-          )}
+          </Collapse>
 
-          {showTimeZone && item.text === 'Timezone' && (
-            <Box pt={2}>
+          {/* Timezone Dropdown */}
+          <Collapse in={showTimeZone && item.text === 'Timezone'}>
+            <Box
+              pl={6}
+              pt={2}
+            >
               {timezones.map((option, index) => (
-                <Text key={index}>{option}</Text>
+                <Text
+                  key={index}
+                  py={1}
+                >
+                  {option}
+                </Text>
               ))}
             </Box>
-          )}
-        </Flex>
+          </Collapse>
+        </Box>
       ))}
     </>
   )
