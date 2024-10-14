@@ -32,7 +32,23 @@ const SettingItems: React.FC<Props> = () => {
     { name: 'AUD', symbol: FaAud }, // Australian Dollar
   ]
 
-  const timezones = ['GMT', 'EST', 'CST', 'MST', 'PST', 'IST', 'JST']
+  const timezones = [
+    'GMT', // GMT+0
+    'GMT+1', // GMT+1 (e.g., Central European Time - CET)
+    'GMT+2', // GMT+2 (e.g., Eastern European Time - EET)
+    'GMT+3', // GMT+3 (e.g., Arabia Standard Time - AST)
+    'GMT+4', // GMT+4 (e.g., Gulf Standard Time - GST)
+    'GMT+5', // GMT+5 (e.g., Pakistan Standard Time - PKT)
+    'GMT+5:30', // GMT+5:30 (India Standard Time - IST)
+    'GMT+6', // GMT+6 (Bangladesh Standard Time - BST)
+    'GMT+7', // GMT+7 (Indochina Time - ICT)
+    'GMT+8', // GMT+8 (China Standard Time - CST)
+    'GMT+9', // GMT+9 (Japan Standard Time - JST)
+    'GMT-5', // EST (Eastern Standard Time)
+    'GMT-6', // CST (Central Standard Time)
+    'GMT-7', // MST (Mountain Standard Time)
+    'GMT-8', // PST (Pacific Standard Time)
+  ]
 
   const [showCurrency, setShowCurrency] = useState(false)
   const [showTimeZone, setShowTimeZone] = useState(false)
@@ -57,6 +73,14 @@ const SettingItems: React.FC<Props> = () => {
       onClick: () => navigate('/settings/timezone'),
     },
   ]
+
+  function setCurrency(item: string) {
+    localStorage.setItem('Currency', item)
+  }
+
+  function setTimeZone(item: string) {
+    localStorage.setItem('Timezone', item)
+  }
 
   return (
     <>
@@ -138,6 +162,9 @@ const SettingItems: React.FC<Props> = () => {
                   key={index}
                   alignItems="center"
                   py={1}
+                  cursor={'pointer'}
+                  _hover={{ bgColor: 'gray.70' }}
+                  onClick={() => setCurrency(option.name)}
                 >
                   <Icon
                     as={option.symbol}
@@ -159,6 +186,9 @@ const SettingItems: React.FC<Props> = () => {
                 <Text
                   key={index}
                   py={1}
+                  cursor={'pointer'}
+                  _hover={{ bgColor: 'gray.70' }}
+                  onClick={() => setTimeZone(option)}
                 >
                   {option}
                 </Text>

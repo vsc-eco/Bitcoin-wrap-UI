@@ -49,6 +49,7 @@ const Sidebar = () => {
       flexDirection={'column'}
       gap={5}
       boxShadow="base"
+      width={300}
       paddingY="10px"
       position="relative"
       _dark={{
@@ -70,7 +71,7 @@ const Sidebar = () => {
       <VStack
         paddingX={'20px'}
         align="start"
-        w="auto"
+        w={200}
       >
         <Routes>
           <Route
