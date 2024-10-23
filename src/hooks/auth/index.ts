@@ -12,7 +12,7 @@ import { eth } from './wagmi-web3modal'
 import { cookieStorage, parseCookie } from 'wagmi'
 import { cookies } from '../../app/providers'
 
-type AuthState = {
+export type AuthState = {
   authenticated: boolean
 } & (
   | {
@@ -42,9 +42,7 @@ function lazy<T extends Record<any, any>>(f: () => T): T {
         handlerType,
         receiver,
       ): ProxyHandler<T>[keyof ProxyHandler<T>] {
-        console.log('getting handler', handlerType)
         return (target, ...args) => {
-          console.log('using handler', handlerType)
           if (!value) {
             value = f()
           }

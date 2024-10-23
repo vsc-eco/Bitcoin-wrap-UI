@@ -94,7 +94,7 @@ const SignUpComponent = () => {
             width={110}
             height={110}
             objectFit="cover"
-            src="/VSC-Logo.png"
+            src="/vsc.svg"
           />
         </Box>
         <Box

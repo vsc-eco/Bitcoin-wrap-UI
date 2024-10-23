@@ -2,9 +2,41 @@ import { useState } from 'react'
 import Crypto from 'crypto'
 import { DID } from 'dids'
 import Axios from 'axios'
+import { AuthState } from './auth'
 
 const API_URL = 'https://api.vsc.eco'
 const LOCAL_API = 'http://localhost:1337'
+
+export type PostingJsonMetadata = Partial<{
+  profile: Profile
+  [key: string]: unknown
+}>
+
+export type Profile = Partial<{
+  name: string
+  profile_image: string
+  version: number
+  about: string
+  website: string
+  location: string
+}>
+//newly added function just to get the intial details
+export async function fetchAccountsStatus(userId: string) {
+  if (userId.startsWith('hive:')) {
+    const response = await Axios.post('https://api.hive.blog', {
+      jsonrpc: '2.0',
+      method: 'condenser_api.get_accounts',
+      params: [[userId.replace('hive:', '')]],
+      id: 1,
+    })
+    const result = JSON.parse(response.data.result[0].posting_json_metadata)
+    // console.log('result->', response.data.result[0])
+
+    return result as PostingJsonMetadata
+  } else {
+    throw new Error('Hey! You have logged in with your eth account')
+  }
+}
 
 export const globalConfig = {
   btcTokenContract: '59dfb8383291734049bfab403ced85a57cbcde6a',

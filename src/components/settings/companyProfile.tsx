@@ -11,39 +11,29 @@ import {
   Icon,
   Flex,
   Image,
-  PopoverContent,
   Button,
 } from '@chakra-ui/react'
-import { InfoIcon } from '@chakra-ui/icons'
 import { IoIosArrowForward } from 'react-icons/io'
 import { RxAvatar } from 'react-icons/rx'
 import { FaCopy } from 'react-icons/fa'
-import { FaCheckSquare } from 'react-icons/fa'
 import { useAuth } from '../../hooks/auth'
-import { Popover } from '@chakra-ui/react'
-import { FaCheck, FaUpload } from 'react-icons/fa6'
-import LogoComponent from '../Logo/LogoComponent'
+import { FaCheck, FaPlus } from 'react-icons/fa6'
 import EditModal from './EditModal'
+import { useDetails } from '../../hooks/AccountData/getDetails'
+import { PostingJsonMetadata, Profile } from '../../hooks/VSC'
+import { BlockchainActions } from '../../hooks/blockchain'
 
 interface Props {}
 
 const CompanyProfile: React.FC<Props> = () => {
   const [copied, setCopy] = useState(false)
   const [isModalOpen, setModalOpen] = useState(false)
-  const [editField, setEditField] = useState<string>('')
+  const [editField, setEditField] = useState<keyof Profile>()
   const [saveForm, setSaveForm] = useState(false)
 
   //for file upload
-  const [logo, setLogo] = useState<File | null>(null)
+  //   const [logo, setLogo] = useState<Boolean>(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
-
-  const [profileData, setProfileData] = useState({
-    profileName: 'VSC Project',
-    profilePicture: null,
-    about: 'VSC Defi, Incorporated',
-    website: 'https://vsc.eco',
-    location: 'SF, California, USA',
-  })
 
   //function for handleCopy
   function handleCopy(value: string) {
@@ -56,12 +46,38 @@ const CompanyProfile: React.FC<Props> = () => {
   }
 
   // Open the modal for editing
-  const openModal = (field: string) => {
+  const openModal = (field: keyof Profile) => {
     setEditField(field) //editField === Profile Name || profileName
     setModalOpen(true)
   }
 
   const auth = useAuth()
+
+  const details: PostingJsonMetadata | null | undefined = useDetails()
+
+  /**
+   * This function will be hooked up to the save button at the end of the form
+   */
+
+  const handleFormSave = async () => {
+    if (typeof details === 'undefined' || details === null) {
+      throw new Error('details is null or undefined!')
+    }
+    const updateProfile = await BlockchainActions(
+      'hive',
+      'updateProfile',
+      details,
+    )
+    if (!updateProfile.success) {
+      console.log('error -> ', updateProfile.error)
+      console.log('error code ->', updateProfile.errorCode)
+      throw new Error('Failed to update profile')
+    }
+    if (updateProfile.success) {
+      console.log('Successfully uploaded!')
+      console.log(updateProfile.result)
+    }
+  }
 
   return (
     <Box
@@ -76,7 +92,7 @@ const CompanyProfile: React.FC<Props> = () => {
       >
         <Box borderRadius="md">
           <Image
-            src={'/VSC-Logo.png'}
+            src={'/vsc.svg'}
             alt="Mercury Demo Logo"
             width={20}
             height={20}
@@ -96,19 +112,20 @@ const CompanyProfile: React.FC<Props> = () => {
       >
         <InfoRow
           label="Profile name"
-          value={profileData.profileName}
+          value={details?.profile?.name}
           subtext="This is the name that appears on VSC and in your notifications."
+          onEdit={() => openModal('name')}
           editable
-          onEdit={() => openModal('profileName')}
+          isEmpty={!details?.profile?.name}
         />
 
         <InfoRow
           label="Profile Picture"
           value={
             <Box>
-              {logo ? (
+              {details?.profile?.profile_image ? (
                 <Image
-                  src={URL.createObjectURL(logo)}
+                  src={details?.profile.profile_image}
                   alt="profile picture"
                   width={100}
                   height={100}
@@ -124,29 +141,33 @@ const CompanyProfile: React.FC<Props> = () => {
           }
           subtext="This will appear on VSC next to your company name."
           editable
-          onEdit={() => openModal('profilePicture')}
+          onEdit={() => openModal('profile_image')}
+          isEmpty={!details?.profile?.profile_image}
         />
 
         <InfoRow
           label="About"
-          value={profileData.about}
+          value={details?.profile?.about}
           editable
           onEdit={() => openModal('about')}
+          isEmpty={!details?.profile?.about}
         />
 
         <InfoRow
           label="Website"
-          value={profileData.website}
+          value={details?.profile?.website}
           subtext="This is the webiste link."
           editable
           onEdit={() => openModal('website')}
+          isEmpty={!details?.profile?.website}
         />
 
         <InfoRow
           label="Location"
-          value={profileData.location}
+          value={details?.profile?.location}
           editable
           onEdit={() => openModal('location')}
+          isEmpty={!details?.profile?.location}
         />
         <InfoRow
           label="User ID"
@@ -197,6 +218,7 @@ const CompanyProfile: React.FC<Props> = () => {
           mr={3}
           variant={'outline'}
           isDisabled={!saveForm}
+          onClick={handleFormSave}
         >
           Save
         </Button>
@@ -206,14 +228,11 @@ const CompanyProfile: React.FC<Props> = () => {
         isModalOpen={isModalOpen}
         setModalOpen={setModalOpen}
         setEditField={setEditField}
-        setLogo={setLogo}
         saveForm={saveForm}
         setSaveForm={setSaveForm}
         editField={editField}
-        logo={logo}
         fileInputRef={fileInputRef}
-        profileData={profileData}
-        setProfileData={setProfileData}
+        profile_image={details?.profile?.profile_image}
       />
     </Box>
   )
@@ -227,6 +246,7 @@ interface InfoRowProps {
   editable?: boolean
   onEdit?: () => void
   logo?: React.ReactNode
+  isEmpty?: boolean
 }
 
 const InfoRow: React.FC<InfoRowProps> = ({
@@ -237,6 +257,7 @@ const InfoRow: React.FC<InfoRowProps> = ({
   editable,
   onEdit,
   logo,
+  isEmpty,
 }) => (
   <Box>
     <HStack
@@ -267,13 +288,6 @@ const InfoRow: React.FC<InfoRowProps> = ({
             value
           )}
           {icon}
-          {/* {copied ? (
-            <Box position={'absolute'}>
-              <Popover>
-                <PopoverContent>Copied!</PopoverContent>
-              </Popover>
-            </Box>
-          ) : null} */}
         </HStack>
         {editable && (
           <Link
@@ -287,8 +301,8 @@ const InfoRow: React.FC<InfoRowProps> = ({
               color={'indigo.900'}
               textDecoration={'none'}
             >
-              <Text>Edit</Text>
-              <Icon as={IoIosArrowForward} />
+              <Text>{isEmpty ? 'Add' : 'Edit'}</Text>
+              <Icon as={isEmpty ? FaPlus : IoIosArrowForward} />
             </Flex>
           </Link>
         )}

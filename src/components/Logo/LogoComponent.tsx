@@ -22,7 +22,7 @@ const LogoComponent = () => {
         alignItems="center"
       >
         <Image
-          src="/VSC-Logo.png"
+          src="/vsc.svg"
           alt="logo"
           width={30}
           height={30}

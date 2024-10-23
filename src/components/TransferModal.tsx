@@ -114,8 +114,8 @@ const TransferModal = () => {
     const method = auth.userId.startsWith(HIVE_PREFIX) ? 'hive' : 'eth'
     setWaitingForSig(true)
     await BlockchainActions(
-      'transfer',
       method,
+      'transfer',
       parsedDestination,
       amount,
       Asset[asset],

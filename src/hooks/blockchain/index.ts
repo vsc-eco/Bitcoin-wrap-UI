@@ -34,9 +34,7 @@ function lazy<T extends Record<any, any>>(f: () => T): T {
         handlerType,
         receiver,
       ): ProxyHandler<T>[keyof ProxyHandler<T>] {
-        console.log('getting handler', handlerType)
         return (target, ...args) => {
-          console.log('using handler', handlerType)
           if (!value) {
             value = f()
           }
@@ -67,28 +65,28 @@ const blockchains = {
 
 export type BlockchainMethod = keyof typeof blockchains
 
-type FunctionKey<
-  Container extends Record<any, any>,
-  Key extends keyof Container,
-> = Container[Key] extends (...args: any[]) => any ? Key : never
-
-type BlockchainOperation = FunctionKey<
-  (typeof blockchains)[keyof typeof blockchains],
-  keyof (typeof blockchains)[keyof typeof blockchains]
->
+type BlockchainOperation<
+  BlockchainSet extends BlockchainMethod = BlockchainMethod,
+> = {
+  [Blockchain in BlockchainSet]: keyof (typeof blockchains)[Blockchain]
+}[BlockchainSet]
 
 type BlockchainOptions<
   Method extends BlockchainMethod,
-  Operation extends BlockchainOperation,
-> = Parameters<(typeof blockchains)[Method][Operation]>
+  Operation extends BlockchainOperation<Method>,
+> = (typeof blockchains)[Method][Operation] extends (...args: any[]) => any
+  ? Parameters<(typeof blockchains)[Method][Operation]>
+  : never
 
 type BlockchainOperationResult<
   Method extends BlockchainMethod,
-  Operation extends BlockchainOperation,
-> = ReturnType<(typeof blockchains)[Method][Operation]>
+  Operation extends BlockchainOperation<Method>,
+> = (typeof blockchains)[Method][Operation] extends (...args: any[]) => any
+  ? ReturnType<(typeof blockchains)[Method][Operation]>
+  : never
 
 const resultHandler = async <
-  Operation extends BlockchainOperation,
+  Operation extends BlockchainOperation<Method>,
   Method extends BlockchainMethod,
 >(
   operation: Operation,
@@ -107,16 +105,17 @@ const resultHandler = async <
 }
 
 export const BlockchainActions = <
-  Operation extends BlockchainOperation,
   Method extends BlockchainMethod,
+  Operation extends BlockchainOperation<Method>,
 >(
-  operation: Operation,
   method: Method,
+  operation: Operation,
   ...args: BlockchainOptions<Method, Operation>
 ): Promise<Awaited<BlockchainOperationResult<Method, Operation>>> =>
   resultHandler(
     operation,
     method,
+    // @ts-ignore :^)
     blockchains[method][operation](
       //@ts-ignore
       ...args,

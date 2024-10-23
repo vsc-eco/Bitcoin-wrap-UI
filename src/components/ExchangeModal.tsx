@@ -27,13 +27,7 @@ import { MdCancelPresentation } from 'react-icons/md'
 import { TbExchange } from 'react-icons/tb'
 import { BiSolidLockOpenAlt } from 'react-icons/bi'
 import { useContext, useState, useLayoutEffect } from 'react'
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import { useShowComponent } from '../context/ShowComponent'
 import { DHive } from '../const'
 import { MyContext } from '../context/TokenTransferContext'
