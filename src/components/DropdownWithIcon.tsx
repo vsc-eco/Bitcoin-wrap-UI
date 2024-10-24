@@ -1,13 +1,16 @@
-//TODO: reuse this component in order to use drop down
 import React, { useState } from 'react'
-import { Flex, Box, Text, Icon, Button } from '@chakra-ui/react'
+import { Flex, Button, Box, Text, Icon } from '@chakra-ui/react'
 import { IoIosArrowDown } from 'react-icons/io'
+import { IconType } from 'react-icons/lib'
 
 type Props = {
-  options: string[]
+  options: {
+    name: string
+    symbol: IconType
+  }[]
 }
 
-const CustomDropdown = ({ options }: Props) => {
+const DropdownWithIcon = ({ options }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
   const [selectItem, setSelectedItem] = useState('Custom')
 
@@ -48,7 +51,7 @@ const CustomDropdown = ({ options }: Props) => {
           boxShadow="xs"
         >
           {options.map((item, index) => (
-            <Box
+            <Flex
               px={2}
               py={1}
               key={index}
@@ -56,10 +59,16 @@ const CustomDropdown = ({ options }: Props) => {
                 bg: 'indigo.900',
                 color: 'white',
               }}
-              onClick={() => handleOptionClick(item)}
+              onClick={() => handleOptionClick(item.name)}
+              alignItems="center"
+              gap={2}
             >
-              {item}
-            </Box>
+              <Icon
+                as={item.symbol}
+                fontWeight={'bold'}
+              />
+              <Text>{item.name}</Text>
+            </Flex>
           ))}
         </Box>
       )}
@@ -67,4 +76,4 @@ const CustomDropdown = ({ options }: Props) => {
   )
 }
 
-export default CustomDropdown
+export default DropdownWithIcon

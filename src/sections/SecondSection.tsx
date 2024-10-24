@@ -11,6 +11,7 @@ import SignUpComponent from '../components/Login/SignUpComponent'
 import Home from '../components/Dashboard/Home'
 import { MemoryRouter, Route, Routes, Navigate } from 'react-router-dom'
 import CompanyProfile from '../components/settings/companyProfile'
+import Interface from '../components/settings/Interface'
 
 const SecondSection = () => {
   return (
@@ -74,6 +75,10 @@ const SecondSection = () => {
                 <Route
                   path="/settings/account-profile"
                   element={<CompanyProfile />}
+                />
+                <Route
+                  path="/settings/interface"
+                  element={<Interface />}
                 />
               </Route>
             </Routes>

@@ -12,7 +12,7 @@ const outline = defineStyle({
     color: 'white',
   },
   borderRadius: 24,
-  fontWeight: 'bold',
+  fontWeight: 'normal',
   backgroundColor: 'gray.70',
   color: 'indigo.900',
 })
@@ -29,7 +29,7 @@ const inline = defineStyle({
     color: 'indigo.900',
   },
   borderRadius: 24,
-  fontWeight: 'bold',
+  fontWeight: 'normal',
   backgroundColor: 'indigo.900',
   color: 'white',
 })

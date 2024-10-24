@@ -1,4 +1,3 @@
-//TODO: replace the icon logo
 import React, { useRef, useState } from 'react'
 import {
   Box,
@@ -127,14 +126,14 @@ const CompanyProfile: React.FC<Props> = () => {
                 <Image
                   src={details?.profile.profile_image}
                   alt="profile picture"
-                  width={100}
-                  height={100}
+                  width={'40px'}
+                  height={'40px'}
                   borderRadius="50%"
                 />
               ) : (
                 <Icon
                   as={RxAvatar}
-                  boxSize={'32px'}
+                  boxSize={'8px'}
                 />
               )}
             </Box>
@@ -275,7 +274,10 @@ const InfoRow: React.FC<InfoRowProps> = ({
         align="flex-end"
         spacing={1}
       >
-        <HStack position={'relative'}>
+        <HStack
+          position={'relative'}
+          pr={1}
+        >
           {typeof value === 'string' ? (
             <Flex
               gap={1}

@@ -1,57 +1,16 @@
+//TODO: local currency and the timezone as main components
+
 import React, { useState } from 'react'
 import { Flex, Box, Text, Icon, Collapse } from '@chakra-ui/react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { CgProfile } from 'react-icons/cg'
 import { BsArrowLeft } from 'react-icons/bs'
-import { MdCurrencyExchange, MdOutlineExpandMore } from 'react-icons/md'
-import { RiTimeLine } from 'react-icons/ri'
-import {
-  FaDollarSign,
-  FaCanadianMapleLeaf,
-  FaPoundSign,
-  FaEuroSign,
-  FaRupeeSign,
-  FaYenSign,
-  FaDollarSign as FaAud,
-} from 'react-icons/fa'
 
 type Props = {}
 
 const SettingItems: React.FC<Props> = () => {
   const loc = useLocation()
   const navigate = useNavigate()
-
-  const currencies = [
-    { name: 'USD', symbol: FaDollarSign }, // US Dollar
-    { name: 'Mexican Peso', symbol: FaDollarSign }, // Mexican Peso
-    { name: 'CAD', symbol: FaCanadianMapleLeaf }, // Canadian Dollar
-    { name: 'British Pound', symbol: FaPoundSign }, // British Pound
-    { name: 'EURO', symbol: FaEuroSign }, // Euro
-    { name: 'Rupee', symbol: FaRupeeSign }, // Indian Rupee
-    { name: 'Japanese Yen', symbol: FaYenSign }, // Japanese Yen
-    { name: 'AUD', symbol: FaAud }, // Australian Dollar
-  ]
-
-  const timezones = [
-    'GMT', // GMT+0
-    'GMT+1', // GMT+1 (e.g., Central European Time - CET)
-    'GMT+2', // GMT+2 (e.g., Eastern European Time - EET)
-    'GMT+3', // GMT+3 (e.g., Arabia Standard Time - AST)
-    'GMT+4', // GMT+4 (e.g., Gulf Standard Time - GST)
-    'GMT+5', // GMT+5 (e.g., Pakistan Standard Time - PKT)
-    'GMT+5:30', // GMT+5:30 (India Standard Time - IST)
-    'GMT+6', // GMT+6 (Bangladesh Standard Time - BST)
-    'GMT+7', // GMT+7 (Indochina Time - ICT)
-    'GMT+8', // GMT+8 (China Standard Time - CST)
-    'GMT+9', // GMT+9 (Japan Standard Time - JST)
-    'GMT-5', // EST (Eastern Standard Time)
-    'GMT-6', // CST (Central Standard Time)
-    'GMT-7', // MST (Mountain Standard Time)
-    'GMT-8', // PST (Pacific Standard Time)
-  ]
-
-  const [showCurrency, setShowCurrency] = useState(false)
-  const [showTimeZone, setShowTimeZone] = useState(false)
 
   const settingItems = [
     {
@@ -61,16 +20,10 @@ const SettingItems: React.FC<Props> = () => {
       onClick: () => navigate('/settings/account-profile'),
     },
     {
-      icon: MdCurrencyExchange,
-      text: 'Local Currency',
-      loc: '/settings/localCurrency',
-      onClick: () => navigate('/settings/localCurrency'),
-    },
-    {
-      icon: RiTimeLine,
-      text: 'Timezone',
-      loc: '/settings/timezone',
-      onClick: () => navigate('/settings/timezone'),
+      icon: CgProfile,
+      text: 'Interface',
+      loc: '/settings/interface',
+      onClick: () => navigate('/settings/interface'),
     },
   ]
 
@@ -132,26 +85,10 @@ const SettingItems: React.FC<Props> = () => {
                   {item.text}
                 </Text>
               </Flex>
-              {item.text !== 'Account Profile' && (
-                <Icon
-                  as={MdOutlineExpandMore}
-                  boxSize={'18px'}
-                  onClick={e => {
-                    e.stopPropagation() // Prevent navigation on toggle click
-                    if (item.text === 'Local Currency') {
-                      setShowCurrency(!showCurrency)
-                      setShowTimeZone(false) // Close timezone dropdown if open
-                    } else if (item.text === 'Timezone') {
-                      setShowTimeZone(!showTimeZone)
-                      setShowCurrency(false) // Close currency dropdown if open
-                    }
-                  }}
-                />
-              )}
             </Flex>
           </Flex>
 
-          {/* Currency Dropdown */}
+          {/* Currency Dropdown
           <Collapse in={showCurrency && item.text === 'Local Currency'}>
             <Box
               pl={6}
@@ -174,10 +111,10 @@ const SettingItems: React.FC<Props> = () => {
                 </Flex>
               ))}
             </Box>
-          </Collapse>
+          </Collapse> */}
 
           {/* Timezone Dropdown */}
-          <Collapse in={showTimeZone && item.text === 'Timezone'}>
+          {/* <Collapse in={showTimeZone && item.text === 'Timezone'}>
             <Box
               pl={6}
               pt={2}
@@ -194,7 +131,7 @@ const SettingItems: React.FC<Props> = () => {
                 </Text>
               ))}
             </Box>
-          </Collapse>
+          </Collapse> */}
         </Box>
       ))}
     </>

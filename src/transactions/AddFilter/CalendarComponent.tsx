@@ -16,6 +16,7 @@ import TimeFilter from './TimeFilter'
 import FilterComponent from './FilterComponent'
 import CustomDropdown from '../../components/addFilter/CustomDropdown'
 
+type Props = {}
 export type MonthDate = {
   year: number
   month: number
@@ -50,7 +51,19 @@ const lastDayOfMonth = (month: number, year: number) =>
       ? 31
       : 30
 
-type Props = {}
+const options = [
+  'Last 30 days',
+  'This month',
+  'Last month',
+  'This Quarter (Q3, 2024)',
+  'Last Quarter (Q2, 2024)',
+  '2 Quarters ago (Q1, 2024)',
+  '3 Quarters ago (Q4, 2024)',
+  'Last 6 months',
+  'This  Year',
+  'Last Year',
+]
+
 const CalendarComponent = (props: Props) => {
   //default
   const currentDate = new Date()
@@ -232,25 +245,8 @@ const CalendarComponent = (props: Props) => {
           >
             Show transactions for
           </Text>
-          {/* TODO: make a custom component and add it here in place of options  */}
-          {/* <Select
-            placeholder="Custom"
-            w="300px"
-            variant={'filled'}
-          >
-            <option value="last-month">Last 30 days</option>
-            <option value="last-month">This month</option>
-            <option value="last-month">Last month</option>
-            <option value="last-month">This Quarter (Q3, 2024)</option>
-            <option value="last-month">Last Quarter (Q2, 2024)</option>
-            <option value="last-month">2 Quarters ago (Q1, 2023)</option>
-            <option value="last-month">3 Quarters ago (Q4, 2023)</option>
-            <option value="last-month">Last 6 months</option>
-            <option value="last-month">This year</option>
-            <option value="last-month">Last year</option>
-          </Select> */}
 
-          <CustomDropdown />
+          <CustomDropdown options={options} />
         </Box>
         <Box pl={2}>
           {/* first filter component  */}

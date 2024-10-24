@@ -9,7 +9,6 @@ import {
   ModalFooter,
   Input,
   Text,
-  Box,
   Image,
   Icon,
   Flex,
@@ -17,7 +16,6 @@ import {
 import React, { useEffect, useState } from 'react'
 import { FaUpload } from 'react-icons/fa6'
 import { RxAvatar } from 'react-icons/rx'
-//import the useQuery and useMutation hook here
 import { useAuth } from '../../hooks/auth'
 import { BlockchainActions } from '../../hooks/blockchain'
 import axios from 'axios'
@@ -333,6 +331,7 @@ const EditModal = ({
             ml={3}
             variant={'outline'}
             onClick={handleSave}
+            isDisabled={tempData === '' && !profileImg}
           >
             Save
           </Button>

@@ -14,16 +14,12 @@ const Dropdown = ({ isOpen, setIsOpen }: Props) => {
       title: 'Settings',
       link: '/settings/account-profile',
     },
-    {
-      title: '2nd option',
-      link: '/option',
-    },
   ]
   return (
     <Flex
       flexDirection="column"
       w="full"
-      justifyContent="space-between"
+      justifyContent={'space-between'}
     >
       <Box>
         {options.map((item, index) => (
@@ -53,7 +49,6 @@ const Dropdown = ({ isOpen, setIsOpen }: Props) => {
           <Text
             fontSize={'12px'}
             px={2}
-            pt={4}
             color={'gray.850'}
           >
             Switch accounts
@@ -61,8 +56,8 @@ const Dropdown = ({ isOpen, setIsOpen }: Props) => {
         </Box>
 
         <Flex
-          py={2}
           px={2}
+          py={1}
           gap={2}
           alignItems={'center'}
           _hover={{
@@ -71,17 +66,17 @@ const Dropdown = ({ isOpen, setIsOpen }: Props) => {
         >
           <Image
             alt="dp"
-            src={'/VSC-Logo.png'}
+            src={'/vsc.svg'}
             width={30}
-            height={10}
+            height={5}
             color="gray.850"
           />
           <Text color={'gray.850'}>Wallet address ...</Text>
         </Flex>
 
         <Flex
-          py={2}
           px={2}
+          py={1}
           gap={2}
           alignItems={'center'}
           _hover={{
@@ -90,17 +85,14 @@ const Dropdown = ({ isOpen, setIsOpen }: Props) => {
         >
           <Image
             alt="dp"
-            src={'/VSC-Logo.png'}
+            src={'/vsc.svg'}
             width={30}
-            height={10}
+            height={5}
           />
           <Text color={'gray.850'}>Wallet address ...</Text>
         </Flex>
       </Box>
-      <Box
-        boxShadow={'0px -1px 0px 0px #d1d5db'}
-        py={2}
-      >
+      <Box boxShadow={'0px -1px 0px 0px #d1d5db'}>
         <Box
           py={1}
           _hover={{
@@ -109,7 +101,6 @@ const Dropdown = ({ isOpen, setIsOpen }: Props) => {
         >
           <Text
             px={2}
-            fontSize={'sm'}
             color={'gray.850'}
           >
             Create an account
@@ -123,7 +114,6 @@ const Dropdown = ({ isOpen, setIsOpen }: Props) => {
         >
           <Text
             px={2}
-            fontSize={'sm'}
             color={'gray.850'}
           >
             Link new account

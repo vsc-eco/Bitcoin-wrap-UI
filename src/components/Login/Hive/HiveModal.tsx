@@ -192,13 +192,20 @@ const HiveModal: React.FC<Props> = ({ isOpen, onClose }) => {
             </form>
           </ModalBody>
           <ModalFooter>
-            <Button
-              variant="ghost"
-              onClick={onClose}
-              className={styles.secondaryButton}
-            >
-              Cancel
-            </Button>
+            <Flex gap={2}>
+              <Button
+                variant="outline"
+                onClick={onClose}
+              >
+                Cancel
+              </Button>
+              <Button
+                variant="inline"
+                //   onClick={}
+              >
+                Continue
+              </Button>
+            </Flex>
           </ModalFooter>
         </ModalContent>
       </Modal>
