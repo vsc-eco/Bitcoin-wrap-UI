@@ -133,7 +133,7 @@ const CompanyProfile: React.FC<Props> = () => {
               ) : (
                 <Icon
                   as={RxAvatar}
-                  boxSize={'8px'}
+                  boxSize={'40px'}
                 />
               )}
             </Box>

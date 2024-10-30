@@ -1,5 +1,3 @@
-//TODO: In Dex Component make the spinner animated once getting the values
-//TODO: rename the components to swap and liquidity
 import React, { useState } from 'react'
 import { Box, Button, ButtonGroup, Flex, VStack, Text } from '@chakra-ui/react'
 import styles from './DexComponent.module.css'

@@ -10,7 +10,6 @@ import LogoComponent from '../Logo/LogoComponent'
 import { useNavigate, useLocation, Route, Routes, Link } from 'react-router-dom'
 import HomeItems from './HomeItems'
 import BottomItems from './BottomItems'
-import { iterateObserversSafely } from '@apollo/client/utilities'
 import SettingItems from './SettingItems'
 
 const Sidebar = () => {

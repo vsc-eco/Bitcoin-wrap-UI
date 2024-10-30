@@ -1,7 +1,3 @@
-//TODO: hook up the functionality
-//TODO: change the name to login with HIVE
-//TODO: import the icons and have title element beside it put it 2 in a row
-//TODO: make it theme specific
 import {
   Modal,
   ModalOverlay,
@@ -16,8 +12,6 @@ import {
   Heading,
   Flex,
   Icon,
-  HStack,
-  Card,
   Box,
 } from '@chakra-ui/react'
 
@@ -65,6 +59,26 @@ function broke(what: string): never {
 
 const HiveModal: React.FC<Props> = ({ isOpen, onClose }) => {
   const navigate = useNavigate()
+
+  async function handleSubmit(data: FormData) {
+    const loginMethod = data
+      .get(LOGIN_METHOD_FIELD)
+      ?.valueOf() as LoginOptionName
+    const username = data.get(USERNAME_FIELD)?.toString()
+    if (typeof loginMethod !== 'string') {
+      return broke('login method')
+    }
+
+    if (typeof username !== 'string') {
+      return broke('username')
+    }
+
+    const provider = providerMap[loginMethod]
+    await AuthActions.login('hive', provider, username).then(() =>
+      navigate('/'),
+    )
+  }
+
   return (
     <>
       <Modal
@@ -76,21 +90,26 @@ const HiveModal: React.FC<Props> = ({ isOpen, onClose }) => {
           <ModalCloseButton />
           <ModalBody>
             <form
-              action={data => {
-                const loginMethod = data
-                  .get(LOGIN_METHOD_FIELD)
-                  ?.valueOf() as LoginOptionName
-                if (typeof loginMethod !== 'string') {
-                  return broke('loginMethod')
-                }
-                const username = data.get(USERNAME_FIELD)?.valueOf()
-                if (typeof username !== 'string') {
-                  return broke('username')
-                }
-                const provider = providerMap[loginMethod]
-                AuthActions.login('hive', provider, username).then(() =>
-                  navigate('/'),
-                )
+              //   action={data => {
+              //     const loginMethod = data
+              //       .get(LOGIN_METHOD_FIELD)
+              //       ?.valueOf() as LoginOptionName
+              //     if (typeof loginMethod !== 'string') {
+              //       return broke('loginMethod')
+              //     }
+              //     const username = data.get(USERNAME_FIELD)?.valueOf()
+              //     if (typeof username !== 'string') {
+              //       return broke('username')
+              //     }
+              //     const provider = providerMap[loginMethod]
+              //     AuthActions.login('hive', provider, username).then(() =>
+              //       navigate('/'),
+              //     )
+              //   }}
+              onSubmit={async e => {
+                e.preventDefault()
+                const data = new FormData(e.target as HTMLFormElement)
+                await handleSubmit(data)
               }}
             >
               <VStack
@@ -201,7 +220,13 @@ const HiveModal: React.FC<Props> = ({ isOpen, onClose }) => {
               </Button>
               <Button
                 variant="inline"
-                //   onClick={}
+                onClick={() => {
+                  const form = document.querySelector('form')
+                  if (form) {
+                    const data = new FormData(form)
+                    handleSubmit(data)
+                  }
+                }}
               >
                 Continue
               </Button>
