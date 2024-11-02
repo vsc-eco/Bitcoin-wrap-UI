@@ -15,10 +15,7 @@ export default function RootLayout({
 }) {
   const cookies = headers().get('cookie')
 
-  const initialState = cookieToInitialState(
-    multiConfig,
-    headers().get('cookie'),
-  )
+  const initialState = cookieToInitialState(multiConfig, cookies)
 
   return (
     <html
