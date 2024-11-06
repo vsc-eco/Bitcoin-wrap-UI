@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Flex, Button, Box, Text, Icon } from '@chakra-ui/react'
 import { IoIosArrowDown } from 'react-icons/io'
 import { IconType } from 'react-icons/lib'
@@ -8,21 +8,38 @@ type Props = {
     name: string
     symbol: IconType
   }[]
+  disable?: boolean
 }
 
-const DropdownWithIcon = ({ options }: Props) => {
+const DropdownWithIcon = ({ options, disable }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
-  const [selectItem, setSelectedItem] = useState('Custom')
+  const [selectItem, setSelectedItem] = useState(options[0].name)
+  const dropdownRef = useRef<HTMLInputElement>(null)
 
   function handleOptionClick(option: string) {
     setSelectedItem(option)
     setIsOpen(false)
   }
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
   return (
     <Box
       position="relative"
       w="300px"
+      ref={dropdownRef}
     >
       <Button
         onClick={() => setIsOpen(!isOpen)}
@@ -59,9 +76,11 @@ const DropdownWithIcon = ({ options }: Props) => {
                 bg: 'indigo.900',
                 color: 'white',
               }}
-              onClick={() => handleOptionClick(item.name)}
+              onClick={() => !disable && handleOptionClick(item.name)}
               alignItems="center"
               gap={2}
+              opacity={disable ? '0.2' : 1}
+              cursor={disable ? 'not-allowed' : 'pointer'}
             >
               <Icon
                 as={item.symbol}

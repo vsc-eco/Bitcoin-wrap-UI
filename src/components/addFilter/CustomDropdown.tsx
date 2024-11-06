@@ -1,5 +1,5 @@
 //TODO: reuse this component in order to use drop down
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Flex, Box, Text, Icon, Button } from '@chakra-ui/react'
 import { IoIosArrowDown } from 'react-icons/io'
 
@@ -9,17 +9,33 @@ type Props = {
 
 const CustomDropdown = ({ options }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
-  const [selectItem, setSelectedItem] = useState('Custom')
+  const [selectItem, setSelectedItem] = useState('Automatic')
+  const dropdownRef = useRef<HTMLInputElement>(null)
 
   function handleOptionClick(option: string) {
     setSelectedItem(option)
     setIsOpen(false)
   }
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
   return (
     <Box
       position="relative"
       w="300px"
+      ref={dropdownRef}
     >
       <Button
         onClick={() => setIsOpen(!isOpen)}

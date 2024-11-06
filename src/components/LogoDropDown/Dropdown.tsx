@@ -1,4 +1,4 @@
-import React, { SetStateAction } from 'react'
+import React, { SetStateAction, useEffect, useRef } from 'react'
 import { Flex, Text, Box } from '@chakra-ui/react'
 import Image from 'next/image'
 import { Navigate, useNavigate, Link } from 'react-router-dom'
@@ -9,17 +9,35 @@ type Props = {
 }
 
 const Dropdown = ({ isOpen, setIsOpen }: Props) => {
+  const dropdownRef = useRef<HTMLInputElement>(null)
+
   const options = [
     {
       title: 'Settings',
       link: '/settings/account-profile',
     },
   ]
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
   return (
     <Flex
       flexDirection="column"
       w="full"
       justifyContent={'space-between'}
+      ref={dropdownRef}
     >
       <Box>
         {options.map((item, index) => (

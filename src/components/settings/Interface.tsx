@@ -1,5 +1,5 @@
 //TODO: to make the local currency and the timezone there and then include the dark mode option here as dropdown
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import { Flex, Box, Text, Button, Card, CardBody, Icon } from '@chakra-ui/react'
 import CustomDropdown from '../addFilter/CustomDropdown'
 import DropdownWithIcon from '../DropdownWithIcon'
@@ -41,7 +41,7 @@ const currencies: currencies[] = [
 ]
 
 const timezones = [
-  'GMT', // GMT+0
+  'GMT+0', // GMT+0
   'GMT+1', // GMT+1 (e.g., Central European Time - CET)
   'GMT+2', // GMT+2 (e.g., Eastern European Time - EET)
   'GMT+3', // GMT+3 (e.g., Arabia Standard Time - AST)
@@ -60,12 +60,12 @@ const timezones = [
 
 const theme: currencies[] = [
   {
-    name: 'dark',
-    symbol: CiDark,
-  },
-  {
     name: 'light',
     symbol: CiLight,
+  },
+  {
+    name: 'dark',
+    symbol: CiDark,
   },
 ]
 const Interface = (props: Props) => {
@@ -97,7 +97,7 @@ const Interface = (props: Props) => {
                   as={FaGlobe}
                   boxSize={'24px'}
                 />
-                <Text fontWeight={'bold'}>Local Currencies</Text>
+                <Text fontWeight={'bold'}>Local Currency</Text>
               </Flex>
               <DropdownWithIcon options={currencies} />
             </Flex>
@@ -138,7 +138,10 @@ const Interface = (props: Props) => {
                 />
                 <Text fontWeight={'bold'}>Theme</Text>
               </Flex>
-              <DropdownWithIcon options={theme} />
+              <DropdownWithIcon
+                options={theme}
+                disable={true}
+              />
             </Flex>
           </Box>
         </Flex>
