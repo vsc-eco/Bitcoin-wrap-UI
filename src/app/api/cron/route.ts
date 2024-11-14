@@ -4,8 +4,6 @@ import { BitcoinAddress } from '../../../utils/BitcoinAddressModel'
 import { Transaction } from '../../../utils/TransactionModel'
 import { callbackify } from 'util'
 
-//TODO: adding the indexing for the destinations
-
 type TransctionsSchema = {
   txid: string
   address: any

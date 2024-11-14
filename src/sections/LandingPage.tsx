@@ -5,7 +5,6 @@ import Navbar from '../components/Navbar/Navbar'
 import { ArrowForwardIcon } from '@chakra-ui/icons'
 import Link from 'next/link'
 
-//TODO: Hive Finance smooth Defi have to bit little bit shorter
 type Props = {
   setShow: React.Dispatch<SetStateAction<Boolean>>
 }

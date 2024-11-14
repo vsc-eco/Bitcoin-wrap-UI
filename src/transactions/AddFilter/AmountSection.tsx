@@ -46,8 +46,6 @@ const amountOptions = [
   },
 ] as const
 
-//TODO: darker the color of the dollar sign icon when its focused the input and cursor is there
-
 const AmountSection = (props: Props) => {
   const [value, setValue] = useState<string>('')
 

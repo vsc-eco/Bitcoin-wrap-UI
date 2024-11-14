@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Flex, Box, CheckboxGroup, Checkbox, Button } from '@chakra-ui/react'
 
 type Props = {}
-//TODO: remove the button and have HIVE check
 
 const options = [
   {

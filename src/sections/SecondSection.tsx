@@ -1,5 +1,3 @@
-//TODO: make a common card here and integrate all the components inside it
-
 'use client'
 import React, { useLayoutEffect, useReducer, useState } from 'react'
 import { Box, Card, Flex, Text } from '@chakra-ui/react'

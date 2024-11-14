@@ -1,4 +1,3 @@
-//TODO: to replace the sidebar items in the settings
 import React, { useState } from 'react'
 import { VStack, Flex } from '@chakra-ui/react'
 import { LiaExchangeAltSolid } from 'react-icons/lia'

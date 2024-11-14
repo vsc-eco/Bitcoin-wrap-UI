@@ -1,4 +1,3 @@
-//TODO:
 import React from 'react'
 import { Flex, Text, Card, Box, CardHeader } from '@chakra-ui/react'
 import AccountComponent from './AccountComponent'

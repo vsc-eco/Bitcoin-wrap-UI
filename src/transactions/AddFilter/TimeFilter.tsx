@@ -5,7 +5,6 @@ import { GoDash } from 'react-icons/go'
 
 type Props = {}
 
-//TODO: Default time set
 const TimeFilter = (props: Props) => {
   const [fromTime, setFromTime] = useState<string>('01:00')
   const [toTime, setToTime] = useState<string>('12:59')

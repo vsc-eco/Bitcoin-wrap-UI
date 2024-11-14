@@ -1,4 +1,3 @@
-//TODO: Connect with metamask button should be on the center
 import React from 'react'
 import {
   Modal,

@@ -1,4 +1,3 @@
-//TODO: reuse this component in order to use drop down
 import React, { useEffect, useRef, useState } from 'react'
 import { Flex, Box, Text, Icon, Button } from '@chakra-ui/react'
 import { IoIosArrowDown } from 'react-icons/io'

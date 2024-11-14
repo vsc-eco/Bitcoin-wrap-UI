@@ -1,5 +1,3 @@
-//TODO: local currency and the timezone as main components
-
 import React, { useEffect, useRef, useState } from 'react'
 import { Flex, Box, Text, Icon, Collapse } from '@chakra-ui/react'
 import { useLocation, useNavigate } from 'react-router-dom'

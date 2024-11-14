@@ -14,8 +14,6 @@ import { BiMoneyWithdraw } from 'react-icons/bi'
 
 type Props = {}
 
-//TODO: remove the icons and bg shade
-
 const options = [
   {
     title: 'Deposit',

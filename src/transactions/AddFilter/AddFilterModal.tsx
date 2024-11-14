@@ -106,8 +106,6 @@ const FilterModal: React.FC<FilterModalProps> = ({
         style={{ height: '500px', maxHeight: '100vh' }}
       >
         <ModalCloseButton />
-
-        {/* TODO: make the styles inline and use theme where possible*/}
         <Flex
           h={700}
           color="gray.850"

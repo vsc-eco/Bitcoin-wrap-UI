@@ -1,4 +1,3 @@
-//TODO: to make the local currency and the timezone there and then include the dark mode option here as dropdown
 import React, { useRef, useState } from 'react'
 import { Flex, Box, Text, Button, Card, CardBody, Icon } from '@chakra-ui/react'
 import CustomDropdown from '../addFilter/CustomDropdown'

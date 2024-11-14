@@ -1,5 +1,3 @@
-//TODO: configure the theme and the font style
-
 'use client'
 // app/providers.tsx
 import { extendTheme, useColorMode } from '@chakra-ui/react'

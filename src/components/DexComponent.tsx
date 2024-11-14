@@ -75,7 +75,6 @@ const DexComponent = () => {
                 handleOpen={handleOpen}
                 handleClose={handleClose}
               />
-              {/* TODO move into Swap */}
               <HivePrice
                 coin={'HIVE'}
                 image={'hive.svg'}

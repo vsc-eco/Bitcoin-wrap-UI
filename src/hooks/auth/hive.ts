@@ -11,7 +11,7 @@ export const aioha =
         },
         hivesigner: {
           app: '3speak.tv',
-          callbackURL: window.location.origin + '/hivesigner.html', // TODO set properly
+          callbackURL: window.location.origin + '/hivesigner.html',
           scope: ['login', 'vote'],
         },
       })

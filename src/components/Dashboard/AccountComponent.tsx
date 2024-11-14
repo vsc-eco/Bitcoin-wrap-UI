@@ -1,5 +1,3 @@
-//TODO: add a functionality here to hover the component and show the copy to clopboard button
-
 import { Card, Flex, Text, IconButton, Button } from '@chakra-ui/react'
 import React from 'react'
 import { BiTransferAlt } from 'react-icons/bi'

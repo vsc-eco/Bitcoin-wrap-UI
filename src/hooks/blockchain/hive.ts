@@ -1,5 +1,3 @@
-//TODO: Declare the SignedProfilePic function and implement the signMessage function there
-
 import {
   AccountUpdate2Operation,
   OperationName,
@@ -21,8 +19,7 @@ export const hive = {
     } else {
       to = to.slice(HIVE_PREFIX.length)
     }
-    // TODO check balances
-    // TODO if enough balance on VSC prioritize that if asset is on VSC already
+
     //same applies to HIVE only asset
     const res = await aioha.transfer(to, amount, assetToCurrency(asset), memo)
     console.log('transfer res')

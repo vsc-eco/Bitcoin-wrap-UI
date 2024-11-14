@@ -1,5 +1,3 @@
-//TODO: add user input validation
-
 import React, { useState } from 'react'
 import {
   Box,
@@ -153,7 +151,7 @@ const CalendarComponent = (props: Props) => {
       // dark selected
       return 'cream.200'
     }
-    // TODO second date might look weird
+
     if (!hoveredDate) {
       // default
       return undefined

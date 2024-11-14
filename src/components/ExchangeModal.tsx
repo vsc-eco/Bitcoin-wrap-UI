@@ -1,5 +1,3 @@
-//TODO: there is the error not rendering the ui
-
 'use client'
 import {
   Button,

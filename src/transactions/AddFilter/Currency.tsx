@@ -4,9 +4,6 @@ import { Flex, Box, Text, Input } from '@chakra-ui/react'
 import Image from 'next/image'
 import { CiSearch } from 'react-icons/ci'
 
-//TODO: Pictures are not getting rendered
-//TODO: Add the logic for search filter and underline the word according to the input
-
 type Props = {}
 
 const Currency = (props: Props) => {
