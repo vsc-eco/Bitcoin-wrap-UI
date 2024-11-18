@@ -36,7 +36,6 @@ const MethodSection = (props: Props) => {
       height={500}
     >
       <Flex direction={'column'}>
-        <Text>This is the method section</Text>
         <Box>
           <CheckboxGroup>
             {options.map((item, index) => (
