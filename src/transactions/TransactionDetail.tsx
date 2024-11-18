@@ -42,16 +42,21 @@ const TransactionDetail = ({ toggleClose, transaction, userId }: Props) => {
       style={{
         float: 'left',
       }}
+      position={'relative'}
     >
       <CardHeader>
         <Flex justify="space-between">
           <Text fontSize={['12px']}>Transfer</Text>
-
           <Icon
             as={RxCross2}
             cursor="pointer"
-            _hover={{ bg: 'blue.100' }}
+            position={'absolute'}
+            top={2}
+            right={3}
+            borderRadius={'2px'}
+            _hover={{ bg: 'gray.200' }}
             onClick={toggleClose}
+            fontSize={'xl'}
           />
         </Flex>
         <Flex>
@@ -228,16 +233,16 @@ const TransactionDetail = ({ toggleClose, transaction, userId }: Props) => {
       {/* This is the border line  */}
       <hr />
       {/* <CardFooter>
-        <Flex justify="space-between" w="full" alignItems="center">
-          <Link
-            href="https://hiveblocks.com/tx/d92bca994c7038a6f59b7743a09af8ff0810080c"
-            target="_blank"
-          >
-            <Icon as={BsLink45Deg} boxSize={[]} />
-          </Link>
-          <Icon as={BsThreeDots} boxSize={[]} />
-        </Flex>
-      </CardFooter> */}
+            <Flex justify="space-between" w="full" alignItems="center">
+            <Link
+                href="https://hiveblocks.com/tx/d92bca994c7038a6f59b7743a09af8ff0810080c"
+                target="_blank"
+            >
+                <Icon as={BsLink45Deg} boxSize={[]} />
+            </Link>
+            <Icon as={BsThreeDots} boxSize={[]} />
+            </Flex>
+        </CardFooter> */}
     </Card>
   )
 }
