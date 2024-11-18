@@ -38,43 +38,49 @@ const Leftbar = ({ filterOptions, selectedItem, setSelectedItem }: Props) => {
       {filterOptions.map(option => (
         <Flex
           key={option.id}
-          w="full"
-          bgColor={selectedItem === option.id ? 'cream.100' : 'transparent'}
-          borderBottom={
-            selectedItem === option.id ? '2px 1px 3px indigo.700' : 'none'
-          }
-          justifyContent={'space-between'}
-          alignItems="center"
-          marginTop={'2px'}
-          paddingY={'2px'}
-          paddingX="12px"
-          marginRight="2px"
-          cursor="pointer"
-          onClick={() => setSelectedItem(option.id)}
+          justifyContent={'center'}
         >
-          <Flex alignItems={'center'}>
-            <Icon
-              as={option.icon}
-              color="gray.850"
-              fontSize={'small'}
-              marginRight={'12px'}
-            />
-            <Text
-              color={'gray.850'}
-              cursor={'pointer'}
-              fontWeight={400}
-              lineHeight={'24px'}
-              fontSize={'15px'}
-            >
-              {option.name}
-            </Text>
-          </Flex>
-          <Flex display={selectedItem === option.id ? 'flex' : 'none'}>
-            <Icon
-              as={FaChevronRight}
-              size="xs"
-              color={'gray.850'}
-            />
+          <Flex
+            w="80%"
+            bgColor={selectedItem === option.id ? 'cream.100' : 'transparent'}
+            borderBottom={
+              selectedItem === option.id ? '2px 1px 3px indigo.700' : 'none'
+            }
+            justifyContent={'space-between'}
+            alignItems="center"
+            marginTop={'2px'}
+            marginY={'2px'}
+            paddingY={'4px'}
+            paddingX="12px"
+            marginRight="2px"
+            borderRadius={'8px'}
+            cursor="pointer"
+            onClick={() => setSelectedItem(option.id)}
+          >
+            <Flex alignItems={'center'}>
+              <Icon
+                as={option.icon}
+                color="gray.850"
+                fontSize={'small'}
+                marginRight={'12px'}
+              />
+              <Text
+                color={'gray.850'}
+                cursor={'pointer'}
+                fontWeight={400}
+                lineHeight={'24px'}
+                fontSize={'15px'}
+              >
+                {option.name}
+              </Text>
+            </Flex>
+            <Flex display={selectedItem === option.id ? 'flex' : 'none'}>
+              <Icon
+                as={FaChevronRight}
+                size="xs"
+                color={'gray.850'}
+              />
+            </Flex>
           </Flex>
         </Flex>
       ))}
