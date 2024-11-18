@@ -97,7 +97,7 @@ const TransactionItem = props => {
       <Td
         display="flex"
         alignItems="center"
-        w={!props.isTransactionDetailOpen ? 621 : 0}
+        w={!props.isTransactionDetailOpen ? 621 : 350}
       >
         <WrapItem>
           <Avatar
@@ -139,17 +139,17 @@ const TransactionItem = props => {
         </Text>
         {/* &nbsp; (${transaction.dollar}) */}
       </Td>
-
+      {/* </Tr> */}
       {!props.isTransactionDetailOpen ? (
         <Td>
           <Flex>
             {/* {transaction.paymentMethod === "Transfer" &&
-          transaction.TransferIn ? (
-            <BsArrowLeft />
-          ) : transaction.paymentMethod === "Transfer" &&
-            !transaction.TransferIn ? (
+            transaction.TransferIn ? (
+                <BsArrowLeft />
+                ) : transaction.paymentMethod === "Transfer" &&
+                !transaction.TransferIn ? (
             <BsArrowRight />
-          ) : null} */}
+            ) : null} */}
             {moneyIn ? <BsArrowLeft /> : <BsArrowRight />}
             {'  '}
             &nbsp;
@@ -162,6 +162,7 @@ const TransactionItem = props => {
             width: '100%',
             backgroundColor: 'white',
           }}
+          borderBottom={!props.isTransactionDetailOpen ? '1px' : '0px'}
           onClick={e => {
             e.stopPropagation()
 
