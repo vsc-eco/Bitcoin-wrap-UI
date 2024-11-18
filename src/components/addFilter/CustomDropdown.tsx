@@ -1,5 +1,3 @@
-//TODO:There needs to be an automatic option for selecting the default date
-
 import React, { useEffect, useRef, useState } from 'react'
 import { Flex, Box, Text, Icon, Button } from '@chakra-ui/react'
 import { IoIosArrowDown } from 'react-icons/io'
@@ -10,7 +8,7 @@ type Props = {
 
 const CustomDropdown = ({ options }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
-  const [selectItem, setSelectedItem] = useState('Automatic')
+  const [selectItem, setSelectedItem] = useState('Custom')
   const dropdownRef = useRef<HTMLInputElement>(null)
 
   function handleOptionClick(option: string) {

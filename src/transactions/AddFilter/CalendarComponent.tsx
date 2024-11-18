@@ -51,6 +51,7 @@ const lastDayOfMonth = (month: number, year: number) =>
       : 30
 
 const options = [
+  'Custom',
   'Last 30 days',
   'This month',
   'Last month',
@@ -61,6 +62,7 @@ const options = [
   'Last 6 months',
   'This  Year',
   'Last Year',
+  'All Time',
 ]
 
 const CalendarComponent = (props: Props) => {

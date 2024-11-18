@@ -142,7 +142,7 @@ const TransactionItem = props => {
       {/* </Tr> */}
       {!props.isTransactionDetailOpen ? (
         <Td>
-          <Flex>
+          <Flex alignItems="center">
             {/* {transaction.paymentMethod === "Transfer" &&
             transaction.TransferIn ? (
                 <BsArrowLeft />
