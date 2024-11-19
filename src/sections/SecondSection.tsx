@@ -22,6 +22,9 @@ const SecondSection = () => {
           <Flex
             w="12%"
             height="100vh"
+            position={'fixed'}
+            top={0}
+            left={0}
           >
             <Sidebar />
           </Flex>

@@ -4,11 +4,14 @@ import { IoIosArrowDown } from 'react-icons/io'
 
 type Props = {
   options: string[]
+  isTimeZone?: boolean
 }
 
-const CustomDropdown = ({ options }: Props) => {
+const CustomDropdown = ({ options, isTimeZone }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
-  const [selectItem, setSelectedItem] = useState('Custom')
+  const [selectItem, setSelectedItem] = useState(
+    isTimeZone ? 'Automatic' : 'Custom',
+  )
   const dropdownRef = useRef<HTMLInputElement>(null)
 
   function handleOptionClick(option: string) {

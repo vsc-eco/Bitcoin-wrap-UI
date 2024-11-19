@@ -268,16 +268,21 @@ const CalendarComponent = (props: Props) => {
           <Box>
             <Flex
               alignItems={'center'}
-              gap={12}
+              gap={6}
+              px={4}
             >
-              <Icon
-                as={FaArrowLeft}
-                fontSize={'12px'}
-                color={'gray.700'}
-                _hover={{ color: 'indigo.900' }}
-                cursor={'pointer'}
+              <Button
+                size={'xs'}
                 onClick={() => setCurrentYear(prev => prev - 1)}
-              />
+              >
+                <Icon
+                  as={FaArrowLeft}
+                  fontSize={'12px'}
+                  color={'gray.700'}
+                  _hover={{ color: 'indigo.900' }}
+                  cursor={'pointer'}
+                />
+              </Button>
               <Text fontSize={'12px'}>{currentYear - 1}</Text>
             </Flex>
             <Grid
@@ -349,18 +354,26 @@ const CalendarComponent = (props: Props) => {
               justify={
                 currentYear < currentDate.getFullYear() ? 'end' : 'center'
               }
-              gap={12}
+              gap={2}
             >
               <Text fontSize={'12px'}>{currentYear}</Text>
               {currentYear < currentDate.getFullYear() && (
-                <Icon
-                  as={FaArrowRight}
-                  fontSize={'12px'}
-                  color={'gray.700'}
-                  _hover={{ color: 'indigo.900' }}
-                  cursor={'pointer'}
+                <Flex
+                  alignItems={'center'}
+                  px={4}
+                  gap={12}
                   onClick={() => setCurrentYear(prev => prev + 1)}
-                />
+                >
+                  <Button size={'xs'}>
+                    <Icon
+                      as={FaArrowRight}
+                      fontSize={'12px'}
+                      color={'gray.700'}
+                      _hover={{ color: 'indigo.900' }}
+                      cursor={'pointer'}
+                    />
+                  </Button>
+                </Flex>
               )}
             </Flex>
             <Grid

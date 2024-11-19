@@ -40,6 +40,7 @@ const currencies: currencies[] = [
 ]
 
 const timezones = [
+  'Automatic',
   'GMT+0', // GMT+0
   'GMT+1', // GMT+1 (e.g., Central European Time - CET)
   'GMT+2', // GMT+2 (e.g., Eastern European Time - EET)
@@ -117,7 +118,10 @@ const Interface = (props: Props) => {
                 />
                 <Text fontWeight={'bold'}>Timezone </Text>
               </Flex>
-              <CustomDropdown options={timezones} />
+              <CustomDropdown
+                options={timezones}
+                isTimeZone={true}
+              />
             </Flex>
           </Box>
           <Box>
