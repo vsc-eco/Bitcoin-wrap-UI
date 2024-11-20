@@ -202,7 +202,7 @@ const Transaction = (props: Props) => {
           <Text
             position={'fixed'}
             top={1}
-            left={'51%'}
+            left={'49%'}
             fontSize="l"
             fontWeight="bolder"
           >
@@ -267,7 +267,7 @@ const Transaction = (props: Props) => {
                       </Flex>
                     </MenuItem>
                   ))}
-                  <MenuItem boxShadow="0 -4px 6px rgba(0, 0, 0, 0.1)">
+                  <MenuItem boxShadow="0px -1px 0px #d1d5db">
                     <Flex
                       gap={2}
                       alignItems={'center'}
