@@ -23,13 +23,17 @@ import {
   MenuList,
   Skeleton,
   Td,
+  Icon,
 } from '@chakra-ui/react'
 import { HiDownload } from 'react-icons/hi'
 import { CiFilter } from 'react-icons/ci'
 import { gql, useQuery } from '@apollo/client'
 import axios from 'axios'
 import Moment from 'moment'
-
+import { IoIosSend } from 'react-icons/io'
+import { BiTransfer } from 'react-icons/bi'
+import { IoMdAdd } from 'react-icons/io'
+import { TbTransferOut } from 'react-icons/tb'
 import TransactionItem from './TransactionItem'
 import TransactionDetail from './TransactionDetail'
 import TransferModal from '../components/TransferModal'
@@ -37,7 +41,10 @@ import { useCreateTx } from '../hooks/VSC'
 import { useAuth } from '../hooks/auth'
 import FilterModal from './AddFilter/AddFilterModal'
 import { ChevronDownIcon } from '@chakra-ui/icons'
+
 import BuyHiveModal from '../components/BuyHive'
+import { FaMoneyBillAlt } from 'react-icons/fa'
+import { FaFileInvoice } from 'react-icons/fa6'
 
 const START_BLOCK = 88079516
 const START_BLOCK_TIME = Moment('2024-08-16T02:46:48Z')
@@ -62,6 +69,30 @@ const query = gql`
     }
   }
 `
+
+//data items for actions button
+const items = [
+  {
+    name: 'Send',
+    icon: IoIosSend,
+    onclick: '',
+  },
+  {
+    name: 'Request',
+    icon: TbTransferOut,
+    onclick: '',
+  },
+  {
+    name: 'Transfer',
+    icon: BiTransfer,
+    onclick: '',
+  },
+  {
+    name: 'Deposit',
+    icon: IoMdAdd,
+    onclick: '',
+  },
+]
 
 function useBitcoinPrice() {
   const [price, setPrice] = useState<number | undefined>()
@@ -162,7 +193,6 @@ const Transaction = (props: Props) => {
           direction="column"
           py={4}
           textAlign="center"
-          bgColor="white"
           p={4}
           borderRadius={8}
           margin="auto"
@@ -170,16 +200,24 @@ const Transaction = (props: Props) => {
           minH="full"
         >
           <Text
+            position={'fixed'}
+            top={1}
+            left={'51%'}
             fontSize="l"
             fontWeight="bolder"
           >
             Transactions
           </Text>
           <Box
+            position="fixed"
+            top="20px"
+            left="50%"
+            transform="translateX(-50%)"
+            zIndex={10}
             display="flex"
             justifyContent="space-between"
+            w="900px"
             my={2}
-            position="relative"
           >
             <Button
               variant="outline"
@@ -216,16 +254,47 @@ const Transaction = (props: Props) => {
                   Actions
                 </MenuButton>
                 <MenuList minWidth="100%">
+                  {/* <TransferModal /> */}
+                  {items.map(item => (
+                    <MenuItem key={item.name}>
+                      <Flex
+                        gap={2}
+                        alignItems={'center'}
+                        px={2}
+                      >
+                        <Icon as={item.icon} />
+                        <Text>{item.name}</Text>
+                      </Flex>
+                    </MenuItem>
+                  ))}
+                  <MenuItem boxShadow="0 -4px 6px rgba(0, 0, 0, 0.1)">
+                    <Flex
+                      gap={2}
+                      alignItems={'center'}
+                      px={2}
+                    >
+                      <Icon as={FaMoneyBillAlt} />
+                      <Text>Pay Bill</Text>
+                    </Flex>
+                  </MenuItem>
+
                   <MenuItem>
-                    <TransferModal />
+                    <Flex
+                      gap={2}
+                      alignItems={'center'}
+                      px={2}
+                    >
+                      <Icon as={FaFileInvoice} />
+                      <Text>Invoice</Text>
+                    </Flex>
                   </MenuItem>
                 </MenuList>
               </Menu>
             </Box>
           </Box>
           <Flex
-            overflowY="auto"
             w="full"
+            my={4}
           >
             <Flex
               direction="column"
@@ -267,7 +336,7 @@ const Transaction = (props: Props) => {
                     </Tr>
                   </Thead>
 
-                  {!loading && <Tbody>{transactions} </Tbody>}
+                  {!loading && <Tbody mt={20}>{transactions} </Tbody>}
                   <Tbody>
                     {loading
                       ? // Render skeletons while loading
@@ -300,6 +369,12 @@ const Transaction = (props: Props) => {
             <Box
               className={`side-popup ${isTransactionDetailOpen ? 'show-popup' : ''}`}
               pr="1px"
+              position={'fixed'}
+              top={200}
+              right={450}
+              height={'100vh'}
+              width={'400px'}
+              zIndex={10}
             >
               {isTransactionDetailOpen && (
                 <TransactionDetail

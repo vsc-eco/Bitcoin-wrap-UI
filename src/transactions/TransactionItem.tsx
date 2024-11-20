@@ -97,7 +97,7 @@ const TransactionItem = props => {
       <Td
         display="flex"
         alignItems="center"
-        w={!props.isTransactionDetailOpen ? 621 : 350}
+        w={!props.isTransactionDetailOpen ? 620 : 350}
       >
         <WrapItem>
           <Avatar
