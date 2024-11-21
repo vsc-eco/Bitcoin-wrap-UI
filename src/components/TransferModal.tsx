@@ -15,6 +15,7 @@ import {
   useDisclosure,
   InputLeftElement,
   Select,
+  Icon,
 } from '@chakra-ui/react'
 
 import React, { useState } from 'react'
@@ -28,6 +29,8 @@ import { Asset } from '../hooks/blockchain/assets'
 import { useAuth } from '../hooks/auth'
 import { HIVE_PREFIX } from '../hooks/auth/hive'
 import { ETH_PREFIX } from '../hooks/auth/wagmi-web3modal'
+import { TbTransfer } from 'react-icons/tb'
+import { IoIosSend } from 'react-icons/io'
 
 const assets = [
   {
@@ -126,13 +129,16 @@ const TransferModal = () => {
 
   return (
     <>
-      <Button
+      <Flex
         onClick={onOpen}
         bgColor={'transparent'}
-        fontSize="xs"
+        fontSize="sm"
+        gap={2}
+        alignItems={'center'}
       >
-        Transfer
-      </Button>
+        <Icon as={IoIosSend} />
+        <Text>Send Transfer</Text>
+      </Flex>
 
       <Modal
         isOpen={isOpen}

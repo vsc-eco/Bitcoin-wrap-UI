@@ -33,18 +33,19 @@ import Moment from 'moment'
 import { IoIosSend } from 'react-icons/io'
 import { BiTransfer } from 'react-icons/bi'
 import { IoMdAdd } from 'react-icons/io'
-import { TbTransferOut } from 'react-icons/tb'
 import TransactionItem from './TransactionItem'
 import TransactionDetail from './TransactionDetail'
 import TransferModal from '../components/TransferModal'
 import { useCreateTx } from '../hooks/VSC'
 import { useAuth } from '../hooks/auth'
 import FilterModal from './AddFilter/AddFilterModal'
-import { ChevronDownIcon } from '@chakra-ui/icons'
+import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons'
 
 import BuyHiveModal from '../components/BuyHive'
 import { FaMoneyBillAlt } from 'react-icons/fa'
 import { FaFileInvoice } from 'react-icons/fa6'
+
+import { TbTransferOut } from 'react-icons/tb'
 
 const START_BLOCK = 88079516
 const START_BLOCK_TIME = Moment('2024-08-16T02:46:48Z')
@@ -71,28 +72,6 @@ const query = gql`
 `
 
 //data items for actions button
-const items = [
-  {
-    name: 'Send',
-    icon: IoIosSend,
-    onclick: '',
-  },
-  {
-    name: 'Request',
-    icon: TbTransferOut,
-    onclick: '',
-  },
-  {
-    name: 'Transfer',
-    icon: BiTransfer,
-    onclick: '',
-  },
-  {
-    name: 'Deposit',
-    icon: IoMdAdd,
-    onclick: '',
-  },
-]
 
 function useBitcoinPrice() {
   const [price, setPrice] = useState<number | undefined>()
@@ -114,8 +93,9 @@ type Props = {}
 const Transaction = (props: Props) => {
   const { transfer } = useCreateTx()
   const lastDateRef = useRef<string | null>(null)
-
+  const [isClicked, setIsClicked] = useState(true)
   const [isTransactionDetailOpen, setTransactionDetailOpen] = useState(false)
+  const [showTransferModal, setShowTransferModal] = useState(false)
   const [selectedTransaction, setSelectedTransaction] = useState<any | null>(
     null,
   )
@@ -246,46 +226,29 @@ const Transaction = (props: Props) => {
               <Menu>
                 <MenuButton
                   as={Button}
-                  rightIcon={<ChevronDownIcon />}
+                  rightIcon={
+                    isClicked ? <ChevronDownIcon /> : <ChevronUpIcon />
+                  }
                   fontSize="xs"
                   borderRadius="3xl"
                   variant="outline"
+                  onClick={() => setIsClicked(!isClicked)}
                 >
                   Actions
                 </MenuButton>
                 <MenuList minWidth="100%">
-                  {/* <TransferModal /> */}
-                  {items.map(item => (
-                    <MenuItem key={item.name}>
-                      <Flex
-                        gap={2}
-                        alignItems={'center'}
-                        px={2}
-                      >
-                        <Icon as={item.icon} />
-                        <Text>{item.name}</Text>
-                      </Flex>
-                    </MenuItem>
-                  ))}
-                  <MenuItem boxShadow="0px -1px 0px #d1d5db">
-                    <Flex
-                      gap={2}
-                      alignItems={'center'}
-                      px={2}
-                    >
-                      <Icon as={FaMoneyBillAlt} />
-                      <Text>Pay Bill</Text>
-                    </Flex>
-                  </MenuItem>
-
                   <MenuItem>
+                    <TransferModal />
+                  </MenuItem>
+                  <MenuItem isDisabled={true}>
                     <Flex
+                      bgColor={'transparent'}
+                      fontSize="sm"
                       gap={2}
                       alignItems={'center'}
-                      px={2}
                     >
-                      <Icon as={FaFileInvoice} />
-                      <Text>Invoice</Text>
+                      <Icon as={BiTransfer} />
+                      <Text>Transfer</Text>
                     </Flex>
                   </MenuItem>
                 </MenuList>
