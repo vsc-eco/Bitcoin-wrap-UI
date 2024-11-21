@@ -3,9 +3,10 @@ import { Chain } from '../assets'
 import { Blockchain } from '../types'
 import { getAccount } from '@wagmi/core'
 import {
+  CallContractTransaction,
   TransactionResult,
   createClient,
-  signAndBrodcastTransaction,
+  signAndBroadcastTransaction,
 } from '../../../vscClient/client'
 import { useAuth } from '../../auth'
 import { multiConfig } from '../../auth/wagmi-web3modal/config'
@@ -37,6 +38,52 @@ const ensureAuthenticated = () => {
 }
 
 export const eth = {
+  // async callContract(action, payload, contract_id) {
+
+  //   const tx: CallContractTransaction = {
+  //     op: 'call_contract',
+  //     action,
+  //     contract_id,
+  //     payload,
+  //   }
+
+  //   const res = await signAndBroadcastTransaction(
+  //     tx,
+  //     wagmiSigner,
+  //     vscClient,
+  //     multiConfig,
+  //   )
+
+  //   return {
+  //     txId: res.id,
+  //   }
+  // },
+
+  // todo
+
+  async depositToDex(hbd, hive) {
+    alert(' calling eth dex method ')
+    // ensureAuthenticated()
+
+    // const res = await signAndBroadcastTransaction(
+    //   {
+    //     op: 'deposit_to_dex',
+    //     payload: {
+    //       hbd,
+    //       hive,
+    //     },
+    //   },
+    //   wagmiSigner,
+    //   vscClient,
+    //   multiConfig,
+    // )
+
+    return {
+      success: true,
+      txId: 'todo',
+    }
+  },
+
   async transfer(to, amount, asset) {
     ensureAuthenticated()
 
@@ -46,7 +93,7 @@ export const eth = {
     if (to.startsWith(HIVE_PREFIX)) {
       if (asset.chain === Chain.HIVE) {
         // withdraw
-        res = await signAndBrodcastTransaction(
+        res = await signAndBroadcastTransaction(
           {
             op: 'withdraw',
             payload: {
@@ -62,7 +109,7 @@ export const eth = {
         )
       } else {
         // transfer
-        res = await signAndBrodcastTransaction(
+        res = await signAndBroadcastTransaction(
           {
             op: 'transfer',
             payload: {
@@ -84,7 +131,7 @@ export const eth = {
         )
       } else {
         // transfer
-        res = await signAndBrodcastTransaction(
+        res = await signAndBroadcastTransaction(
           {
             op: 'transfer',
             payload: {

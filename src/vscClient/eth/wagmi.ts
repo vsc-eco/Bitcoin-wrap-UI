@@ -26,6 +26,8 @@ export const wagmiSigner = (async (txData, client, config: Config) => {
     } as const,
   ]
 
+  alert(types)
+
   const rawTx = (await encodePayload(txData)).linkedBlock
 
   return {

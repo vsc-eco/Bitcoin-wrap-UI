@@ -2,12 +2,25 @@ import { getNonce, uint8ArrayToBase64Url } from '@vsc.eco/client/dist/utils'
 import { submitTxQuery } from '@vsc.eco/client/dist/queries'
 import Axios from 'axios'
 import { encodePayload } from 'dag-jose-utils'
+import { Tr } from '@chakra-ui/react'
+import { aioha } from '../hooks/auth/hive'
+import { CompletedIntents, IntentsBuilder, TransactionIntent } from './intents'
 
 type Client = {
   api: string
   userId: string
   nonce: number | null
   netId: 'testnet/0bf2e474-6b9e-4165-ad4e-a0d78968d20c'
+}
+
+export type DepositToDexTransaction = {
+  op: 'call_contract'
+  action: 'deposit'
+  contract_id: 'vs41q9c3ygqhcuxhu07meg3klwnsfadwfy52dtjjx5s4346d3p7q9684pngr6ug45hvh'
+  payload: {
+    hbd: number
+    hive: number
+  }
 }
 
 export type CallContractTransaction = {
@@ -43,6 +56,7 @@ export type Transaction =
   | CallContractTransaction
   | WithdrawTransaction
   | TransferTransaction
+  | DepositToDexTransaction
 
 export type Signer<ExtraArgs extends any[] = []> = (
   tx: OffchainTransactionContainerV2,
@@ -79,10 +93,6 @@ export enum TransactionDbType {
   anchor_ref,
 }
 
-export enum TransactionIntent {
-  'money.spend' = 'money.spend',
-}
-
 export interface SignatureContainer {
   __t: 'vsc-sig'
   sigs: Signature[]
@@ -101,7 +111,7 @@ export interface OffchainTransactionContainerV2 {
     nonce: number
     required_auths: string[]
     //Tuple of transaction intent enum and arguments as querystring
-    intents: [TransactionIntent, string][]
+    intents: CompletedIntents
     type: TransactionDbType
   }
   tx: Transaction
@@ -119,7 +129,7 @@ export interface OnchainTransactionContainerV2 {
     // lock_block?: number
     // expire_block?: number
     //Tuple of transaction intent enum and arguments as querystring
-    intents: [TransactionIntent, string][]
+    intents: CompletedIntents
     type: TransactionDbType
   }
   tx: Transaction
@@ -142,7 +152,7 @@ type TupleRemoveFirstTwoValues<T extends any[]> = T extends [
   ? [...Rest]
   : []
 
-export async function signAndBrodcastTransaction<
+export async function signAndBroadcastTransaction<
   SigningFunc extends Signer<ExtraSignerArgs>,
   ExtraSignerArgs extends any[],
 >(
@@ -165,11 +175,17 @@ export async function signAndBrodcastTransaction<
       nonce: client.nonce!,
       required_auths: [client.userId],
       //Tuple of transaction intent enum and arguments as querystring
-      intents: [],
+      // intents: [], // todo: intents? todo: 1 giant string, type wrong
+      // todo: plus 1 for HBD, and I can pass both in so its more structured
+      intents: IntentsBuilder.fromIntents([
+        [TransactionIntent['hive.allow_transfer'], { token: 'HIVE', limit: 1 }],
+      ]),
       type: TransactionDbType.input,
     },
     tx,
   }
+
+  alert('txData:' + JSON.stringify(txData))
 
   const signedTx = await signer(
     txData,
@@ -188,6 +204,11 @@ export async function signAndBrodcastTransaction<
   )
   const txEncoded = uint8ArrayToBase64Url(signedTx.rawTx)
 
+  console.log({
+    query: submitTxQuery,
+    variables: { tx: txEncoded, sig: sigEncoded },
+  })
+
   const { data } = await Axios.post(`${client.api}/api/v1/graphql`, {
     query: submitTxQuery,
     variables: {
@@ -196,6 +217,7 @@ export async function signAndBrodcastTransaction<
     },
   })
   console.log(data)
+  alert(JSON.stringify(data))
   if (data?.data?.submitTransactionV1) {
     const submitResult = data.data.submitTransactionV1
     client.nonce!++
@@ -241,7 +263,7 @@ export type HiveSigner<
   ): SubmittedTransaction | Promise<SubmittedTransaction>
 }
 
-export async function signAndBrodcastTransactionToHive<
+export async function signAndBroadcastTransactionToHive<
   HiveSignerInstance extends HiveSigner<
     ExtraJsonSignerArgs,
     ExtraTransferSignerArgs
@@ -260,6 +282,7 @@ export async function signAndBrodcastTransactionToHive<
     >
   >
 ): Promise<TransactionResult> {
+  alert('op is ' + tx.op)
   if (tx.op === 'deposit') {
     const res = await signer.transfer(
       tx,
@@ -268,6 +291,9 @@ export async function signAndBrodcastTransactionToHive<
     )
     return res
   }
+
+  // todo: 1 for each intent types, separate file,
+  // todo: "builds intents" new file in vsc client called intents.ts call it a day
 
   const txData: OnchainTransactionContainerV2 = {
     __t: 'vsc-tx',
@@ -278,17 +304,22 @@ export async function signAndBrodcastTransactionToHive<
       // lock_block?: number
       // expire_block?: number
       //Tuple of transaction intent enum and arguments as querystring
-      intents: [],
+      // intents: [[TransactionIntent['hive.allow_transfer'], '?token=HIVE&limit=1']],
+      intents: IntentsBuilder.fromIntents([
+        [TransactionIntent['hive.allow_transfer'], { token: 'HIVE', limit: 1 }],
+      ]),
       type: TransactionDbType.input,
     },
     tx,
   }
 
+  alert('trying to sign')
   const res = await signer.json(
     auth,
     'vsc.tx',
     txData,
     // @ts-ignore
+    aioha,
     ...signerArgs,
   )
   return res

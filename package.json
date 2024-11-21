@@ -41,7 +41,7 @@
     "bs58check": "^3.0.1",
     "chart.js": "^4.4.1",
     "clipboard-copy": "^4.0.1",
-    "dids": "^4.0.4",
+    "dids": "^5.0.2",
     "eslint": "8.49.0",
     "eslint-config-next": "13.4.19",
     "framer-motion": "^10.16.4",

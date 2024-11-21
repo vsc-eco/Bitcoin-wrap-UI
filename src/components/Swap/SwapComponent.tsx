@@ -20,6 +20,8 @@ import { tokens, TokenName } from '../../TokenData'
 import TokenSearchModal from '../TokenSearchModal'
 import { MdAccountBalanceWallet } from 'react-icons/md'
 import styles from './SwapComponents.module.css'
+import { useAuth } from '../../hooks/auth'
+import { useDetails } from '../../hooks/AccountData/getDetails'
 
 type Props = {
   showModal: boolean
@@ -28,6 +30,10 @@ type Props = {
 }
 
 const SwapComponent = (props: Props) => {
+  const auth = useAuth()
+  const details = useDetails()
+
+  // if (!auth.authenticated || !details?.profile) return
   const [tokenAmount, setTokenAmount] = useState<string>('')
   const [IsReload, setIsReload] = useState(true)
   const [fromToken, setFromToken] = useState<TokenName>('HIVE')
@@ -129,7 +135,7 @@ const SwapComponent = (props: Props) => {
                   fontSize={'xs'}
                   className={styles.text}
                 >
-                  Wallet not connected
+                  {`Wallet not connected ${JSON.stringify(auth)} ${JSON.stringify(details)}`}
                 </Text>
               </Flex>
             </Flex>

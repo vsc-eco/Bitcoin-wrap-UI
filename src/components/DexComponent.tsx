@@ -11,6 +11,7 @@ import LiquidityInterface from './liquidity/LiquidityInterface'
 import SwapComponent from './Swap/SwapComponent'
 import HivePrice from './HivePrice'
 import WBTC from './WBTC'
+import MattSection from '../sections/MattSection'
 
 const DexComponent = () => {
   const [activeTab, setActiveTab] = useState<'swap' | 'liquidity'>('swap')
@@ -103,6 +104,7 @@ const DexComponent = () => {
             />
           )}
         </Flex>
+        <MattSection />
       </VStack>
     </Flex>
   )
