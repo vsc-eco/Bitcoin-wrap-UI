@@ -201,7 +201,7 @@ const CalendarComponent = (props: Props) => {
     } else {
       if (hoveredDate.year === year && hoveredDate.month === month) {
         // light selected
-        return 'gray.50'
+        return 'gray.200'
       }
     }
   }
@@ -332,7 +332,7 @@ const CalendarComponent = (props: Props) => {
                         px: '8px',
                         py: '1px',
                         border: '2px solid white',
-                        bgColor: 'cream.50',
+                        bgColor: 'cream.100',
                       }}
                     >
                       <Text
@@ -417,7 +417,7 @@ const CalendarComponent = (props: Props) => {
                         px: '8px',
                         py: '1px',
                         border: '2px solid white',
-                        bgColor: 'cream.50',
+                        bgColor: 'cream.100',
                       }}
                     >
                       <Text

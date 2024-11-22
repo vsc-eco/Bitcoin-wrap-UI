@@ -298,7 +298,6 @@ const Transaction = (props: Props) => {
                       )}
                     </Tr>
                   </Thead>
-
                   {!loading && <Tbody mt={20}>{transactions} </Tbody>}
                   <Tbody>
                     {loading
