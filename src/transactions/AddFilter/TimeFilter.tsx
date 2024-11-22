@@ -2,12 +2,26 @@ import React, { useState } from 'react'
 import { Icon, Flex, Box, Input, Text } from '@chakra-ui/react'
 import { FaRegClock } from 'react-icons/fa'
 import { GoDash } from 'react-icons/go'
+import moment from 'moment'
 
 type Props = {}
 
 const TimeFilter = (props: Props) => {
-  const [fromTime, setFromTime] = useState<string>('01:00')
-  const [toTime, setToTime] = useState<string>('12:59')
+  const [fromTime, setFromTime] = useState<string>('00:00')
+  const [toTime, setToTime] = useState<string>('23:59')
+
+  const formatTo24Hour = (time: string) => {
+    // Converts 12-hour format to 24-hour format
+    const [timePart, modifier] = time.split(' ')
+    let [hours, minutes] = timePart.split(':')
+    let formattedHour = parseInt(hours)
+
+    if (modifier === 'PM') {
+      formattedHour += 12
+    }
+
+    return `${formattedHour}:${minutes}`
+  }
 
   return (
     <Box>
@@ -35,20 +49,26 @@ const TimeFilter = (props: Props) => {
         <Input
           type="time"
           value={fromTime}
-          onChange={e => setFromTime(e.target.value)}
-          step="60"
+          onChange={e => {
+            const formatted24HourTime = formatTo24Hour(e.target.value)
+            setFromTime(formatted24HourTime)
+          }}
           mr={1}
+          step={60}
         />
         <Icon
           as={GoDash}
-          size={'xs'}
+          boxSize={4} // Use boxSize instead of size
         />
         <Input
           type="time"
           value={toTime}
-          onChange={e => setToTime(e.target.value)}
-          step="60"
+          onChange={e => {
+            const formatted24HourTime = formatTo24Hour(e.target.value)
+            setToTime(formatted24HourTime)
+          }}
           ml={1}
+          step={60}
         />
       </Flex>
     </Box>

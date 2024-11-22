@@ -40,6 +40,8 @@ const DropdownWithIcon = ({ options, disable }: Props) => {
       position="relative"
       w="300px"
       ref={dropdownRef}
+      borderBottomWidth={isOpen ? '2px' : '0px'}
+      borderBottomColor={isOpen ? 'indigo.900' : 'transparent'}
     >
       <Button
         onClick={() => setIsOpen(!isOpen)}
@@ -47,7 +49,7 @@ const DropdownWithIcon = ({ options, disable }: Props) => {
         px={4}
         py={2}
         bg="gray.50"
-        border="2px solid"
+        border={isOpen ? '0px' : '2px solid'}
         borderColor="gray.100"
         justifyContent="space-between"
       >
