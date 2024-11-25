@@ -58,7 +58,7 @@ const TimeFilter = (props: Props) => {
         />
         <Icon
           as={GoDash}
-          boxSize={4} // Use boxSize instead of size
+          boxSize={4}
         />
         <Input
           type="time"

@@ -32,9 +32,8 @@ const TransactionItem = props => {
   const [showDate, setShowDate] = useState(showDateProp)
 
   function handleMouseEnter() {
-    //if showDate is false then make it true
     if (!showDateProp) {
-      setShowDate(true) //updating the state not the prop
+      setShowDate(true)
     }
   }
 
@@ -44,7 +43,6 @@ const TransactionItem = props => {
     }
   }
 
-  //function for toggling the transaction detail modal
   const handleTransactionClick = () => {
     handleTransactionOpen()
   }
@@ -58,28 +56,27 @@ const TransactionItem = props => {
 
   const isSelected = transaction.id === selectedId
 
-  console.log(
-    'transaction.id===selectedId',
-    transaction.id,
-    selectedId,
-    isSelected,
-  )
-
   return (
     <Tr
       _hover={{ bg: 'blue.100' }}
       cursor="pointer"
       sx={{
         td: {
-          h: '40px',
+          height: '40px',
         },
       }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={handleTransactionClick}
       className={`${styles.murItem} ${isSelected ? styles.murItemActive : ''}`}
+      borderBottom={'1px'}
+      borderBottomColor={'#D1D5DB'}
     >
-      <Td w={22}>
+      {/* Date Column */}
+      <Td
+        textAlign="center"
+        width="15%"
+      >
         {showDate
           ? ((transaction.block_height - START_BLOCK) * 3 < 0
               ? START_BLOCK_TIME.clone().subtract(
@@ -94,10 +91,12 @@ const TransactionItem = props => {
           : null}
       </Td>
 
+      {/* User Info Column */}
       <Td
         display="flex"
         alignItems="center"
-        w={!props.isTransactionDetailOpen ? 620 : 350}
+        width="45%"
+        border={'none'}
       >
         <WrapItem>
           <Avatar
@@ -127,9 +126,11 @@ const TransactionItem = props => {
           />
         )}
       </Td>
+
+      {/* Amount Column */}
       <Td
-        isNumeric
-        w={22}
+        textAlign="right"
+        width="20%"
       >
         <Text color={moneyIn ? 'green' : undefined}>
           {moneyIn ? '' : '-'}
@@ -137,50 +138,20 @@ const TransactionItem = props => {
           &nbsp;
           {transaction.tk}
         </Text>
-        {/* &nbsp; (${transaction.dollar}) */}
       </Td>
-      {/* </Tr> */}
-      {!props.isTransactionDetailOpen ? (
-        <Td>
-          <Flex alignItems="center">
-            {/* {transaction.paymentMethod === "Transfer" &&
-            transaction.TransferIn ? (
-                <BsArrowLeft />
-                ) : transaction.paymentMethod === "Transfer" &&
-                !transaction.TransferIn ? (
-            <BsArrowRight />
-            ) : null} */}
-            {moneyIn ? <BsArrowLeft /> : <BsArrowRight />}
-            {'  '}
-            &nbsp;
-            <Text>{transaction.t}</Text>
-          </Flex>
-        </Td>
-      ) : transaction.id === selectedId ? (
-        <Td
-          style={{
-            width: '100%',
-            backgroundColor: 'white',
-          }}
-          borderBottom={!props.isTransactionDetailOpen ? '1px' : '0px'}
-          onClick={e => {
-            e.stopPropagation()
 
-            if (props.handleTransactionClose) {
-              props.handleTransactionClose()
-            }
-          }}
-        >
-          <button
-            style={{
-              background: 'url(./arrow-right.svg) 50%/24px 24px no-repeat',
-              width: '10px',
-              height: '20px',
-            }}
-            className={styles.murCancelItem}
-          ></button>
-        </Td>
-      ) : null}
+      {/* Transfer Method Column */}
+      <Td
+        textAlign="center"
+        width="20%"
+      >
+        <Flex alignItems="center">
+          {moneyIn ? <BsArrowLeft /> : <BsArrowRight />}
+          {'  '}
+          &nbsp;
+          <Text>{transaction.t}</Text>
+        </Flex>
+      </Td>
     </Tr>
   )
 }
