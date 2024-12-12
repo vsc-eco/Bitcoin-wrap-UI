@@ -6,6 +6,7 @@ import type { Signer } from '../client'
 import { Config, signTypedData } from '@wagmi/core'
 
 export const wagmiSigner = (async (txData, client, config: Config) => {
+  alert('DOING DECODE STUFF' + JSON.stringify(txData))
   const types = convertEIP712Type(decode(encode(txData)))
   const signature = await signTypedData(config, types as any)
 
