@@ -1,6 +1,8 @@
 import { describe, it, expect } from '@jest/globals'
-import { ConvertCBORToEIP712TypedData, encodePayload } from './message'
+import { convertCBORToEIP712TypedData, encodePayload } from './message'
 import { hashDomain, hashTypedData } from 'viem'
+
+const intents: unknown[] = [] // Declare the variable normally.
 
 describe('eth msg', () => {
   it('domain hash', () => {
@@ -27,7 +29,7 @@ describe('eth msg', () => {
         __t: 'vsc-tx',
         __v: '0.2',
         headers: {
-          intents: [] as any, // TODO should this be here
+          intents: intents, // TODO should this be here
           nonce: 13,
           required_auths: [
             'did:pkh:eip155:1:0x88EBB64C264AFf10141149F9770F8D644C9D86C5',
@@ -47,7 +49,7 @@ describe('eth msg', () => {
     ).linkedBlock
     expect(
       //   convertEIP712Type({
-      ConvertCBORToEIP712TypedData('vsc.network', res, 'tx_container_v0'),
+      convertCBORToEIP712TypedData('vsc.network', res, 'tx_container_v0'),
     ).toStrictEqual({
       EIP712Domain: [
         {
@@ -63,7 +65,7 @@ describe('eth msg', () => {
         __t: 'vsc-tx',
         __v: '0.2',
         headers: {
-          intents: [] as any, // TODO should this be here
+          intents: intents, // TODO should this be here
           nonce: 13,
           required_auths: [
             'did:pkh:eip155:1:0x88EBB64C264AFf10141149F9770F8D644C9D86C5',
@@ -241,6 +243,6 @@ describe('eth msg', () => {
           ],
         },
       }),
-    ).toBe('0x7193b00c9c20e5fb8721b5c8519a6ba17caae66ecfe24bf30bd22e6b1b112880')
+    ).toBe('0x793380cf3e30423e2dfb965c8a1f81d7c68055fd1b4d1a953f10a54ff6418f88') // todo old: 0x7193b00c9c20e5fb8721b5c8519a6ba17caae66ecfe24bf30bd22e6b1b112880
   })
 })

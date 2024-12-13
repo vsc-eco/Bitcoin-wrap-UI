@@ -1,8 +1,9 @@
-import { decodeErrPrefix } from 'cborg/lib/common.js'
 import { Type, Token } from 'cborg'
-import { encode as encodeCborg } from 'cborg/lib/encode.js'
-import { jump, quick } from 'cborg/lib/jump.js'
 import { TagDecoder } from 'cborg/interface.js'
+
+import { jump, quick } from './cborg_utils/jump.js'
+import { encode as encodeCborg } from './cborg_utils/encode.js'
+import { decodeErrPrefix } from './cborg_utils/common.js'
 
 export interface DecodeTokenizer {
   done(): boolean
@@ -201,11 +202,11 @@ function tokensToObject(
     return token.value
   }
 
-  if (token.type === Type.array) {
+  if (token.type === Type.array || token.type.major === 4) {
     return tokenToArray(token, tokeniser, options, path, ignoreToken)
   }
 
-  if (token.type === Type.map) {
+  if (token.type === Type.map || token.type.major === 5) {
     return tokenToMap(token, tokeniser, options, path, ignoreToken)
   }
 
@@ -220,6 +221,7 @@ function tokensToObject(
     }
     throw new Error(`${decodeErrPrefix} tag not supported (${token.value})`)
   }
+  console.log(token)
   /* c8 ignore next */
   throw new Error('unsupported')
 }
@@ -297,18 +299,6 @@ const CID_CBOR_TAG = 42
  */
 function cidEncoder(obj: any): Token[] | null {
   return null
-  //   if (obj.asCID !== obj && obj['/'] !== obj.bytes) {
-  //     return null // any other kind of object
-  //   }
-  //   const cid = CID.asCID(obj)
-  //   /* c8 ignore next 4 */
-  //   // very unlikely case, and it'll probably throw a recursion error in cborg
-  //   if (!cid) {
-  //     return null
-  //   }
-  //   const bytes = new Uint8Array(cid.bytes.byteLength + 1)
-  //   bytes.set(cid.bytes, 1) // prefix is 0x00, for historical reasons
-  //   return [new cborg.Token(cborg.Type.tag, CID_CBOR_TAG), new cborg.Token(cborg.Type.bytes, bytes)]
 }
 
 /**
@@ -384,7 +374,7 @@ function eip712Type(type: ReturnType<typeof typeOf>) {
   }
 }
 
-export function ConvertCBORToEIP712TypedData(
+export function convertCBORToEIP712TypedData(
   domainName: string,
   res: Uint8Array,
   primaryType: string,
