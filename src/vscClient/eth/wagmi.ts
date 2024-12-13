@@ -1,12 +1,18 @@
 import type { Signer } from '../client'
 import { Config, signTypedData } from '@wagmi/core'
-import { encodePayload, convertCBORToEIP712TypedData } from '../message'
+import {
+  encodePayload,
+  convertCBORToEIP712TypedData,
+  decode,
+  encode,
+} from '../message'
 
 export const wagmiSigner = (async (txData, _, config: Config) => {
-  const encodedPayload = (await encodePayload(txData)).linkedBlock
+  // not doing encode/decode for txData because convertCBORToEIP712TypedData handles internally
+  const res = (await encodePayload(txData)).linkedBlock
   const eip712TypedData = convertCBORToEIP712TypedData(
     'vsc.network',
-    encodedPayload,
+    res,
     'tx_container_v0',
   )
 
@@ -21,6 +27,6 @@ export const wagmiSigner = (async (txData, _, config: Config) => {
 
   return {
     sigs,
-    rawTx: encodedPayload,
+    rawTx: res,
   }
 }) satisfies Signer<[Config]>

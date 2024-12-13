@@ -2,7 +2,7 @@ import { describe, it, expect } from '@jest/globals'
 import { convertCBORToEIP712TypedData, encodePayload } from './message'
 import { hashDomain, hashTypedData } from 'viem'
 
-const intents: unknown[] = [] // Declare the variable normally.
+const intents: unknown[] = []
 
 describe('eth msg', () => {
   it('domain hash', () => {
@@ -48,7 +48,6 @@ describe('eth msg', () => {
       })
     ).linkedBlock
     expect(
-      //   convertEIP712Type({
       convertCBORToEIP712TypedData('vsc.network', res, 'tx_container_v0'),
     ).toStrictEqual({
       EIP712Domain: [

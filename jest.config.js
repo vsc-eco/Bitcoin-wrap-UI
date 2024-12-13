@@ -1,6 +1,6 @@
 module.exports = {
   preset: 'ts-jest',
-  testEnvironment: 'node', // Change here if browser-like behavior is unnecessary
+  testEnvironment: 'node',
   testMatch: ['**/__tests__/**/*.ts?(x)', '**/?(*.)+(test).ts?(x)'],
   transform: {
     '^.+\\.(js|ts)$': 'ts-jest',
