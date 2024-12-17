@@ -221,7 +221,7 @@ function tokensToObject(
     }
     throw new Error(`${decodeErrPrefix} tag not supported (${token.value})`)
   }
-  console.log(token)
+  // console.log(token)
   /* c8 ignore next */
   throw new Error('unsupported')
 }
@@ -276,86 +276,10 @@ const _decodeOptions = {
 }
 
 type ByteView<T> = Uint8Array
-export const decode = <T = unknown>(
+const decode = <T = unknown>(
   data: ByteView<T>,
   visitor?: (path: string[], value: unknown) => void,
 ): T => cborgdecode(data, { ..._decodeOptions, visitor }) as T
-
-// https://github.com/ipfs/go-ipfs/issues/3570#issuecomment-273931692
-const CID_CBOR_TAG = 42
-
-/**
- * @template T
- * @typedef {import('multiformats/codecs/interface').ByteView<T>} ByteView
- */
-
-/**
- * cidEncoder will receive all Objects during encode, it needs to filter out
- * anything that's not a CID and return `null` for that so it's encoded as
- * normal.
- *
- * @param {any} obj
- * @returns {cborg.Token[]|null}
- */
-function cidEncoder(obj: any): Token[] | null {
-  return null
-}
-
-/**
- * Intercept all `undefined` values from an object walk and reject the entire
- * object if we find one.
- *
- * @returns {null}
- */
-function undefinedEncoder(): null {
-  throw new Error(
-    '`undefined` is not supported by the IPLD Data Model and cannot be encoded',
-  )
-}
-
-/**
- * Intercept all `number` values from an object walk and reject the entire
- * object if we find something that doesn't fit the IPLD data model (NaN &
- * Infinity).
- *
- * @param {number} num
- * @returns {null}
- */
-function numberEncoder(num: number): null {
-  if (Number.isNaN(num)) {
-    throw new Error(
-      '`NaN` is not supported by the IPLD Data Model and cannot be encoded',
-    )
-  }
-  if (num === Infinity || num === -Infinity) {
-    throw new Error(
-      '`Infinity` and `-Infinity` is not supported by the IPLD Data Model and cannot be encoded',
-    )
-  }
-  return null
-}
-
-const _encodeOptions = {
-  float64: true,
-  typeEncoders: {
-    Object: cidEncoder,
-    undefined: undefinedEncoder,
-    number: numberEncoder,
-  },
-}
-
-/**
- * @template T
- * @param {T} node
- * @returns {ByteView<T>}
- */
-export const encode = <T>(node: T): ByteView<T> =>
-  encodeCborg(node, _encodeOptions)
-export async function encodePayload(payload) {
-  return {
-    linkedBlock: encode(payload),
-  }
-}
 
 function typeOf(a: any) {
   return typeof a
@@ -383,7 +307,7 @@ export function convertCBORToEIP712TypedData(
     []
   const pathMap: { path: string[]; val: unknown }[] = []
   const message = decode(res, (path, value) => {
-    console.log(path.join('/'), '->', value, `:${typeof value}`)
+    // console.log(path.join('/'), '->', value, `:${typeof value}`)
     switch (typeof value) {
       case 'undefined':
       case 'function':
