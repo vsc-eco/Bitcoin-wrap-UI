@@ -1,5 +1,7 @@
 import { describe, it, expect } from '@jest/globals'
-import { convertCBORToEIP712TypedData, encodePayload } from './message'
+import { convertCBORToEIP712TypedData } from './cbor_to_eip712_converter'
+import { encodePayload } from 'dag-jose-utils'
+
 import { hashDomain, hashTypedData } from 'viem'
 
 const intents: unknown[] = []
@@ -242,6 +244,6 @@ describe('eth msg', () => {
           ],
         },
       }),
-    ).toBe('0x793380cf3e30423e2dfb965c8a1f81d7c68055fd1b4d1a953f10a54ff6418f88') // todo old: 0x7193b00c9c20e5fb8721b5c8519a6ba17caae66ecfe24bf30bd22e6b1b112880
+    ).toBe('0x793380cf3e30423e2dfb965c8a1f81d7c68055fd1b4d1a953f10a54ff6418f88')
   })
 })

@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "prepare": "husky",
-    "test": "node --experimental-vm-modules ./node_modules/.bin/jest --verbose",
+    "test": "node --experimental-vm-modules ./node_modules/.bin/jest",
     "format": "prettier -w --ignore-unknown ."
   },
   "dependencies": {
