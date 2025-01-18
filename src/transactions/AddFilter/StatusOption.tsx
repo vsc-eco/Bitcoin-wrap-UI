@@ -6,12 +6,15 @@ type Props = {}
 const options = [
   {
     name: 'Confirmed',
+    subtext: `Transaction has been confirmed and successfully completed.`,
   },
   {
     name: 'Pending',
+    subtext: 'Transaction is pending and has not been confirmed yet.',
   },
   {
     name: 'Failed',
+    subtext: `Transaction has failed <learn more>`,
   },
 ] as const
 const StatusOption = (props: Props) => {
@@ -29,6 +32,7 @@ const StatusOption = (props: Props) => {
               my={2}
             >
               <Checkbox value={item.name}>{item.name}</Checkbox>
+              <p style={{ fontSize: '12px' }}>{item.subtext} </p>
             </Box>
           ))}
         </CheckboxGroup>

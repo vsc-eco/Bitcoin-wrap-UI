@@ -20,6 +20,10 @@ export default function RootLayout({
     headers().get('cookie'),
   )
 
+  if (window.localStorage != undefined) {
+    localStorage.setItem('chakra-ui-color-mode', 'light')
+  }
+
   return (
     <html
       lang="en"

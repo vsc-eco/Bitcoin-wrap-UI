@@ -111,6 +111,7 @@ const BuyModal = (props: Props) => {
         fontSize="xs"
         borderRadius="3xl"
         mx={2}
+        height={'32px'}
       >
         Buy
       </Button>

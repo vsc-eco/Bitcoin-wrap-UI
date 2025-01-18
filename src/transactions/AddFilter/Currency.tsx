@@ -7,9 +7,15 @@ import { CiSearch } from 'react-icons/ci'
 type Props = {}
 
 const Currency = (props: Props) => {
-  const [currency, setCurrency] = useState<string>('')
+  const [currency, setCurrency] = useState<string[]>(['HIVE', 'HBD'])
   const handleCheckboxChange = (checkboxId: string) => {
-    setCurrency(prev => (prev === checkboxId ? 'HIVE' : checkboxId))
+    for (let cur of currency) {
+      if (cur === checkboxId) {
+        setCurrency(currency.filter(item => item !== checkboxId))
+        return
+      }
+    }
+    setCurrency([...currency, checkboxId])
   }
 
   const handleSearch = (event: any) => {
@@ -51,7 +57,7 @@ const Currency = (props: Props) => {
               py={4}
             >
               <Checkbox
-                isChecked={currency === 'HIVE'}
+                isChecked={currency.includes('HIVE')}
                 onChange={() => handleCheckboxChange('HIVE')}
               >
                 <Flex gap={1}>
@@ -67,7 +73,7 @@ const Currency = (props: Props) => {
             </Flex>
             <Flex gap={4}>
               <Checkbox
-                isChecked={currency === 'HBD'}
+                isChecked={currency.includes('HBD')}
                 onChange={() => handleCheckboxChange('HBD')}
               >
                 <Flex gap={1}>

@@ -137,7 +137,7 @@ const TransferModal = () => {
         alignItems={'center'}
       >
         <Icon as={IoIosSend} />
-        <Text>Send Transfer</Text>
+        <Text>Quick Send</Text>
       </Flex>
 
       <Modal

@@ -48,6 +48,7 @@ const Sidebar = () => {
       gap={5}
       boxShadow="base"
       width={300}
+      paddingTop="0px"
       paddingY="10px"
       position="relative"
       _dark={{
@@ -55,7 +56,6 @@ const Sidebar = () => {
       }}
     >
       <Flex
-        bg="gray.50"
         px={2}
         py={2}
         boxShadow="0px 1px 0px #ECEEF2"

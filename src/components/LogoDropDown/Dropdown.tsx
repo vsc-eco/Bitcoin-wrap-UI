@@ -63,7 +63,7 @@ const Dropdown = ({ isOpen, setIsOpen }: Props) => {
           </Box>
         ))}
 
-        <Box boxShadow="0px 1px 0px #d1d5db">
+        {/* <Box boxShadow="0px 1px 0px #d1d5db">
           <Text
             fontSize={'12px'}
             px={2}
@@ -71,9 +71,9 @@ const Dropdown = ({ isOpen, setIsOpen }: Props) => {
           >
             Switch accounts
           </Text>
-        </Box>
+        </Box> */}
 
-        <Flex
+        {/* <Flex
           px={2}
           py={1}
           gap={2}
@@ -108,9 +108,10 @@ const Dropdown = ({ isOpen, setIsOpen }: Props) => {
             height={5}
           />
           <Text color={'gray.850'}>Wallet address ...</Text>
-        </Flex>
+        </Flex> */}
       </Box>
-      <Box boxShadow={'0px -1px 0px 0px #d1d5db'}>
+      <hr />
+      <Box>
         <Box
           py={1}
           _hover={{
@@ -124,7 +125,7 @@ const Dropdown = ({ isOpen, setIsOpen }: Props) => {
             Create an account
           </Text>
         </Box>
-        <Box
+        {/* <Box
           py={1}
           _hover={{
             backgroundColor: 'gray.70',
@@ -135,6 +136,20 @@ const Dropdown = ({ isOpen, setIsOpen }: Props) => {
             color={'gray.850'}
           >
             Link new account
+          </Text>
+        </Box> */}
+        <hr />
+        <Box
+          py={1}
+          _hover={{
+            backgroundColor: 'gray.70',
+          }}
+        >
+          <Text
+            px={2}
+            color={'gray.850'}
+          >
+            Logout
           </Text>
         </Box>
       </Box>

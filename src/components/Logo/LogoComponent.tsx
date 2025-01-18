@@ -38,7 +38,7 @@ const LogoComponent = () => {
           bg="white"
           zIndex={10}
           w="250px"
-          h={190}
+          h={'auto'}
           borderRadius={'lg'}
           boxShadow={'base'}
         >

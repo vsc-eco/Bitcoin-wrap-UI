@@ -204,6 +204,7 @@ const Transaction = (props: Props) => {
               alignItems="center"
               onClick={() => setIsModalOpen(!isModalOpen)}
               borderRadius="3xl"
+              height={'32px'}
             >
               <CiFilter />
               <Text
@@ -229,6 +230,7 @@ const Transaction = (props: Props) => {
                   rightIcon={
                     isClicked ? <ChevronDownIcon /> : <ChevronUpIcon />
                   }
+                  height={'32px'}
                   fontSize="xs"
                   borderRadius="3xl"
                   variant="outline"
