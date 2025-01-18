@@ -7,6 +7,7 @@ import { Providers } from './providers'
 
 //import the analytics
 import { Analytics } from '@vercel/analytics/react'
+import React from 'react'
 
 export default function RootLayout({
   children,
@@ -20,9 +21,11 @@ export default function RootLayout({
     headers().get('cookie'),
   )
 
-  if (window.localStorage != undefined) {
-    localStorage.setItem('chakra-ui-color-mode', 'light')
-  }
+  React.useEffect(() => {
+    if (window.localStorage != undefined) {
+      localStorage.setItem('chakra-ui-color-mode', 'light')
+    }
+  }, [])
 
   return (
     <html
