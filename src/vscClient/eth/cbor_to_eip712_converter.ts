@@ -306,7 +306,7 @@ export function convertCBORToEIP712TypedData(
   const typeMap: { typeName: string[]; val: { name: string; type: string } }[] =
     []
   const pathMap: { path: string[]; val: unknown }[] = []
-  const message = decode(res, (path, value) => {
+  const message = decode<Record<string, unknown>>(res, (path, value) => {
     // console.log(path.join('/'), '->', value, `:${typeof value}`)
     switch (typeof value) {
       case 'undefined':
@@ -316,6 +316,11 @@ export function convertCBORToEIP712TypedData(
     if (value === null) {
       throw new Error('cbor value can not be: null')
     }
+
+    if (value === EMPTY_ARRAY) {
+      return
+    }
+
     const typeName = [primaryType, ...path.slice(0, -1)]
     typeMap.push({
       typeName,
@@ -337,7 +342,7 @@ export function convertCBORToEIP712TypedData(
     for (let i = 0; i < partialType.typeName.length; i++) {
       const before = partialType.typeName.slice(0, i + 1) // [tx_container], [tx_container, tx], [tx_container, tx, payload]
       const after = partialType.typeName.slice(i + 1)
-      const typeName = before.join('.')
+      const typeName = before.join('_')
       if (after.length === 0) {
         if (types[typeName] === undefined) {
           types[typeName] = []
@@ -368,7 +373,7 @@ export function convertCBORToEIP712TypedData(
             types[typeName] = val || []
             types[typeName].push({
               name: after[0],
-              type: typeName + '.' + after[0],
+              type: typeName + '_' + after[0],
             })
           }
         }
